@@ -1,0 +1,5 @@
+Cloud data methods
+    updateData
+    pushData
+    deleteData
+    loadData
