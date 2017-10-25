@@ -1,0 +1,1 @@
+A react-native redux and firebase boilerplate.
