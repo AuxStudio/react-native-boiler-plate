@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { StatusBar, View, Platform } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import { Page, Logo, SnackBar } from "react-native-simple-components";
+import { Page, SnackBar } from "react-native-simple-components";
 
 import config from "../config";
 import utilities from "../utilities";
@@ -120,8 +120,6 @@ export class Splash extends React.Component {
         return (
             <Page>
                 <StatusBar backgroundColor={styleConstants.darkTransPrimary} />
-
-                <Logo />
 
                 <SnackBar />
             </Page>

@@ -6,7 +6,6 @@ import { Actions } from "react-native-router-flux";
 import {
     Page,
     HeaderBar,
-    Logo,
     InfoBlock,
     Button,
     Loader,
@@ -96,8 +95,6 @@ export class SignIn extends React.Component {
                     handleTextPress={() => Actions.signInWithEmail()}
                     textRight
                 />
-
-                <Logo />
 
                 <InfoBlock
                     title="Title"
