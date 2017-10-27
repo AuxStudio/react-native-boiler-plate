@@ -22,6 +22,10 @@ A react-native redux and firebase boilerplate.
     Create local.properties in ./android
         ndk.dir=PATH_TO_NDK_BUNDLE
         sdk.dir=PATH_TO_SDK
+        /*
+            ndk.dir=/home/shaun/Android/Sdk/ndk-bundle
+            sdk.dir=/home/shaun/Android/Sdk
+        */
     
 5. GENERATE ANDROID APP SIGNING (do this at the beginning so you can get your release key for facebook and google sign in)
     keytool -genkey -v -keystore PROJECT_NAME.keystore -alias PROJECT_NAME -keyalg RSA -keysize 2048 -validity 10000
@@ -30,22 +34,24 @@ A react-native redux and firebase boilerplate.
     In ./android/gradle.properties, Add 
         PROJECT_NAME_STORE_FILE=PROJECT_NAME.keystore
         PROJECT_NAME_KEY_ALIAS=PROJECT_NAME
-        PROJECT_NAME_STORE_PASSWORD=youshallnotpass
-        PROJECT_NAME_KEY_PASSWORD=youshallnotpass
-    In ./android/app/build.gradle, Add 
-        (below defaultConfig object)
-            signingConfigs {
-                release {
-                    if (project.hasProperty('PROJECT_NAME_STORE_FILE')) {
-                        storeFile file(PROJECT_NAME_STORE_FILE)
-                        storePassword PROJECT_NAME_STORE_PASSWORD
-                        keyAlias PROJECT_NAME_KEY_ALIAS
-                        keyPassword PROJECT_NAME_KEY_PASSWORD
-                    }
+        PROJECT_NAME_STORE_PASSWORD=PASSWORD
+        PROJECT_NAME_KEY_PASSWORD=PASSWORD
+    In ./android/app/build.gradle, Add (android.defaultConfig)
+        signingConfigs {
+            release {
+                if (project.hasProperty('PROJECT_NAME_STORE_FILE')) {
+                    storeFile file(PROJECT_NAME_STORE_FILE)
+                    storePassword PROJECT_NAME_STORE_PASSWORD
+                    keyAlias PROJECT_NAME_KEY_ALIAS
+                    keyPassword PROJECT_NAME_KEY_PASSWORD
                 }
             }
-        {in buildTypes.release}
+        }
+        {in android.buildTypes.release}
             signingConfig signingConfigs.release
+    *NOT COMMITTING THESE FILES
+        In .gitignore
+            add gradle.properties
     *COMMITTING THESE FILES
         In .gitignore
             remove *.keystore
@@ -56,7 +62,7 @@ A react-native redux and firebase boilerplate.
 6. INSTALL DEPENDENCIES (NOTE: Some of these are optional)
     yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs
 
-7. LINK AND SETUP DEPENDENCIES (TODO: IOS)
+7. LINK AND SETUP DEPENDENCIES (ANDROID ONLY - TODO: IOS)
 
     react-native-vector-icons
         ./android/app/build.gradle (at bottom of file add)
@@ -156,15 +162,11 @@ A react-native redux and firebase boilerplate.
         Add app name and main activity name to Facebook app
         Add key hashes to Facebook app
             keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+            (DO THE ABOVE TWICE, FIRST WITH android as password and second with your project password)
             keytool -exportcert -alias PROJECT_NAME -keystore ./android/app/PROJECT_NAME.keystore | openssl sha1 -binary | openssl base64
 
     react-native-google-signin 
         react-native link react-native-google-signin
-        /*In ./android/build.gradle
-            dependencies {
-                classpath 'com.android.tools.build:gradle:2.1.2' // <--- update this
-                classpath 'com.google.gms:google-services:3.0.0' // <--- add this
-            }*/
         In ./android/app/build.gradle add (dependencies)
             compile(project(":react-native-google-signin")){         
                 exclude group: "com.google.android.gms" // very important
@@ -174,13 +176,29 @@ A react-native redux and firebase boilerplate.
     react-native-permissions 
         react-native link react-native-permissions
         Add permissions to AndroidManifest.xml
+            <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.READ_INTERAL_STORAGE"/>
+            <uses-permission android:name="android.permission.WRITE_INTERAL_STORAGE"/>
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     react-native-geocoder 
         react-native link react-native-geocoder
 
-    https://github.com/react-community/react-native-image-picker 
-    https://github.com/bamlab/react-native-image-resizer 
-    https://github.com/itinance/react-native-fs 
+    react-native-image-picker 
+        react-native link react-native-image-picker
+        In ./android/build.grade (buildscript.dependencies) change
+            classpath 'com.android.tools.build:gradle:2.2.3' => classpath 'com.android.tools.build:gradle:2.2.+'
+
+    react-native-image-resizer 
+        react-native link react-native-image-resizer
+
+    react-native-fs 
+        react-native link react-native-fs
 
 8. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src

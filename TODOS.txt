@@ -2,4 +2,7 @@ Cloud data methods
     updateData
     pushData
     deleteData
-    loadData
+    getData
+Auth method
+    Phone Auth
+    Enable password reset in app

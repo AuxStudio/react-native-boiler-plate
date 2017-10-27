@@ -9,16 +9,12 @@ import Scenes from "./routes";
 // Connect router to store
 const ConnectedRouter = connect()(Router);
 
-export default function Init() {
-    class App extends React.Component {
-        render() {
-            return (
-                <Provider store={store}>
-                    <ConnectedRouter scenes={Scenes} />
-                </Provider>
-            );
-        }
+export default class App extends React.Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <ConnectedRouter scenes={Scenes} />
+            </Provider>
+        );
     }
-
-    AppRegistry.registerComponent("App", () => App);
 }

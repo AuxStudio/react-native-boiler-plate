@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { StatusBar, View, Platform } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import { Page, SnackBar } from "react-native-simple-components";
+import { SnackBar, Loader } from "react-native-simple-components";
+
+import Page from "../components/Page";
 
 import config from "../config";
 import utilities from "../utilities";
@@ -16,9 +18,11 @@ export class Splash extends React.Component {
 
         this.startTimer = this.startTimer.bind(this);
         this.runLogic = this.runLogic.bind(this);
+        this.resetSnackBar = this.resetSnackBar.bind(this);
+        this.retrySnackBarAction = this.retrySnackBarAction.bind(this);
 
         this.state = {
-            isFethingData: false,
+            isAuthenticating: false,
             time: 0,
         };
     }
@@ -26,11 +30,6 @@ export class Splash extends React.Component {
     static get propTypes() {
         return {
             authenticated: PropTypes.bool,
-            isAuthenticating: PropTypes.bool,
-            anonymous: PropTypes.bool,
-            redirectToSignInPage: PropTypes.bool,
-            uid: PropTypes.string,
-            cloudDataSuccess: PropTypes.bool,
         };
     }
 
@@ -62,42 +61,15 @@ export class Splash extends React.Component {
     }
 
     runLogic() {
-        // Redirect user to sign in page if we're not authenticated and have received the redirect flag from getUserAuth
+        // Redirect to home if we're authenticated and the splash screen has shown for at the minimumDisplayDuration
         if (
-            this.props.redirectToSignInPage &&
-            (this.state.time >= 2 || config.testing.disableLoadingDelay)
-        ) {
-            !config.testing.disableLoadingDelay && clearInterval(this.timer);
-            Actions.welcome();
-        } else if (
             this.props.authenticated &&
-            this.props.anonymous &&
-            (this.state.time >= 2 || config.testing.disableLoadingDelay)
+            (this.state.time >= config.splash.minimumDisplayDuration ||
+                config.splash.disableLoadingDelay)
         ) {
-            // Anonymous user (no data)
             !config.testing.disableLoadingDelay && clearInterval(this.timer);
             this.props.dispatch({
                 type: "TOGGLE_LOADING",
-            });
-
-            Actions.home();
-        } else if (
-            this.props.authenticated &&
-            !this.props.cloudDataSuccess &&
-            !this.state.isFetchingData
-        ) {
-            // If we're authenticated and we have not yet loaded data, load/save data to db
-            this.setState({
-                isFetchingData: true,
-            });
-
-            this.props.dispatch({
-                type: "loadUserData",
-                uid: this.props.uid,
-            });
-        } else if (this.props.authenticated && this.props.cloudDataSuccess) {
-            this.props.dispatch({
-                type: "RESET_ERROR",
             });
 
             Actions.home();
@@ -116,12 +88,37 @@ export class Splash extends React.Component {
         }
     }
 
+    resetSnackBar() {
+        this.props.dispatch({
+            type: "RESET_ERROR",
+        });
+    }
+
+    retrySnackBarAction() {
+        this.resetSnackBar();
+
+        this.props.dispatch({
+            ...this.props.retryAction,
+        });
+    }
+
     render() {
+        const snackBar = this.props.error.message && (
+            <SnackBar
+                iconName="error"
+                iconColor="black"
+                text={this.props.error.message}
+                handleClose={this.resetSnackBar}
+                handleRetry={this.retrySnackBarAction}
+            />
+        );
+
         return (
             <Page>
                 <StatusBar backgroundColor={styleConstants.darkTransPrimary} />
 
-                <SnackBar />
+                <Loader />
+                {snackBar}
             </Page>
         );
     }
@@ -130,12 +127,8 @@ export class Splash extends React.Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.main.userAuth.authenticated,
-        anonymous: state.main.userAuth.anonymous,
-        redirectToSignInPage: state.main.userAuth.redirectToSignInPage,
-        uid: state.main.userAuth.uid,
-        cloudDataSuccess:
-            state.main.appState.error.type === "CLOUD_DATA" &&
-            state.main.appState.error.success,
+        error: state.main.appState.error,
+        retryAction: state.main.appState.retryAction,
     };
 }
 

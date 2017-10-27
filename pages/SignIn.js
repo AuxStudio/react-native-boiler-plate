@@ -92,7 +92,7 @@ export class SignIn extends React.Component {
             <Page fauxFooter>
                 <HeaderBar
                     text="Log In"
-                    handleTextPress={() => Actions.signInWithEmail()}
+                    handleTextPress={() => Actions.SignInEmail()}
                     textRight
                 />
 

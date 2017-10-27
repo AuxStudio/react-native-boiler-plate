@@ -57,10 +57,7 @@ export default class UserAuth {
         return new Promise(resolve => {
             firebase
                 .auth()
-                .signInWithEmailAndPassword(
-                    action.userEmail,
-                    action.userPassword
-                )
+                .SignInEmailAndPassword(action.userEmail, action.userPassword)
                 .then(user => {
                     response.authenticated = true;
                     response.message = {

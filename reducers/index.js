@@ -14,16 +14,10 @@ export default function(state = initialState, action) {
             new_state.userAuth.userPassword = action.value;
             return new_state;
 
-        case "REDIRECT_USER_TO_WELCOME_PAGE":
-            new_state = utilities.cloneObject(state);
-            new_state.userAuth.redirectToWelcomePage = true;
-            return new_state;
-
         case "SIGN_IN_USER":
             new_state = utilities.cloneObject(state);
             new_state.userAuth.authenticated = true;
             new_state.userAuth.uid = action.uid;
-            new_state.userAuth.redirectToWelcomePage = false;
 
             if (action.userEmail)
                 new_state.userData.profile.userEmail = action.userEmail;
@@ -36,7 +30,6 @@ export default function(state = initialState, action) {
 
             if (action.anonymous) {
                 new_state.userAuth.anonymous = true;
-                new_state.userAuth.firstTimeUser = true;
             }
 
             return new_state;
@@ -45,7 +38,6 @@ export default function(state = initialState, action) {
             new_state = utilities.cloneObject(state);
             new_state = initialState;
             new_state.appState.loading = false;
-            new_state.userAuth.redirectToWelcomePage = true;
 
             return new_state;
 
@@ -64,11 +56,6 @@ export default function(state = initialState, action) {
             new_state.appState.error.message = action.message;
             new_state.appState.error.success = true;
             new_state.appState.loading = false;
-
-            // Cloud data attaches this
-            if (action.firstTimeUser) {
-                new_state.userAuth.firstTimeUser = action.firstTimeUser;
-            }
 
             return new_state;
 

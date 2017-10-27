@@ -3,9 +3,8 @@ const initialState = {
         authenticated: null,
         uid: null,
 
-        firstTimeUser: null,
         anonymous: null,
-        redirectToWelcomePage: null,
+        redirectToSignInPage: null,
 
         userPassword: null,
     },
@@ -15,7 +14,6 @@ const initialState = {
         error: {
             type: null,
             message: null,
-            success: null, // if true, indicates success message
         },
         retryAction: {
             type: null,
@@ -27,7 +25,6 @@ const initialState = {
         temporaryImage: null,
     },
     userData: {
-        settings: {},
         profile: {
             userName: null,
             userEmail: null,

@@ -107,7 +107,7 @@ export class SignInOptions extends React.Component {
     }
 
     signInUserWithEmail() {
-        Actions.signInWithEmail();
+        Actions.SignInEmail();
     }
 
     signInUserAnonymously() {

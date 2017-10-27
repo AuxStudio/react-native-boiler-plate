@@ -182,4 +182,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(SignInWithEmail);
+export default connect(mapStateToProps)(SignInEmail);

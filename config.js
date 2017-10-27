@@ -12,10 +12,13 @@ config.app = {
     },
 };
 
-config.testing = {
-    firstTimeUser: false,
-    dimensions: false,
+config.splash = {
     disableLoadingDelay: false,
+    minimumDisplayDuration: 1, // seconds
+};
+
+config.testing = {
+    dimensions: false,
 };
 
 config.firebase = {
