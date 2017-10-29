@@ -6,11 +6,15 @@ const response = {
 };
 
 export default class CloudData {
-    static loadUserData(action) {
+    static getData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
+
+        console.log("Dispatching get at " + nodeRef);
+
         return new Promise(resolve => {
             firebase
                 .database()
-                .ref("users/" + action.uid)
+                .ref(nodeRef)
                 .on(
                     "value",
                     snapshot => {
@@ -27,23 +31,21 @@ export default class CloudData {
         });
     }
 
-    static saveUserData(action) {
-        // Allows us to pass in eg. 'profile' and only set that node
-        const nodeRef = action.node || "";
+    static updateData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
 
-        console.log("Dispatching save at users/" + action.uid + "/" + nodeRef);
-        console.log(action.userData);
+        console.log("Dispatching update at " + nodeRef);
 
         return new Promise(resolve => {
             firebase
                 .database()
-                .ref("users/" + action.uid + "/" + nodeRef)
-                .set({
-                    ...action.userData,
+                .ref(nodeRef)
+                .update({
+                    ...action.data,
                 })
                 .then(() => {
                     response.success = true;
-                    response.message = action.userData;
+                    response.message = action.data;
                     resolve(response);
                 })
                 .catch(error => {
@@ -54,18 +56,40 @@ export default class CloudData {
         });
     }
 
-    static deleteUserData(action) {
-        // Allows us to pass in eg.'profile' and only set that node
-        const nodeRef = action.node || "";
+    static pushData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
 
-        console.log(
-            "Dispatching delete at users/" + action.uid + "/" + nodeRef
-        );
+        console.log("Dispatching push at " + nodeRef);
 
         return new Promise(resolve => {
             firebase
                 .database()
-                .ref("users/" + action.uid + "/" + nodeRef)
+                .ref(nodeRef)
+                .push({
+                    ...action.data,
+                })
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
+        });
+    }
+
+    static deleteData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
+
+        console.log("Dispatching delete at " + nodeRef);
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(nodeRef)
                 .set(null)
                 .then(() => {
                     response.success = true;

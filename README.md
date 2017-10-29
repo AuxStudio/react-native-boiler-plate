@@ -173,6 +173,8 @@ A react-native redux and firebase boilerplate.
                 exclude group: "com.google.android.gms" // very important
             }
             compile 'com.google.android.gms:play-services-auth:11.4.2'
+        Add web client id to config
+        Add dev and release SHA-1 to Firebase project
 
     react-native-permissions 
         react-native link react-native-permissions
@@ -224,7 +226,9 @@ A react-native redux and firebase boilerplate.
         ./android/app/src/assets/fonts
         ./ios/PROJECT_NAME/     TODO: TEST THIS
 
-10. SETUP FIREBASE AUTH
-    In Firebase console => PROJECT_NAME => Authentication => Sign-In Method => Enable anonymous
-
-    TODO: Enable FB, Google, Email, Mobile
+10. ENABLE FIREBASE AUTH
+    Anonymous,
+    Facebook,
+    Google,
+    Email,
+    Phone

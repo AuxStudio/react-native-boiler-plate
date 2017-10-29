@@ -13,41 +13,48 @@ const response = {
 export default class UserAuth {
     static getUserAuth() {
         return new Promise(resolve => {
-            const user = firebase.auth().currentUser;
-
-            if (user) {
-                response.authenticated = true;
-                response.message = {
-                    uid: user._user.uid,
-                    anonymous: user._user.isAnonymous,
-                };
-                resolve(response);
-            } else {
-                response.authenticated = false;
-                resolve(response);
-            }
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    console.log(user._user);
+                    response.authenticated = true;
+                    response.message = {
+                        uid: user._user.uid,
+                        userEmail: user._user.email
+                            ? user._user.email
+                            : user._user.providerData.length &&
+                              user._user.providerData[0].email,
+                        userName:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].displayName,
+                        userPhotoURL:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].photoURL,
+                        anonymous: user._user.isAnonymous,
+                    };
+                    resolve(response);
+                } else {
+                    response.authenticated = false;
+                    resolve(response);
+                }
+            });
         });
     }
 
-    static signUpUserWithEmail(action) {
+    static signInUserAnonymously() {
         return new Promise(resolve => {
             firebase
                 .auth()
-                .createUserWithEmailAndPassword(
-                    action.userEmail,
-                    action.userPassword
-                )
+                .signInAnonymously()
                 .then(user => {
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
-                        userEmail: user._user.email,
                     };
                     resolve(response);
                 })
                 .catch(error => {
                     response.authenticated = false;
-                    response.message = error.code;
+                    response.message = error;
                     resolve(response);
                 });
         });
@@ -55,21 +62,16 @@ export default class UserAuth {
 
     static signInUserWithEmail(action) {
         return new Promise(resolve => {
-            firebase
-                .auth()
-                .SignInEmailAndPassword(action.userEmail, action.userPassword)
-                .then(user => {
-                    response.authenticated = true;
-                    response.message = {
-                        uid: user._user.uid,
-                    };
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.authenticated = false;
-                    response.message = error.code;
-                    resolve(response);
-                });
+            const credential = firebase.auth.EmailAuthProvider.credential(
+                action.email,
+                action.password
+            );
+
+            response.success = true;
+            response.message = {
+                credential,
+            };
+            resolve(response);
         });
     }
 
@@ -102,32 +104,15 @@ export default class UserAuth {
                     } else {
                         AccessToken.getCurrentAccessToken()
                             .then(user => {
-                                const credential = {
-                                    provider: "facebook",
-                                    token: user.accessToken,
-                                    secret: "",
-                                };
+                                const credential = firebase.auth.FacebookAuthProvider.credential(
+                                    user.accessToken
+                                );
 
-                                firebase
-                                    .auth()
-                                    .signInWithCredential(credential)
-                                    .then(currentUser => {
-                                        response.authenticated = true;
-                                        response.message = {
-                                            uid: currentUser._user.uid,
-                                            userEmail: currentUser._user.email,
-                                            userName:
-                                                currentUser._user.displayName,
-                                            userPhotoURL:
-                                                currentUser._user.photoURL,
-                                        };
-                                        resolve(response);
-                                    })
-                                    .catch(error => {
-                                        response.authenticated = false;
-                                        response.message = error;
-                                        resolve(response);
-                                    });
+                                response.success = true;
+                                response.message = {
+                                    credential,
+                                };
+                                resolve(response);
                             })
                             .catch(error => {
                                 response.authenticated = false;
@@ -138,7 +123,7 @@ export default class UserAuth {
                 },
                 error => {
                     response.authenticated = false;
-                    response.message = error; // TODO: check this
+                    response.message = error;
                     resolve(response);
                 }
             );
@@ -155,71 +140,64 @@ export default class UserAuth {
                         .then(() => {
                             GoogleSignin.signIn()
                                 .then(user => {
-                                    const credential = {
-                                        provider: "google",
-                                        token: user.idToken,
-                                        secret: user.accessToken,
-                                    };
+                                    const credential = firebase.auth.GoogleAuthProvider.credential(
+                                        user.idToken,
+                                        user.accessToken
+                                    );
 
-                                    firebase
-                                        .auth()
-                                        .signInWithCredential(credential)
-                                        .then(currentUser => {
-                                            response.authenticated = true;
-                                            response.message = {
-                                                uid: currentUser._user.uid,
-                                                userEmail:
-                                                    currentUser._user.email,
-                                                userName:
-                                                    currentUser._user
-                                                        .displayName,
-                                                userPhotoURL:
-                                                    currentUser._user.photoURL,
-                                            };
-                                            resolve(response);
-                                        })
-                                        .catch(error => {
-                                            response.authenticated = false;
-                                            response.message = error;
-                                            resolve(response);
-                                        });
+                                    response.success = true;
+                                    response.message = {
+                                        credential,
+                                    };
+                                    resolve(response);
                                 })
                                 .catch(error => {
                                     response.authenticated = false;
-                                    response.message = error; // TODO: check this
+                                    response.message = error;
                                     resolve(response);
                                 })
                                 .done();
                         })
                         .catch(error => {
                             response.authenticated = false;
-                            response.message = error; // TODO: check this
+                            response.message = error;
                             resolve(response);
                         });
                 })
                 .catch(error => {
                     response.authenticated = false;
-                    response.message = error; // TODO: check this
+                    response.message = error;
                     resolve(response);
                 });
         });
     }
 
-    static signInUserAnonymously() {
+    static linkUserWithCredential(action) {
         return new Promise(resolve => {
             firebase
                 .auth()
-                .signInAnonymously()
+                .currentUser.linkWithCredential(action.credential)
                 .then(user => {
+                    console.log(user._user); // TODO: add relevant details from user object
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
+                        userEmail: user._user.email
+                            ? user._user.email
+                            : user._user.providerData.length &&
+                              user._user.providerData[0].email,
+                        userName:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].displayName,
+                        userPhotoURL:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].photoURL,
                     };
                     resolve(response);
                 })
                 .catch(error => {
                     response.authenticated = false;
-                    response.message = error;
+                    response.message = error.code;
                     resolve(response);
                 });
         });

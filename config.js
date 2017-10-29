@@ -13,7 +13,8 @@ config.app = {
 };
 
 config.splash = {
-    disableLoadingDelay: false,
+    disableLoadingDelay: true,
+    disableUserAuth: false,
     minimumDisplayDuration: 1, // seconds
 };
 
@@ -64,7 +65,7 @@ config.voiceNotes = {
 
 config.googleSignIn = {
     webClientId:
-        "77557779345-ap7udmcr3md8eu5c7akc1i0nkuekvi4l.apps.googleusercontent.com",
+        "939952029165-7q23777tan1lu8pveoo1hgsn92gk1dej.apps.googleusercontent.com",
     iosClientId: "",
     offlineAccess: false,
 };

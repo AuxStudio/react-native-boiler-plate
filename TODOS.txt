@@ -1,8 +1,4 @@
-Cloud data methods
-    updateData
-    pushData
-    deleteData
-    getData
 Auth method
     Phone Auth
+        Link Phone
     Enable password reset in app

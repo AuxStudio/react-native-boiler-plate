@@ -10,6 +10,9 @@ export function* getUserAuth() {
         yield put({
             type: "SIGN_IN_USER",
             uid: getUserAuthResponse.message.uid,
+            userName: getUserAuthResponse.message.userName,
+            userEmail: getUserAuthResponse.message.userEmail,
+            userPhotoURL: getUserAuthResponse.message.userPhotoURL,
             anonymous: getUserAuthResponse.message.anonymous,
         });
     } else {
@@ -19,57 +22,57 @@ export function* getUserAuth() {
     }
 }
 
-export function* signInUserWithEmail(action) {
-    const signUpUserWithEmailResponse = yield call(
-        UserAuth.signUpUserWithEmail,
-        action
+export function* signInUserAnonymously() {
+    const signInUserAnonymouslyResponse = yield call(
+        UserAuth.signInUserAnonymously
     );
-    console.log("signUpUserWithEmailResponse", signUpUserWithEmailResponse);
+    console.log("signInUserAnonymouslyResponse", signInUserAnonymouslyResponse);
 
-    if (signUpUserWithEmailResponse.authenticated) {
+    if (signInUserAnonymouslyResponse.authenticated) {
         yield put({
             type: "SIGN_IN_USER",
-            uid: signUpUserWithEmailResponse.message.uid,
-            userEmail: signUpUserWithEmailResponse.message.userEmail,
-            anonymous: false,
+            uid: signInUserAnonymouslyResponse.message.uid,
+            anonymous: true,
         });
     } else {
-        let emailInUse = false;
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message:
+                "We were unable to connect. Check your connection and try again.",
+            retryAction: {
+                type: "signInUserAnonymously",
+            },
+        });
+    }
+}
 
-        if (
-            signUpUserWithEmailResponse.message === "auth/email-already-in-use"
-        ) {
-            emailInUse = true;
-        }
+export function* signInUserWithEmail(action) {
+    const signInUserWithEmailResponse = yield call(
+        UserAuth.signInUserWithEmail,
+        action
+    );
+    console.log("signInUserWithEmailResponse", signInUserWithEmailResponse);
 
-        const signInUserWithEmailResponse = yield call(
-            UserAuth.signInUserWithEmail,
-            action
-        );
-        console.log("signInUserWithEmailResponse", signInUserWithEmailResponse);
-
-        if (signInUserWithEmailResponse.authenticated) {
-            yield put({
-                type: "SIGN_IN_USER",
-                uid: signInUserWithEmailResponse.message.uid,
-                anonymous: false,
-            });
-        } else {
-            yield put({
-                type: "SET_ERROR",
-                errorType: "AUTH",
-                message: emailInUse
-                    ? "This email address is already in use. Check your password and try again."
-                    : "We were unable to connect with email. Check your connection and try again.",
-                retryAction: {
-                    type: "signInUserWithEmail",
-                    data: {
-                        userEmail: action.userEmail,
-                        userPassword: action.userPassword,
-                    },
+    if (signInUserWithEmailResponse.success) {
+        yield put({
+            type: "linkUserWithCredential",
+            credential: signInUserWithEmailResponse.message.credential,
+        });
+    } else {
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message:
+                "We were unable to connect with email. Check your connection and try again.",
+            retryAction: {
+                type: "signInUserWithEmail",
+                data: {
+                    userEmail: action.userEmail,
+                    userPassword: action.userPassword,
                 },
-            });
-        }
+            },
+        });
     }
 }
 
@@ -105,19 +108,18 @@ export function* sendPasswordResetEmail(action) {
 }
 
 export function* signInUserWithFacebook() {
-    const signInFacebookResponse = yield call(UserAuth.signInUserWithFacebook);
-    console.log("signInFacebookResponse", signInFacebookResponse);
+    const signInUserWithFacebookResponse = yield call(
+        UserAuth.signInUserWithFacebook
+    );
+    console.log(
+        "signInUserWithFacebookResponse",
+        signInUserWithFacebookResponse
+    );
 
-    if (signInFacebookResponse.authenticated) {
+    if (signInUserWithFacebookResponse.success) {
         yield put({
-            type: "SIGN_IN_USER",
-            uid: signInFacebookResponse.message.uid,
-            userEmail: signInFacebookResponse.message.userEmail,
-            userName: signInFacebookResponse.message.userName,
-            userPhotoUrl: {
-                cropped: signInFacebookResponse.message.userPhotoURL,
-            },
-            anonymous: false,
+            type: "linkUserWithCredential",
+            credential: signInUserWithFacebookResponse.message.credential,
         });
     } else {
         yield put({
@@ -133,19 +135,15 @@ export function* signInUserWithFacebook() {
 }
 
 export function* signInUserWithGoogle() {
-    const signInGoogleResponse = yield call(UserAuth.signInUserWithGoogle);
-    console.log("signInGoogleResponse", signInGoogleResponse);
+    const signInUserWithGoogleResponse = yield call(
+        UserAuth.signInUserWithGoogle
+    );
+    console.log("signInUserWithGoogleResponse", signInUserWithGoogleResponse);
 
-    if (signInGoogleResponse.authenticated) {
+    if (signInUserWithGoogleResponse.success) {
         yield put({
-            type: "SIGN_IN_USER",
-            uid: signInGoogleResponse.message.uid,
-            userEmail: signInGoogleResponse.message.userEmail,
-            userName: signInGoogleResponse.message.userName,
-            userPhotoUrl: {
-                cropped: signInGoogleResponse.message.userPhotoURL,
-            },
-            anonymous: false,
+            type: "linkUserWithCredential",
+            credential: signInUserWithGoogleResponse.message.credential,
         });
     } else {
         yield put({
@@ -160,17 +158,24 @@ export function* signInUserWithGoogle() {
     }
 }
 
-export function* signInUserAnonymously() {
-    const signInUserAnonymouslyResponse = yield call(
-        UserAuth.signInUserAnonymously
+export function* linkUserWithCredential(action) {
+    const linkUserWithCredentialResponse = yield call(
+        UserAuth.linkUserWithCredential,
+        action
     );
-    console.log("signInUserAnonymouslyResponse", signInUserAnonymouslyResponse);
+    console.log(
+        "linkUserWithCredentialResponse",
+        linkUserWithCredentialResponse
+    );
 
-    if (signInUserAnonymouslyResponse.authenticated) {
+    if (linkUserWithCredentialResponse.authenticated) {
         yield put({
             type: "SIGN_IN_USER",
-            uid: signInUserAnonymouslyResponse.message.uid,
-            anonymous: true,
+            uid: linkUserWithCredentialResponse.message.uid,
+            userEmail: linkUserWithCredentialResponse.message.userEmail,
+            userName: linkUserWithCredentialResponse.message.userName,
+            userPhotoURL: linkUserWithCredentialResponse.message.userPhotoURL,
+            anonymous: false,
         });
     } else {
         yield put({
@@ -179,7 +184,8 @@ export function* signInUserAnonymously() {
             message:
                 "We were unable to connect. Check your connection and try again.",
             retryAction: {
-                type: "signInUserAnonymously",
+                type: "linkUserWithCredential",
+                credential: action.credential,
             },
         });
     }

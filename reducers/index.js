@@ -23,11 +23,10 @@ export default function(state = initialState, action) {
                 new_state.userData.profile.userEmail = action.userEmail;
             if (action.userName)
                 new_state.userData.profile.userName = action.userName;
-            if (action.userPhotoUrl)
-                new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
+            if (action.userPhotoURL)
+                new_state.userData.profile.userPhotoURL = action.userPhotoURL;
             if (action.dateJoined)
                 new_state.userData.profile.dateJoined = action.dateJoined;
-
             if (action.anonymous) {
                 new_state.userAuth.anonymous = true;
             }
@@ -55,7 +54,6 @@ export default function(state = initialState, action) {
             new_state.appState.error.type = action.errorType;
             new_state.appState.error.message = action.message;
             new_state.appState.error.success = true;
-            new_state.appState.loading = false;
 
             return new_state;
 
@@ -85,7 +83,7 @@ export default function(state = initialState, action) {
             new_state.appState.error.success = null;
             return new_state;
 
-        /* APP DATA */
+        /* DATA */
         case "SET_CURRENT_LOCATION":
             new_state = utilities.cloneObject(state);
             new_state.appData.currentLocation = action.currentLocation;
@@ -102,25 +100,14 @@ export default function(state = initialState, action) {
             new_state.appData.temporaryImage = null;
             return new_state;
 
-        /* USER DATA */
-        case "UPDATE_USER_DATA":
+        case "SET_USER_DATA":
             new_state = utilities.cloneObject(state);
-
-            if (action.node) {
-                new_state.userData[action.node] = action.userData;
-            } else {
-                new_state.userData = action.userData;
-            }
-
-            new_state.appState.error.type = "CLOUD_DATA";
-            new_state.appState.error.message = null;
-            new_state.appState.error.success = true;
-            new_state.appState.loading = false;
+            new_state.userData[action.subNode] = action.data;
             return new_state;
 
         case "SET_USER_PHOTO":
             new_state = utilities.cloneObject(state);
-            new_state.userData.profile.userPhotoUrl = action.userPhotoUrl;
+            new_state.userData.profile.userPhotoURL = action.userPhotoURL;
             return new_state;
 
         default:

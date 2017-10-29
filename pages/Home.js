@@ -1,9 +1,9 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import PropTypes from "prop-types";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
-import { Page, HeaderBar } from "react-native-simple-components";
+import { Page, Touchable } from "react-native-simple-components";
 
 import config from "../config";
 import utilities from "../utilities";
@@ -13,6 +13,9 @@ export class Home extends React.Component {
     constructor(props) {
         super(props);
 
+        this.handleAuth = this.handleAuth.bind(this);
+        this.signOut = this.signOut.bind(this);
+
         this.state = {};
     }
 
@@ -20,17 +23,37 @@ export class Home extends React.Component {
         return {};
     }
 
+    handleAuth() {
+        this.props.dispatch({
+            type: "signInUserWithGoogle",
+        });
+    }
+
+    signOut() {
+        this.props.dispatch({
+            type: "signOutUser",
+        });
+    }
+
     render() {
+        console.log(this.props.user);
         return (
             <Page>
-                <HeaderBar />
+                <Touchable onPress={this.handleAuth}>
+                    <Text>Login</Text>
+                </Touchable>
+                <Touchable onPress={this.signOut}>
+                    <Text>Sign Out</Text>
+                </Touchable>
             </Page>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        user: state.main.userData.profile,
+    };
 }
 
 export default connect(mapStateToProps)(Home);

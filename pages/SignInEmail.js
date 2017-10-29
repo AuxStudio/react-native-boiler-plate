@@ -54,7 +54,7 @@ export class SignInEmail extends React.Component {
             });
 
             this.props.dispatch({
-                type: "loadUserData",
+                type: "getData",
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user

@@ -35,7 +35,7 @@ export class SignIn extends React.Component {
             uid: PropTypes.string,
             userEmail: PropTypes.string,
             userName: PropTypes.string,
-            userPhotoUrl: PropTypes.object,
+            userPhotoURL: PropTypes.object,
             userSettings: PropTypes.object,
         };
     }
@@ -52,7 +52,7 @@ export class SignIn extends React.Component {
             });
 
             this.props.dispatch({
-                type: "loadUserData",
+                type: "getData",
                 uid: this.props.uid,
 
                 // Add these for the ride in case we have a new user
@@ -61,7 +61,7 @@ export class SignIn extends React.Component {
                     profile: {
                         userEmail: this.props.userEmail,
                         userName: this.props.userName,
-                        userPhotoUrl: this.props.userPhotoUrl,
+                        userPhotoURL: this.props.userPhotoURL,
                         dateJoined: Date.now(),
                     },
                     categories: this.props.categories,
@@ -140,7 +140,7 @@ function mapStateToProps(state) {
         uid: state.main.userAuth.uid,
         userEmail: state.main.userData.profile.userEmail,
         userName: state.main.userData.profile.userName,
-        userPhotoUrl: state.main.userData.profile.userPhotoUrl,
+        userPhotoURL: state.main.userData.profile.userPhotoURL,
         userSettings: state.main.userData.settings,
     };
 }

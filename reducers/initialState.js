@@ -6,7 +6,7 @@ const initialState = {
         userPassword: null,
     },
     appState: {
-        loading: false,
+        loading: true,
 
         error: {
             type: null,
@@ -22,11 +22,12 @@ const initialState = {
         temporaryImage: null,
     },
     userData: {
+        settings: null,
         profile: {
             userName: null,
             userEmail: null,
             userLocation: null,
-            userPhotoUrl: null,
+            userPhotoURL: null,
         },
     },
 };

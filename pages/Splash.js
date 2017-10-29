@@ -16,18 +16,24 @@ export class Splash extends React.Component {
 
         this.startTimer = this.startTimer.bind(this);
         this.runLogic = this.runLogic.bind(this);
-        this.resetSnackBar = this.resetSnackBar.bind(this);
+        this.resetError = this.resetError.bind(this);
         this.retrySnackBarAction = this.retrySnackBarAction.bind(this);
 
         this.state = {
             isAuthenticating: false,
+            isFetchingData: false,
             time: 0,
         };
     }
 
     static get propTypes() {
         return {
+            loading: PropTypes.bool,
+            uid: PropTypes.string,
             authenticated: PropTypes.bool,
+            error: PropTypes.object,
+            retryAction: PropTypes.object,
+            cloudDataSuccess: PropTypes.bool,
         };
     }
 
@@ -61,39 +67,59 @@ export class Splash extends React.Component {
     runLogic() {
         // Redirect to home if we're authenticated and the splash screen has shown for at the minimumDisplayDuration
         if (
-            this.props.authenticated &&
-            (this.state.time >= config.splash.minimumDisplayDuration ||
-                config.splash.disableLoadingDelay)
+            config.splash.disableUserAuth ||
+            (this.props.authenticated &&
+                this.props.cloudDataSuccess &&
+                (this.state.time >= config.splash.minimumDisplayDuration ||
+                    config.splash.disableLoadingDelay))
         ) {
             !config.testing.disableLoadingDelay && clearInterval(this.timer);
+
             this.props.dispatch({
                 type: "TOGGLE_LOADING",
             });
 
+            this.resetError();
+
             Actions.home();
+        } else if (
+            this.props.authenticated &&
+            !this.props.cloudDataSuccess &&
+            !this.state.isFetchingData
+        ) {
+            this.setState({
+                isFetchingData: true,
+            });
+
+            // Get the user's settings
+            this.props.dispatch({
+                type: "getData",
+                node: "users",
+                subNode: "settings",
+                uid: this.props.uid,
+            });
         } else if (!this.props.authenticated && !this.state.isAuthenticating) {
             // Set this prop so we don't reauthenticate while the timer is running
             this.setState({
                 isAuthenticating: true,
             });
 
-            // getUserAuth is not initialised immediately
             setTimeout(() => {
                 this.props.dispatch({
                     type: "getUserAuth",
                 });
-            }, 0);
+            }, 0); // getUserAuth is not initialised immediately
         }
     }
 
-    resetSnackBar() {
+    resetError() {
         this.props.dispatch({
             type: "RESET_ERROR",
         });
     }
 
     retrySnackBarAction() {
-        this.resetSnackBar();
+        this.resetError();
 
         this.props.dispatch({
             ...this.props.retryAction,
@@ -106,7 +132,7 @@ export class Splash extends React.Component {
                 iconName="error"
                 iconColor="black"
                 text={this.props.error.message}
-                handleClose={this.resetSnackBar}
+                handleClose={this.resetError}
                 handleRetry={this.retrySnackBarAction}
             />
         );
@@ -115,7 +141,7 @@ export class Splash extends React.Component {
             <Page>
                 <StatusBar backgroundColor={styleConstants.darkTransPrimary} />
 
-                <Loader />
+                <Loader loading={this.props.loading} />
                 {snackBar}
             </Page>
         );
@@ -124,9 +150,14 @@ export class Splash extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        loading: state.main.appState.loading,
+        uid: state.main.userAuth.uid,
         authenticated: state.main.userAuth.authenticated,
         error: state.main.appState.error,
         retryAction: state.main.appState.retryAction,
+        cloudDataSuccess:
+            state.main.appState.error.type === "CLOUD_DATA" &&
+            state.main.appState.error.success,
     };
 }
 
