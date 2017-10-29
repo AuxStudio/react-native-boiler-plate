@@ -93,6 +93,7 @@ A react-native redux and firebase boilerplate.
             compile "com.google.android.gms:play-services-base:11.4.2"
             compile "com.google.firebase:firebase-core:11.4.2"
             compile "com.google.firebase:firebase-auth:11.4.2"
+            compile "com.google.firebase:firebase-database:11.4.2"
             compile "com.google.firebase:firebase-storage:11.4.2"
         
         In ./android/app/src/main/java/MainApplication.java add (at top)
@@ -140,7 +141,7 @@ A react-native redux and firebase boilerplate.
         In ./android/app/src/main/res/values/strings.xml add 
             <string name="facebook_app_id">FACEBOOK_APP_ID</string>
             <string name="fb_login_protocol_scheme">FACEBOOK_LOGIN_SCHEME</string>
-        In ./android/app/src/main/AndroidManifest.xml add
+        In ./android/app/src/main/AndroidManifest.xml add (within <application> tags)
             <meta-data android:name="com.facebook.sdk.ApplicationId" 
                 android:value="@string/facebook_app_id"/>
     
@@ -191,8 +192,6 @@ A react-native redux and firebase boilerplate.
 
     react-native-image-picker 
         react-native link react-native-image-picker
-        In ./android/build.grade (buildscript.dependencies) change
-            classpath 'com.android.tools.build:gradle:2.2.3' => classpath 'com.android.tools.build:gradle:2.2.+'
 
     react-native-image-resizer 
         react-native link react-native-image-resizer
@@ -200,11 +199,18 @@ A react-native redux and firebase boilerplate.
     react-native-fs 
         react-native link react-native-fs
 
+8.1. SET SDK VERSION (ANDROID ONLY)
+    In ./android/app/build.gradle
+        android.compileSdkVersion => 25
+        android.buildToolsVersion => "25.0.3"
+        android.defaultConfig.targetSdkVersion => 25
+        depenencies (com.android.support) => 25.0.0
+
 8. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src
     In index.js change
         import App from './App' to './src/App';
-    rm ./App.js
+    rm ./App.js 
     sudo rm -R ./src/.git
 
 9. SETUP EXTRA APP ICONS
@@ -214,9 +220,11 @@ A react-native redux and firebase boilerplate.
             "./src/assets/fonts",
             ]
         }
-    Copy ./src/assets/fonts/AppIcons.ttf to
+    Copy ./src/assets/fonts/AppIcons.ttf
         ./android/app/src/assets/fonts
         ./ios/PROJECT_NAME/     TODO: TEST THIS
 
+10. SETUP FIREBASE AUTH
+    In Firebase console => PROJECT_NAME => Authentication => Sign-In Method => Enable anonymous
 
-10. UPDATE config.js with google sign in webClientId and iosClientId
+    TODO: Enable FB, Google, Email, Mobile

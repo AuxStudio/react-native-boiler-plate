@@ -2,10 +2,7 @@ const initialState = {
     userAuth: {
         authenticated: null,
         uid: null,
-
         anonymous: null,
-        redirectToSignInPage: null,
-
         userPassword: null,
     },
     appState: {

@@ -14,7 +14,7 @@ export function* getUserAuth() {
         });
     } else {
         yield put({
-            type: "REDIRECT_USER_TO_SignIn_PAGE",
+            type: "signInUserAnonymously",
         });
     }
 }

@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { StatusBar, View, Platform } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
-import { SnackBar, Loader } from "react-native-simple-components";
-
-import Page from "../components/Page";
+import { Page, SnackBar, Loader } from "react-native-simple-components";
 
 import config from "../config";
 import utilities from "../utilities";
