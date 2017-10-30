@@ -2,6 +2,15 @@ import { Dimensions, Platform } from "react-native";
 
 const styleConstants = {};
 
+/* FONT FAMILIES */
+
+// styleConstants.primaryFont = {
+//     fontFamily: "Montserrat-Regular",
+// };
+// styleConstants.secondaryFont = {
+//     fontFamily: "Lora-Regular",
+// };
+
 /* FONT SIZES */
 
 styleConstants.largeFont = 32;
@@ -12,22 +21,16 @@ styleConstants.iconFont = 24;
 
 /* COLOURS */
 
-styleConstants.primary = "#0094d4";
-styleConstants.lightTransPrimary = "rgba(0, 148, 212, 0.50)";
-styleConstants.darkTransPrimary = "rgba(0, 148, 212, 0.75)";
-styleConstants.secondary = "#f8a900";
-styleConstants.lightTransSecondary = "rgba(248, 167, 0, 0.50)";
-styleConstants.darkTransSecondary = "rgba(248, 167, 0, 0.75)";
-styleConstants.grey = "#808092";
-styleConstants.lightGrey = "#b0b3cf";
-styleConstants.veryLightGrey = "#EAEAEA";
-styleConstants.white = "#ffffff";
-styleConstants.lightTransparent = "rgba(0, 0, 0, 0.33)";
-styleConstants.mediumTransparent = "rgba(0, 0, 0, 0.50)";
-styleConstants.darkTransparent = "rgba(0, 0, 0, 0.67)";
-styleConstants.black = "#000000";
-styleConstants.danger = "#d32f2f";
-styleConstants.success = "#69b532";
+styleConstants.primary = "#E91E63";
+styleConstants.darkPrimary = "#C2185B";
+styleConstants.lightPrimary = "#F8BBD0";
+styleConstants.secondary = "#00BCD4";
+styleConstants.darkSecondary = "#0097A7";
+styleConstants.lightSecondary = "#00BCD4";
+styleConstants.white = "#FFFFFF";
+styleConstants.primaryText = "#212121";
+styleConstants.secondaryText = "#757575";
+styleConstants.dividerColor = "#BDBDBD";
 
 /* DIMENSIONS */
 
