@@ -2,3 +2,4 @@ Auth method
     Phone Auth
         Link Phone
     Enable password reset in app
+Sign In pages

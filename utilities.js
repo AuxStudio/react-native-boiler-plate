@@ -94,12 +94,12 @@ utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
 
 /* STRINGS */
 
-utilities.firstCharToUppercase = string => {
+utilities.firstCharToUpperCase = string => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
-utilities.firstCharToLowercase = string => {
+utilities.firstCharToLowerCase = string => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toLowerCase() + trimmedString.slice(1);
 };
