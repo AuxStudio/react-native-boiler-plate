@@ -211,13 +211,8 @@ A react-native redux and firebase boilerplate.
 		pod init
 		Delete duplicate PROJECT_NAME-tvOSTests within main project target
 		pod update
-		In .gitignore Add
-			Pods/
-			ios/FBSDKCoreKit.framework/
-			ios/FBSDKLoginKit.framework/
-			ios/Bolts.framework/
-			ios/FBSDKShareKit.framework/
-			ios/GoogleSDK/
+		*In .gitignore Add
+			Pods/ (when cloning the project you will need to run pod install)
 
 	react-native-vector-icons
 		In Xcode, drag fonts to project
