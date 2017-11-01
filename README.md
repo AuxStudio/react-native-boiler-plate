@@ -250,10 +250,9 @@ A react-native redux and firebase boilerplate.
 			</array>
 
 	react-native-google-signin
-		Add to podfile
-			pod 'Google/SignIn'
-			pod install
-			pod update
+        add ios/RNGoogleSignin.xcodeproj to your xcode project
+        In your project build phase -> Link binary with libraries step, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd
+        Drag and drop the ios/GoogleSdk folder to your xcode project. (Make sure Copy items if needed IS ticked)
 		Configure URL types in the Info panel
 			add a URL with scheme set to your REVERSED_CLIENT_ID (found inside the plist)
 			add a URL with scheme set to your bundle id
