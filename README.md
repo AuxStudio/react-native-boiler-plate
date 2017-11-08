@@ -15,7 +15,7 @@ A react-native redux and firebase boilerplate.
 3. UPDATE DISPLAY NAME*
     ./android/app/src/main/values/strings.xml 
         Change the string value in <string name="app_name">NEW_APP_DISPLAY_NAME</string
-    ./ios/PROJECT_NAME/Info.plist    NEEDS TESTING  
+    ./ios/PROJECT_NAME/Info.plist
         Under <key>CFBUNDLEDISPLAYNAME</key>, change the string value to your NEW_APP_DISPLAY_NAME
     
 4. ADD REFERENCE TO ANDROID SDK PATH
@@ -62,7 +62,7 @@ A react-native redux and firebase boilerplate.
 6. INSTALL DEPENDENCIES (NOTE: Some of these are optional)
     yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs
 
-7. LINK AND SETUP DEPENDENCIES (ANDROID ONLY - TODO: IOS)
+7. LINK AND SETUP DEPENDENCIES (ANDROID)
 
     react-native-vector-icons
         ./android/app/build.gradle (at bottom of file add)
@@ -79,7 +79,6 @@ A react-native redux and firebase boilerplate.
                 keytool -exportcert -list -v -alias PROJECT_NAME -keystore ./android/app/PROJECT_NAME.keystore
         Download google-services.json to
             ./android/app/
-            ./ios/PROJECT_NAME/
         In ./android/build.gradle add (in buildscript.dependencies)
                 classpath 'com.google.gms:google-services:3.1.1'
         Same file as above add (to allprojects.repositories)
@@ -175,6 +174,10 @@ A react-native redux and firebase boilerplate.
             compile 'com.google.android.gms:play-services-auth:11.4.2'
         Add web client id to config
         Add dev and release SHA-1 to Firebase project
+			keytool -exportcert -list -v \
+-alias androiddebugkey -keystore ~/.android/debug.keystore (PASSWORD: android)
+			keytool -exportcert -list -v \
+-alias LeCreusetApp -keystore ./android/app/LeCreusetApp.keystore (PASSWORD: PROJECT_PASSWORD)
 
     react-native-permissions 
         react-native link react-native-permissions
@@ -201,21 +204,96 @@ A react-native redux and firebase boilerplate.
     react-native-fs 
         react-native link react-native-fs
 
-8.1. SET SDK VERSION (ANDROID ONLY)
+8. LINK AND SETUP DEPENDENCIES (IOS)
+
+	Add Cocoapods
+		cd ios
+		pod init
+		Delete duplicate PROJECT_NAME-tvOSTests within main project target
+		pod update
+		*In .gitignore Add
+			Pods/ (when cloning the project you will need to run pod install)
+
+	react-native-vector-icons
+		In Xcode, drag fonts to project
+		In info.plist, UIAppFonts (within array)
+			Add <string>MaterialIcons.ttf</string> (and any other fonts you want)
+
+	react-native-firebase
+		Add ios app to firebase console
+		Download GoogleServices-Info.plist to ./ios
+		In podfile, uncomment platform :ios, '9.0'
+			Change to '8.0' if on Mac version < 10.2
+		Same file Add
+		  	pod 'Firebase', '4.3.0' // necessary for pod to use latest firebase modules
+			pod 'Firebase/Core'
+			pod 'Firebase/Auth'	
+			pod 'Firebase/Database'
+			pod 'Firebase/Storage'
+		pod install
+		In ./ios/PROJECT_NAME/AppDelegate.m (at top of file)
+			Add #import <Firebase.h>
+		Same file (before return)
+			Add [FIRApp configure];
+		pod update
+
+	react-native-fbsdk
+		https://developers.facebook.com/docs/facebook-login/ios 
+		From Documents/FacebookSDK, drag Bolts.framework and FBSDKShareKit.framework into Frameworks
+		Add the following to Info.plist
+			<key>LSApplicationQueriesSchemes</key>
+			<array>
+				<string>fbapi</string>
+				<string>fb-messenger-api</string>
+				<string>fbauth2</string>
+				<string>fbshareextension</string>
+			</array>
+
+	react-native-google-signin
+        add ios/RNGoogleSignin.xcodeproj to your xcode project
+        In your project build phase -> Link binary with libraries step, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd
+        Drag and drop the ios/GoogleSdk folder to your xcode project. (Make sure Copy items if needed IS ticked)
+		Configure URL types in the Info panel
+			add a URL with scheme set to your REVERSED_CLIENT_ID (found inside the plist)
+			add a URL with scheme set to your bundle id
+		Add ios client id to ./src/config.js
+
+	react-native-permissions
+		Add necessary permissions to Info.plist
+			<key>NSCameraUsageDescription</key>
+			<string></string>
+			<key>NSLocationWhenInUseUsageDescription</key>
+			<string></string>
+			<key>NSPhotoLibraryUsageDescription</key>
+			<string></string>
+
+	react-native-geocoder
+		react-native link react-native-geocoder (this has been done already if you went through the Android linking guide)
+
+	react-native-image-picker
+		TODO
+
+	react-native-image-resizer
+		TODO
+
+	react-native-fs
+		TODO
+
+9. SET SDK VERSION (ANDROID)
     In ./android/app/build.gradle
         android.compileSdkVersion => 25
         android.buildToolsVersion => "25.0.3"
         android.defaultConfig.targetSdkVersion => 25
         depenencies (com.android.support) => 25.0.0
 
-8. COPY THE SOURCE FILES
+10. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src
     In index.js change
         import App from './App' to './src/App';
     rm ./App.js 
     sudo rm -R ./src/.git
 
-9. SETUP EXTRA APP ICONS
+11. SETUP EXTRA APP ICONS
     Copy the following to package.json
         "rnpm": {
             "assets": [
@@ -224,11 +302,12 @@ A react-native redux and firebase boilerplate.
         }
     Copy ./src/assets/fonts/AppIcons.ttf
         ./android/app/src/assets/fonts
-        ./ios/PROJECT_NAME/     TODO: TEST THIS
+        ./ios/PROJECT_NAME/     
 
-10. ENABLE FIREBASE AUTH
+12. ENABLE FIREBASE AUTH
     Anonymous,
     Facebook,
     Google,
+		You may need to download a new google-services.json and GoogleService-Info.plist
     Email,
-    Phone
+    *Phone
