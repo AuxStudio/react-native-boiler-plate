@@ -11,7 +11,10 @@ import { linkUserWithCredential } from "./userAuth";
 import { signOutUser } from "./userAuth";
 
 // Geolocation
-import { getUserLocation } from "./geolocation";
+import {
+    getUserLocation,
+    getFormattedAddressFromCoordinates,
+} from "./geolocation";
 
 // Cloud Data
 import { getData } from "./cloudData";
@@ -39,6 +42,11 @@ export function* sagas() {
 
         // Geolocation
         fork(takeLatest, "getUserLocation", getUserLocation),
+        fork(
+            takeLatest,
+            "getFormattedAddressFromCoordinates",
+            getFormattedAddressFromCoordinates
+        ),
 
         // Cloud Data
         fork(takeLatest, "getData", getData),

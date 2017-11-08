@@ -1,5 +1,3 @@
-import { Easing } from "react-native";
-
 const config = {};
 
 config.app = {
@@ -12,31 +10,19 @@ config.app = {
     },
 };
 
-config.splash = {
-    disableLoadingDelay: true,
-    disableUserAuth: false,
-    minimumDisplayDuration: 1, // seconds
-};
-
 config.testing = {
     dimensions: false,
+    disableSplashPageLoadingDelay: true,
+    disableUserAuth: true,
+};
+
+config.splash = {
+    minimumDisplayDuration: 1, // seconds
 };
 
 config.firebase = {
     debug: false,
     persistence: true,
-};
-
-config.animation = {
-    duration: {
-        short: 250,
-        long: 750,
-    },
-    easing: Easing.gentle,
-};
-
-config.modal = {
-    animation: "slide",
 };
 
 config.images = {

@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 const utilities = {};
 
 /* TIMING */
@@ -136,7 +138,10 @@ utilities.createUUID = () => {
 };
 
 utilities.prettifyUrl = url => {
-    const prettyUrl = url.split("//")[1].split("/")[0];
+    const prettyUrl = url
+        .split("//")[1]
+        .split("/")[0]
+        .split("www.")[1];
 
     return prettyUrl;
 };
@@ -160,6 +165,46 @@ utilities.incrementNumberInString = (string, delimiter) => {
     const stringArray = string.split(delimiter);
     const nextNumber = Number(stringArray[1]) + 1;
     const newString = stringArray[0] + delimiter + nextNumber;
+
+    return newString;
+};
+
+utilities.createLinkingURL = url => {
+    let linkingUrl = "";
+
+    // Location ({lat: X, lng: X})
+    if (url.lat) {
+        if (Platform.OS === "android") {
+            linkingUrl = "geo:" + url.lat + "," + url.lng;
+        } else {
+            linkingUrl = `http://maps.apple.com/?ll=${url.lat},${url.lng}`;
+        }
+    } else if (url.indexOf("@") > -1) {
+        // Email address
+        linkingUrl = "mailto:" + url;
+    } else if (url.indexOf("+") > -1) {
+        // Telephone number
+        linkingUrl = "tel:" + url;
+    } else {
+        linkingUrl = url;
+    }
+
+    return linkingUrl;
+};
+
+// Takes a two word camelCased string (childFriendly => Child Friendly) // TODO: should work with any number of words
+utilities.prettifyCamelCasedString = string => {
+    let index;
+
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === string[i].toUpperCase()) {
+            index = i;
+        }
+    }
+
+    const firstWord = utilities.firstCharToUpperCase(string.slice(0, index));
+    const secondWord = string.slice(index, string.length);
+    const newString = firstWord + " " + secondWord;
 
     return newString;
 };
@@ -486,6 +531,28 @@ utilities.getDifferenceBetweenDictionarys = (newDictionary, oldDictionary) => {
     }
 
     return missingObjects;
+};
+
+/* LOCATION */
+
+// Thanks to https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula (https://stackoverflow.com/users/1921/chuck)
+utilities.getDistanceBetweenCoordinateSets = (setA, setB) => {
+    var R = 6371; // Radius of the earth in km
+    var dLat = utilities.convertDegreesToRadians(setB.lat - setA.lat);
+    var dLon = utilities.convertDegreesToRadians(setB.lng - setA.lng);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(utilities.convertDegreesToRadians(setA.lat)) *
+            Math.cos(utilities.convertDegreesToRadians(setB.lat)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+};
+
+utilities.convertDegreesToRadians = degrees => {
+    return degrees * (Math.PI / 180);
 };
 
 export default utilities;

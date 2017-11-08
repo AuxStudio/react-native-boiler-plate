@@ -1,3 +1,6 @@
+Colours as per WineMe
+Shadow borders only on early android
+
 Auth method
     Phone Auth
         Link Phone

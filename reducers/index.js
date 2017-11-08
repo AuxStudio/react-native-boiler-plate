@@ -84,9 +84,9 @@ export default function(state = initialState, action) {
             return new_state;
 
         /* DATA */
-        case "SET_CURRENT_LOCATION":
+        case "SET_USER_LOCATION":
             new_state = utilities.cloneObject(state);
-            new_state.appData.currentLocation = action.currentLocation;
+            new_state.appData.userLocation = action.userLocation;
             new_state.appState.loading = false; // for profile page
             return new_state;
 

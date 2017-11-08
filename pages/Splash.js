@@ -71,9 +71,10 @@ export class Splash extends React.Component {
             (this.props.authenticated &&
                 this.props.cloudDataSuccess &&
                 (this.state.time >= config.splash.minimumDisplayDuration ||
-                    config.splash.disableLoadingDelay))
+                    config.splash.disableSplashPageLoadingDelay))
         ) {
-            !config.testing.disableLoadingDelay && clearInterval(this.timer);
+            !config.testing.disableSplashPageLoadingDelay &&
+                clearInterval(this.timer);
 
             this.props.dispatch({
                 type: "TOGGLE_LOADING",

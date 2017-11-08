@@ -11,6 +11,7 @@ const initialState = {
         error: {
             type: null,
             message: null,
+            success: null,
         },
         retryAction: {
             type: null,
@@ -18,7 +19,8 @@ const initialState = {
         },
     },
     appData: {
-        currentLocation: null,
+        userLocation: null,
+        currentPlaceLocality: null,
         temporaryImage: null,
     },
     userData: {

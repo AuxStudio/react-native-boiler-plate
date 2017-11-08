@@ -10,9 +10,9 @@ Permissions.handlePermission = (permission, successCallback, errorCallback) => {
         } else {
             RNPermissions.request(permission).then(response => {
                 if (response === "authorized") {
-                    successCallback();
+                    successCallback && successCallback();
                 } else {
-                    errorCallback();
+                    errorCallback && errorCallback();
                 }
             });
         }
