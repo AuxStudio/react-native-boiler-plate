@@ -1,5 +1,6 @@
 Colours as per WineMe
 Shadow borders only on early android
+Update iOS shadows
 
 Auth method
     Phone Auth

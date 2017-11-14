@@ -211,11 +211,9 @@ A react-native redux and firebase boilerplate.
 		pod init
 		Delete duplicate PROJECT_NAME-tvOSTests within main project target
 		pod update
-		*In .gitignore Add
-			Pods/ (when cloning the project you will need to run pod install)
 
 	react-native-vector-icons
-		In Xcode, drag fonts to project
+		In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want)
 		In info.plist, UIAppFonts (within array)
 			Add <string>MaterialIcons.ttf</string> (and any other fonts you want)
 
@@ -231,31 +229,44 @@ A react-native redux and firebase boilerplate.
 			pod 'Firebase/Database'
 			pod 'Firebase/Storage'
 		pod install
+        pod update
 		In ./ios/PROJECT_NAME/AppDelegate.m (at top of file)
 			Add #import <Firebase.h>
 		Same file (before return)
 			Add [FIRApp configure];
-		pod update
 
 	react-native-fbsdk
 		https://developers.facebook.com/docs/facebook-login/ios 
-		From Documents/FacebookSDK, drag Bolts.framework and FBSDKShareKit.framework into Frameworks
-		Add the following to Info.plist
-			<key>LSApplicationQueriesSchemes</key>
-			<array>
-				<string>fbapi</string>
-				<string>fb-messenger-api</string>
-				<string>fbauth2</string>
-				<string>fbshareextension</string>
-			</array>
+        Additional Steps
+            From Documents/FacebookSDK, drag Bolts.framework and FBSDKShareKit.framework into Frameworks
 
+    TODO: Migrate to react-native-google-sign-in (BELOW NOT MAINTAINED ANYMORE)
 	react-native-google-signin
-        add ios/RNGoogleSignin.xcodeproj to your xcode project
-        In your project build phase -> Link binary with libraries step, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd
-        Drag and drop the ios/GoogleSdk folder to your xcode project. (Make sure Copy items if needed IS ticked)
+        May have been done by link? already
+            add ios/RNGoogleSignin.xcodeproj to your xcode project
+            In your project build phase -> Link binary with libraries step, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd
+        Drag and drop contents of the ios/GoogleSdk folder to your xcode project. (Make sure Copy items if needed is ticked)
+        Copy this folder to ios/ if you don't see it there
 		Configure URL types in the Info panel
-			add a URL with scheme set to your REVERSED_CLIENT_ID (found inside the plist)
-			add a URL with scheme set to your bundle id
+			add Identifier and URL Schemes with your REVERSED_CLIENT_ID (found inside the plist)
+			add Identifier and URL Schemes set to your bundle id
+        Add top of AppDelegate.m
+            #import <RNGoogleSignin/RNGoogleSignin.h>
+        Replace openUrl function with:
+            - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+            sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+
+            return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                    openURL:url
+                                                        sourceApplication:sourceApplication
+                                                                annotation:annotation
+                    ]
+                    || [RNGoogleSignin application:application
+                                            openURL:url
+                                sourceApplication:sourceApplication
+                                        annotation:annotation
+                        ];
+            }
 		Add ios client id to ./src/config.js
 
 	react-native-permissions
@@ -268,16 +279,17 @@ A react-native redux and firebase boilerplate.
 			<string></string>
 
 	react-native-geocoder
-		react-native link react-native-geocoder (this has been done already if you went through the Android linking guide)
+		react-native link react-native-geocoder (unless done in android setup)
 
 	react-native-image-picker
-		TODO
+		react-native link react-native-image-picker (unless done in android setup)
+        For iOS 10+, Add the NSPhotoLibraryUsageDescription, NSCameraUsageDescription, and NSMicrophoneUsageDescription (if allowing video) keys to your Info.plist with strings describing why your app needs these permissions. Note: You will get a SIGABRT crash if you don't complete this step
 
 	react-native-image-resizer
-		TODO
+		react-native link react-native-image-resizer (unless done in android setup)
 
 	react-native-fs
-		TODO
+		react-native link react-native-fs (unless done in android setup)
 
 9. SET SDK VERSION (ANDROID)
     In ./android/app/build.gradle
@@ -311,3 +323,5 @@ A react-native redux and firebase boilerplate.
 		You may need to download a new google-services.json and GoogleService-Info.plist
     Email,
     *Phone
+
+13. TODO: ADDING CUSTOM ICONS
