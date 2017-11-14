@@ -240,7 +240,6 @@ A react-native redux and firebase boilerplate.
         Additional Steps
             From Documents/FacebookSDK, drag Bolts.framework and FBSDKShareKit.framework into Frameworks
 
-    TODO: Migrate to react-native-google-sign-in (BELOW NOT MAINTAINED ANYMORE)
 	react-native-google-signin
         May have been done by link? already
             add ios/RNGoogleSignin.xcodeproj to your xcode project
