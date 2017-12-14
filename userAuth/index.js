@@ -15,7 +15,6 @@ export default class UserAuth {
         return new Promise(resolve => {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    console.log(user._user);
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
@@ -60,7 +59,7 @@ export default class UserAuth {
         });
     }
 
-    static signInUserWithEmail(action) {
+    static getUserCredentialFromEmail(action) {
         return new Promise(resolve => {
             const credential = firebase.auth.EmailAuthProvider.credential(
                 action.email,
@@ -70,6 +69,8 @@ export default class UserAuth {
             response.success = true;
             response.message = {
                 credential,
+                userName: action.userName,
+                userEmail: action.email,
             };
             resolve(response);
         });
@@ -93,8 +94,9 @@ export default class UserAuth {
         });
     }
 
-    static signInUserWithFacebook(action) {
+    static getUserCredentialFromFacebook(action) {
         return new Promise(resolve => {
+            LoginManager.logOut();
             LoginManager.logInWithReadPermissions(["public_profile"]).then(
                 result => {
                     if (result.isCancelled) {
@@ -130,7 +132,7 @@ export default class UserAuth {
         });
     }
 
-    static signInUserWithGoogle(action) {
+    static getUserCredentialFromGoogle(action) {
         return new Promise(resolve => {
             GoogleSignin.hasPlayServices({ autoResolve: true })
                 .then(() => {
@@ -178,7 +180,6 @@ export default class UserAuth {
                 .auth()
                 .currentUser.linkWithCredential(action.credential)
                 .then(user => {
-                    console.log(user._user); // TODO: add relevant details from user object
                     response.authenticated = true;
                     response.message = {
                         uid: user._user.uid,
@@ -200,6 +201,40 @@ export default class UserAuth {
                     response.message = error.code;
                     resolve(response);
                 });
+        });
+    }
+
+    static signInUserWithCredential(action) {
+        return new Promise(resolve => {
+            firebase
+                .auth()
+                .signInWithCredential(action.credential)
+                .then(user => {
+                    response.authenticated = true;
+                    response.message = {
+                        uid: user._user.uid,
+                        userEmail: user._user.email
+                            ? user._user.email
+                            : user._user.providerData.length &&
+                              user._user.providerData[0].email,
+                        userName:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].displayName,
+                        userPhotoURL:
+                            user._user.providerData.length &&
+                            user._user.providerData[0].photoURL,
+                    };
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.authenticated = false;
+                    response.message = error;
+                    resolve(response);
+                });
+        }).catch(error => {
+            response.authenticated = false;
+            response.message = error;
+            resolve(response);
         });
     }
 

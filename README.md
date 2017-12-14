@@ -2,6 +2,8 @@ A react-native redux and firebase boilerplate.
 
 1. INITIALISE
     react-native init PROJECT_NAME
+    yarn add react-native@0.49      (AT THE MOMENT THERE IS A RN VERSION MISMATCH ERROR WITH RN > 0.49)
+        TODO: Fix iOS build error after this step?
 
 2. SETUP GIT
     Setup git repo
@@ -12,11 +14,10 @@ A react-native redux and firebase boilerplate.
     git commit -m "Initialise Project"
     git push -u origin master
 
-3. UPDATE DISPLAY NAME*
-    ./android/app/src/main/values/strings.xml 
-        Change the string value in <string name="app_name">NEW_APP_DISPLAY_NAME</string
-    ./ios/PROJECT_NAME/Info.plist
-        Under <key>CFBUNDLEDISPLAYNAME</key>, change the string value to your NEW_APP_DISPLAY_NAME
+3. UPDATE DISPLAY AND PACKAGE NAME*
+    npm install -g react-native-rename
+    react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
+    in Xcode, Project => General => Bundle Identifier = NEW_PACKAGE_NAME
     
 4. ADD REFERENCE TO ANDROID SDK PATH
     Create local.properties in ./android
@@ -28,22 +29,22 @@ A react-native redux and firebase boilerplate.
         */
     
 5. GENERATE ANDROID APP SIGNING (do this at the beginning so you can get your release key for facebook and google sign in)
-    keytool -genkey -v -keystore PROJECT_NAME.keystore -alias PROJECT_NAME -keyalg RSA -keysize 2048 -validity 10000
+    keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
     Enter a password and your details
-    Move PROJECT_NAME.keystore to ./android/app/
+    Move my-release-key.keystore to ./android/app/
     In ./android/gradle.properties, Add 
-        PROJECT_NAME_STORE_FILE=PROJECT_NAME.keystore
-        PROJECT_NAME_KEY_ALIAS=PROJECT_NAME
-        PROJECT_NAME_STORE_PASSWORD=PASSWORD
-        PROJECT_NAME_KEY_PASSWORD=PASSWORD
-    In ./android/app/build.gradle, Add (android.defaultConfig)
+        MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+        MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+        MYAPP_RELEASE_STORE_PASSWORD=*****
+        MYAPP_RELEASE_KEY_PASSWORD=*****
+    In ./android/app/build.gradle, Add (in android.defaultConfig)
         signingConfigs {
             release {
-                if (project.hasProperty('PROJECT_NAME_STORE_FILE')) {
-                    storeFile file(PROJECT_NAME_STORE_FILE)
-                    storePassword PROJECT_NAME_STORE_PASSWORD
-                    keyAlias PROJECT_NAME_KEY_ALIAS
-                    keyPassword PROJECT_NAME_KEY_PASSWORD
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                    storeFile file(MYAPP_RELEASE_STORE_FILE)
+                    storePassword MYAPP_RELEASE_STORE_PASSWORD
+                    keyAlias MYAPP_RELEASE_KEY_ALIAS
+                    keyPassword MYAPP_RELEASE_KEY_PASSWORD
                 }
             }
         }
@@ -60,7 +61,7 @@ A react-native redux and firebase boilerplate.
     *TO TEST RELEASE react-native run-android --variant=release
 
 6. INSTALL DEPENDENCIES (NOTE: Some of these are optional)
-    yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs
+    yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs axios
 
 7. LINK AND SETUP DEPENDENCIES (ANDROID)
 
@@ -75,13 +76,14 @@ A react-native redux and firebase boilerplate.
     react-native-firebase
         react-native link react-native-firebase
         Add Firebase app in Firebase console
-            Get the Android SHA1 key here
-                keytool -exportcert -list -v -alias PROJECT_NAME -keystore ./android/app/PROJECT_NAME.keystore
+            keytool -exportcert -list -v \
+    -alias androiddebugkey -keystore ~/.android/debug.keystore
+            keytool -exportcert -list -v -alias my-key-alias -keystore ./android/app/my-release-key.keystore
         Download google-services.json to
             ./android/app/
         In ./android/build.gradle add (in buildscript.dependencies)
                 classpath 'com.google.gms:google-services:3.1.1'
-        Same file as above add (to allprojects.repositories)
+        Same file as above add (to allprojects.repositories) (it's okay if you have to maven props)
             maven {
                 url 'https://maven.google.com'
             }
@@ -135,7 +137,7 @@ A react-native redux and firebase boilerplate.
 
         In ./android/build.gradle add (allprojects.repositories)
             mavenCentral()
-        In ./android/app/build.gradle add (dependencies)
+        In ./android/app/build.gradle add (to dependencies)
             compile 'com.facebook.android:facebook-login:[4,5)'
         In ./android/app/src/main/res/values/strings.xml add 
             <string name="facebook_app_id">FACEBOOK_APP_ID</string>
@@ -209,7 +211,7 @@ A react-native redux and firebase boilerplate.
 	Add Cocoapods
 		cd ios
 		pod init
-		Delete duplicate PROJECT_NAME-tvOSTests within main project target
+		in PodFile => Delete duplicate PROJECT_NAME-tvOSTests within main project target
 		pod update
 
 	react-native-vector-icons
@@ -228,8 +230,8 @@ A react-native redux and firebase boilerplate.
 			pod 'Firebase/Auth'	
 			pod 'Firebase/Database'
 			pod 'Firebase/Storage'
-		pod install
-        pod update
+		cd ios pod install && pod update
+        
 		In ./ios/PROJECT_NAME/AppDelegate.m (at top of file)
 			Add #import <Firebase.h>
 		Same file (before return)

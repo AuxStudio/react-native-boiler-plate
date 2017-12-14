@@ -2,6 +2,19 @@ import { Platform } from "react-native";
 
 const utilities = {};
 
+/* COLORS */
+
+utilities.convertHexToRGB = hex => {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+        ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16),
+          }
+        : null;
+};
+
 /* TIMING */
 
 utilities.getPrettyMinutesFromSeconds = seconds => {
@@ -96,12 +109,12 @@ utilities.getInputHeight = (inputWidth, inputLineHeight, charCount) => {
 
 /* STRINGS */
 
-utilities.firstCharToUpperCase = string => {
+utilities.firstCharToUppercase = string => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toUpperCase() + trimmedString.slice(1);
 };
 
-utilities.firstCharToLowerCase = string => {
+utilities.firstCharToLowercase = string => {
     const trimmedString = string.trim();
     return trimmedString.charAt(0).toLowerCase() + trimmedString.slice(1);
 };
@@ -138,10 +151,7 @@ utilities.createUUID = () => {
 };
 
 utilities.prettifyUrl = url => {
-    const prettyUrl = url
-        .split("//")[1]
-        .split("/")[0]
-        .split("www.")[1];
+    const prettyUrl = url.split("//")[1].split("/")[0];
 
     return prettyUrl;
 };
@@ -192,24 +202,25 @@ utilities.createLinkingURL = url => {
     return linkingUrl;
 };
 
-// Takes a two word camelCased string (childFriendly => Child Friendly) // TODO: should work with any number of words
-utilities.prettifyCamelCasedString = string => {
-    let index;
-
-    for (let i = 0; i < string.length; i++) {
-        if (string[i] === string[i].toUpperCase()) {
-            index = i;
-        }
-    }
-
-    const firstWord = utilities.firstCharToUpperCase(string.slice(0, index));
-    const secondWord = string.slice(index, string.length);
-    const newString = firstWord + " " + secondWord;
-
-    return newString;
+utilities.stripHTML = html => {
+    return html.replace(/<(?:.|\n)*?>/gm, "");
 };
 
 /* ARRAYS */
+
+utilities.isValueInArray = (value, array, returnIndex) => {
+    for (let i = 0; i < array.length; i++) {
+        if (value == array[i]) {
+            if (returnIndex) {
+                return i;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    return false;
+};
 
 utilities.reverseArray = array => {
     const copy = array.slice();
@@ -249,13 +260,13 @@ utilities.deleteObjectWithKeyValuePairFromArray = (keyValuePair, array) => {
     return newArray;
 };
 
-// Takes an array and converts it into a dictionary with the uid as parent key
+// Takes an array and converts it into a dictionary with the id as parent key
 utilities.convertArrayToDictionary = array => {
     let dictionary = {};
 
     for (let i = 0; i < array.length; i++) {
-        const uid = array[i].uid;
-        dictionary[uid] = array[i];
+        const id = array[i].id;
+        dictionary[id] = array[i];
     }
 
     return dictionary;
@@ -293,7 +304,7 @@ utilities.convertDictionaryToArray = (dictionary, shouldKeepUUID) => {
     for (key in dictionary) {
         let object = dictionary[key];
         if (shouldKeepUUID) {
-            object["uuid"] = key;
+            object["id"] = key;
         }
         array.push(object);
     }
@@ -350,8 +361,8 @@ utilities.pushObjectToDictionary = (object, dictionary) => {
     let newObject = {};
     let newDictionary;
 
-    const uid = object.uid;
-    newObject[uid] = object;
+    const id = object.id;
+    newObject[id] = object;
 
     if (dictionary) {
         newDictionary = { ...dictionary, ...newObject };
@@ -363,12 +374,12 @@ utilities.pushObjectToDictionary = (object, dictionary) => {
     return newDictionary;
 };
 
-// Removes an object from a dictionary that matches the uid/key, value or key value pair (if present)
-utilities.removeObjectFromDictionary = (uid, dictionary) => {
+// Removes an object from a dictionary that matches the id/key, value or key value pair (if present)
+utilities.removeObjectFromDictionary = (id, dictionary) => {
     let newDictionary = {};
 
     for (key in dictionary) {
-        if (key !== uid) {
+        if (key !== id) {
             newDictionary[key] = dictionary[key];
         }
     }
@@ -417,11 +428,11 @@ utilities.findKeyValuePairAndSetKeysValueToNull = (
     return newDictionary;
 };
 
-// Updates a dictionary's object at a given uid
-utilities.updateObjectInDictionary = (uid, newObject, dictionary) => {
+// Updates a dictionary's object at a given id
+utilities.updateObjectInDictionary = (id, newObject, dictionary) => {
     let newDictionary = dictionary;
 
-    newDictionary[uid] = newObject;
+    newDictionary[id] = newObject;
 
     return newDictionary;
 };

@@ -20,7 +20,8 @@ export function* handleImage(action) {
     }
 
     if (imagePickerResponse.success) {
-        const appPhotosDir = RNFS.PicturesDirectoryPath + "/" + config.app.name;
+        const appPhotosDir =
+            RNFS.PicturesDirectoryPath + "/" + config.appDetails.name;
         console.log("appPhotosDir:", appPhotosDir);
 
         const createDirectoryResponse = yield call(
@@ -131,36 +132,40 @@ export function* handleImage(action) {
                             yield put({
                                 type: "SET_ERROR",
                                 errorType: "IMAGE",
-                                message: moveCroppedFileResponse.message,
+                                success: config.images.crop.type,
+                                message: config.images.crop.message,
                             });
                         }
                     } else {
                         yield put({
                             type: "SET_ERROR",
                             errorType: "IMAGE",
-                            message:
-                                "We were unable to crop your image. Please try again with a different image.",
+                            success: config.images.crop.type,
+                            message: config.images.crop.message,
                         });
                     }
                 } else {
                     yield put({
                         type: "SET_ERROR",
                         errorType: "IMAGE",
-                        message: imageResizerResponse.message,
+                        success: config.images.resize.type,
+                        message: config.images.resize.message,
                     });
                 }
             } else {
                 yield put({
                     type: "SET_ERROR",
                     errorType: "IMAGE",
-                    message: transferFileResponse.message,
+                    success: config.fileSystem.copy.type,
+                    message: config.fileSystem.copy.message,
                 });
             }
         } else {
             yield put({
                 type: "SET_ERROR",
                 errorType: "IMAGE",
-                message: createDirectoryResponse.message,
+                success: config.fileSystem.createDirectory.type,
+                message: config.fileSystem.createDirectory.message,
             });
         }
     } else {

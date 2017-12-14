@@ -111,7 +111,8 @@ export class SignInEmail extends React.Component {
             this.props.dispatch({
                 type: "SET_ERROR",
                 errorType: "USER",
-                message: "Password should be at least 6 characters long",
+                success: config.auth.passwordLength.type,
+                message: config.auth.passwordLength.message,
             });
         }
     }

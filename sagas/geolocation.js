@@ -1,9 +1,10 @@
 import { call, put } from "redux-saga/effects";
 
+import config from "../config";
 import Geolocation from "../geolocation/index";
 
 export function* getUserLocation(action) {
-    const userCoordinatesResponse = yield call(Geolocation.getUserCoordinates);
+    const userCoordinatesResponse = yield call(Geolocation.getUserLocation);
     console.log("userCoordinatesResponse", userCoordinatesResponse);
 
     if (userCoordinatesResponse.success) {
@@ -15,7 +16,8 @@ export function* getUserLocation(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "GEOLOCATION",
-            message: "Geolocation services not available.",
+            success: config.geolocation.location.type,
+            message: config.geolocation.location.message,
             retryAction: {
                 type: "getUserLocation",
             },
@@ -43,7 +45,8 @@ export function* getFormattedAddressFromCoordinates(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "GEOLOCATION_LOCALITY",
-            message: "Geolocation services not available.",
+            success: config.geolocation.location.type,
+            message: config.geolocation.location.message,
             retryAction: {
                 type: "getFormattedAddressFromCoordinates",
                 coordinates: action.coordinates,

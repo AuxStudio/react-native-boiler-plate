@@ -6,7 +6,7 @@ const Permissions = {};
 Permissions.handlePermission = (permission, successCallback, errorCallback) => {
     RNPermissions.check(permission).then(response => {
         if (response === "authorized") {
-            successCallback();
+            successCallback && successCallback();
         } else {
             RNPermissions.request(permission).then(response => {
                 if (response === "authorized") {

@@ -1,16 +1,21 @@
 import React from "react";
 import { Actions, ActionConst, Scene } from "react-native-router-flux";
 
-import Splash from "./pages/Splash";
+import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignInOptions from "./pages/SignInOptions";
 import SignInEmail from "./pages/SignInEmail";
 import ForgotPassword from "./pages/ForgotPassword";
-import Home from "./pages/Home";
 
 const Scenes = Actions.create(
     <Scene key="root" hideNavBar>
-        <Scene key="splash" component={Splash} initial={true} />
+        />
+        <Scene
+            key="home"
+            component={Home}
+            type={ActionConst.REPLACE}
+            initial={true}
+        />
         <Scene
             key="SignIn"
             component={SignIn}
@@ -18,20 +23,10 @@ const Scenes = Actions.create(
             initial={false}
         />
         <Scene key="signInOptions" component={SignInOptions} initial={false} />
-        <Scene
-            key="SignInEmail"
-            component={SignInEmail}
-            initial={false}
-        />
+        <Scene key="SignInEmail" component={SignInEmail} initial={false} />
         <Scene
             key="forgotPassword"
             component={ForgotPassword}
-            initial={false}
-        />
-        <Scene
-            key="home"
-            component={Home}
-            type={ActionConst.REPLACE}
             initial={false}
         />
     </Scene>

@@ -1,4 +1,5 @@
-import { call, put } from "redux-saga/effects";
+import { call, put, all } from "redux-saga/effects";
+import firebase from "../firebase";
 
 import UserAuth from "../userAuth/index";
 
@@ -13,7 +14,10 @@ export function* getUserAuth() {
             userName: getUserAuthResponse.message.userName,
             userEmail: getUserAuthResponse.message.userEmail,
             userPhotoURL: getUserAuthResponse.message.userPhotoURL,
+            authenticated: true,
             anonymous: getUserAuthResponse.message.anonymous,
+
+            lastAccessed: Date.now,
         });
     } else {
         yield put({
@@ -38,8 +42,7 @@ export function* signInUserAnonymously() {
         yield put({
             type: "SET_ERROR",
             errorType: "AUTH",
-            message:
-                "We were unable to connect. Check your connection and try again.",
+            message: "Oh dear, network error. Please try again.",
             retryAction: {
                 type: "signInUserAnonymously",
             },
@@ -47,30 +50,248 @@ export function* signInUserAnonymously() {
     }
 }
 
-export function* signInUserWithEmail(action) {
-    const signInUserWithEmailResponse = yield call(
-        UserAuth.signInUserWithEmail,
+export function* getUserCredentialFromEmail(action) {
+    const getUserCredentialFromEmailResponse = yield call(
+        UserAuth.getUserCredentialFromEmail,
         action
     );
-    console.log("signInUserWithEmailResponse", signInUserWithEmailResponse);
+    console.log(
+        "getUserCredentialFromEmailResponse",
+        getUserCredentialFromEmailResponse
+    );
 
-    if (signInUserWithEmailResponse.success) {
-        yield put({
-            type: "linkUserWithCredential",
-            credential: signInUserWithEmailResponse.message.credential,
-        });
+    if (getUserCredentialFromEmailResponse.success) {
+        yield all([
+            put({
+                type: "TOGGLE_LOADING",
+            }),
+            put({
+                type: "linkUserWithCredential",
+                credential:
+                    getUserCredentialFromEmailResponse.message.credential,
+                userName: action.userName,
+                userEmail: action.email,
+            }),
+        ]);
     } else {
         yield put({
             type: "SET_ERROR",
             errorType: "AUTH",
             message:
-                "We were unable to connect with email. Check your connection and try again.",
+                "Something's not right. Please check your connection and try again.",
             retryAction: {
-                type: "signInUserWithEmail",
+                type: "getUserCredentialFromEmail",
                 data: {
                     userEmail: action.userEmail,
                     userPassword: action.userPassword,
+                    userName: action.userName,
                 },
+            },
+        });
+    }
+}
+
+export function* getUserCredentialFromFacebook() {
+    const getUserCredentialFromFacebookResponse = yield call(
+        UserAuth.getUserCredentialFromFacebook
+    );
+    console.log(
+        "getUserCredentialFromFacebookResponse",
+        getUserCredentialFromFacebookResponse
+    );
+
+    if (getUserCredentialFromFacebookResponse.success) {
+        yield all([
+            put({
+                type: "TOGGLE_LOADING",
+            }),
+            put({
+                type: "linkUserWithCredential",
+                credential:
+                    getUserCredentialFromFacebookResponse.message.credential,
+            }),
+        ]);
+    } else {
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message:
+                "Can't connect to Facebook. Please check your connection and try again.",
+            retryAction: {
+                type: "getUserCredentialFromFacebook",
+            },
+        });
+    }
+}
+
+export function* getUserCredentialFromGoogle() {
+    const getUserCredentialFromGoogleResponse = yield call(
+        UserAuth.getUserCredentialFromGoogle
+    );
+    console.log(
+        "getUserCredentialFromGoogleResponse",
+        getUserCredentialFromGoogleResponse
+    );
+
+    if (getUserCredentialFromGoogleResponse.success) {
+        yield all([
+            put({
+                type: "TOGGLE_LOADING",
+            }),
+            put({
+                type: "linkUserWithCredential",
+                credential:
+                    getUserCredentialFromGoogleResponse.message.credential,
+            }),
+        ]);
+    } else {
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message:
+                "Can't connect to Google. Please check your connection and try again.",
+            retryAction: {
+                type: "getUserCredentialFromGoogle",
+            },
+        });
+    }
+}
+
+export function* linkUserWithCredential(action) {
+    if (firebase.auth().currentUser) {
+        const linkUserWithCredentialResponse = yield call(
+            UserAuth.linkUserWithCredential,
+            action
+        );
+        console.log(
+            "linkUserWithCredentialResponse",
+            linkUserWithCredentialResponse
+        );
+
+        if (linkUserWithCredentialResponse.authenticated) {
+            yield all([
+                put({
+                    type: "updateData",
+                    node: "users/" + linkUserWithCredentialResponse.message.uid,
+                    data: {
+                        userName:
+                            linkUserWithCredentialResponse.message.userName ||
+                            action.userName,
+                        userEmail:
+                            linkUserWithCredentialResponse.message.userEmail ||
+                            action.userEmail,
+                        userPhotoURL:
+                            linkUserWithCredentialResponse.message.userPhotoURL,
+                        dateJoined: Date.now(),
+                    },
+                    nextActionType: null, // handle the next action here
+                }),
+                put({
+                    type: "SIGN_IN_USER",
+                    uid: linkUserWithCredentialResponse.message.uid,
+                    userName:
+                        linkUserWithCredentialResponse.message.userName ||
+                        action.userName,
+                    userEmail:
+                        linkUserWithCredentialResponse.message.userEmail ||
+                        action.userEmail,
+                    userPhotoURL:
+                        linkUserWithCredentialResponse.message.userPhotoURL,
+                    anonymous: false,
+                }),
+            ]);
+        } else if (
+            linkUserWithCredentialResponse.message ===
+                "auth/credential-already-in-use" ||
+            linkUserWithCredentialResponse.message ===
+                "auth/email-already-in-use"
+        ) {
+            // Sign in with provider instead
+            yield put({
+                type: "signInUserWithCredential",
+                credential: action.credential,
+            });
+        } else {
+            yield put({
+                type: "SET_ERROR",
+                errorType: "AUTH",
+                message: "Oh dear, login error. Please try again.",
+                retryAction: {
+                    type: "linkUserWithCredential",
+                    credential: action.credential,
+                },
+            });
+        }
+    } else {
+        // sign in anonymously
+        const signInUserAnonymouslyResponse = yield call(
+            UserAuth.signInUserAnonymously,
+            action
+        );
+        console.log(
+            "signInUserAnonymouslyResponse",
+            signInUserAnonymouslyResponse
+        );
+
+        if (signInUserAnonymouslyResponse.success) {
+            yield put({
+                type: "linkUserWithCredential",
+                credential: action.credential,
+            });
+        } else {
+            yield put({
+                type: "SET_ERROR",
+                errorType: "AUTH",
+                message: "Oh dear, login error. Please try again.",
+                retryAction: {
+                    type: "signInUserAnonymously",
+                },
+            });
+        }
+    }
+}
+
+export function* signInUserWithCredential(action) {
+    const signInUserWithCredentialResponse = yield call(
+        UserAuth.signInUserWithCredential,
+        action
+    );
+    console.log(
+        "signInUserWithCredentialResponse",
+        signInUserWithCredentialResponse
+    );
+
+    if (signInUserWithCredentialResponse.authenticated) {
+        yield put({
+            type: "SIGN_IN_USER",
+            uid: signInUserWithCredentialResponse.message.uid,
+            userName:
+                signInUserWithCredentialResponse.message.userName ||
+                action.userName,
+            userEmail:
+                signInUserWithCredentialResponse.message.userEmail ||
+                action.userEmail,
+            userPhotoURL: signInUserWithCredentialResponse.message.userPhotoURL,
+            anonymous: false,
+        });
+    } else if (
+        signInUserWithCredentialResponse.message.code ===
+        "auth/account-exists-with-different-credential"
+    ) {
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message:
+                "Hello! You've already signed in with someone else. Please try another option.",
+        });
+    } else {
+        yield put({
+            type: "SET_ERROR",
+            errorType: "AUTH",
+            message: "Oh dear, login error. Please try again.",
+            retryAction: {
+                type: "signInUserWithCredential",
+                credential: action.credential,
             },
         });
     }
@@ -95,97 +316,13 @@ export function* sendPasswordResetEmail(action) {
             errorType: "AUTH",
             message:
                 passwordResetResponse.message.code === "auth/user-not-found"
-                    ? "We couldn't find your email address. Please sign up."
+                    ? "Email address not registered. Please sign up."
                     : "We were unable to send a password reset request. Check your connection and try again.",
             retryAction: {
                 type: "sendPasswordResetEmail",
                 data: {
                     userEmail: action.userEmail,
                 },
-            },
-        });
-    }
-}
-
-export function* signInUserWithFacebook() {
-    const signInUserWithFacebookResponse = yield call(
-        UserAuth.signInUserWithFacebook
-    );
-    console.log(
-        "signInUserWithFacebookResponse",
-        signInUserWithFacebookResponse
-    );
-
-    if (signInUserWithFacebookResponse.success) {
-        yield put({
-            type: "linkUserWithCredential",
-            credential: signInUserWithFacebookResponse.message.credential,
-        });
-    } else {
-        yield put({
-            type: "SET_ERROR",
-            errorType: "AUTH",
-            message:
-                "We were unable to connect with Facebook. Check your connection and try again.",
-            retryAction: {
-                type: "signInUserWithFacebook",
-            },
-        });
-    }
-}
-
-export function* signInUserWithGoogle() {
-    const signInUserWithGoogleResponse = yield call(
-        UserAuth.signInUserWithGoogle
-    );
-    console.log("signInUserWithGoogleResponse", signInUserWithGoogleResponse);
-
-    if (signInUserWithGoogleResponse.success) {
-        yield put({
-            type: "linkUserWithCredential",
-            credential: signInUserWithGoogleResponse.message.credential,
-        });
-    } else {
-        yield put({
-            type: "SET_ERROR",
-            errorType: "AUTH",
-            message:
-                "We were unable to connect with Google. Check your connection and try again.",
-            retryAction: {
-                type: "signInUserWithGoogle",
-            },
-        });
-    }
-}
-
-export function* linkUserWithCredential(action) {
-    const linkUserWithCredentialResponse = yield call(
-        UserAuth.linkUserWithCredential,
-        action
-    );
-    console.log(
-        "linkUserWithCredentialResponse",
-        linkUserWithCredentialResponse
-    );
-
-    if (linkUserWithCredentialResponse.authenticated) {
-        yield put({
-            type: "SIGN_IN_USER",
-            uid: linkUserWithCredentialResponse.message.uid,
-            userEmail: linkUserWithCredentialResponse.message.userEmail,
-            userName: linkUserWithCredentialResponse.message.userName,
-            userPhotoURL: linkUserWithCredentialResponse.message.userPhotoURL,
-            anonymous: false,
-        });
-    } else {
-        yield put({
-            type: "SET_ERROR",
-            errorType: "AUTH",
-            message:
-                "We were unable to connect. Check your connection and try again.",
-            retryAction: {
-                type: "linkUserWithCredential",
-                credential: action.credential,
             },
         });
     }
@@ -203,8 +340,7 @@ export function* signOutUser() {
         yield put({
             type: "SET_ERROR",
             errorType: "AUTH",
-            message:
-                "We were unable to sign you out. Check your connection and try again.",
+            message: "We couldn't sign out. Please try again.",
             retryAction: {
                 type: "signOutUser",
             },

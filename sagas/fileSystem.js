@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 
+import config from "../config";
 import FileSystem from "../fileSystem/index";
 
 export function* deleteFile(action) {
@@ -12,7 +13,8 @@ export function* deleteFile(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "FILE_SYSTEM",
-            message: deleteFileResponse.message,
+            success: config.fileSystem.delete.type,
+            message: config.fileSystem.delete.message,
         });
     }
 }

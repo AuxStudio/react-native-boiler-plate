@@ -1,9 +1,10 @@
-Colours as per WineMe
-Shadow borders only on early android
-Update iOS shadows
 
+SnackBar and Loader widgets out of the box
+Sign In pages need updating
+Rework forgot password
+Rework userAuth (anonymous => getCredential => linkWithCredential)
 Auth method
     Phone Auth
         Link Phone
     Enable password reset in app
-Sign In pages
+Write script to generate project in one go (saves up to 2 hrs)

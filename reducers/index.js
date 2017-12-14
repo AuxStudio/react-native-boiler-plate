@@ -62,6 +62,8 @@ export default function(state = initialState, action) {
             new_state.appState.error.type = action.errorType;
             new_state.appState.error.message = action.message;
             new_state.appState.error.success = false;
+            new_state.appState.retryAction.type = null;
+            new_state.appState.retryAction.data = null;
             new_state.appState.loading = false;
 
             // Attach a retry action if provided
@@ -100,15 +102,12 @@ export default function(state = initialState, action) {
             new_state.appData.temporaryImage = null;
             return new_state;
 
-        case "SET_USER_DATA":
-            new_state = utilities.cloneObject(state);
-            new_state.userData[action.subNode] = action.data;
-            return new_state;
-
         case "SET_USER_PHOTO":
             new_state = utilities.cloneObject(state);
             new_state.userData.profile.userPhotoURL = action.userPhotoURL;
             return new_state;
+
+        /* APP */
 
         default:
             return state;

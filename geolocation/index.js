@@ -6,7 +6,7 @@ let response = {
 };
 
 export default class Utilities {
-    static getUserCoordinates() {
+    static getUserLocation() {
         return new Promise(resolve => {
             navigator.geolocation.getCurrentPosition(
                 position => {

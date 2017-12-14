@@ -21,16 +21,18 @@ styleConstants.iconFont = 24;
 
 /* COLOURS */
 
-styleConstants.primary = "#E91E63";
-styleConstants.darkPrimary = "#C2185B";
-styleConstants.lightPrimary = "#F8BBD0";
-styleConstants.secondary = "#00BCD4";
-styleConstants.darkSecondary = "#0097A7";
-styleConstants.lightSecondary = "#00BCD4";
+styleConstants.primary = "#3D84A8";
+styleConstants.lightPrimary = "#46CDCF";
+styleConstants.darkPrimary = "#48466D";
+styleConstants.secondary = "#88304E";
+styleConstants.lightSecondary = "#E23E57";
+styleConstants.darkSecondary = "#522546";
 styleConstants.white = "#FFFFFF";
+styleConstants.transWhite = "rgba(255, 255, 255, 0.70)";
+styleConstants.transBlack = "rgba(0, 0, 0, 0.70)";
 styleConstants.primaryText = "#212121";
 styleConstants.secondaryText = "#757575";
-styleConstants.dividerColor = "#BDBDBD";
+styleConstants.dividerColor = "#E0E0E0";
 
 /* DIMENSIONS */
 
@@ -42,14 +44,12 @@ styleConstants.windowHeight = height;
 /* SHADOWS */
 
 // Elevation does not work on Android V4 so we add a border as a fallback
-const isEarlyAndroidOrIOS =
-    (Platform.OS === "Android" && Platform.Version <= 19) ||
-    Platform.OS === "ios";
+const isEarlyAndroid = Platform.OS === "Android" && Platform.Version <= 19;
 
 styleConstants.smallShadow = {
     elevation: 2,
-    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
-    borderColor: isEarlyAndroidOrIOS ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
 
     // iOS
     shadowColor: styleConstants.black,
@@ -63,8 +63,8 @@ styleConstants.smallShadow = {
 
 styleConstants.regularShadow = {
     elevation: 6,
-    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
-    borderColor: isEarlyAndroidOrIOS ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
 
     // iOS
     shadowColor: styleConstants.black,
@@ -78,8 +78,8 @@ styleConstants.regularShadow = {
 
 styleConstants.largeShadow = {
     elevation: 12,
-    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
-    borderColor: isEarlyAndroidOrIOS ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroid ? 1 : 0,
+    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
 
     // iOS
     shadowColor: styleConstants.black,
