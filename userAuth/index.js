@@ -1,4 +1,4 @@
-import firebase from "../firebase";
+import firebase from "react-native-firebase";
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import { GoogleSignin } from "react-native-google-signin";
 

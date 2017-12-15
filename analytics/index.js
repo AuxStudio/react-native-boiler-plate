@@ -1,4 +1,4 @@
-import firebase from "../firebase";
+import firebase from "react-native-firebase";
 
 export default class Analytics {
     static logEvent(event) {
