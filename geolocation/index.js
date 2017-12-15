@@ -6,7 +6,7 @@ let response = {
 };
 
 export default class Utilities {
-    static getUserLocation() {
+    static getUserCoordinates() {
         return new Promise(resolve => {
             navigator.geolocation.getCurrentPosition(
                 position => {
@@ -27,12 +27,12 @@ export default class Utilities {
         });
     }
 
-    static getFormattedAddressFromCoordinates(coordinates) {
+    static getUserSuburb(coordinates) {
         return new Promise(resolve => {
             Geocoder.geocodePosition(coordinates)
                 .then(data => {
                     response.success = true;
-                    response.message = data;
+                    response.message = data[0].subLocality;
                     resolve(response);
                 })
                 .catch(error => {

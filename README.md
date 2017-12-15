@@ -301,8 +301,12 @@ A react-native redux and firebase boilerplate.
 
 10. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src
-    In index.js change
-        import App from './App' to './src/App';
+    In App.js change
+        import { AppRegistry } from "react-native";
+        import App from "./src/App";
+
+        AppRegistry.registerComponent("PROJECT_NAME", () => App);
+
     rm ./App.js 
     sudo rm -R ./src/.git
 

@@ -17,26 +17,19 @@ export default function(state = initialState, action) {
         case "SIGN_IN_USER":
             new_state = utilities.cloneObject(state);
             new_state.userAuth.authenticated = true;
-            new_state.userAuth.uid = action.uid;
+            new_state.userAuth.anonymous = action.anonymous;
 
-            if (action.userEmail)
-                new_state.userData.profile.userEmail = action.userEmail;
-            if (action.userName)
-                new_state.userData.profile.userName = action.userName;
-            if (action.userPhotoURL)
-                new_state.userData.profile.userPhotoURL = action.userPhotoURL;
-            if (action.dateJoined)
-                new_state.userData.profile.dateJoined = action.dateJoined;
-            if (action.anonymous) {
-                new_state.userAuth.anonymous = true;
-            }
+            new_state.userAuth.uid = action.uid;
+            new_state.userData.profile.userEmail = action.userEmail;
+            new_state.userData.profile.userName = action.userName;
+            new_state.userData.profile.userPhotoURL = action.userPhotoURL;
 
             return new_state;
 
         case "SIGN_OUT_USER":
             new_state = utilities.cloneObject(state);
-            new_state = initialState;
-            new_state.appState.loading = false;
+            new_state.userAuth = initialState.userAuth;
+            new_state.userData = initialState.userData;
 
             return new_state;
 
@@ -62,9 +55,6 @@ export default function(state = initialState, action) {
             new_state.appState.error.type = action.errorType;
             new_state.appState.error.message = action.message;
             new_state.appState.error.success = false;
-            new_state.appState.retryAction.type = null;
-            new_state.appState.retryAction.data = null;
-            new_state.appState.loading = false;
 
             // Attach a retry action if provided
             if (action.retryAction && action.retryAction.type) {
@@ -83,13 +73,15 @@ export default function(state = initialState, action) {
             new_state.appState.error.type = null;
             new_state.appState.error.message = null;
             new_state.appState.error.success = null;
+            new_state.appState.retryAction.type = null;
+            new_state.appState.retryAction.data = null;
+
             return new_state;
 
         /* DATA */
         case "SET_USER_LOCATION":
             new_state = utilities.cloneObject(state);
             new_state.appData.userLocation = action.userLocation;
-            new_state.appState.loading = false; // for profile page
             return new_state;
 
         case "SET_TEMPORARY_IMAGE":
@@ -105,6 +97,11 @@ export default function(state = initialState, action) {
         case "SET_USER_PHOTO":
             new_state = utilities.cloneObject(state);
             new_state.userData.profile.userPhotoURL = action.userPhotoURL;
+            return new_state;
+
+        case "SET_NETWORK_INFO":
+            new_state = utilities.cloneObject(state);
+            new_state.appData.networkInfo = action.data;
             return new_state;
 
         /* APP */

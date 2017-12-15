@@ -1,4 +1,5 @@
-
+Update userAuth to work without anonymous => linkUser
+SnackBar gets iconName from props
 SnackBar and Loader widgets out of the box
 Sign In pages need updating
 Rework forgot password
@@ -8,3 +9,4 @@ Auth method
         Link Phone
     Enable password reset in app
 Write script to generate project in one go (saves up to 2 hrs)
+Splash screen guides
