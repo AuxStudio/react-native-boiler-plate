@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { Actions } from "react-native-router-flux";
 import { connect } from "react-redux";
@@ -33,5 +33,7 @@ export class Home extends React.Component {
 function mapStateToProps(state) {
     return {};
 }
+
+const styles = StyleSheet.create({});
 
 export default connect(mapStateToProps)(Home);

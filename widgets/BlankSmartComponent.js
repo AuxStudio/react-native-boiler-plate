@@ -25,12 +25,12 @@ export class BlankSmartComponent extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {},
-});
-
 function mapStateToProps(state) {
     return {};
 }
+
+const styles = StyleSheet.create({
+    container: {},
+});
 
 export default connect(mapStateToProps)(Blank);
