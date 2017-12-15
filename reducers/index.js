@@ -81,17 +81,17 @@ export default function(state = initialState, action) {
         /* DATA */
         case "SET_USER_LOCATION":
             new_state = utilities.cloneObject(state);
-            new_state.appData.userLocation = action.userLocation;
+            new_state.appState.userLocation = action.userLocation;
             return new_state;
 
         case "SET_TEMPORARY_IMAGE":
             new_state = utilities.cloneObject(state);
-            new_state.appData.temporaryImage = action.image;
+            new_state.appState.temporaryImage = action.image;
             return new_state;
 
         case "CLEAR_TEMPORARY_IMAGE":
             new_state = utilities.cloneObject(state);
-            new_state.appData.temporaryImage = null;
+            new_state.appState.temporaryImage = null;
             return new_state;
 
         case "SET_USER_PHOTO":
@@ -105,6 +105,15 @@ export default function(state = initialState, action) {
             return new_state;
 
         /* APP */
+        case "SET_APP_DATA":
+            new_state = utilities.cloneObject(state);
+            new_state.appData.app = action.data;
+            return new_state;
+
+        case "SET_USERS_DATA":
+            new_state = utilities.cloneObject(state);
+            new_state.appData.users = action.data;
+            return new_state;
 
         default:
             return state;

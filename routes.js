@@ -6,12 +6,13 @@ import Home from "./pages/Home";
 
 // Wrappers
 import AuthHandler from "./wrappers/AuthHandler";
+import DataHandler from "./wrappers/DataHandler";
 
 const Scenes = Actions.create(
     <Scene key="root" hideNavBar>
         <Scene
             key="home"
-            component={AuthHandler(Home)}
+            component={AuthHandler(DataHandler(Home))}
             type={ActionConst.REPLACE}
             initial={true}
         />

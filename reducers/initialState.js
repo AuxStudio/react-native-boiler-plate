@@ -17,11 +17,12 @@ const initialState = {
             type: null,
             data: null,
         },
+        userLocation: null,
+        temporaryImage: null,
     },
     appData: {
-        userLocation: null,
-        currentPlaceLocality: null,
-        temporaryImage: null,
+        app: null,
+        users: null,
     },
     userData: {
         settings: null,
