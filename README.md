@@ -21,12 +21,12 @@ A react-native redux and firebase boilerplate.
 
 4. ADD REFERENCE TO ANDROID SDK PATH
    Create local.properties in ./android
-   ndk.dir=PATH_TO_NDK_BUNDLE
+   ndk.dir=PATH*TO_NDK_BUNDLE
    sdk.dir=PATH_TO_SDK
-   /_
+   /*
    ndk.dir=/home/shaun/Android/Sdk/ndk-bundle
    sdk.dir=/home/shaun/Android/Sdk
-   _/
+   \_/
 
 5. GENERATE ANDROID APP SIGNING (do this at the beginning so you can get your release key for facebook and google sign in)
    keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
@@ -233,7 +233,7 @@ A react-native redux and firebase boilerplate.
    pod 'Firebase/Storage'
    cd ios pod install && pod update
 
-    In ./ios/PROJECT_NAME/AppDelegate.m (at top of file)
+   In ./ios/PROJECT_NAME/AppDelegate.m (at top of file)
    Add #import <Firebase.h>
    Same file (before return)
    Add [FIRApp configure];
@@ -250,11 +250,11 @@ A react-native redux and firebase boilerplate.
    Drag and drop contents of the ios/GoogleSdk folder to your xcode project. (Make sure Copy items if needed is ticked)
    Copy this folder to ios/ if you don't see it there
    Configure URL types in the Info panel
-   add Identifier and URL Schemes with your REVERSED_CLIENT_ID (found inside the plist)
+   add Identifier and URL Schemes with your REVERSED*CLIENT_ID (found inside the plist)
    add Identifier and URL Schemes set to your bundle id
    Add top of AppDelegate.m
    #import <RNGoogleSignin/RNGoogleSignin.h>
-   Replace openUrl function with: - (BOOL)application:(UIApplication _)application openURL:(NSURL _)url
+   Replace openUrl function with: - (BOOL)application:(UIApplication *)application openURL:(NSURL \_)url
    sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
 
            return [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -301,9 +301,10 @@ A react-native redux and firebase boilerplate.
 
 10. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src
-    In index.js change
-    import { AppRegistry } from "react-native";
-    import App from "./src/App";
+    In index.js replace content with:
+
+        import { AppRegistry } from "react-native";
+        import App from "./src/App";
 
         AppRegistry.registerComponent("PROJECT_NAME", () => App);
 

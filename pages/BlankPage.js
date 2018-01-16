@@ -2,10 +2,15 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
 
+import config from "../config";
+import utilities from "../utilities";
 import styleConstants from "../assets/styleConstants";
 
-export class BlankSmartComponent extends React.Component {
+import { Page } from "react-native-simple-components";
+
+export class BlankPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -18,9 +23,9 @@ export class BlankSmartComponent extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Page style={styles.container}>
                 <View />
-            </View>
+            </Page>
         );
     }
 }
@@ -33,4 +38,4 @@ const styles = StyleSheet.create({
     container: {},
 });
 
-export default connect(mapStateToProps)(Blank);
+export default connect(mapStateToProps)(BlankPage);

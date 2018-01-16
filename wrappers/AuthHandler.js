@@ -10,7 +10,7 @@ export default function(WrappedComponent) {
             };
         }
 
-        componentDidMount() {
+        componentWillMount() {
             if (!this.props.authenticated) {
                 this.props.dispatch({
                     type: "getUserAuth",

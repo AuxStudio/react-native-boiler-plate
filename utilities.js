@@ -33,7 +33,7 @@ utilities.getPrettyMinutesFromSeconds = seconds => {
     return prettyMinutes;
 };
 
-utilities.getPrettyDate = timestamp => {
+utilities.getPrettyDate = (timestamp, returnTime) => {
     const date = new Date(timestamp);
     const months = [
         "January",
@@ -54,13 +54,18 @@ utilities.getPrettyDate = timestamp => {
     const month = months[date.getMonth()];
     let day = date.getDate();
     day = utilities.addZeroPadding(day);
-    let hours = date.getHours();
-    hours = utilities.addZeroPadding(hours);
-    let minutes = date.getMinutes();
-    minutes = utilities.addZeroPadding(minutes);
 
-    let prettyDate =
-        day + " " + month + " " + year + ", " + hours + ":" + minutes;
+    let prettyDate = day + " " + month + " " + year;
+
+    if (returnTime) {
+        let hours = date.getHours();
+        hours = utilities.addZeroPadding(hours);
+        let minutes = date.getMinutes();
+        minutes = utilities.addZeroPadding(minutes);
+
+        prettyDate += ", " + hours + ":" + minutes;
+    }
+
     return prettyDate;
 };
 

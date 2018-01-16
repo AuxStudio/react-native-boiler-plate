@@ -25,7 +25,7 @@ export default function(WrappedComponent) {
             };
         }
 
-        componentDidMount() {
+        componentWillMount() {
             this.handleGetData();
         }
 
