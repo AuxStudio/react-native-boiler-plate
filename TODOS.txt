@@ -1,12 +1,25 @@
-Update userAuth to work without anonymous => linkUser
-SnackBar gets iconName from props
-SnackBar and Loader widgets out of the box
-Sign In pages need updating
+Update userAuth to work without anonymous => linkUser?
+SnackBar widget out of the box
+    Icons and success/danger and autohide from props
 Rework forgot password
-Rework userAuth (anonymous => getCredential => linkWithCredential)
-Auth method
-    Phone Auth
-        Link Phone
-    Enable password reset in app
-Write script to generate project in one go (saves up to 2 hrs)
-Splash screen guides
+    Need to reset via app
+Phone Auth
+    Link Phone
+Write script to generate project in one go (saves up to 3 hrs)
+Firebase data listen method
+Need error management system
+    Log errors to db
+    Get error messages from config
+Need data management system
+    If data event has error and loading nodes
+Need dev and staging nodes on db
+Console.log only if __DEV__
+Add NetworkHandler 
+    Latency wrapper
+Use try/catch in sagas
+Rework config
+Unit testing
+Update AuthHandler
+Update DataHandler
+Add FB query methods (ie. filtering, searching etc)
+Fix FB deprecation error
