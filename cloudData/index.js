@@ -1,168 +1,147 @@
-import { call, put, all } from "redux-saga/effects";
+import firebase from "react-native-firebase";
 
-import CloudData from "../cloudData/index";
+import utilities from "../utilities";
 
-export function* getData(action) {
-    const getDataResponse = yield call(CloudData.getData, action);
-    if (__DEV__) {
-        console.log("getDataResponse", getDataResponse.success);
-    }
+const response = {
+    success: null,
+    message: null,
+};
 
-    if (getDataResponse) {
-        if (getDataResponse.success) {
-            yield put({
-                type: action.nextActionType,
-                data: getDataResponse.message,
-            });
-        } else {
-            // We must have an error
-            yield put({
-                type: "SET_ERROR",
-                errorType: "CLOUD_DATA",
-                message: getDataResponse.message,
-                retryAction: {
-                    type: "getData",
-                    data: {
-                        nextActionType: action.nextActionType,
-                        node: action.node,
-                    },
-                },
-            });
+export default class CloudData {
+    static listenForData(action) {
+        if (__DEV__) {
+            console.log("Listening at " + action.node);
         }
-    }
-}
 
-export function* updateData(action) {
-    const updateDataResponse = yield call(CloudData.updateData, action);
-    if (__DEV__) {
-        console.log("updateDataResponse", updateDataResponse);
+        firebase
+            .database()
+            .ref(action.node)
+            .on(
+                "value",
+                snapshot => {
+                    this.props.dispatch({
+                        type: action.nextActionType,
+                        data: snapshot.val(),
+                    });
+                },
+                error => {
+                    // Do nothing - silent error
+                }
+            );
     }
 
-    if (updateDataResponse) {
-        if (updateDataResponse.success) {
-            if (action.nextActionType) {
-                yield put({
-                    type: action.nextActionType,
-                    node: action.node,
-                    data: action.data,
+    static getData(action) {
+        if (__DEV__) {
+            console.log("Dispatching get at " + action.node);
+        }
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(action.node)
+                .once("value")
+                .then(snapshot => {
+                    response.success = true;
+                    response.message = snapshot.val();
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
                 });
-            }
-        } else {
-            // We must have an error
-            yield put({
-                type: "SET_ERROR",
-                errorType: "CLOUD_DATA",
-                message: updateDataResponse.message,
-                retryAction: {
-                    type: "updateData",
-                    data: {
-                        nextActionType: action.nextActionType,
-                        node: action.node,
-                        data: action.data,
-                    },
-                },
-            });
+        });
+    }
+
+    static updateData(action) {
+        if (__DEV__) {
+            console.log("Dispatching update at " + action.node);
         }
-    }
-}
 
-export function* setData(action) {
-    const setDataResponse = yield call(CloudData.setData, action);
-    if (__DEV__) {
-        console.log("setDataResponse", setDataResponse);
-    }
-
-    if (setDataResponse) {
-        if (setDataResponse.success) {
-            if (action.nextActionType) {
-                yield put({
-                    type: action.nextActionType,
-                    node: action.node,
-                    data: action.data,
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(action.node)
+                .update({ ...action.data })
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
                 });
-            }
-        } else {
-            // We must have an error
-            yield put({
-                type: "SET_ERROR",
-                errorType: "CLOUD_DATA",
-                message: setDataResponse.message,
-                retryAction: {
-                    type: "setData",
-                    data: {
-                        nextActionType: action.nextActionType,
-                        node: action.node,
-                        data: action.data,
-                    },
-                },
-            });
+        });
+    }
+
+    static setData(action) {
+        if (__DEV__) {
+            console.log("Dispatching set at " + action.node);
         }
-    }
-}
 
-export function* pushData(action) {
-    const pushDataResponse = yield call(CloudData.pushData, action);
-    if (__DEV__) {
-        console.log("pushDataResponse", pushDataResponse);
-    }
-
-    if (pushDataResponse) {
-        if (pushDataResponse.success) {
-            if (action.nextActionType) {
-                yield put({
-                    type: action.nextActionType,
-                    node: action.node,
-                    data: action.data,
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(action.node)
+                .set(action.data)
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
                 });
-            }
-        } else {
-            // We must have an error
-            yield put({
-                type: "SET_ERROR",
-                errorType: "CLOUD_DATA",
-                message: pushDataResponse.message,
-                retryAction: {
-                    type: "pushData",
-                    data: {
-                        nextActionType: action.nextActionType,
-                        node: action.node,
-                        data: action.data,
-                    },
-                },
-            });
+        });
+    }
+
+    static pushData(action) {
+        if (__DEV__) {
+            console.log("Dispatching push at " + action.node);
         }
-    }
-}
 
-export function* deleteData(action) {
-    const deleteDataResponse = yield call(CloudData.deleteData, action);
-    if (__DEV__) {
-        console.log("deleteDataResponse", deleteDataResponse);
-    }
-
-    if (deleteDataResponse) {
-        if (deleteDataResponse.success) {
-            if (action.nextActionType) {
-                yield put({
-                    type: action.nextActionType,
-                    node: action.node,
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(action.node)
+                .push(action.data)
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
                 });
-            }
-        } else {
-            // We must have an error
-            yield put({
-                type: "SET_ERROR",
-                errorType: "CLOUD_DATA",
-                message: deleteDataResponse.message,
-                retryAction: {
-                    type: "deleteData",
-                    data: {
-                        nextActionType: action.nextActionType,
-                        node: action.node,
-                        data: action.data,
-                    },
-                },
-            });
+        });
+    }
+
+    static deleteData(action) {
+        if (__DEV__) {
+            console.log("Dispatching delete at " + action.node);
         }
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(action.node)
+                .set(null)
+                .then(() => {
+                    response.success = true;
+                    response.message = null;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
+        });
     }
 }
