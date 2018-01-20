@@ -1,73 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import firebase from "react-native-firebase";
+
+import CloudData from "../cloudData/index";
 
 export class DataHandler extends React.Component {
     constructor(props) {
         super(props);
 
-        this.setPersistence = this.setPersistence.bind(this);
         this.setRealTimeMode = this.setRealTimeMode.bind(this);
     }
 
     static get propTypes() {
-        return {};
+        return {
+            authenticated: PropTypes.bool,
+        };
     }
 
-    componentDidMount() {
-        // delay fixes missing data fetch on first app load (I assume because of auth)
-        setTimeout(() => {
-            this.setPersistence();
+    componentDidUpdate(prevProps) {
+        // Once authenticated, handle data
+        if (this.props.authenticated && !prevProps.authenticated) {
             this.setRealTimeMode();
-        }, 500);
-    }
-
-    setPersistence() {
-        // Set persistence for offline capability
-        firebase
-            .database()
-            .ref("app")
-            .keepSynced(true);
-        firebase
-            .database()
-            .ref("users")
-            .keepSynced(true);
+        }
     }
 
     setRealTimeMode() {
         // Listen for live changes to db
-        firebase
-            .database()
-            .ref("app/")
-            .on(
-                "value",
-                snapshot => {
-                    this.props.dispatch({
-                        type: "SET_APP_DATA",
-                        data: snapshot.val(),
-                    });
-                },
-                error => {
-                    // Do nothing - silent error
-                }
-            );
+        CloudData.listenForData("app", data => {
+            this.props.dispatch({
+                type: "SET_APP_DATA",
+                data,
+            });
+        });
 
-        firebase
-            .database()
-            .ref("users/")
-            .on(
-                "value",
-                snapshot => {
-                    this.props.dispatch({
-                        type: "SET_USERS_DATA",
-                        data: snapshot.val(),
-                    });
-                },
-                error => {
-                    // Do nothing - silent error
-                }
-            );
+        CloudData.listenForData("users", data => {
+            this.props.dispatch({
+                type: "SET_USERS_DATA",
+                data,
+            });
+        });
     }
 
     render() {
@@ -76,7 +47,9 @@ export class DataHandler extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        authenticated: state.main.userAuth.authenticated,
+    };
 }
 
 export default connect(mapStateToProps)(DataHandler);

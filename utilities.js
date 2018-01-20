@@ -74,6 +74,14 @@ utilities.getTimestampFromISODate = date => {
     return timestamp;
 };
 
+utilities.getDaysFromDate = date => {
+    return Math.abs(
+        Math.ceil(
+            (Date.now() - new Date(date).getTime()) / 86400000 // milliseconds in a day
+        )
+    );
+};
+
 /* FILES */
 
 utilities.getFileName = path => {

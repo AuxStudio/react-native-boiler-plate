@@ -1,13 +1,5 @@
-Fix FB deprecation error
-Add FB query methods (ie. filtering, searching etc)
-Need error management system
-    Log errors to db
-    Get error messages from config
-    SnackBar widget out of the box
-        Icons and success/danger and autohide from props
 Need data management system
     If data event has error and loading nodes
-
 Update userAuth to work without anonymous => linkUser?
 Rework forgot password
     Need to reset via app
@@ -17,6 +9,19 @@ Unit testing
 Write script to generate project in one go (saves up to 3 hrs)
 
 TESTING 
-    Firebase data listen method
-    Update DataHandler
     Try/Catch sagas
+        See if you can actually catch errors
+    Need error management system
+        SnackBar widget out of the box with props from store
+            text
+            iconName
+            success     GREEN/RED icon
+            autoHide
+            action: {
+                text,
+                type,
+                data
+            }
+            *Does not autoHide if retryAction supplied
+        Get error messages from config
+        Log errors to db

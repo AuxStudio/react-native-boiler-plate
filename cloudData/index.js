@@ -8,21 +8,18 @@ const response = {
 };
 
 export default class CloudData {
-    static listenForData(action) {
+    static listenForData(node, callback) {
         if (__DEV__) {
-            console.log("Listening at " + action.node);
+            console.log("Listening at " + node);
         }
 
         firebase
             .database()
-            .ref(action.node)
+            .ref(node)
             .on(
                 "value",
                 snapshot => {
-                    this.props.dispatch({
-                        type: action.nextActionType,
-                        data: snapshot.val(),
-                    });
+                    callback(snapshot.val());
                 },
                 error => {
                     // Do nothing - silent error
@@ -53,29 +50,6 @@ export default class CloudData {
         });
     }
 
-    static updateData(action) {
-        if (__DEV__) {
-            console.log("Dispatching update at " + action.node);
-        }
-
-        return new Promise(resolve => {
-            firebase
-                .database()
-                .ref(action.node)
-                .update({ ...action.data })
-                .then(() => {
-                    response.success = true;
-                    response.message = action.data;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.success = false;
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
     static setData(action) {
         if (__DEV__) {
             console.log("Dispatching set at " + action.node);
@@ -89,52 +63,6 @@ export default class CloudData {
                 .then(() => {
                     response.success = true;
                     response.message = action.data;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.success = false;
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
-    static pushData(action) {
-        if (__DEV__) {
-            console.log("Dispatching push at " + action.node);
-        }
-
-        return new Promise(resolve => {
-            firebase
-                .database()
-                .ref(action.node)
-                .push(action.data)
-                .then(() => {
-                    response.success = true;
-                    response.message = action.data;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.success = false;
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
-    static deleteData(action) {
-        if (__DEV__) {
-            console.log("Dispatching delete at " + action.node);
-        }
-
-        return new Promise(resolve => {
-            firebase
-                .database()
-                .ref(action.node)
-                .set(null)
-                .then(() => {
-                    response.success = true;
-                    response.message = null;
                     resolve(response);
                 })
                 .catch(error => {
