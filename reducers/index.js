@@ -83,14 +83,11 @@ export default function(state = initialState, action) {
             return new_state;
 
         /* APP */
-        case "SET_APP_DATA":
+        case "SET_DATA":
             new_state = utilities.cloneObject(state);
-            new_state.appData.app = action.data;
-            return new_state;
-
-        case "SET_USERS_DATA":
-            new_state = utilities.cloneObject(state);
-            new_state.appData.users = action.data;
+            new_state.appData[action.node] = action.data;
+            new_state.appState.loading = false;
+            new_state.appState.refreshing = false;
             return new_state;
 
         default:

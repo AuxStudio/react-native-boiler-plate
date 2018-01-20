@@ -28,14 +28,16 @@ export class DataHandler extends React.Component {
         // Listen for live changes to db
         CloudData.listenForData("app", data => {
             this.props.dispatch({
-                type: "SET_APP_DATA",
+                type: "SET_DATA",
+                node: "app",
                 data,
             });
         });
 
         CloudData.listenForData("users", data => {
             this.props.dispatch({
-                type: "SET_USERS_DATA",
+                type: "SET_DATA",
+                node: "users",
                 data,
             });
         });
