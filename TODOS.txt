@@ -1,3 +1,6 @@
+Use try/catch in sagas
+Rework config
+Update DataHandler
 Need error management system
     Log errors to db
     Get error messages from config
@@ -5,14 +8,7 @@ Need error management system
         Icons and success/danger and autohide from props
 Need data management system
     If data event has error and loading nodes
-Need dev and staging nodes on db
-Add NetworkHandler 
-    Latency wrapper
-Use try/catch in sagas
-Rework config
-Unit testing
-Update AuthHandler
-Update DataHandler
+
 Add FB query methods (ie. filtering, searching etc)
 Fix FB deprecation error
 
@@ -21,7 +17,9 @@ Rework forgot password
     Need to reset via app
 Phone Auth
     Link Phone
+Unit testing
 Write script to generate project in one go (saves up to 3 hrs)
 
 TESTING 
     Firebase data listen method
+    DataHandler

@@ -1,23 +1,20 @@
 import React from "react";
+import { View } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-export default function(WrappedComponent) {
-    class BlankWrapperComponent extends React.Component {
-        static get propTypes() {
-            return {};
-        }
-
-        componentDidMount() {}
-
-        render() {
-            return <WrappedComponent {...this.props} />;
-        }
-    }
-
-    function mapStateToProps(state) {
+export class BlankWrapperComponent extends React.Component {
+    static get propTypes() {
         return {};
     }
 
-    return connect(mapStateToProps)(BlankWrapperComponent);
+    render() {
+        return this.props.children;
+    }
 }
+
+function mapStateToProps(state) {
+    return {};
+}
+
+export default connect(mapStateToProps)(BlankWrapperComponent);

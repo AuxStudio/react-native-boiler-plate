@@ -1,76 +1,82 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import firebase from "react-native-firebase";
 
-export default function(WrappedComponent) {
-    class DataHandler extends React.Component {
-        constructor(props) {
-            super(props);
+export class DataHandler extends React.Component {
+    constructor(props) {
+        super(props);
 
-            this.handleGetData = this.handleGetData.bind(this);
-            this.getData = this.getData.bind(this);
+        this.setPersistence = this.setPersistence.bind(this);
+        this.setRealTimeMode = this.setRealTimeMode.bind(this);
+    }
 
-            this.state = {
-                isFetchingData: {
-                    app: false,
-                    users: false,
+    static get propTypes() {
+        return {};
+    }
+
+    componentDidMount() {
+        // delay fixes missing data fetch on first app load (I assume because of auth)
+        setTimeout(() => {
+            this.setPersistence();
+            this.setRealTimeMode();
+        }, 500);
+    }
+
+    setPersistence() {
+        // Set persistence for offline capability
+        firebase
+            .database()
+            .ref("app")
+            .keepSynced(true);
+        firebase
+            .database()
+            .ref("users")
+            .keepSynced(true);
+    }
+
+    setRealTimeMode() {
+        // Listen for live changes to db
+        firebase
+            .database()
+            .ref("app/")
+            .on(
+                "value",
+                snapshot => {
+                    this.props.dispatch({
+                        type: "SET_APP_DATA",
+                        data: snapshot.val(),
+                    });
                 },
-            };
-        }
-
-        static get propTypes() {
-            return {
-                appData: PropTypes.object,
-                usersData: PropTypes.object,
-            };
-        }
-
-        componentWillMount() {
-            this.handleGetData();
-        }
-
-        componentDidUpdate() {
-            this.handleGetData();
-        }
-
-        handleGetData() {
-            if (this.props.authenticated) {
-                if (!this.state.isFetchingData.app && !this.props.appData) {
-                    this.getData("app");
+                error => {
+                    // Do nothing - silent error
                 }
+            );
 
-                if (!this.state.isFetchingData.users && !this.props.usersData) {
-                    this.getData("users");
+        firebase
+            .database()
+            .ref("users/")
+            .on(
+                "value",
+                snapshot => {
+                    this.props.dispatch({
+                        type: "SET_USERS_DATA",
+                        data: snapshot.val(),
+                    });
+                },
+                error => {
+                    // Do nothing - silent error
                 }
-            }
-        }
-
-        getData(node) {
-            let state = this.state;
-            state.isFetchingData[node] = true;
-            this.setState(state);
-
-            const nextActionType =
-                node === "app" ? "SET_APP_DATA" : "SET_USERS_DATA";
-
-            this.props.dispatch({
-                type: "getData",
-                node,
-                nextActionType,
-            });
-        }
-
-        render() {
-            return <WrappedComponent {...this.props} />;
-        }
+            );
     }
 
-    function mapStateToProps(state) {
-        return {
-            appData: state.main.appData.app,
-            usersData: state.main.appData.users,
-        };
+    render() {
+        return this.props.children;
     }
-
-    return connect(mapStateToProps)(DataHandler);
 }
+
+function mapStateToProps(state) {
+    return {};
+}
+
+export default connect(mapStateToProps)(DataHandler);

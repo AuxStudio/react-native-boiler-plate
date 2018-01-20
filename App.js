@@ -8,11 +8,22 @@ import Scenes from "./routes";
 // Connect router to store
 const ConnectedRouter = connect()(Router);
 
+// Wrappers
+import AuthHandler from "./wrappers/AuthHandler";
+import DataHandler from "./wrappers/DataHandler";
+import NetworkHandler from "./wrappers/NetworkHandler";
+
 export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <ConnectedRouter scenes={Scenes} />
+                <AuthHandler>
+                    <DataHandler>
+                        <NetworkHandler>
+                            <ConnectedRouter scenes={Scenes} />
+                        </NetworkHandler>
+                    </DataHandler>
+                </AuthHandler>
             </Provider>
         );
     }
