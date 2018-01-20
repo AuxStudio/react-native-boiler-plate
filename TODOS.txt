@@ -1,5 +1,3 @@
-Need data management system
-    If data event has error and loading nodes
 Update userAuth to work without anonymous => linkUser?
 Rework forgot password
     Need to reset via app
