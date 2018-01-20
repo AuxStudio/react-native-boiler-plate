@@ -33,6 +33,8 @@ styleConstants.transBlack = "rgba(0, 0, 0, 0.70)";
 styleConstants.primaryText = "#212121";
 styleConstants.secondaryText = "#757575";
 styleConstants.dividerColor = "#E0E0E0";
+styleConstants.success = "#4caf50";
+styleConstants.danger = "#d32f2f";
 
 /* DIMENSIONS */
 

@@ -13,6 +13,8 @@ export class SnackBarComponent extends React.Component {
 
         this.resetError = this.resetError.bind(this);
         this.handleAction = this.handleAction.bind(this);
+
+        this.state = {};
     }
 
     static get propTypes() {
@@ -28,27 +30,46 @@ export class SnackBarComponent extends React.Component {
     }
 
     handleAction() {
+        const nextAction = {
+            type: this.props.error.action.type,
+            ...this.props.error.action.data,
+        };
+
         this.resetError();
-
-        const actionData = this.props.action.data && this.props.action.data;
-
-        this.props.dispatch({
-            type: this.props.action.type,
-            ...actionData,
-        });
+        this.props.dispatch(nextAction);
     }
 
     render() {
-        const snackBar = this.props.error.type ? (
+        const snackBar = this.props.error.errorType ? (
             <SnackBar
                 text={this.props.error.message}
-                actionText={this.props.errorAction.text}
+                iconName={this.props.error.iconName}
+                actionText={this.props.error.action.text}
                 handleClose={this.resetError}
-                handleAction={this.props.errorAction.type && this.handleAction}
-                shouldAutoHide
-                textStyle={styles.snackBarText}
-                actionTextStyle={styles.actionText}
+                handleAction={this.props.error.action.type && this.handleAction}
+                shouldAutoHide={this.props.error.autoHide}
+                textStyle={[
+                    styles.snackBarText,
+                    {
+                        marginRight: this.props.error.autoHide ? 0 : 16,
+                    },
+                ]}
+                iconStyle={[
+                    styles.snackBarIcon,
+                    {
+                        color: this.props.error.success
+                            ? styleConstants.success
+                            : styleConstants.danger,
+                    },
+                ]}
+                actionTextStyle={[
+                    styles.actionText,
+                    {
+                        marginRight: this.props.error.autoHide ? 0 : 16,
+                    },
+                ]}
                 containerStyle={styles.container}
+                showCloseButton={!this.props.error.autoHide}
             />
         ) : null;
 
@@ -58,7 +79,7 @@ export class SnackBarComponent extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#323232",
+        backgroundColor: "#323232", // Material design
     },
     snackBarText: {
         fontSize: styleConstants.regularFont,
@@ -67,7 +88,6 @@ const styles = StyleSheet.create({
     actionText: {
         fontSize: styleConstants.regularFont,
         color: "yellow",
-        fontWeight: "500",
     },
 });
 

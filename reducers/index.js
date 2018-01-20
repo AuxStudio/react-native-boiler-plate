@@ -42,39 +42,17 @@ export default function(state = initialState, action) {
         /*
 			SUCCESS/ERROR MESSAGES
         */
-        case "SET_SUCCESS":
-            new_state = utilities.cloneObject(state);
-            new_state.appState.error.type = action.errorType;
-            new_state.appState.error.message = action.message;
-            new_state.appState.error.success = true;
-
-            return new_state;
-
         case "SET_ERROR":
             new_state = utilities.cloneObject(state);
-            new_state.appState.error.type = action.errorType;
-            new_state.appState.error.message = action.message;
-            new_state.appState.error.success = false;
-
-            // Attach a retry action if provided
-            if (action.retryAction && action.retryAction.type) {
-                new_state.appState.retryAction.type = action.retryAction.type;
-            }
-            if (action.retryAction && action.retryAction.data) {
-                new_state.appState.retryAction.data = {
-                    ...action.retryAction.data,
-                };
-            }
+            new_state.appState.error = {
+                ...action,
+            };
 
             return new_state;
 
         case "RESET_ERROR":
             new_state = utilities.cloneObject(state);
-            new_state.appState.error.type = null;
-            new_state.appState.error.message = null;
-            new_state.appState.error.success = null;
-            new_state.appState.retryAction.type = null;
-            new_state.appState.retryAction.data = null;
+            new_state.appState.error = initialState.appState.error;
 
             return new_state;
 

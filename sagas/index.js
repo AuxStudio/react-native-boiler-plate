@@ -33,9 +33,6 @@ import { deleteFile } from "./fileSystem";
 // HTTP
 import { get } from "./http";
 
-// Network
-import { getConnectionInfo } from "./network";
-
 export function* sagas() {
     yield all([
         // User auth
@@ -44,18 +41,18 @@ export function* sagas() {
         fork(
             takeLatest,
             "getUserCredentialFromEmail",
-            getUserCredentialFromEmail
+            getUserCredentialFromEmail,
         ),
         fork(takeLatest, "sendPasswordResetEmail", sendPasswordResetEmail),
         fork(
             takeLatest,
             "getUserCredentialFromFacebook",
-            getUserCredentialFromFacebook
+            getUserCredentialFromFacebook,
         ),
         fork(
             takeLatest,
             "getUserCredentialFromGoogle",
-            getUserCredentialFromGoogle
+            getUserCredentialFromGoogle,
         ),
         fork(takeLatest, "linkUserWithCredential", linkUserWithCredential),
         fork(takeLatest, "signInUserWithCredential", signInUserWithCredential),
@@ -66,7 +63,7 @@ export function* sagas() {
         fork(
             takeLatest,
             "getFormattedAddressFromCoordinates",
-            getFormattedAddressFromCoordinates
+            getFormattedAddressFromCoordinates,
         ),
 
         // Cloud Data
@@ -83,8 +80,5 @@ export function* sagas() {
 
         // HTTP
         fork(takeLatest, "get", get),
-
-        // Network
-        fork(takeLatest, "getConnectionInfo", getConnectionInfo),
     ]);
 }

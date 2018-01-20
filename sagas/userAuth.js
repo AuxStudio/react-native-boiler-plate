@@ -30,12 +30,12 @@ export function* getUserAuth() {
 
 export function* signInUserAnonymously() {
     const signInUserAnonymouslyResponse = yield call(
-        UserAuth.signInUserAnonymously
+        UserAuth.signInUserAnonymously,
     );
     if (__DEV__) {
         console.log(
             "signInUserAnonymouslyResponse",
-            signInUserAnonymouslyResponse
+            signInUserAnonymouslyResponse,
         );
     }
 
@@ -50,7 +50,8 @@ export function* signInUserAnonymously() {
             type: "SET_ERROR",
             errorType: "AUTH",
             message: "Oh dear, network error. Please try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "signInUserAnonymously",
             },
         });
@@ -60,12 +61,12 @@ export function* signInUserAnonymously() {
 export function* getUserCredentialFromEmail(action) {
     const getUserCredentialFromEmailResponse = yield call(
         UserAuth.getUserCredentialFromEmail,
-        action
+        action,
     );
     if (__DEV__) {
         console.log(
             "getUserCredentialFromEmailResponse",
-            getUserCredentialFromEmailResponse
+            getUserCredentialFromEmailResponse,
         );
     }
 
@@ -88,7 +89,8 @@ export function* getUserCredentialFromEmail(action) {
             errorType: "AUTH",
             message:
                 "Something's not right. Please check your connection and try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "getUserCredentialFromEmail",
                 data: {
                     userEmail: action.userEmail,
@@ -102,12 +104,12 @@ export function* getUserCredentialFromEmail(action) {
 
 export function* getUserCredentialFromFacebook() {
     const getUserCredentialFromFacebookResponse = yield call(
-        UserAuth.getUserCredentialFromFacebook
+        UserAuth.getUserCredentialFromFacebook,
     );
     if (__DEV__) {
         console.log(
             "getUserCredentialFromFacebookResponse",
-            getUserCredentialFromFacebookResponse
+            getUserCredentialFromFacebookResponse,
         );
     }
 
@@ -128,7 +130,8 @@ export function* getUserCredentialFromFacebook() {
             errorType: "AUTH",
             message:
                 "Can't connect to Facebook. Please check your connection and try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "getUserCredentialFromFacebook",
             },
         });
@@ -137,12 +140,12 @@ export function* getUserCredentialFromFacebook() {
 
 export function* getUserCredentialFromGoogle() {
     const getUserCredentialFromGoogleResponse = yield call(
-        UserAuth.getUserCredentialFromGoogle
+        UserAuth.getUserCredentialFromGoogle,
     );
     if (__DEV__) {
         console.log(
             "getUserCredentialFromGoogleResponse",
-            getUserCredentialFromGoogleResponse
+            getUserCredentialFromGoogleResponse,
         );
     }
 
@@ -163,7 +166,8 @@ export function* getUserCredentialFromGoogle() {
             errorType: "AUTH",
             message:
                 "Can't connect to Google. Please check your connection and try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "getUserCredentialFromGoogle",
             },
         });
@@ -174,12 +178,12 @@ export function* linkUserWithCredential(action) {
     if (firebase.auth().currentUser) {
         const linkUserWithCredentialResponse = yield call(
             UserAuth.linkUserWithCredential,
-            action
+            action,
         );
         if (__DEV__) {
             console.log(
                 "linkUserWithCredentialResponse",
-                linkUserWithCredentialResponse
+                linkUserWithCredentialResponse,
             );
         }
 
@@ -231,7 +235,8 @@ export function* linkUserWithCredential(action) {
                 type: "SET_ERROR",
                 errorType: "AUTH",
                 message: "Oh dear, login error. Please try again.",
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "linkUserWithCredential",
                     credential: action.credential,
                 },
@@ -241,12 +246,12 @@ export function* linkUserWithCredential(action) {
         // sign in anonymously
         const signInUserAnonymouslyResponse = yield call(
             UserAuth.signInUserAnonymously,
-            action
+            action,
         );
         if (__DEV__) {
             console.log(
                 "signInUserAnonymouslyResponse",
-                signInUserAnonymouslyResponse
+                signInUserAnonymouslyResponse,
             );
         }
 
@@ -260,7 +265,8 @@ export function* linkUserWithCredential(action) {
                 type: "SET_ERROR",
                 errorType: "AUTH",
                 message: "Oh dear, login error. Please try again.",
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "signInUserAnonymously",
                 },
             });
@@ -271,12 +277,12 @@ export function* linkUserWithCredential(action) {
 export function* signInUserWithCredential(action) {
     const signInUserWithCredentialResponse = yield call(
         UserAuth.signInUserWithCredential,
-        action
+        action,
     );
     if (__DEV__) {
         console.log(
             "signInUserWithCredentialResponse",
-            signInUserWithCredentialResponse
+            signInUserWithCredentialResponse,
         );
     }
 
@@ -302,13 +308,15 @@ export function* signInUserWithCredential(action) {
             errorType: "AUTH",
             message:
                 "Hello! You've already signed in with someone else. Please try another option.",
+            iconName: "error-outline",
         });
     } else {
         yield put({
             type: "SET_ERROR",
             errorType: "AUTH",
             message: "Oh dear, login error. Please try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "signInUserWithCredential",
                 credential: action.credential,
             },
@@ -319,7 +327,7 @@ export function* signInUserWithCredential(action) {
 export function* sendPasswordResetEmail(action) {
     const passwordResetResponse = yield call(
         UserAuth.sendPasswordResetEmail,
-        action
+        action,
     );
     if (__DEV__) {
         console.log("passwordResetResponse", passwordResetResponse);
@@ -327,9 +335,11 @@ export function* sendPasswordResetEmail(action) {
 
     if (passwordResetResponse.success) {
         yield put({
-            type: "SET_SUCCESS",
+            type: "SET_ERROR",
             errorType: "USER",
             message: "Email sent successfully",
+            success: true,
+            iconName: "check",
         });
     } else {
         yield put({
@@ -339,7 +349,8 @@ export function* sendPasswordResetEmail(action) {
                 passwordResetResponse.message.code === "auth/user-not-found"
                     ? "Email address not registered. Please sign up."
                     : "We were unable to send a password reset request. Check your connection and try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "sendPasswordResetEmail",
                 data: {
                     userEmail: action.userEmail,
@@ -364,7 +375,8 @@ export function* signOutUser() {
             type: "SET_ERROR",
             errorType: "AUTH",
             message: "We couldn't sign out. Please try again.",
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "signOutUser",
             },
         });

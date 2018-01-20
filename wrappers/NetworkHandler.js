@@ -3,6 +3,8 @@ import { NetInfo } from "react-native";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Analytics from "../analytics";
+
 import HighLatencyNetworkDetector from "./HighLatencyNetworkDetector";
 
 export class NetworkHandler extends React.Component {
@@ -15,7 +17,7 @@ export class NetworkHandler extends React.Component {
     componentDidMount() {
         NetInfo.addEventListener(
             "connectionChange",
-            this.handleConnectionChange
+            this.handleConnectionChange,
         );
 
         // If we don't delay this, the event fires immediately after app mount and displays the success snackbar
@@ -29,23 +31,28 @@ export class NetworkHandler extends React.Component {
     componentWillUnmount() {
         NetInfo.removeEventListener(
             "connectionChange",
-            this.handleConnectionChange
+            this.handleConnectionChange,
         );
     }
 
     handleConnectionChange = connectionInfo => {
         if (connectionInfo.type === "none") {
+            Analytics.logEvent("network_offline");
+
             this.props.dispatch({
                 type: "SET_ERROR",
                 errorType: "NETWORK",
                 message: "Oh no! It looks like you're offline.",
+                iconName: "error-outline",
             });
         } else if (this.props.appStart) {
             // Only dispatch this action if we were previously offline
             this.props.dispatch({
                 type: "SET_ERROR",
-                errorType: "SUCCESS",
+                errorType: "NETWORK",
                 message: "Good to go! You are back online.",
+                success: true,
+                iconName: "check",
             });
         }
     };

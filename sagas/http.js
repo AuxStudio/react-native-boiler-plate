@@ -20,8 +20,10 @@ export function* get(action) {
                 type: "SET_ERROR",
                 errorType: "HTTP",
                 message: getResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "get",
+                    text: "RETRY",
                     data: {
                         endPoint: action.node,
                         parameters: action.parameters,

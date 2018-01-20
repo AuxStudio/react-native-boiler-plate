@@ -1,3 +1,4 @@
+SET_APP/USERS_DATA => SET_DATA (action.node)
 Need data management system
     If data event has error and loading nodes
 Update userAuth to work without anonymous => linkUser?
@@ -7,21 +8,3 @@ Phone Auth
     Link Phone
 Unit testing
 Write script to generate project in one go (saves up to 3 hrs)
-
-TESTING 
-    Try/Catch sagas
-        See if you can actually catch errors
-    Need error management system
-        SnackBar widget out of the box with props from store
-            text
-            iconName
-            success     GREEN/RED icon
-            autoHide
-            action: {
-                text,
-                type,
-                data
-            }
-            *Does not autoHide if retryAction supplied
-        Get error messages from config
-        Log errors to db

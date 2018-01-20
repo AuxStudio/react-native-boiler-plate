@@ -9,14 +9,18 @@ const initialState = {
         loading: true,
 
         error: {
-            type: null,
+            errorType: null,
             message: null,
+            iconName: null,
             success: null,
+            autoHide: null,
+            action: {
+                type: null,
+                text: null,
+                data: null,
+            },
         },
-        retryAction: {
-            type: null,
-            data: null,
-        },
+
         userLocation: null,
         temporaryImage: null,
     },

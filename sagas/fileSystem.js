@@ -15,8 +15,8 @@ export function* deleteFile(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "FILE_SYSTEM",
-            success: config.fileSystem.delete.type,
-            message: config.fileSystem.delete.message,
+            message: "Unable to delete file",
+            iconName: "error-outline",
         });
     }
 }

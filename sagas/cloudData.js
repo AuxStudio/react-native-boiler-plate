@@ -21,8 +21,10 @@ export function* getData(action) {
                 type: "SET_ERROR",
                 errorType: "CLOUD_DATA",
                 message: getDataResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "getData",
+                    text: "RETRY",
                     data: {
                         nextActionType: action.nextActionType,
                         node: action.node,
@@ -55,8 +57,10 @@ export function* updateData(action) {
                 type: "SET_ERROR",
                 errorType: "CLOUD_DATA",
                 message: updateDataResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "updateData",
+                    text: "RETRY",
                     data: {
                         nextActionType: action.nextActionType,
                         node: action.node,
@@ -89,8 +93,10 @@ export function* setData(action) {
                 type: "SET_ERROR",
                 errorType: "CLOUD_DATA",
                 message: setDataResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "setData",
+                    text: "RETRY",
                     data: {
                         nextActionType: action.nextActionType,
                         node: action.node,
@@ -123,8 +129,10 @@ export function* pushData(action) {
                 type: "SET_ERROR",
                 errorType: "CLOUD_DATA",
                 message: pushDataResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "pushData",
+                    text: "RETRY",
                     data: {
                         nextActionType: action.nextActionType,
                         node: action.node,
@@ -156,8 +164,10 @@ export function* deleteData(action) {
                 type: "SET_ERROR",
                 errorType: "CLOUD_DATA",
                 message: deleteDataResponse.message,
-                retryAction: {
+                iconName: "error-outline",
+                action: {
                     type: "deleteData",
+                    text: "RETRY",
                     data: {
                         nextActionType: action.nextActionType,
                         node: action.node,

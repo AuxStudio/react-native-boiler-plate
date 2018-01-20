@@ -18,10 +18,11 @@ export function* getUserLocation(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "GEOLOCATION",
-            success: config.geolocation.location.type,
-            message: config.geolocation.location.message,
-            retryAction: {
+            message: "Unable to retrieve your location",
+            iconName: "error-outline",
+            action: {
                 type: "getUserLocation",
+                text: "RETRY",
             },
         });
     }
@@ -30,12 +31,12 @@ export function* getUserLocation(action) {
 export function* getFormattedAddressFromCoordinates(action) {
     const getLocalityFromCoordinatesResponse = yield call(
         Geolocation.getFormattedAddressFromCoordinates,
-        action.coordinates
+        action.coordinates,
     );
     if (__DEV__) {
         console.log(
             "getLocalityFromCoordinatesResponse",
-            getLocalityFromCoordinatesResponse.success // message is too long
+            getLocalityFromCoordinatesResponse.success, // message is too long
         );
     }
 
@@ -49,11 +50,14 @@ export function* getFormattedAddressFromCoordinates(action) {
         yield put({
             type: "SET_ERROR",
             errorType: "GEOLOCATION_LOCALITY",
-            success: config.geolocation.location.type,
             message: config.geolocation.location.message,
-            retryAction: {
+            iconName: "error-outline",
+            action: {
                 type: "getFormattedAddressFromCoordinates",
-                coordinates: action.coordinates,
+                text: "RETRY",
+                data: {
+                    coordinates: action.coordinates,
+                },
             },
         });
     }

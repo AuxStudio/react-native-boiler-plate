@@ -32,7 +32,7 @@ export function* handleImage(action) {
 
         const createDirectoryResponse = yield call(
             FileSystem.createDirectory,
-            appPhotosDir
+            appPhotosDir,
         );
         if (__DEV__) {
             console.log("createDirectoryResponse", createDirectoryResponse);
@@ -56,7 +56,7 @@ export function* handleImage(action) {
             if (action.option === "Take a Photo") {
                 transferFileResponse = yield call(
                     FileSystem.moveFile,
-                    transferFileOptions
+                    transferFileOptions,
                 );
                 if (__DEV__) {
                     console.log("transferFileResponse", transferFileResponse);
@@ -65,7 +65,7 @@ export function* handleImage(action) {
                 // Copy the file if it was chosen from an existing directory
                 transferFileResponse = yield call(
                     FileSystem.copyFile,
-                    transferFileOptions
+                    transferFileOptions,
                 );
                 if (__DEV__) {
                     console.log("transferFileResponse", transferFileResponse);
@@ -86,7 +86,7 @@ export function* handleImage(action) {
 
                 const imageResizerResponse = yield call(
                     Images.resizeImage,
-                    imageResizerOptions
+                    imageResizerOptions,
                 );
                 if (__DEV__) {
                     console.log("imageResizerResponse", imageResizerResponse);
@@ -103,23 +103,23 @@ export function* handleImage(action) {
 
                     const imageCropperResponse = yield call(
                         Images.cropImage,
-                        imageCropperOptions
+                        imageCropperOptions,
                     );
                     if (__DEV__) {
                         console.log(
                             "imageCropperResponse",
-                            imageCropperResponse
+                            imageCropperResponse,
                         );
                     }
 
                     if (imageCropperResponse.success) {
                         const croppedImagePath = imageCropperResponse.message.replace(
                             "file:",
-                            ""
+                            "",
                         );
                         const croppedImageOutputPath = utilities.appendStringToFileName(
                             transferFileResponse.message,
-                            "-cropped"
+                            "-cropped",
                         );
 
                         const moveCroppedFileOptions = {
@@ -129,12 +129,12 @@ export function* handleImage(action) {
 
                         const moveCroppedFileResponse = yield call(
                             FileSystem.moveFile,
-                            moveCroppedFileOptions
+                            moveCroppedFileOptions,
                         );
                         if (__DEV__) {
                             console.log(
                                 "moveCroppedFileResponse",
-                                moveCroppedFileResponse
+                                moveCroppedFileResponse,
                             );
                         }
 
@@ -155,40 +155,40 @@ export function* handleImage(action) {
                             yield put({
                                 type: "SET_ERROR",
                                 errorType: "IMAGE",
-                                success: config.images.crop.type,
-                                message: config.images.crop.message,
+                                message: "Failed to crop image",
+                                iconName: "error-outline",
                             });
                         }
                     } else {
                         yield put({
                             type: "SET_ERROR",
                             errorType: "IMAGE",
-                            success: config.images.crop.type,
-                            message: config.images.crop.message,
+                            message: "Failed to crop image",
+                            iconName: "error-outline",
                         });
                     }
                 } else {
                     yield put({
                         type: "SET_ERROR",
                         errorType: "IMAGE",
-                        success: config.images.resize.type,
-                        message: config.images.resize.message,
+                        message: "Failed to resize image",
+                        iconName: "error-outline",
                     });
                 }
             } else {
                 yield put({
                     type: "SET_ERROR",
                     errorType: "IMAGE",
-                    success: config.fileSystem.copy.type,
-                    message: config.fileSystem.copy.message,
+                    message: "Failed to copy image",
+                    iconName: "error-outline",
                 });
             }
         } else {
             yield put({
                 type: "SET_ERROR",
                 errorType: "IMAGE",
-                success: config.fileSystem.createDirectory.type,
-                message: config.fileSystem.createDirectory.message,
+                message: "Failed to copy image",
+                iconName: "error-outline",
             });
         }
     } else {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import config from "../config";
+import Analytics from "../analytics";
 
 export class HighLatencyDetector extends React.Component {
     constructor(props) {
@@ -35,10 +36,13 @@ export class HighLatencyDetector extends React.Component {
 
         // Check to see if time > config.latencyTimeout and dispatch an error event if so
         if (this.state.time && this.state.time > config.latencyTimeout) {
+            Analytics.logEvent("network_high_latency");
+
             this.props.dispatch({
                 type: "SET_ERROR",
                 errorType: "NETWORK",
                 message: "Slow network detected. Please try again later.",
+                iconName: "error-outline",
             });
 
             this.clearTimer();
