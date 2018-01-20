@@ -24,7 +24,7 @@ export class Home extends React.Component {
     render() {
         return (
             <Page>
-                <View />
+                <Text>Let's make magic!</Text>
             </Page>
         );
     }

@@ -5,8 +5,8 @@ let response = {
     message: null,
 };
 
-export default class Utilities {
-    static getUserCoordinates() {
+export default class Geolocation {
+    static getUserLocation() {
         return new Promise(resolve => {
             navigator.geolocation.getCurrentPosition(
                 position => {
@@ -22,17 +22,17 @@ export default class Utilities {
                     response.success = false;
                     response.message = error.message;
                     resolve(response);
-                }
+                },
             );
         });
     }
 
-    static getUserSuburb(coordinates) {
+    static getFormattedAddressFromCoordinates(coordinates) {
         return new Promise(resolve => {
             Geocoder.geocodePosition(coordinates)
                 .then(data => {
                     response.success = true;
-                    response.message = data[0].subLocality;
+                    response.message = data;
                     resolve(response);
                 })
                 .catch(error => {

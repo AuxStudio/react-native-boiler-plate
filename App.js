@@ -12,6 +12,7 @@ const ConnectedRouter = connect()(Router);
 import AuthHandler from "./wrappers/AuthHandler";
 import DataHandler from "./wrappers/DataHandler";
 import NetworkHandler from "./wrappers/NetworkHandler";
+import GeolocationHandler from "./wrappers/GeolocationHandler";
 
 export default class App extends React.Component {
     render() {
@@ -20,7 +21,9 @@ export default class App extends React.Component {
                 <AuthHandler>
                     <DataHandler>
                         <NetworkHandler>
-                            <ConnectedRouter scenes={Scenes} />
+                            <GeolocationHandler>
+                                <ConnectedRouter scenes={Scenes} />
+                            </GeolocationHandler>
                         </NetworkHandler>
                     </DataHandler>
                 </AuthHandler>

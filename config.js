@@ -2,7 +2,7 @@ const config = {};
 
 config.app = {
     name: "PROJECT_NAME",
-    version: "0.0.1",
+    version: "1.0.0",
     url: null,
     developer: {
         name: "Shaun Saker",
