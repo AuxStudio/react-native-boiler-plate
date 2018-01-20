@@ -4,7 +4,9 @@ import HTTP from "../http";
 
 export function* get(action) {
     const getResponse = yield call(HTTP.get, action);
-    console.log("getResponse", getResponse.success);
+    if (__DEV__) {
+        console.log("getResponse", getResponse.success);
+    }
 
     if (getResponse) {
         if (getResponse.success) {

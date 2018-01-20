@@ -1,11 +1,5 @@
-Update userAuth to work without anonymous => linkUser?
 SnackBar widget out of the box
     Icons and success/danger and autohide from props
-Rework forgot password
-    Need to reset via app
-Phone Auth
-    Link Phone
-Write script to generate project in one go (saves up to 3 hrs)
 Firebase data listen method
 Need error management system
     Log errors to db
@@ -13,7 +7,6 @@ Need error management system
 Need data management system
     If data event has error and loading nodes
 Need dev and staging nodes on db
-Console.log only if __DEV__
 Add NetworkHandler 
     Latency wrapper
 Use try/catch in sagas
@@ -23,3 +16,10 @@ Update AuthHandler
 Update DataHandler
 Add FB query methods (ie. filtering, searching etc)
 Fix FB deprecation error
+
+Update userAuth to work without anonymous => linkUser?
+Rework forgot password
+    Need to reset via app
+Phone Auth
+    Link Phone
+Write script to generate project in one go (saves up to 3 hrs)

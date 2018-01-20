@@ -5,7 +5,9 @@ import FileSystem from "../fileSystem/index";
 
 export function* deleteFile(action) {
     const deleteFileResponse = yield call(FileSystem.deleteFile, action);
-    console.log("deleteFileResponse", deleteFileResponse);
+    if (__DEV__) {
+        console.log("deleteFileResponse", deleteFileResponse);
+    }
 
     if (deleteFileResponse.success) {
         // Do nothing

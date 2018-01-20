@@ -5,7 +5,9 @@ import Geolocation from "../geolocation/index";
 
 export function* getUserLocation(action) {
     const userCoordinatesResponse = yield call(Geolocation.getUserLocation);
-    console.log("userCoordinatesResponse", userCoordinatesResponse);
+    if (__DEV__) {
+        console.log("userCoordinatesResponse", userCoordinatesResponse);
+    }
 
     if (userCoordinatesResponse.success) {
         yield put({
@@ -30,10 +32,12 @@ export function* getFormattedAddressFromCoordinates(action) {
         Geolocation.getFormattedAddressFromCoordinates,
         action.coordinates
     );
-    console.log(
-        "getLocalityFromCoordinatesResponse",
-        getLocalityFromCoordinatesResponse.success // message is too long
-    );
+    if (__DEV__) {
+        console.log(
+            "getLocalityFromCoordinatesResponse",
+            getLocalityFromCoordinatesResponse.success // message is too long
+        );
+    }
 
     if (getLocalityFromCoordinatesResponse.success) {
         yield put({

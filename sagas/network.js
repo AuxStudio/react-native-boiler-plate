@@ -7,7 +7,12 @@ export function* getConnectionInfo(action) {
         Network.getConnectionInfo,
         action
     );
-    console.log("getConnectionInfoResponse", getConnectionInfoResponse.success);
+    if (__DEV__) {
+        console.log(
+            "getConnectionInfoResponse",
+            getConnectionInfoResponse.success
+        );
+    }
 
     if (getConnectionInfoResponse) {
         if (getConnectionInfoResponse.success) {

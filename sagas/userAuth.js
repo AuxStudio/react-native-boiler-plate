@@ -5,7 +5,9 @@ import UserAuth from "../userAuth/index";
 
 export function* getUserAuth() {
     const getUserAuthResponse = yield call(UserAuth.getUserAuth);
-    console.log("getUserAuthResponse", getUserAuthResponse);
+    if (__DEV__) {
+        console.log("getUserAuthResponse", getUserAuthResponse);
+    }
 
     if (getUserAuthResponse.authenticated) {
         yield put({
@@ -30,7 +32,12 @@ export function* signInUserAnonymously() {
     const signInUserAnonymouslyResponse = yield call(
         UserAuth.signInUserAnonymously
     );
-    console.log("signInUserAnonymouslyResponse", signInUserAnonymouslyResponse);
+    if (__DEV__) {
+        console.log(
+            "signInUserAnonymouslyResponse",
+            signInUserAnonymouslyResponse
+        );
+    }
 
     if (signInUserAnonymouslyResponse.authenticated) {
         yield put({
@@ -55,10 +62,12 @@ export function* getUserCredentialFromEmail(action) {
         UserAuth.getUserCredentialFromEmail,
         action
     );
-    console.log(
-        "getUserCredentialFromEmailResponse",
-        getUserCredentialFromEmailResponse
-    );
+    if (__DEV__) {
+        console.log(
+            "getUserCredentialFromEmailResponse",
+            getUserCredentialFromEmailResponse
+        );
+    }
 
     if (getUserCredentialFromEmailResponse.success) {
         yield all([
@@ -95,10 +104,12 @@ export function* getUserCredentialFromFacebook() {
     const getUserCredentialFromFacebookResponse = yield call(
         UserAuth.getUserCredentialFromFacebook
     );
-    console.log(
-        "getUserCredentialFromFacebookResponse",
-        getUserCredentialFromFacebookResponse
-    );
+    if (__DEV__) {
+        console.log(
+            "getUserCredentialFromFacebookResponse",
+            getUserCredentialFromFacebookResponse
+        );
+    }
 
     if (getUserCredentialFromFacebookResponse.success) {
         yield all([
@@ -128,10 +139,12 @@ export function* getUserCredentialFromGoogle() {
     const getUserCredentialFromGoogleResponse = yield call(
         UserAuth.getUserCredentialFromGoogle
     );
-    console.log(
-        "getUserCredentialFromGoogleResponse",
-        getUserCredentialFromGoogleResponse
-    );
+    if (__DEV__) {
+        console.log(
+            "getUserCredentialFromGoogleResponse",
+            getUserCredentialFromGoogleResponse
+        );
+    }
 
     if (getUserCredentialFromGoogleResponse.success) {
         yield all([
@@ -163,10 +176,12 @@ export function* linkUserWithCredential(action) {
             UserAuth.linkUserWithCredential,
             action
         );
-        console.log(
-            "linkUserWithCredentialResponse",
-            linkUserWithCredentialResponse
-        );
+        if (__DEV__) {
+            console.log(
+                "linkUserWithCredentialResponse",
+                linkUserWithCredentialResponse
+            );
+        }
 
         if (linkUserWithCredentialResponse.authenticated) {
             yield all([
@@ -228,10 +243,12 @@ export function* linkUserWithCredential(action) {
             UserAuth.signInUserAnonymously,
             action
         );
-        console.log(
-            "signInUserAnonymouslyResponse",
-            signInUserAnonymouslyResponse
-        );
+        if (__DEV__) {
+            console.log(
+                "signInUserAnonymouslyResponse",
+                signInUserAnonymouslyResponse
+            );
+        }
 
         if (signInUserAnonymouslyResponse.success) {
             yield put({
@@ -256,10 +273,12 @@ export function* signInUserWithCredential(action) {
         UserAuth.signInUserWithCredential,
         action
     );
-    console.log(
-        "signInUserWithCredentialResponse",
-        signInUserWithCredentialResponse
-    );
+    if (__DEV__) {
+        console.log(
+            "signInUserWithCredentialResponse",
+            signInUserWithCredentialResponse
+        );
+    }
 
     if (signInUserWithCredentialResponse.authenticated) {
         yield put({
@@ -302,7 +321,9 @@ export function* sendPasswordResetEmail(action) {
         UserAuth.sendPasswordResetEmail,
         action
     );
-    console.log("passwordResetResponse", passwordResetResponse);
+    if (__DEV__) {
+        console.log("passwordResetResponse", passwordResetResponse);
+    }
 
     if (passwordResetResponse.success) {
         yield put({
@@ -330,7 +351,9 @@ export function* sendPasswordResetEmail(action) {
 
 export function* signOutUser() {
     const signOutUserResponse = yield call(UserAuth.signOutUser);
-    console.log("signOutUserResponse", signOutUserResponse);
+    if (__DEV__) {
+        console.log("signOutUserResponse", signOutUserResponse);
+    }
 
     if (signOutUserResponse.success) {
         yield put({

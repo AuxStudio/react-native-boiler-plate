@@ -12,30 +12,40 @@ export function* handleImage(action) {
 
     if (action.option === "Take a Photo") {
         imagePickerResponse = yield call(Images.takePhoto);
-        console.log("imagePickerResponse", imagePickerResponse);
+        if (__DEV__) {
+            console.log("imagePickerResponse", imagePickerResponse);
+        }
     } else {
         // Choose a Photo
         imagePickerResponse = yield call(Images.choosePhoto);
-        console.log("imagePickerResponse", imagePickerResponse);
+        if (__DEV__) {
+            console.log("imagePickerResponse", imagePickerResponse);
+        }
     }
 
     if (imagePickerResponse.success) {
         const appPhotosDir =
             RNFS.PicturesDirectoryPath + "/" + config.appDetails.name;
-        console.log("appPhotosDir:", appPhotosDir);
+        if (__DEV__) {
+            console.log("appPhotosDir:", appPhotosDir);
+        }
 
         const createDirectoryResponse = yield call(
             FileSystem.createDirectory,
             appPhotosDir
         );
-        console.log("createDirectoryResponse", createDirectoryResponse);
+        if (__DEV__) {
+            console.log("createDirectoryResponse", createDirectoryResponse);
+        }
 
         if (createDirectoryResponse.success) {
             const outputPath =
                 createDirectoryResponse.message +
                 "/" +
                 utilities.getFileName(imagePickerResponse.message.path);
-            console.log("Output path: ", outputPath);
+            if (__DEV__) {
+                console.log("Output path: ", outputPath);
+            }
 
             const transferFileOptions = {
                 path: imagePickerResponse.message.path,
@@ -48,14 +58,18 @@ export function* handleImage(action) {
                     FileSystem.moveFile,
                     transferFileOptions
                 );
-                console.log("transferFileResponse", transferFileResponse);
+                if (__DEV__) {
+                    console.log("transferFileResponse", transferFileResponse);
+                }
             } else {
                 // Copy the file if it was chosen from an existing directory
                 transferFileResponse = yield call(
                     FileSystem.copyFile,
                     transferFileOptions
                 );
-                console.log("transferFileResponse", transferFileResponse);
+                if (__DEV__) {
+                    console.log("transferFileResponse", transferFileResponse);
+                }
             }
 
             if (transferFileResponse.success) {
@@ -74,7 +88,9 @@ export function* handleImage(action) {
                     Images.resizeImage,
                     imageResizerOptions
                 );
-                console.log("imageResizerResponse", imageResizerResponse);
+                if (__DEV__) {
+                    console.log("imageResizerResponse", imageResizerResponse);
+                }
 
                 if (imageResizerResponse.success) {
                     const imageCropperOptions = {
@@ -89,7 +105,12 @@ export function* handleImage(action) {
                         Images.cropImage,
                         imageCropperOptions
                     );
-                    console.log("imageCropperResponse", imageCropperResponse);
+                    if (__DEV__) {
+                        console.log(
+                            "imageCropperResponse",
+                            imageCropperResponse
+                        );
+                    }
 
                     if (imageCropperResponse.success) {
                         const croppedImagePath = imageCropperResponse.message.replace(
@@ -110,10 +131,12 @@ export function* handleImage(action) {
                             FileSystem.moveFile,
                             moveCroppedFileOptions
                         );
-                        console.log(
-                            "moveCroppedFileResponse",
-                            moveCroppedFileResponse
-                        );
+                        if (__DEV__) {
+                            console.log(
+                                "moveCroppedFileResponse",
+                                moveCroppedFileResponse
+                            );
+                        }
 
                         if (moveCroppedFileResponse.success) {
                             const image = {

@@ -4,7 +4,9 @@ import CloudData from "../cloudData/index";
 
 export function* getData(action) {
     const getDataResponse = yield call(CloudData.getData, action);
-    console.log("getDataResponse", getDataResponse.success);
+    if (__DEV__) {
+        console.log("getDataResponse", getDataResponse.success);
+    }
 
     if (getDataResponse) {
         if (getDataResponse.success) {
@@ -32,7 +34,9 @@ export function* getData(action) {
 
 export function* updateData(action) {
     const updateDataResponse = yield call(CloudData.updateData, action);
-    console.log("updateDataResponse", updateDataResponse);
+    if (__DEV__) {
+        console.log("updateDataResponse", updateDataResponse);
+    }
 
     if (updateDataResponse) {
         if (updateDataResponse.success) {
@@ -64,7 +68,9 @@ export function* updateData(action) {
 
 export function* setData(action) {
     const setDataResponse = yield call(CloudData.setData, action);
-    console.log("setDataResponse", setDataResponse);
+    if (__DEV__) {
+        console.log("setDataResponse", setDataResponse);
+    }
 
     if (setDataResponse) {
         if (setDataResponse.success) {
@@ -96,7 +102,9 @@ export function* setData(action) {
 
 export function* pushData(action) {
     const pushDataResponse = yield call(CloudData.pushData, action);
-    console.log("pushDataResponse", pushDataResponse);
+    if (__DEV__) {
+        console.log("pushDataResponse", pushDataResponse);
+    }
 
     if (pushDataResponse) {
         if (pushDataResponse.success) {
@@ -128,7 +136,9 @@ export function* pushData(action) {
 
 export function* deleteData(action) {
     const deleteDataResponse = yield call(CloudData.deleteData, action);
-    console.log("deleteDataResponse", deleteDataResponse);
+    if (__DEV__) {
+        console.log("deleteDataResponse", deleteDataResponse);
+    }
 
     if (deleteDataResponse) {
         if (deleteDataResponse.success) {
