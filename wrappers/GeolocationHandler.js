@@ -42,7 +42,6 @@ export class GeolocationHandler extends React.Component {
     }
 
     render() {
-        console.log(this.props.userLocation);
         return this.props.children;
     }
 }

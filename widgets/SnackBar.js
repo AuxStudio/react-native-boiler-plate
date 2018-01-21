@@ -44,9 +44,15 @@ export class SnackBarComponent extends React.Component {
             <SnackBar
                 text={this.props.error.message}
                 iconName={this.props.error.iconName}
-                actionText={this.props.error.action.text}
+                actionText={
+                    this.props.error.action && this.props.error.action.text
+                }
                 handleClose={this.resetError}
-                handleAction={this.props.error.action.type && this.handleAction}
+                handleAction={
+                    this.props.error.action &&
+                    this.props.error.action.type &&
+                    this.handleAction
+                }
                 shouldAutoHide={this.props.error.autoHide}
                 textStyle={[
                     styles.snackBarText,

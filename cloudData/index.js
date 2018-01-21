@@ -23,7 +23,7 @@ export default class CloudData {
                 },
                 error => {
                     // Do nothing - silent error
-                }
+                },
             );
     }
 
@@ -63,6 +63,79 @@ export default class CloudData {
                 .then(() => {
                     response.success = true;
                     response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
+        });
+    }
+
+    static updateData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
+
+        console.log("Dispatching update at " + nodeRef);
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(nodeRef)
+                .update({
+                    ...action.data,
+                })
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
+        });
+    }
+
+    static pushData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
+
+        console.log("Dispatching push at " + nodeRef);
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(nodeRef)
+                .push({
+                    ...action.data,
+                })
+                .then(() => {
+                    response.success = true;
+                    response.message = action.data;
+                    resolve(response);
+                })
+                .catch(error => {
+                    response.success = false;
+                    response.message = error.message;
+                    resolve(response);
+                });
+        });
+    }
+
+    static deleteData(action) {
+        const nodeRef = action.node + "/" + action.uid + "/" + action.subNode;
+
+        console.log("Dispatching delete at " + nodeRef);
+
+        return new Promise(resolve => {
+            firebase
+                .database()
+                .ref(nodeRef)
+                .set(null)
+                .then(() => {
+                    response.success = true;
+                    response.message = null;
                     resolve(response);
                 })
                 .catch(error => {

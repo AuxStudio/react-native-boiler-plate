@@ -77,8 +77,8 @@ utilities.getTimestampFromISODate = date => {
 utilities.getDaysFromDate = date => {
     return Math.abs(
         Math.ceil(
-            (Date.now() - new Date(date).getTime()) / 86400000 // milliseconds in a day
-        )
+            (Date.now() - new Date(date).getTime()) / 86400000, // milliseconds in a day
+        ),
     );
 };
 
@@ -311,12 +311,12 @@ utilities.getRandomItemFromDictionary = dictionary => {
 };
 
 // Takes a dictionary and returns a normal array without the keys
-utilities.convertDictionaryToArray = (dictionary, shouldKeepUUID) => {
+utilities.convertDictionaryToArray = (dictionary, shouldKeepID) => {
     let array = [];
 
     for (key in dictionary) {
         let object = dictionary[key];
-        if (shouldKeepUUID) {
+        if (shouldKeepID) {
             object["id"] = key;
         }
         array.push(object);
@@ -416,7 +416,7 @@ utilities.deleteObjectFromDictionary = (targetKey, dictionary) => {
 // Finds a key value pair in a two tier object array and sets the keys value to null
 utilities.findKeyValuePairAndSetKeysValueToNull = (
     targetKeyValuePair,
-    dictionary
+    dictionary,
 ) => {
     let targetKey;
     let targetValue;
