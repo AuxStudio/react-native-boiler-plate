@@ -5,16 +5,14 @@ import { connect } from "react-redux";
 
 import styleConstants from "../assets/styleConstants";
 
-import { Snackbar } from "react-native-simple-components";
+import { SnackBar } from "react-native-simple-components";
 
-export class SnackBarComponent extends React.Component {
+export class SnackBarHandler extends React.Component {
     constructor(props) {
         super(props);
 
         this.resetError = this.resetError.bind(this);
         this.handleAction = this.handleAction.bind(this);
-
-        this.state = {};
     }
 
     static get propTypes() {
@@ -79,8 +77,19 @@ export class SnackBarComponent extends React.Component {
             />
         ) : null;
 
-        return snackBar;
+        return (
+            <View style={{ flex: 1, alignSelf: "stretch" }}>
+                {this.props.children}
+                {snackBar}
+            </View>
+        );
     }
+}
+
+function mapStateToProps(state) {
+    return {
+        error: state.main.appState.error,
+    };
 }
 
 const styles = StyleSheet.create({
@@ -97,10 +106,4 @@ const styles = StyleSheet.create({
     },
 });
 
-function mapStateToProps(state) {
-    return {
-        error: state.main.appState.error,
-    };
-}
-
-export default connect(mapStateToProps)(SnackBarComponent);
+export default connect(mapStateToProps)(SnackBarHandler);
