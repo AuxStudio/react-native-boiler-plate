@@ -221,9 +221,12 @@ utilities.stripHTML = html => {
 
 /* ARRAYS */
 
-utilities.isValueInArray = (value, array, returnIndex) => {
+utilities.isValueInArray = (value, array, returnIndex, caseSensitive) => {
+    const newValue = caseSensitive ? value.toLowerCase() : value;
+
     for (let i = 0; i < array.length; i++) {
-        if (value == array[i]) {
+        const arrayValue = caseSensitive ? array[i].toLowerCase() : array[i];
+        if (newValue.toLowerCase() == arrayValue.toLowerCase()) {
             if (returnIndex) {
                 return i;
             } else {
@@ -311,12 +314,12 @@ utilities.getRandomItemFromDictionary = dictionary => {
 };
 
 // Takes a dictionary and returns a normal array without the keys
-utilities.convertDictionaryToArray = (dictionary, shouldKeepID) => {
+utilities.convertDictionaryToArray = (dictionary, shouldKeepUUID) => {
     let array = [];
 
     for (key in dictionary) {
         let object = dictionary[key];
-        if (shouldKeepID) {
+        if (shouldKeepUUID) {
             object["id"] = key;
         }
         array.push(object);
