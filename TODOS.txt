@@ -1,3 +1,5 @@
+SnackBarHandler
+
 Update userAuth to work without anonymous => linkUser?
 Rework forgot password
     Need to reset via app
