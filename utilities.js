@@ -75,10 +75,12 @@ utilities.getTimestampFromISODate = date => {
 };
 
 utilities.getDaysFromDate = date => {
-    return Math.abs(
-        Math.ceil(
-            (Date.now() - new Date(date).getTime()) / 86400000, // milliseconds in a day
-        ),
+    const time = new Date(date).getTime();
+    const largest = time > Date.now() ? time : Date.now();
+    const smallest = largest === time ? Date.now() : time;
+
+    return Math.floor(
+        (largest - smallest) / 86400000, // milliseconds in a day
     );
 };
 
