@@ -33,30 +33,17 @@ export default function(state = initialState, action) {
 
             return new_state;
 
-        /* APP */
+        /* APP STATE */
+        case "SET_APP_START":
+            new_state = utilities.cloneObject(state);
+            new_state.appState.appStart = !new_state.appState.appStart;
+            return new_state;
+
         case "TOGGLE_LOADING":
             new_state = utilities.cloneObject(state);
             new_state.appState.loading = !new_state.appState.loading;
             return new_state;
 
-        /*
-			SUCCESS/ERROR MESSAGES
-        */
-        case "SET_ERROR":
-            new_state = utilities.cloneObject(state);
-            new_state.appState.error = {
-                ...action,
-            };
-
-            return new_state;
-
-        case "RESET_ERROR":
-            new_state = utilities.cloneObject(state);
-            new_state.appState.error = initialState.appState.error;
-
-            return new_state;
-
-        /* DATA */
         case "SET_USER_LOCATION":
             new_state = utilities.cloneObject(state);
             new_state.appState.userLocation = action.userLocation;
@@ -77,12 +64,24 @@ export default function(state = initialState, action) {
             new_state.userData.profile.userPhotoURL = action.userPhotoURL;
             return new_state;
 
-        case "SET_NETWORK_INFO":
+        /*
+			SUCCESS/ERROR MESSAGES
+        */
+        case "SET_ERROR":
             new_state = utilities.cloneObject(state);
-            new_state.appData.networkInfo = action.data;
+            new_state.appState.error = {
+                ...action,
+            };
+
             return new_state;
 
-        /* APP */
+        case "RESET_ERROR":
+            new_state = utilities.cloneObject(state);
+            new_state.appState.error = initialState.appState.error;
+
+            return new_state;
+
+        /* APP DATA */
         case "SET_DATA":
             new_state = utilities.cloneObject(state);
             new_state.appData[action.node] = action.data;
