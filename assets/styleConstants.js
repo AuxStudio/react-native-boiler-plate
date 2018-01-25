@@ -5,7 +5,8 @@ const styleConstants = {};
 /* FONT FAMILIES */
 
 // styleConstants.primaryFont = {
-//     fontFamily: "Montserrat-Regular",
+//     fontFamily: "Circular-Medium",
+//     // font00000000201a19f2
 // };
 // styleConstants.secondaryFont = {
 //     fontFamily: "Lora-Regular",
@@ -13,10 +14,10 @@ const styleConstants = {};
 
 /* FONT SIZES */
 
-styleConstants.largeFont = 32;
-styleConstants.regularFont = 18;
-styleConstants.smallFont = 16;
-styleConstants.verySmallFont = 12;
+styleConstants.largeFont = 24;
+styleConstants.regularFont = 17;
+styleConstants.smallFont = 15;
+styleConstants.verySmallFont = 11;
 styleConstants.iconFont = 24;
 
 /* COLOURS */
@@ -46,12 +47,14 @@ styleConstants.windowHeight = height;
 /* SHADOWS */
 
 // Elevation does not work on Android V4 so we add a border as a fallback
-const isEarlyAndroid = Platform.OS === "Android" && Platform.Version <= 19;
+const isEarlyAndroidOrIOS =
+    (Platform.OS === "Android" && Platform.Version <= 19) ||
+    Platform.OS === "ios";
 
 styleConstants.smallShadow = {
     elevation: 2,
-    borderWidth: isEarlyAndroid ? 1 : 0,
-    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
+    borderColor: isEarlyAndroidOrIOS ? styleConstants.dividerColor : null,
 
     // iOS
     shadowColor: styleConstants.black,
@@ -65,8 +68,8 @@ styleConstants.smallShadow = {
 
 styleConstants.regularShadow = {
     elevation: 6,
-    borderWidth: isEarlyAndroid ? 1 : 0,
-    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
+    borderColor: isEarlyAndroidOrIOS ? styleConstants.dividerColor : null,
 
     // iOS
     shadowColor: styleConstants.black,
@@ -80,8 +83,8 @@ styleConstants.regularShadow = {
 
 styleConstants.largeShadow = {
     elevation: 12,
-    borderWidth: isEarlyAndroid ? 1 : 0,
-    borderColor: isEarlyAndroid ? styleConstants.veryLightGrey : null,
+    borderWidth: isEarlyAndroidOrIOS ? 1 : 0,
+    borderColor: isEarlyAndroidOrIOS ? styleConstants.dividerColor : null,
 
     // iOS
     shadowColor: styleConstants.black,

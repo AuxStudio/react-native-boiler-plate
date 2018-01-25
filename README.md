@@ -2,7 +2,6 @@ A react-native redux and firebase boilerplate.
 
 1. INITIALISE
    react-native init PROJECT_NAME
-   yarn add react-native@0.49 (AT THE MOMENT THERE IS A RN VERSION MISMATCH ERROR WITH RN > 0.49)
    TODO: Fix iOS build error after this step?
 
 2. SETUP GIT
