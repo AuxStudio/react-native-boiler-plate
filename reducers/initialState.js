@@ -23,10 +23,13 @@ const initialState = {
 
         userLocation: null,
         temporaryImage: null,
+
+        feedbackPosted: false,
     },
     appData: {
         app: null,
         users: null,
+        appVersion: null,
     },
     userData: {
         settings: null,
