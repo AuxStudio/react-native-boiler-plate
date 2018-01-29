@@ -224,11 +224,11 @@ utilities.stripHTML = html => {
 /* ARRAYS */
 
 utilities.isValueInArray = (value, array, returnIndex, caseSensitive) => {
-    const newValue = caseSensitive ? value.toLowerCase() : value;
+    const newValue = caseSensitive ? value : isValueInArray;
 
     for (let i = 0; i < array.length; i++) {
-        const arrayValue = caseSensitive ? array[i].toLowerCase() : array[i];
-        if (newValue.toLowerCase() == arrayValue.toLowerCase()) {
+        const arrayValue = caseSensitive ? array[i] : array[i].toLowerCase();
+        if (newValue == arrayValue) {
             if (returnIndex) {
                 return i;
             } else {
