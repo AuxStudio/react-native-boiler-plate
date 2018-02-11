@@ -25,6 +25,12 @@ export class HighLatencyDetector extends React.Component {
         };
     }
 
+    componentDidMount() {
+        if (this.props.loading) {
+            this.startTimer();
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.props.loading && !prevProps.loading) {
             // New loading event started
@@ -41,7 +47,7 @@ export class HighLatencyDetector extends React.Component {
             this.props.dispatch({
                 type: "SET_ERROR",
                 errorType: "NETWORK",
-                message: "Slow network detected. Please try again later.",
+                message: "Slow network detected.",
                 iconName: "error-outline",
             });
 
