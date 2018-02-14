@@ -13,6 +13,7 @@ export class HighLatencyDetector extends React.Component {
         this.clearTimer = this.clearTimer.bind(this);
 
         this.timer;
+        this.latencyTimeout = 5;
 
         this.state = {
             time: 0,
@@ -41,7 +42,7 @@ export class HighLatencyDetector extends React.Component {
         }
 
         // Check to see if time > config.latencyTimeout and dispatch an error event if so
-        if (this.state.time && this.state.time > config.latencyTimeout) {
+        if (this.state.time && this.state.time > this.latencyTimeout) {
             Analytics.logEvent("network_high_latency");
 
             this.props.dispatch({
