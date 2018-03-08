@@ -13,6 +13,7 @@ export class HighLatencyDetector extends React.Component {
         this.clearTimer = this.clearTimer.bind(this);
 
         this.timer;
+        this.latencyTimeout = 5;
 
         this.state = {
             time: 0,
@@ -25,6 +26,12 @@ export class HighLatencyDetector extends React.Component {
         };
     }
 
+    componentDidMount() {
+        if (this.props.loading) {
+            this.startTimer();
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.props.loading && !prevProps.loading) {
             // New loading event started
@@ -35,13 +42,13 @@ export class HighLatencyDetector extends React.Component {
         }
 
         // Check to see if time > config.latencyTimeout and dispatch an error event if so
-        if (this.state.time && this.state.time > config.latencyTimeout) {
+        if (this.state.time && this.state.time > this.latencyTimeout) {
             Analytics.logEvent("network_high_latency");
 
             this.props.dispatch({
                 type: "SET_ERROR",
                 errorType: "NETWORK",
-                message: "Slow network detected. Please try again later.",
+                message: "Slow network detected.",
                 iconName: "error-outline",
             });
 

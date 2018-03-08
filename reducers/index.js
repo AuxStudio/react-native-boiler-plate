@@ -33,6 +33,23 @@ export default function(state = initialState, action) {
 
             return new_state;
 
+        /*
+			SUCCESS/ERROR MESSAGES
+        */
+        case "SET_ERROR":
+            new_state = utilities.cloneObject(state);
+            new_state.appState.error = {
+                ...action,
+            };
+
+            return new_state;
+
+        case "RESET_ERROR":
+            new_state = utilities.cloneObject(state);
+            new_state.appState.error = initialState.appState.error;
+
+            return new_state;
+
         /* APP STATE */
         case "SET_APP_START":
             new_state = utilities.cloneObject(state);
@@ -64,24 +81,19 @@ export default function(state = initialState, action) {
             new_state.userData.profile.userPhotoURL = action.userPhotoURL;
             return new_state;
 
-        /*
-			SUCCESS/ERROR MESSAGES
-        */
-        case "SET_ERROR":
+        case "TOGGLE_FEEDBACK_POSTED":
             new_state = utilities.cloneObject(state);
-            new_state.appState.error = {
-                ...action,
-            };
-
+            new_state.appState.feedbackPosted = !new_state.appState
+                .feedbackPosted;
+            new_state.appState.loading = false;
             return new_state;
 
-        case "RESET_ERROR":
+        /* APP */
+        case "SET_APP_VERSION":
             new_state = utilities.cloneObject(state);
-            new_state.appState.error = initialState.appState.error;
-
+            new_state.appData.appVersion = action.data;
             return new_state;
 
-        /* APP DATA */
         case "SET_DATA":
             new_state = utilities.cloneObject(state);
             new_state.appData[action.node] = action.data;

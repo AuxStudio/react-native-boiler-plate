@@ -1,4 +1,5 @@
 SnackBarHandler
+Sort out config file
 
 Update userAuth to work without anonymous => linkUser?
 Rework forgot password
