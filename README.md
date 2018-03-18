@@ -175,11 +175,8 @@ A react-native redux and firebase boilerplate.
                 compile 'com.google.android.gms:play-services-auth:11.4.2'
             Add web client id to config
             Add dev and release SHA-1 to Firebase project
-        		keytool -exportcert -list -v \
-
-    -alias androiddebugkey -keystore ~/.android/debug.keystore (PASSWORD: android)
-    keytool -exportcert -list -v \
-    -alias LeCreusetApp -keystore ./android/app/LeCreusetApp.keystore (PASSWORD: PROJECT_PASSWORD)
+                keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore (PASSWORD: android)
+                keytool -exportcert -list -v -alias LeCreusetApp -keystore ./android/app/LeCreusetApp.keystore (PASSWORD: PROJECT_PASSWORD)
 
         react-native-permissions
             react-native link react-native-permissions

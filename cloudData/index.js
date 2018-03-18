@@ -82,9 +82,7 @@ export default class CloudData {
             firebase
                 .database()
                 .ref(nodeRef)
-                .update({
-                    ...action.data,
-                })
+                .update(action.data)
                 .then(() => {
                     response.success = true;
                     response.message = action.data;
@@ -107,9 +105,7 @@ export default class CloudData {
             firebase
                 .database()
                 .ref(nodeRef)
-                .push({
-                    ...action.data,
-                })
+                .push(action.data)
                 .then(() => {
                     response.success = true;
                     response.message = action.data;
