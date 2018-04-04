@@ -164,7 +164,7 @@ A react-native redux and firebase boilerplate.
             Add key hashes to Facebook app
                 keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
                 (DO THE ABOVE TWICE, FIRST WITH android as password and second with your project password)
-                keytool -exportcert -alias PROJECT_NAME -keystore ./android/app/PROJECT_NAME.keystore | openssl sha1 -binary | openssl base64
+                keytool -exportcert -alias my-key-alias -keystore ./android/app/my-release-key.keystore | openssl sha1 -binary | openssl base64
 
         react-native-google-signin
             react-native link react-native-google-signin

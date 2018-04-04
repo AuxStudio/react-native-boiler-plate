@@ -391,7 +391,7 @@ utilities.filterArrayOfObjectsByValue = (array, value, targetKey) => {
     return filteredArray;
 };
 
-// Takes a key value pair and checks to see if that key value pair is present in a dictionary
+// Takes a key value pair and checks to see if that key value pair is present in a dictionary, returns the key if found
 utilities.isKeyValuePairPresentInDictionary = (keyValuePair, dictionary) => {
     let targetKey;
     let targetValue;
@@ -405,7 +405,7 @@ utilities.isKeyValuePairPresentInDictionary = (keyValuePair, dictionary) => {
 
     for (key in dictionary) {
         if (dictionary[key][targetKey] === targetValue) {
-            isKeyValuePairPresent = true;
+            isKeyValuePairPresent = key;
         }
     }
 
