@@ -1,0 +1,26 @@
+{
+  "name": "react-native-boiler-plate",
+  "version": "1.0.0",
+  "description": "A boiler-plate project for React-native, Redux and Firebase apps",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaunsaker/react-native-boiler-plate.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "redux",
+    "firebase",
+    "redux-saga"
+  ],
+  "author": "Shaun Saker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaunsaker/react-native-boiler-plate/issues"
+  },
+  "homepage": "https://github.com/shaunsaker/react-native-boiler-plate#readme"
+}
