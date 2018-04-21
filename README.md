@@ -49,15 +49,7 @@ A react-native redux and firebase boilerplate.
    }
    {in android.buildTypes.release}
    signingConfig signingConfigs.release
-   *NOT COMMITTING THESE FILES
-   In .gitignore
-   add gradle.properties
-   *COMMITTING THESE FILES
-   In .gitignore
-   remove *.keystore
-   *cd android && ./gradlew assembleRelease
-   *cd ..
-   *TO TEST RELEASE react-native run-android --variant=release
+   *TO TEST: cd android && ./gradlew assembleRelease
 
 6. INSTALL DEPENDENCIES (NOTE: Some of these are optional)
    yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs axios
@@ -280,10 +272,14 @@ A react-native redux and firebase boilerplate.
 
     react-native-image-picker
     react-native link react-native-image-picker (unless done in android setup)
+    *Sometimes this does not work, in this case:
+        Drag node_modules/react-native-image-picker/ios/*.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
     For iOS 10+, Add the NSPhotoLibraryUsageDescription, NSCameraUsageDescription, and NSMicrophoneUsageDescription (if allowing video) keys to your Info.plist with strings describing why your app needs these permissions. Note: You will get a SIGABRT crash if you don't complete this step
 
     react-native-image-resizer
     react-native link react-native-image-resizer (unless done in android setup)
+    *Sometimes this does not work, in this case:
+        Drag node_modules/react-native-image-resizer/ios/*.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
 
     react-native-fs
     react-native link react-native-fs (unless done in android setup)
