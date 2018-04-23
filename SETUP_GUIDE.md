@@ -1,5 +1,9 @@
 # React-native setup guide
 
+This is a work in progress.
+
+It is rather difficult keeping this up to date with the new RN and dependencies versions so if anything is unclear or does not work, please let me know via [email](mailto:shaun@aux.co.za) or create an issue/PR and I will attend to it as soon as I can.
+
 ## 1. Initialise project
 
 ```
@@ -372,6 +376,7 @@ pod update
 #### react-native-vector-icons
 
 In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
+
 In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
 
 ```
@@ -382,7 +387,9 @@ In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
 
 Add ios app to [Firebase console](https://console.firebase.google.com/).
 Download GoogleServices-Info.plist to **./ios**
-In **./ios/podfile**, uncomment platform :ios, '9.0' (change to '8.0' if on Mac version < 10.2)
+
+In **./ios/podfile**, uncomment platform :ios, '9.0' (change to '8.0' if on Mac version < 10.2).
+
 Same file add (remove what you don't need):
 
 ```
@@ -412,12 +419,15 @@ Same file as above (before return):
 #### react-native-fbsdk
 
 Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
+
 Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip) and drag Bolts.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
 
 #### react-native-google-signin
 
 In XCode add **./node_modules/react-native-google-signin/iosRNGoogleSignin.xcodeproj** to your project.
+
 In XCode build phases -> Link binary with libraries, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd.
+
 Drag and drop contents of the **./node_modules/react-native-google-signin/ios/GoogleSdk** folder to your XCode project. (make sure Copy items if needed is ticked) (copy this folder to **./ios/** if you don't see it there).
 
 Configure URL types in the Info panel:
@@ -554,8 +564,9 @@ Remove what you don't need.
 * Email
 * Phone
 
-## 12. Add custom icons
+TODOS:
 
-TODO.
-
-TODO: Prettier, eslint, storybook etc.
+* Adding custom icons
+* Prettier setup
+* ESLint setup
+* Storybook setup
