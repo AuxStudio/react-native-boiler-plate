@@ -1,3 +1,5 @@
+SETUP_GUIDE
+    Refine iOS steps
 Restructure app
     Wrappers?
 Rewrite all code according to style guide
