@@ -1,6 +1,6 @@
-# React-native style guide
+# React-native setup guide
 
-## 1. Initial project
+## 1. Initialise project
 
 ```
 react-native init PROJECT_NAME
@@ -474,7 +474,9 @@ Drag node_modules/react-native-image-resizer/ios/_.workspace into iOS project in
 TODO: Not necessary in RN 0.54.
 No extra steps necessary (linked in Android setup).
 
-## 8. Set SDK version (ANDROID)
+## 8. Set SDK version
+
+Android only.
 
 In **./android/app/build.gradle**:
 
@@ -537,3 +539,5 @@ Remove what you don't need.
 ## 12. Add custom icons
 
 TODO.
+
+TODO: Prettier, eslint, storybook etc.
