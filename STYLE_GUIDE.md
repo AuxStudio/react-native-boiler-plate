@@ -19,18 +19,18 @@ To enforce consistency, we use Prettier and ESLint. Each project should contain 
 ```
 src
 	assets
-		fonts
-		images
-		icons
-			index.js
+	fonts
+	images
+	icons
+		index.js
 	components
 		Button
 			index.js
 			styles.js
-    config
+	config
 	containers
 		Home.js
-    navigation
+	navigation
 	reducers
 		auth.js
 	sagas
@@ -39,14 +39,13 @@ src
 	services
 		auth
 			index.js
-    store
-    styleConstants
+	store
+	styleConstants
 		index.js
 		dimensions.js
 		colors.js
 		fonts.js
 	utils
-		Index.js
 	App.js
 ```
 
