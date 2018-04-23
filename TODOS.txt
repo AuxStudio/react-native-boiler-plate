@@ -1,11 +1,14 @@
-ESLint
+Restructure app
+    Wrappers?
+Rewrite all code according to style guide
+Setup guide should be separate doc
+    Update README to include this
+    Update README to include style guide
+Add a CHANGELOG
 Investigate TypeScript
 Fastlane
 CodePush
 Testing
-Restructure app
-Rewrite all code according to style guide
-Setup guide should be separate doc
 
 Update userAuth to work without anonymous => linkUser?
 Rework forgot password
