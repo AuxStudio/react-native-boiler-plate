@@ -38,7 +38,7 @@ src
 		auth.js
 	services
 		auth
-			index.js
+		index.js
 	store
 	styleConstants
 		index.js
