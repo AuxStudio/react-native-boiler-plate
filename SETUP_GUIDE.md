@@ -1,58 +1,60 @@
-1. INITIALISE
-   react-native init PROJECT_NAME
-   TODO: Fix iOS build error after this step?
+# React-native style guide
 
-2. SETUP GIT
-   Setup git repo
-   cd PROJECT_NAME
-   git init
-   git remote add origin GIT_REPO_URL
-   git add .
-   git commit -m "Initialise Project"
-   git push -u origin master
+1.  INITIALISE
+    react-native init PROJECT_NAME
+    TODO: Fix iOS build error after this step?
 
-3. UPDATE DISPLAY AND PACKAGE NAME\*
-   npm install -g react-native-rename
-   react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
-   in Xcode, Project => General => Bundle Identifier = NEW_PACKAGE_NAME
+2.  SETUP GIT
+    Setup git repo
+    cd PROJECT_NAME
+    git init
+    git remote add origin GIT_REPO_URL
+    git add .
+    git commit -m "Initialise Project"
+    git push -u origin master
 
-4. ADD REFERENCE TO ANDROID SDK PATH
-   Create local.properties in ./android
-   ndk.dir=PATH*TO_NDK_BUNDLE
-   sdk.dir=PATH_TO_SDK
-   /*
-   ndk.dir=/home/shaun/Android/Sdk/ndk-bundle
-   sdk.dir=/home/shaun/Android/Sdk
-   \_/
+3.  UPDATE DISPLAY AND PACKAGE NAME\*
+    npm install -g react-native-rename
+    react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
+    in Xcode, Project => General => Bundle Identifier = NEW_PACKAGE_NAME
 
-5. GENERATE ANDROID APP SIGNING (do this at the beginning so you can get your release key for facebook and google sign in)
-   keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-   Enter a password and your details
-   Move my-release-key.keystore to ./android/app/
-   In ./android/gradle.properties, Add
-   MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
-   MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-   MYAPP_RELEASE_STORE_PASSWORD=**\***
-   MYAPP_RELEASE_KEY_PASSWORD=**\***
-   In ./android/app/build.gradle, Add (in android.defaultConfig)
-   signingConfigs {
-   release {
-   if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-   storeFile file(MYAPP_RELEASE_STORE_FILE)
-   storePassword MYAPP_RELEASE_STORE_PASSWORD
-   keyAlias MYAPP_RELEASE_KEY_ALIAS
-   keyPassword MYAPP_RELEASE_KEY_PASSWORD
-   }
-   }
-   }
-   {in android.buildTypes.release}
-   signingConfig signingConfigs.release
-   *TO TEST: cd android && ./gradlew assembleRelease
+4.  ADD REFERENCE TO ANDROID SDK PATH
+    Create local.properties in ./android
+    ndk.dir=PATH*TO_NDK_BUNDLE
+    sdk.dir=PATH_TO_SDK
+    /*
+    ndk.dir=/home/shaun/Android/Sdk/ndk-bundle
+    sdk.dir=/home/shaun/Android/Sdk
+    \_/
 
-6. INSTALL DEPENDENCIES (NOTE: Some of these are optional)
-   yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs axios
+5.  GENERATE ANDROID APP SIGNING (do this at the beginning so you can get your release key for facebook and google sign in)
+    keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+    Enter a password and your details
+    Move my-release-key.keystore to ./android/app/
+    In ./android/gradle.properties, Add
+    MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+    MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+    MYAPP_RELEASE_STORE_PASSWORD=**\***
+    MYAPP_RELEASE_KEY_PASSWORD=**\***
+    In ./android/app/build.gradle, Add (in android.defaultConfig)
+    signingConfigs {
+    release {
+    if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+    storeFile file(MYAPP_RELEASE_STORE_FILE)
+    storePassword MYAPP_RELEASE_STORE_PASSWORD
+    keyAlias MYAPP_RELEASE_KEY_ALIAS
+    keyPassword MYAPP_RELEASE_KEY_PASSWORD
+    }
+    }
+    }
+    {in android.buildTypes.release}
+    signingConfig signingConfigs.release
+    \*TO TEST: cd android && ./gradlew assembleRelease
 
-7. LINK AND SETUP DEPENDENCIES (ANDROID)
+6.  INSTALL DEPENDENCIES (NOTE: Some of these are optional)
+    yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs axios
+
+7.  LINK AND SETUP DEPENDENCIES (ANDROID)
 
         react-native-vector-icons
             ./android/app/build.gradle (at bottom of file add)
@@ -193,7 +195,7 @@
         react-native-fs
             react-native link react-native-fs
 
-8. LINK AND SETUP DEPENDENCIES (IOS)
+8.  LINK AND SETUP DEPENDENCIES (IOS)
 
     Add Cocoapods
     cd ios
@@ -270,24 +272,24 @@
 
     react-native-image-picker
     react-native link react-native-image-picker (unless done in android setup)
-    *Sometimes this does not work, in this case:
-        Drag node_modules/react-native-image-picker/ios/*.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
+    _Sometimes this does not work, in this case:
+    Drag node_modules/react-native-image-picker/ios/_.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
     For iOS 10+, Add the NSPhotoLibraryUsageDescription, NSCameraUsageDescription, and NSMicrophoneUsageDescription (if allowing video) keys to your Info.plist with strings describing why your app needs these permissions. Note: You will get a SIGABRT crash if you don't complete this step
 
     react-native-image-resizer
     react-native link react-native-image-resizer (unless done in android setup)
-    *Sometimes this does not work, in this case:
-        Drag node_modules/react-native-image-resizer/ios/*.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
+    _Sometimes this does not work, in this case:
+    Drag node_modules/react-native-image-resizer/ios/_.workspace into iOS project in Xcode and add libRNX.a to Link Binary ...
 
     react-native-fs
     react-native link react-native-fs (unless done in android setup)
 
-9. SET SDK VERSION (ANDROID)
-   In ./android/app/build.gradle
-   android.compileSdkVersion => 25
-   android.buildToolsVersion => "25.0.3"
-   android.defaultConfig.targetSdkVersion => 25
-   depenencies (com.android.support) => 25.0.0
+9.  SET SDK VERSION (ANDROID)
+    In ./android/app/build.gradle
+    android.compileSdkVersion => 25
+    android.buildToolsVersion => "25.0.3"
+    android.defaultConfig.targetSdkVersion => 25
+    depenencies (com.android.support) => 25.0.0
 
 10. COPY THE SOURCE FILES
     git clone https://github.com/shaunsaker/react-native-boilerplate.git src

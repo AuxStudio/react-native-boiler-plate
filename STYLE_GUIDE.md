@@ -12,7 +12,7 @@ This is a working guide and is not set in stone. If you have any suggestions/imp
 
 ## Code linting
 
-To enforce consistency, we use Prettier and ESLint. Each project should contain our generic config files for these tools which otherwise can be found [here](../prettierrc) and [here](./eslintrc.json).
+To enforce consistency, we use Prettier and ESLint. Each project should contain our generic config files for these tools which otherwise can be found [here](./.prettierrc) and [here](./.eslintrc.json).
 
 ## Directory structure:
 
