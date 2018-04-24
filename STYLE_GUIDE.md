@@ -12,7 +12,12 @@ This is a working guide and is not set in stone. If you have any suggestions/imp
 
 ## Code linting
 
-To enforce consistency, we use Prettier and ESLint. Each project should contain our generic config files for these tools which otherwise can be found [here](./.prettierrc) and [here](./.eslintrc.json).
+To enforce consistency, we use Prettier and ESLint. Each project should contain our generic config files for these tools which otherwise can be found [here](./.prettierrc) and [here](./.eslintrc.json). Copy these to your root folder.
+
+To set these tools up with VSCode:
+
+* Prettier (easy, install the VSCode extension and enable formatOnSave in userSettings)
+* [ESLint](https://github.com/airbnb/javascript/issues/1589#issuecomment-344097023)
 
 ## Directory structure:
 

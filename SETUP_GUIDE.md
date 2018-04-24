@@ -294,7 +294,7 @@ compile(project(":react-native-google-signin")){
 compile 'com.google.android.gms:play-services-auth:11.4.2'
 ```
 
-Add web client id (TODO: found where?) to **./src/config/index.js**.
+Add web client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/index.js**.
 
 Add key hashes to Firebase app (these are encrypted differently to the Facebook key hashes so these steps are necessary):
 
@@ -461,7 +461,7 @@ sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
 }
 ```
 
-Add Firebase iOS client id (TODO: found where?) to **./src/config/index.js**.
+Add Firebase iOS client id (which can be found in your GoogleServices-Info.plist - under "CLIENT_ID") to **./src/config/index.js**.
 
 #### react-native-permissions
 
@@ -482,18 +482,18 @@ No extra steps necessary (linked in Android setup).
 
 #### react-native-image-picker
 
-If link command did not work in android setup, link manually:
+If link command did not work in android setup, [link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html) manually:
 
-* Drag **./node_modules/react-native-image-picker/ios/\*.workspace** (TODO: filename) into XCode project.
-* Add libRNX.a (TODO: filename) to Link Binary with Libraries.
+* Drag **./node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj** into XCode project.
+* Add libRNImagePicker.a to Link Binary with Libraries.
 * For iOS 10+, add the NSPhotoLibraryUsageDescription, NSCameraUsageDescription, and NSMicrophoneUsageDescription (if allowing video) keys to your Info.plist with strings describing why your app needs these permissions. Note: You will get a SIGABRT crash if you don't complete this step
 
 #### react-native-image-resizer
 
-If link command did not work in android setup, link manually:
+If link command did not work in android setup, [link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html) manually:
 
-* Drag **./node_modules/react-native-image-resizer/ios/\*.workspace** (TODO: filename) into XCode project.
-* Add libRNX.a (TODO: filename) to Link Binary with Libraries.
+* Drag **./node_modules/react-native-image-resizer/ios/RNImageResizer.xcodeproj** into XCode project.
+* Add libRNImageResizer.a to Link Binary with Libraries.
 
 #### react-native-fs
 
@@ -505,13 +505,25 @@ No extra steps necessary (linked in Android setup).
 
 Android only.
 
-In **./android/app/build.gradle** (in TODO: what object):
+In **./android/app/build.gradle** (in android object) (replace appropriately):
 
 ```
-android.compileSdkVersion: 25
-android.buildToolsVersion: "25.0.3"
+compileSdkVersion: 25
+buildToolsVersion: "25.0.3"
 android.defaultConfig.targetSdkVersion: 25
 depenencies (com.android.support): 25.0.0
+```
+
+Same file as above (in android.defaultConfig object):
+
+```
+targetSdkVersion: 25
+```
+
+Same file as above (in dependencies object):
+
+```
+compile "com.android.support:appcompat-v7:25.0.0"
 ```
 
 ## 9. Copy the source files
@@ -560,13 +572,22 @@ Remove what you don't need.
 
 * Anonymous
 * Facebook
-* Google (TODO: you may need to download a new google-services.json and GoogleService-Info.plist)
+* Google (download and replace new google-services.json and GoogleService-Info.plist)
 * Email
 * Phone
 
-TODOS:
+## 12. Add your custom fonts
 
-* Adding custom icons
-* Prettier setup
-* ESLint setup
+Optional.
+
+### Android
+
+Copy the fonts to **./android/app/src/assets/fonts**.
+
+### iOS
+
+Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts-to-react-native-b266b41bff7f).
+
+## TODOS:
+
 * Storybook setup

@@ -1,6 +1,4 @@
 SETUP_GUIDE
-    Refine iOS steps
-    Refine all
     TODOS
 Restructure app
     Wrappers?
