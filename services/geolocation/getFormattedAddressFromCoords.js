@@ -10,7 +10,7 @@ export default function getFormattedAddressFromCoordinates(action) {
       })
       .catch((error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       });

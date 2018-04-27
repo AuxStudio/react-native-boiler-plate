@@ -23,21 +23,21 @@ export default function getUserCredentialFromGoogle() {
               })
               .catch((error) => {
                 resolve({
-                  payload: error,
+                  payload: new Error(error),
                   error: true,
                 });
               });
           })
           .catch((error) => {
             resolve({
-              payload: error,
+              payload: new Error(error),
               error: true,
             });
           });
       })
       .catch((error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       });

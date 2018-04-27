@@ -23,7 +23,7 @@ export default function getUserCredentialFromFacebook() {
             })
             .catch((error) => {
               resolve({
-                payload: error,
+                payload: new Error(error),
                 error: true,
               });
             });
@@ -31,7 +31,7 @@ export default function getUserCredentialFromFacebook() {
       },
       (error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       },

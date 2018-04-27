@@ -8,7 +8,7 @@ export default function getUserLocation() {
       },
       (error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       },

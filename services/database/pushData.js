@@ -19,7 +19,7 @@ export default function pushData(action) {
       })
       .catch((error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       });

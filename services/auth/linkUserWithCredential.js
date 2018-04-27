@@ -12,7 +12,7 @@ export default function linkUserWithCredential(action) {
       })
       .catch((error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       });

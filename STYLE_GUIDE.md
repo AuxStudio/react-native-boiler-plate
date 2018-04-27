@@ -71,4 +71,3 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 * Presentational components should not contain any business logic.
 * Presentational components should be wired up to Storybook.
 * Components should be able to manage state internally where possible to allow for testing in Storybook.
-* Services should as far as possible return whatever they generate as the payload unless errors are received. In that case, you can attach an error: true key value pair.

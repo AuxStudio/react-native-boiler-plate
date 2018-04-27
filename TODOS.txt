@@ -1,4 +1,6 @@
 Rewrite all code according to style guide
+Add services/http/post
+Add storage/ (see other projects)
 Create ErrorBoundary component
 System messages management
 FileSystem sagas and services based on new RN

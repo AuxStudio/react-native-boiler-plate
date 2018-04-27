@@ -12,7 +12,7 @@ export default function signInUserAnonymously() {
       })
       .catch((error) => {
         resolve({
-          payload: error,
+          payload: new Error(error),
           error: true,
         });
       });

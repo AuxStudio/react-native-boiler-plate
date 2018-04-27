@@ -16,7 +16,7 @@ export default function listenForData(ref, callback) {
         },
         (error) => {
           resolve({
-            payload: error,
+            payload: new Error(error),
             error: true,
           });
         },

@@ -11,9 +11,9 @@ const propTypes = {};
 const defaultProps = {};
 
 const ExampleContainer = ({ someProp }) => {
-  const someLogicOnProp = someProp;
+  const newProp = someProp; // do some business logic
 
-  return <Example someProp={someLogicOnProp} />;
+  return <Example someProp={newProp} />;
 };
 
 ExampleContainer.propTypes = propTypes;
