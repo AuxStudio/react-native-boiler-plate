@@ -1,9 +1,9 @@
 import getUserLocation from './getUserLocation';
 import getFormattedAddressFromCoords from './getFormattedAddressFromCoords';
 
-const database = {
+const geolocation = {
   getUserLocation,
   getFormattedAddressFromCoords,
 };
 
-export default database;
+export default geolocation;
