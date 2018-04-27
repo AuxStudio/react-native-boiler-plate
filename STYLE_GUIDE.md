@@ -29,11 +29,13 @@ src
 	icons
 		index.js
 	components
-		Button
-			index.js
+		Example
+			Example.js	// presentational component
+			ExampleContainer.js	// business logic (optional)
+			index.js	// import and export
 			styles.js
 	config
-	containers
+	scenes
 		Home.js
 	navigation
 	reducers
@@ -54,6 +56,10 @@ src
 	App.js
 ```
 
+## Redux actions
+
+We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
+
 ## Save hair, read these tips:
 
 * Do not use arrays in Firebase. Use objects indexed by IDs.
@@ -65,3 +71,4 @@ src
 * Presentational components should not contain any business logic.
 * Presentational components should be wired up to Storybook.
 * Components should be able to manage state internally where possible to allow for testing in Storybook.
+* Services should as far as possible return whatever they generate as the payload unless errors are received. In that case, you can attach an error: true key value pair.

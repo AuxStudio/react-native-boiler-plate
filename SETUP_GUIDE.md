@@ -261,6 +261,8 @@ In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags
 
 Add [Facebook](https://developers.facebook.com/apps/) app.
 
+`NOTE: There is a toggle button at the top of the page that will default to development mode. When in production, switch this to live (you will need a privacy policy link). Otherwise your production build facebook logins will fail with all other users who are not admins.`
+
 Add app name and main activity name to Facebook app.
 
 Add key hashes to Facebook app:

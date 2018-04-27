@@ -1,88 +1,88 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import config from "../config";
-import Analytics from "../analytics";
+import config from '../config';
+import Analytics from '../analytics';
 
 export class HighLatencyDetector extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.startTimer = this.startTimer.bind(this);
-        this.clearTimer = this.clearTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.clearTimer = this.clearTimer.bind(this);
 
-        this.timer;
-        this.latencyTimeout = 5;
+    this.timer;
+    this.latencyTimeout = 5;
 
-        this.state = {
-            time: 0,
-        };
+    this.state = {
+      time: 0,
+    };
+  }
+
+  static get propTypes() {
+    return {
+      loading: PropTypes.bool,
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.loading) {
+      this.startTimer();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.loading && !prevProps.loading) {
+      // New loading event started
+      this.startTimer();
+    } else if (!this.props.loading && prevProps.loading) {
+      // Loading event ended
+      this.clearTimer();
     }
 
-    static get propTypes() {
-        return {
-            loading: PropTypes.bool,
-        };
+    // Check to see if time > config.latencyTimeout and dispatch an error event if so
+    if (this.state.time && this.state.time > this.latencyTimeout) {
+      Analytics.logEvent('network_high_latency');
+
+      this.props.dispatch({
+        type: 'SET_MESSAGE',
+        errorType: 'NETWORK',
+        message: 'Slow network detected.',
+        iconName: 'error-outline',
+      });
+
+      this.clearTimer();
     }
+  }
 
-    componentDidMount() {
-        if (this.props.loading) {
-            this.startTimer();
-        }
-    }
+  startTimer() {
+    this.timer = null;
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.loading && !prevProps.loading) {
-            // New loading event started
-            this.startTimer();
-        } else if (!this.props.loading && prevProps.loading) {
-            // Loading event ended
-            this.clearTimer();
-        }
+    this.timer = setInterval(() => {
+      this.setState({
+        time: (this.state.time += 1),
+      });
+    }, 1000);
+  }
 
-        // Check to see if time > config.latencyTimeout and dispatch an error event if so
-        if (this.state.time && this.state.time > this.latencyTimeout) {
-            Analytics.logEvent("network_high_latency");
+  clearTimer() {
+    clearInterval(this.timer);
 
-            this.props.dispatch({
-                type: "SET_ERROR",
-                errorType: "NETWORK",
-                message: "Slow network detected.",
-                iconName: "error-outline",
-            });
+    this.setState({
+      time: 0,
+    });
+  }
 
-            this.clearTimer();
-        }
-    }
-
-    startTimer() {
-        this.timer = null;
-
-        this.timer = setInterval(() => {
-            this.setState({
-                time: (this.state.time += 1),
-            });
-        }, 1000);
-    }
-
-    clearTimer() {
-        clearInterval(this.timer);
-
-        this.setState({
-            time: 0,
-        });
-    }
-
-    render() {
-        return this.props.children;
-    }
+  render() {
+    return this.props.children;
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        loading: state.main.appState.loading,
-    };
+  return {
+    loading: state.main.appState.loading,
+  };
 }
 
 export default connect(mapStateToProps)(HighLatencyDetector);
