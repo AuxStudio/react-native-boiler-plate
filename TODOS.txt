@@ -1,10 +1,7 @@
-Reducers
-    Use action.payload
-Sagas
-    Move images to utils
 Rewrite all code according to style guide
 Create ErrorBoundary component
 System messages management
+FileSystem sagas and services based on new RN
 Add a CHANGELOG
 SETUP_GUIDE
     Storybook

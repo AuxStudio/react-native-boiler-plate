@@ -22,9 +22,6 @@ import { getData, updateData, setData, pushData, deleteData } from './database';
 // Images
 import { handleImage } from './images';
 
-// File System
-import { deleteFile } from './fileSystem';
-
 // HTTP
 import { get } from './http';
 
@@ -54,9 +51,6 @@ export default function* sagas() {
 
     // Images
     fork(takeLatest, 'handleImage', handleImage),
-
-    // File System
-    fork(takeEvery, 'deleteFile', deleteFile),
 
     // HTTP
     fork(takeLatest, 'get', get),
