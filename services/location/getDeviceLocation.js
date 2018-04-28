@@ -1,4 +1,4 @@
-export default function getUserLocation() {
+export default function getDeviceLocation() {
   return new Promise((resolve) => {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {

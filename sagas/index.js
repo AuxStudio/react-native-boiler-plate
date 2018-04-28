@@ -14,7 +14,7 @@ import {
 } from './auth';
 
 // Location
-import { getUserLocation, getFormattedAddressFromCoordinates } from './location';
+import { getDeviceLocation, getFormattedAddressFromCoordinates } from './location';
 
 // Database
 import { getData, updateData, setData, pushData, deleteData } from './database';
@@ -39,7 +39,7 @@ export default function* sagas() {
     fork(takeLatest, 'signOutUser', signOutUser),
 
     // Location
-    fork(takeLatest, 'getUserLocation', getUserLocation),
+    fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
     fork(takeLatest, 'getFormattedAddressFromCoordinates', getFormattedAddressFromCoordinates),
 
     // Database

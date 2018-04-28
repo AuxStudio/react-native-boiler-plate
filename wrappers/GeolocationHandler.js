@@ -9,7 +9,7 @@ export class GeolocationHandler extends React.Component {
     super(props);
 
     this.getLocationPermission = this.getLocationPermission.bind(this);
-    this.getUserLocation = this.getUserLocation.bind(this);
+    this.getDeviceLocation = this.getDeviceLocation.bind(this);
   }
 
   static get propTypes() {
@@ -25,7 +25,7 @@ export class GeolocationHandler extends React.Component {
   }
 
   getLocationPermission() {
-    Permissions.handlePermission('location', this.getUserLocation(), () => {
+    Permissions.handlePermission('location', this.getDeviceLocation(), () => {
       this.props.dispatch({
         type: 'SET_MESSAGE',
         errorType: 'PERMISSIONS',
@@ -35,9 +35,9 @@ export class GeolocationHandler extends React.Component {
     });
   }
 
-  getUserLocation() {
+  getDeviceLocation() {
     this.props.dispatch({
-      type: 'getUserLocation',
+      type: 'getDeviceLocation',
     });
   }
 
