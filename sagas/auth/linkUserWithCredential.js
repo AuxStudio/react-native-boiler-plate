@@ -5,38 +5,33 @@ import { auth } from '../../services';
 export default function* linkUserWithCredential(action) {
   try {
     if (firebase.auth().currentUser) {
-      const { payload } = yield call(auth.linkUserWithCredential, action);
+      const response = yield call(auth.linkUserWithCredential, action);
 
       if (__DEV__) {
-        console.log('linkUserWithCredential', payload);
+        console.log('linkUserWithCredential', response);
       }
 
-      yield all([
-        put({
-          type: 'updateData',
-          payload,
-          meta: {
-            node: `users/ ${payload.message.uid}`,
-          },
-        }),
-        put({
-          type: 'SIGN_IN_USER',
-          payload,
-        }),
-      ]);
+      // TODO: yield next actions if there
     } else {
-      // TODO: missing try catch?
-      // sign in anonymously
-      const { payload } = yield call(auth.signInUserAnonymously, action);
+      // User is logged out and needs to sign in again
+      try {
+        const response = yield call(auth.signInUserAnonymously, action);
 
-      if (__DEV__) {
-        console.log('signInUserAnonymously', payload);
+        if (__DEV__) {
+          console.log('signInUserAnonymously', response);
+        }
+
+        yield put({
+          type: 'linkUserWithCredential',
+          payload: response,
+        });
+      } catch (error) {
+        yield put({
+          type: 'SET_MESSAGE',
+          payload: new Error(error),
+          error: true,
+        });
       }
-
-      yield put({
-        type: 'linkUserWithCredential',
-        payload,
-      });
     }
   } catch (error) {
     if (
@@ -46,7 +41,7 @@ export default function* linkUserWithCredential(action) {
       // Sign in with provider instead
       yield put({
         type: 'signInUserWithCredential',
-        credential: action.credential,
+        payload: action.payload.credential,
       });
     } else {
       yield put({

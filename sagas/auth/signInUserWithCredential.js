@@ -4,15 +4,15 @@ import config from '../../config';
 
 export default function* signInUserWithCredential(action) {
   try {
-    const { payload } = yield call(auth.signInUserWithCredential, action);
+    const response = yield call(auth.signInUserWithCredential, action);
 
     if (__DEV__) {
-      console.log('signInUserWithCredentialResponse', payload);
+      console.log('signInUserWithCredentialResponse', response);
     }
 
     yield put({
       type: 'SIGN_IN_USER',
-      payload,
+      payload: response,
     });
   } catch (error) {
     if (error.message.code === 'auth/account-exists-with-different-credential') {

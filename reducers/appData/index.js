@@ -7,7 +7,7 @@ export default function appDataReducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SET_DATA':
       newState = utils.cloneObject(state);
-      newState.appData[action.meta.node] = action.payload;
+      newState.appData[action.payload.node] = action.payload.data;
       newState.appState.loading = false;
       newState.appState.refreshing = false;
       return newState;

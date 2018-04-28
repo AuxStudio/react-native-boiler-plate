@@ -2,16 +2,16 @@ import firebase from 'react-native-firebase';
 
 export default function uploadFile(action) {
   return new Promise((resolve, reject) => {
-    const ref = action.meta.node;
+    const ref = action.payload.node;
 
     if (__DEV__) {
-      console.log(`Uploading file to ${ref}`);
+      console.log(`Uploading file: ${ref}, ${action.payload}`);
     }
 
     firebase
       .storage()
       .ref(ref)
-      .putFile(action.meta.filePath)
+      .putFile(action.payload.filePath)
       .on(
         'state_changed',
         () => {
@@ -23,9 +23,7 @@ export default function uploadFile(action) {
           reject(new Error(error));
         },
         (uploadedFile) => {
-          resolve({
-            payload: uploadedFile.downloadURL,
-          });
+          resolve(uploadedFile);
         },
       );
   });

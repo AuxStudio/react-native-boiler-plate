@@ -2,13 +2,15 @@ import firebase from 'react-native-firebase';
 
 export default function linkUserWithCredential(action) {
   return new Promise((resolve, reject) => {
+    if (__DEV__) {
+      console.log(`Link user with credential: ${action.payload}`);
+    }
+
     firebase
       .auth()
-      .currentUser.linkWithCredential(action.credential)
+      .currentUser.linkWithCredential(action.payload)
       .then((user) => {
-        resolve({
-          payload: user,
-        });
+        resolve(user);
       })
       .catch((error) => {
         reject(new Error(error));

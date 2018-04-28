@@ -3,16 +3,16 @@ import { auth } from '../../services';
 
 export default function* getUserAuth() {
   try {
-    const { payload } = yield call(auth.getUserAuth);
+    const response = yield call(auth.getUserAuth);
 
     if (__DEV__) {
-      console.log('getUserAuth', payload);
+      console.log('getUserAuth', response);
     }
 
-    if (payload) {
+    if (response) {
       yield put({
         type: 'SIGN_IN_USER',
-        payload,
+        payload: response,
       });
     } else {
       yield put({

@@ -3,16 +3,16 @@ import { analytics } from '../../services';
 
 export default function* logEvent(action) {
   try {
-    const { payload } = yield call(analytics.logEvent);
+    const response = yield call(analytics.logEvent);
 
     if (__DEV__) {
-      console.log('logEvent', payload);
+      console.log('logEvent', response);
     }
 
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
-        payload,
+        payload: response,
       });
     }
   } catch (error) {

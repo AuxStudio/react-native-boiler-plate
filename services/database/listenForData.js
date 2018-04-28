@@ -1,11 +1,11 @@
 import firebase from 'react-native-firebase';
 
 export default function listenForData(ref, callback) {
-  if (__DEV__) {
-    console.log(`Listening at ${ref}`);
-  }
-
   return new Promise((resolve, reject) => {
+    if (__DEV__) {
+      console.log(`Listening at ${ref}`);
+    }
+
     firebase
       .database()
       .ref(ref)

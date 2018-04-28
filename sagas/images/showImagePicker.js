@@ -3,15 +3,16 @@ import { images } from '../../services';
 
 export default function* showImagePicker(action) {
   try {
-    const { payload } = yield call(images.showImagePicker);
+    const response = yield call(images.showImagePicker);
+
     if (__DEV__) {
-      console.log('showImagePicker', payload);
+      console.log('showImagePicker', response);
     }
 
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
-        payload,
+        payload: response,
       });
     }
   } catch (error) {

@@ -3,10 +3,10 @@ import { database } from '../../services';
 
 export default function* setData(action) {
   try {
-    const { payload } = yield call(database.setData);
+    const response = yield call(database.setData);
 
     if (__DEV__) {
-      console.log('setData', payload);
+      console.log('setData', response);
     }
 
     if (action.nextAction) {

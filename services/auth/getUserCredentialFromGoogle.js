@@ -4,6 +4,10 @@ import config from '../../config';
 
 export default function getUserCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
+    if (__DEV__) {
+      console.log('Getting user credential from Google');
+    }
+
     GoogleSignin.hasPlayServices({ autoResolve: true })
       .then(() => {
         GoogleSignin.configure({
@@ -17,9 +21,7 @@ export default function getUserCredentialFromGoogle() {
                   user.accessToken,
                 );
 
-                resolve({
-                  payload: credential,
-                });
+                resolve(credential);
               })
               .catch((error) => {
                 reject(new Error(error));

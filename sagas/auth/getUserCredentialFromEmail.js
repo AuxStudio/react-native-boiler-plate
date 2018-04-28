@@ -3,17 +3,15 @@ import { auth } from '../../services';
 
 export default function* getUserCredentialFromEmail() {
   try {
-    const { payload } = yield call(auth.getUserCredentialFromEmail);
+    const response = yield call(auth.getUserCredentialFromEmail);
 
     if (__DEV__) {
-      console.log('getUserCredentialFromEmail', payload);
+      console.log('getUserCredentialFromEmail', response);
     }
 
     yield put({
       type: 'linkUserWithCredential',
-      payload: {
-        ...payload,
-      },
+      payload: response,
     });
   } catch (error) {
     yield put({

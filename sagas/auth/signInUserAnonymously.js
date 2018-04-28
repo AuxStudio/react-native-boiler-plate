@@ -3,15 +3,15 @@ import { auth } from '../../services';
 
 export default function* signInUserAnonymously() {
   try {
-    const { payload } = yield call(auth.signInUserAnonymously);
+    const response = yield call(auth.signInUserAnonymously);
 
     if (__DEV__) {
-      console.log('signInUserAnonymously', payload);
+      console.log('signInUserAnonymously', response);
     }
 
     yield put({
       type: 'SIGN_IN_USER',
-      payload,
+      payload: response,
     });
   } catch (error) {
     yield put({

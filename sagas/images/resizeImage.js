@@ -3,15 +3,16 @@ import { images } from '../../services';
 
 export default function* resizeImage(action) {
   try {
-    const { payload } = yield call(images.resizeImage);
+    const response = yield call(images.resizeImage);
+
     if (__DEV__) {
-      console.log('resizeImage', payload);
+      console.log('resizeImage', response);
     }
 
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
-        payload,
+        payload: response,
       });
     }
   } catch (error) {

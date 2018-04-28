@@ -1,10 +1,12 @@
 export default function get(action) {
   return new Promise((resolve, reject) => {
-    fetch(action.meta.url)
+    if (__DEV__) {
+      console.log(`HTTP get at: ${action.payload.url}`);
+    }
+
+    fetch(action.payload.url)
       .then((response) => {
-        resolve({
-          payload: response,
-        });
+        resolve(response);
       })
       .catch((error) => {
         reject(new Error(error));

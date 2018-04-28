@@ -3,10 +3,10 @@ import { auth } from '../../services';
 
 export default function* signOutUser() {
   try {
-    const { payload } = yield call(auth.signOutUser);
+    const response = yield call(auth.signOutUser);
 
     if (__DEV__) {
-      console.log('signOutUserResponse', payload);
+      console.log('signOutUserResponse', response);
     }
 
     yield put({

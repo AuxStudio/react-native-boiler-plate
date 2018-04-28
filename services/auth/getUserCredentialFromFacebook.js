@@ -4,6 +4,10 @@ import config from '../../config';
 
 export default function getUserCredentialFromFacebook() {
   return new Promise((resolve, reject) => {
+    if (__DEV__) {
+      console.log('Getting user credential from facebook');
+    }
+
     LoginManager.logOut();
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       (result) => {
@@ -14,9 +18,7 @@ export default function getUserCredentialFromFacebook() {
             .then((user) => {
               const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
 
-              resolve({
-                payload: credential,
-              });
+              resolve(credential);
             })
             .catch((error) => {
               reject(new Error(error));

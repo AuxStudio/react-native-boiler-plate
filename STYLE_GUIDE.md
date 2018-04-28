@@ -76,7 +76,7 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 ### Services and sagas
 
 * Every service should have a saga.
-* If you're going to couple sagas (see ./sagas/permissions/checkAndRequestPermissions), that's okay, but make sure the individual sagas are available individually (ie. checkPermission and requestPermission are in separate files).
+* If you're going to couple sagas (see ./sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
 * Sagas should not implicitly yield (put) an action. Use the nextAction convention (see all sagas). This allows for much better customisablility when calling sagas.
 
 ### Firebase

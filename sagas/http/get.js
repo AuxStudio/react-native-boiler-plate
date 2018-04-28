@@ -3,16 +3,16 @@ import { http } from '../../services';
 
 export default function* get(action) {
   try {
-    const { payload } = yield call(http.get);
+    const response = yield call(http.get);
 
     if (__DEV__) {
-      console.log('get', payload);
+      console.log('get', response);
     }
 
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
-        payload,
+        payload: response,
       });
     }
   } catch (error) {

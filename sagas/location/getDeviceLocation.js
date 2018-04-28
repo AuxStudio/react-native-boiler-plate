@@ -3,15 +3,15 @@ import { location } from '../../services';
 
 export default function* getDeviceLocation() {
   try {
-    const { payload } = yield call(location.getDeviceLocation);
+    const response = yield call(location.getDeviceLocation);
 
     if (__DEV__) {
-      console.log('getDeviceLocation', payload);
+      console.log('getDeviceLocation', response);
     }
 
     yield put({
       type: 'SET_DEVICE_LOCATION',
-      payload,
+      payload: response,
     });
   } catch (error) {
     yield put({

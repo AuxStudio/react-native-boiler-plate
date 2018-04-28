@@ -3,17 +3,15 @@ import { auth } from '../../services';
 
 export default function* getUserCredentialFromGoogle() {
   try {
-    const { payload } = yield call(auth.getUserCredentialFromGoogle);
+    const response = yield call(auth.getUserCredentialFromGoogle);
 
     if (__DEV__) {
-      console.log('getUserCredentialFromGoogle', payload);
+      console.log('getUserCredentialFromGoogle', response);
     }
 
     yield put({
       type: 'linkUserWithCredential',
-      payload: {
-        ...payload,
-      },
+      payload: response,
     });
   } catch (error) {
     yield put({

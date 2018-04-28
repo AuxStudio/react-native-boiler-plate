@@ -3,15 +3,16 @@ import { images } from '../../services';
 
 export default function* cropImage(action) {
   try {
-    const { payload } = yield call(images.cropImage);
+    const response = yield call(images.cropImage);
+
     if (__DEV__) {
-      console.log('cropImage', payload);
+      console.log('cropImage', response);
     }
 
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
-        payload,
+        payload: response,
       });
     }
   } catch (error) {

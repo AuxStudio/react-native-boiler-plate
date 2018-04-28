@@ -1,21 +1,19 @@
 import firebase from 'react-native-firebase';
 
 export default function updateData(action) {
-  const ref = action.meta.node;
-
-  if (__DEV__) {
-    console.log(`Dispatching get at ${ref}`);
-  }
-
   return new Promise((resolve, reject) => {
+    const ref = action.payload.node;
+
+    if (__DEV__) {
+      console.log(`Dispatching get at ${ref}`);
+    }
+
     firebase
       .database()
       .ref(ref)
       .update(action.payload)
       .then(() => {
-        resolve({
-          payload: true,
-        });
+        resolve(true);
       })
       .catch((error) => {
         reject(new Error(error));
