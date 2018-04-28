@@ -43,7 +43,15 @@ ndk.dir=PATH_TO_NDK_BUNDLE
 sdk.dir=PATH_TO_SDK
 ```
 
-## 5. Generate android app signing
+## 5. Make Android builds waaay smaller
+
+In **./android/app/build.gradle**, change:
+
+```
+def enableSeparateBuildPerCPUArchitecture = true
+```
+
+## 6. Generate android app signing
 
 ```
 keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
@@ -83,21 +91,33 @@ In the same file add (in android.buildTypes.release object):
 signingConfig signingConfigs.release
 ```
 
-## 6. Set SDK version
+## 7. Set android versioning
 
-Android only.
+In **./android/build.gradle**, add (to buildscript.repositories object and to all projects.repositories):
+
+```
+google()
+```
+
+Same file as above, delete (from allprojects.repositories):
+
+```
+maven {
+    url 'https://maven.google.com'
+}
+```
 
 In **./android/app/build.gradle** (in android object) (replace as necessary):
 
 ```
-compileSdkVersion: 25
-buildToolsVersion: "25.0.3"
+compileSdkVersion: 27
+buildToolsVersion: "26.0.1"
 ```
 
 Same file as above (in android.defaultConfig object):
 
 ```
-targetSdkVersion: 25
+targetSdkVersion: 27
 ```
 
 Same file as above (in dependencies object):
@@ -106,7 +126,13 @@ Same file as above (in dependencies object):
 compile "com.android.support:appcompat-v7:25.0.0"
 ```
 
-## 7. Install dependencies
+In ** ./android/gradle/gradle-wrapper.properties**, replace:
+
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-4.1-all.zip
+```
+
+## 8. Install dependencies
 
 Remove what you don't need.
 
@@ -114,7 +140,7 @@ Remove what you don't need.
 yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder
 ```
 
-## 8. Link and setup dependencies
+## 9. Link and setup dependencies
 
 ### Android
 
@@ -149,18 +175,23 @@ react-native link react-native-firebase
 From Firebase console, download **google-services.json** to
 ./android/app/
 
-In **./android/build.gradle** add (in buildscript.dependencies):
+In **./android/build.gradle** add (in buildscript.dependencies) (replace as necessary):
 
 ```
+classpath 'com.android.tools.build:gradle:3.0.1'
 classpath 'com.google.gms:google-services:3.1.1'
+```
+
+Same file as above, add (in buildscript.repositories):
+
+```
+google()
 ```
 
 Same file as above add (to allprojects.repositories object):
 
 ```
-maven {
-    url 'https://maven.google.com'
-}
+google()
 ```
 
 In **./android/app/build.gradle** add (at very bottom):
@@ -172,18 +203,18 @@ apply plugin: 'com.google.gms.google-services'
 Same file as above add (to dependencies object) (remove what you don't need):
 
 ```
-compile "com.google.android.gms:play-services-base:11.4.2"
-compile "com.google.firebase:firebase-core:11.4.2"
-compile "com.google.firebase:firebase-analytics:11.4.2"
-compile "com.google.firebase:firebase-auth:11.4.2"
-compile "com.google.firebase:firebase-database:11.4.2"
-compile "com.google.firebase:firebase-storage:11.4.2"
+compile "com.google.android.gms:play-services-base:12.0.1"
+compile "com.google.firebase:firebase-core:12.0.1"
+compile "com.google.firebase:firebase-analytics:12.0.1"
+compile "com.google.firebase:firebase-auth:12.0.1"
+compile "com.google.firebase:firebase-database:12.0.1"
+compile "com.google.firebase:firebase-storage:12.0.1"
 ```
 
 In **./android/app/src/main/java/MainApplication.java** add (at top):
 
 ```
-import io.invertase.firebase.auth.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
@@ -249,6 +280,12 @@ public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
 }
+```
+
+Same file as above remove (from link) (in packages object):
+
+```
+new FBSDKPackage(),
 ```
 
 Same file as above add (in packages object):
@@ -319,7 +356,7 @@ In **./android/app/build.gradle** add (dependencies):
 compile(project(":react-native-google-signin")){
     exclude group: "com.google.android.gms" // very important
 }
-compile 'com.google.android.gms:play-services-auth:11.4.2'
+compile 'com.google.android.gms:play-services-auth:12.0.1'
 ```
 
 #### react-native-permissions
@@ -484,7 +521,7 @@ No extra steps necessary (linked in Android setup).
 
 #### react-native-image-picker
 
-If link command did not work in android setup, [link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html) manually:
+If link command did not work in android setup, [link manually](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
 
 * Drag **./node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj** into XCode project.
 * Add libRNImagePicker.a to Link Binary with Libraries.
@@ -492,7 +529,7 @@ If link command did not work in android setup, [link](https://facebook.github.io
 
 #### react-native-image-resizer
 
-If link command did not work in android setup, [link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html) manually:
+If link command did not work in android setup, [link manually](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
 
 * Drag **./node_modules/react-native-image-resizer/ios/RNImageResizer.xcodeproj** into XCode project.
 * Add libRNImageResizer.a to Link Binary with Libraries.
@@ -512,7 +549,7 @@ import App from "./src/App";
 AppRegistry.registerComponent("PROJECT_NAME", () => App);
 ```
 
-Delete unnecessary files.
+Delete unnecessary files. FIXME: surely there is a better way?
 
 ```
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git

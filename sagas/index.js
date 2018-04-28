@@ -31,7 +31,7 @@ import { get } from './http';
 export default function* sagas() {
   yield all([
     // Analytics
-    fork(takeLatest, 'logEvent', logEvent)
+    fork(takeLatest, 'logEvent', logEvent),
 
     // Auth
     fork(takeLatest, 'getUserAuth', getUserAuth),

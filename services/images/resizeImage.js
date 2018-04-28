@@ -17,8 +17,8 @@ export default function resizeImage(action) {
     ];
 
     ImageResizer.createResizedImage(...imageResizerOptions)
-      .then((resizedImageUri) => {
-        resolve(resizedImageUri);
+      .then(({ uri }) => {
+        resolve(uri);
       })
       .catch((error) => {
         reject(new Error(error));
