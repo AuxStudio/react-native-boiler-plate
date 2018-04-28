@@ -29,11 +29,13 @@ src
 	icons
 		index.js
 	components
-		Button
-			index.js
+		Example
+			Example.js	// presentational component
+			ExampleContainer.js	// business logic (optional)
+			index.js	// import and export
 			styles.js
 	config
-	containers
+	scenes
 		Home.js
 	navigation
 	reducers
@@ -54,14 +56,29 @@ src
 	App.js
 ```
 
+## Redux actions
+
+We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
+
 ## Save hair, read these tips:
 
-* Do not use arrays in Firebase. Use objects indexed by IDs.
-* Wherever possible, use stateless, functional components, e.g. function(props) { return ( <Thing /> )}.
+### Components
+
+* Wherever possible, use stateless, functional components, e.g. function(props) { return ( <View /> )}.
 * If you find yourself rewriting UI code more than once, it should be a component.
 * Do not name your components after part of the state they connect to or the role they play, e.g. GuestProfilePhoto (a circular image) should be called CircularImage to maximise code reuse.
 * The same goes for props, e.g. userImage prop should be named imageSourceURL.
 * Components should only be given the props that they need. Object destructuring is handy for this, e.g. function ({ imagePhotoURL }) { return ( <CircularImage imagePhotoURL={imagePhotoURL} )}
 * Presentational components should not contain any business logic.
-* Presentational components should be wired up to Storybook.
-* Components should be able to manage state internally where possible to allow for testing in Storybook.
+* Presentational components should be wired up to Storybook (TODO).
+* Components should be able to manage state internally where possible to allow for testing in Storybook and unit testing.
+
+### Services and sagas
+
+* Every service should have a saga.
+* If you're going to couple sagas (see ./sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
+* Sagas should not implicitly yield (put) an action. Use the nextAction convention (see all sagas). This allows for much better customisablility when calling sagas.
+
+### Firebase
+
+* Do not use arrays in Firebase. Use objects indexed by IDs.

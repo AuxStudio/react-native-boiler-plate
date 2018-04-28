@@ -1,21 +1,16 @@
-SETUP_GUIDE
-    TODOS
-Restructure app
-    Wrappers?
-Rewrite all code according to style guide
-Setup guide should be separate doc
-    Update README to include this
-    Update README to include style guide
+MERGE INTO MASTER
+
+Refactor wrappers
+    Some of them don't need to be wrappers, they can just be components
+Create ErrorBoundary component
+Error logging to DB component
+System messages management
+FileSystem sagas and services based on new RN
 Add a CHANGELOG
+SETUP_GUIDE
+    Storybook
 Investigate TypeScript
 Fastlane
 CodePush
 Testing
-
-Update userAuth to work without anonymous => linkUser?
-Rework forgot password
-    Need to reset via app
-Phone Auth
-    Link Phone
-Unit testing
 Write script to generate project in one go (saves up to 3 hrs)
