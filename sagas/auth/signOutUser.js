@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga';
-import auth from '../../services/auth';
+import { auth } from '../../services';
 
 export default function* signOutUser() {
   try {

@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-
-import http from '../../services/http';
+import { http } from '../../services';
 
 export default function* get(action) {
   try {

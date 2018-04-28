@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-
-import database from '../../services/database';
+import { database } from '../../services';
 
 export default function* updateData(action) {
   try {

@@ -1,6 +1,6 @@
 import { call, put, all } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
-import auth from '../../services/auth';
+import { auth } from '../../services';
 
 export default function* linkUserWithCredential(action) {
   try {

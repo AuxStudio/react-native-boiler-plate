@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-
-import location from '../../services/location';
+import { location } from '../../services';
 
 export default function* getFormattedAddressFromCoordinates(action) {
   try {

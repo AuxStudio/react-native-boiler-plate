@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga';
-import auth from '../../services/auth';
+import { auth } from '../../services';
 import config from '../../config';
 
 export default function* signInUserWithCredential(action) {
