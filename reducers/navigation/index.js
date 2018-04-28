@@ -8,7 +8,7 @@ export default function navigationReducer(state = initialState, action = {}) {
   switch (action.type) {
     case ActionConst.FOCUS:
       newState = utils.cloneObject(state);
-      newState.scene = action.payload;
+      newState.scene = action.scene; // comes from RNRF, ie. we can't control the action pattern
       return newState;
 
     default:

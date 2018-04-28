@@ -41,6 +41,7 @@ export default function appStateReducer(state = initialState, action = {}) {
       newState.appState.loading = false;
       return newState;
 
+    // TODO: Refactor
     case 'SET_MESSAGE':
       newState = utils.cloneObject(state);
       newState.appState.error = {
@@ -48,6 +49,7 @@ export default function appStateReducer(state = initialState, action = {}) {
       };
       return newState;
 
+    // TODO: Refactor
     case 'RESET_MESSAGE':
       newState = utils.cloneObject(state);
       newState.appState.error = initialState.appState.error;

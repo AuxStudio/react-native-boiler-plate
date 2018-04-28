@@ -60,7 +60,7 @@ export default function* linkUserWithCredential(action) {
       } else {
         yield put({
           type: 'linkUserWithCredential',
-          payload: action.payload,
+          payload,
         });
       }
     }
