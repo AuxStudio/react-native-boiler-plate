@@ -1,3 +1,9 @@
+services/index.js
+    Export as object
+    import { analytics } from '../services/'
+Every service has a saga
+Sagas all use nextAction
+    Needs to be able to handle an array of actions
 Rewrite all code according to style guide
 Create ErrorBoundary component
 System messages management

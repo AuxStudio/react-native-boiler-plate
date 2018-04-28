@@ -19,10 +19,9 @@ fonts.iconFont = 24;
 
 // Font types
 fonts.title = {
-  fontWeight: 'bold',
-  color: colors.primaryText,
   fontFamily: fonts.primaryFontFamily,
   fontSize: fonts.largeFont,
+  color: colors.primaryText,
 };
 
 export default fonts;
