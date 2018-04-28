@@ -1,5 +1,3 @@
-Every service has a saga
-    Images
 Investigate reject in promises
 Decide on whether all sagas or all services should log their results
 Sagas all use nextAction
