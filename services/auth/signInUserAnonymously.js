@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 
 export default function signInUserAnonymously() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     firebase
       .auth()
       .signInAnonymously()
@@ -11,10 +11,7 @@ export default function signInUserAnonymously() {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

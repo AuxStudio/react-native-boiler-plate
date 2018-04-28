@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 
 export default function signOutUser() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     firebase
       .auth()
       .signOut()
@@ -11,10 +11,7 @@ export default function signOutUser() {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

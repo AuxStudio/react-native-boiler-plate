@@ -3,19 +3,13 @@ import { analytics } from '../../services';
 
 export default function* logEvent(action) {
   try {
-    const { payload, error } = yield call(analytics.logEvent);
+    const { payload } = yield call(analytics.logEvent);
 
     if (__DEV__) {
       console.log('logEvent', payload);
     }
 
-    if (error) {
-      yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(payload),
-        error: true,
-      });
-    } else if (action.nextAction) {
+    if (action.nextAction) {
       yield put({
         ...action.nextAction,
         payload,

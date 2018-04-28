@@ -3,19 +3,13 @@ import { location } from '../../services';
 
 export default function* getFormattedAddressFromCoordinates(action) {
   try {
-    const { payload, error } = yield call(location.getFormattedAddressFromCoordinates);
+    const { payload } = yield call(location.getFormattedAddressFromCoordinates);
 
     if (__DEV__) {
       console.log('getFormattedAddressFromCoordinates', payload);
     }
 
-    if (error) {
-      yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(payload),
-        error: true,
-      });
-    } else if (action.nextAction) {
+    if (action.nextAction) {
       yield put({
         ...action.nextAction,
         payload,

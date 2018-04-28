@@ -1,5 +1,5 @@
 export default function get(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     fetch(action.meta.url)
       .then((response) => {
         resolve({
@@ -7,10 +7,7 @@ export default function get(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

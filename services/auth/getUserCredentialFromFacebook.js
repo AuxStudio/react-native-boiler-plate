@@ -3,15 +3,12 @@ import firebase from 'react-native-firebase';
 import config from '../../config';
 
 export default function getUserCredentialFromFacebook() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     LoginManager.logOut();
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       (result) => {
         if (result.isCancelled) {
-          resolve({
-            payload: config.messages.auth.facebook.loginCancelled,
-            error: true,
-          });
+          reject(new Error(config.messages.auth.facebook.loginCancelled));
         } else {
           AccessToken.getCurrentAccessToken()
             .then((user) => {
@@ -22,18 +19,12 @@ export default function getUserCredentialFromFacebook() {
               });
             })
             .catch((error) => {
-              resolve({
-                payload: new Error(error),
-                error: true,
-              });
+              reject(new Error(error));
             });
         }
       },
       (error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       },
     );
   });

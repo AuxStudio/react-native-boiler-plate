@@ -3,19 +3,13 @@ import { database } from '../../services';
 
 export default function* pushData(action) {
   try {
-    const { payload, error } = yield call(database.pushData);
+    const { payload } = yield call(database.pushData);
 
     if (__DEV__) {
       console.log('pushData', payload);
     }
 
-    if (error) {
-      yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(payload),
-        error: true,
-      });
-    } else if (action.nextAction) {
+    if (action.nextAction) {
       yield put({
         ...action.nextAction,
       });

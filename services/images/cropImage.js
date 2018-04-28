@@ -1,7 +1,7 @@
 import { ImageEditor } from 'react-native';
 
 export default function cropImage(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const offsetX = action.meta.portrait
       ? 0
       : action.meta.maxWidth / 2 * action.meta.width / action.meta.height -
@@ -30,10 +30,7 @@ export default function cropImage(action) {
         });
       },
       (error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       },
     );
   });

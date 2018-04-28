@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 
 export default function sendPasswordResetEmail(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     firebase
       .auth()
       .sendPasswordResetEmail(action.userEmail)
@@ -9,10 +9,7 @@ export default function sendPasswordResetEmail(action) {
         resolve();
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

@@ -2,7 +2,7 @@ import ImageResizer from 'react-native-image-resizer';
 import config from '../../config';
 
 export default function resizeImage(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const portrait = action.meta.height > action.meta.width;
 
     const imageResizerOptions = [
@@ -24,10 +24,7 @@ export default function resizeImage(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

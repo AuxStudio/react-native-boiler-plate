@@ -3,19 +3,13 @@ import { http } from '../../services';
 
 export default function* get(action) {
   try {
-    const { payload, error } = yield call(http.get);
+    const { payload } = yield call(http.get);
 
     if (__DEV__) {
       console.log('get', payload);
     }
 
-    if (error) {
-      yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(payload),
-        error: true,
-      });
-    } else if (action.nextAction) {
+    if (action.nextAction) {
       yield put({
         ...action.nextAction,
         payload,

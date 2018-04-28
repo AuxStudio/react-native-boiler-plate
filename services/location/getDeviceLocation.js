@@ -1,5 +1,5 @@
 export default function getDeviceLocation() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         resolve({
@@ -7,10 +7,7 @@ export default function getDeviceLocation() {
         });
       },
       (error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       },
     );
   });

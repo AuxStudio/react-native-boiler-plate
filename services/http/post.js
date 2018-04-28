@@ -1,5 +1,5 @@
 export default function post(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     fetch(action.meta.url, {
       method: 'POST',
       headers: action.meta.headers,
@@ -11,10 +11,7 @@ export default function post(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

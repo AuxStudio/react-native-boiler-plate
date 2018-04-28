@@ -1,4 +1,5 @@
-Investigate reject in promises
+Use custom error class
+    Allows additional manipulation and capturing/logging of errors
 Decide on whether all sagas or all services should log their results
 Sagas all use nextAction
     Needs to be able to handle an array of actions

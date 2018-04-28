@@ -3,18 +3,12 @@ import { images } from '../../services';
 
 export default function* showImagePicker(action) {
   try {
-    const { payload, error } = yield call(images.showImagePicker);
+    const { payload } = yield call(images.showImagePicker);
     if (__DEV__) {
       console.log('showImagePicker', payload);
     }
 
-    if (error) {
-      yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(payload),
-        error: true,
-      });
-    } else if (action.nextAction) {
+    if (action.nextAction) {
       yield put({
         ...action.nextAction,
         payload,

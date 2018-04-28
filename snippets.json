@@ -153,13 +153,7 @@
       "      console.log('$2', payload);",
       "    }",
       "$3",
-      "  if (error) {",
-      "    yield put({",
-      "      type: 'SET_MESSAGE',",
-      "      payload: new Error(payload),",
-      "      error: true,",
-      "    });",
-      "  } else if (action.nextAction) {",
+      "  if (action.nextAction) {",
       "      yield put({",
       "        ...action.nextAction,",
       "        payload,",
@@ -172,7 +166,7 @@
       "      error: true,",
       "    });",
       "  }",
-      "}"
+      "}",
       "$3"
     ]
   }

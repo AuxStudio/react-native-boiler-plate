@@ -3,7 +3,7 @@ import firebase from 'react-native-firebase';
 import config from '../../config';
 
 export default function getUserCredentialFromGoogle() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     GoogleSignin.hasPlayServices({ autoResolve: true })
       .then(() => {
         GoogleSignin.configure({
@@ -22,24 +22,15 @@ export default function getUserCredentialFromGoogle() {
                 });
               })
               .catch((error) => {
-                resolve({
-                  payload: new Error(error),
-                  error: true,
-                });
+                reject(new Error(error));
               });
           })
           .catch((error) => {
-            resolve({
-              payload: new Error(error),
-              error: true,
-            });
+            reject(new Error(error));
           });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

@@ -7,7 +7,7 @@ export default function getData(action) {
     console.log(`Dispatching get at ${ref}`);
   }
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     firebase
       .database()
       .ref(ref)
@@ -18,10 +18,7 @@ export default function getData(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

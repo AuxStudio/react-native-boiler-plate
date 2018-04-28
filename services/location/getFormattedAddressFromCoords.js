@@ -1,7 +1,7 @@
 import Geocoder from 'react-native-geocoder';
 
 export default function getFormattedAddressFromCoordinates(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     Geocoder.geocodePosition(action.meta.coords)
       .then((data) => {
         resolve({
@@ -9,10 +9,7 @@ export default function getFormattedAddressFromCoordinates(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }

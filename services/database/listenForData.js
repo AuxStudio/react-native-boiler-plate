@@ -5,7 +5,7 @@ export default function listenForData(ref, callback) {
     console.log(`Listening at ${ref}`);
   }
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     firebase
       .database()
       .ref(ref)
@@ -15,10 +15,7 @@ export default function listenForData(ref, callback) {
           resolve(callback(snapshot.val()));
         },
         (error) => {
-          resolve({
-            payload: new Error(error),
-            error: true,
-          });
+          reject(new Error(error));
         },
       );
   });

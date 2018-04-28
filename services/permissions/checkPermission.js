@@ -1,7 +1,7 @@
 import RNPermissions from 'react-native-permissions';
 
 export default function checkPermission(action) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     RNPermissions.check(action.meta.permission)
       .then((response) => {
         resolve({
@@ -9,10 +9,7 @@ export default function checkPermission(action) {
         });
       })
       .catch((error) => {
-        resolve({
-          payload: new Error(error),
-          error: true,
-        });
+        reject(new Error(error));
       });
   });
 }
