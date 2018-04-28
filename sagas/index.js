@@ -1,5 +1,8 @@
 import { takeLatest, takeEvery, fork, all } from 'redux-saga/effects';
 
+// Analytics
+import { logEvent } from './analytics';
+
 // Auth
 import {
   getUserAuth,
@@ -27,6 +30,9 @@ import { get } from './http';
 
 export default function* sagas() {
   yield all([
+    // Analytics
+    fork(takeLatest, 'logEvent', logEvent)
+
     // Auth
     fork(takeLatest, 'getUserAuth', getUserAuth),
     fork(takeLatest, 'signInUserAnonymously', signInUserAnonymously),
