@@ -1,5 +1,5 @@
-Sagas all use nextAction
-    Needs to be able to handle an array of actions
+MERGE INTO MASTER
+
 Refactor wrappers
     Some of them don't need to be wrappers, they can just be components
 Create ErrorBoundary component

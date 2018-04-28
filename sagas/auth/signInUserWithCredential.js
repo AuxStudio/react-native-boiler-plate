@@ -10,10 +10,12 @@ export default function* signInUserWithCredential(action) {
       console.log('signInUserWithCredentialResponse', response);
     }
 
-    yield put({
-      type: 'SIGN_IN_USER',
-      payload: response,
-    });
+    if (action.nextAction) {
+      yield put({
+        ...action.nextAction,
+        payload: response,
+      });
+    }
   } catch (error) {
     if (error.message.code === 'auth/account-exists-with-different-credential') {
       yield put({

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { location } from '../../services';
 
-export default function* getDeviceLocation() {
+export default function* getDeviceLocation(action) {
   try {
     const response = yield call(location.getDeviceLocation);
 
@@ -9,10 +9,12 @@ export default function* getDeviceLocation() {
       console.log('getDeviceLocation', response);
     }
 
-    yield put({
-      type: 'SET_DEVICE_LOCATION',
-      payload: response,
-    });
+    if (action.nextAction) {
+      yield put({
+        ...action.nextAction,
+        payload: response,
+      });
+    }
   } catch (error) {
     yield put({
       type: 'SET_MESSAGE',

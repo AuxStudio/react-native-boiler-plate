@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga';
 import { auth } from '../../services';
 
-export default function* signOutUser() {
+export default function* signOutUser(action) {
   try {
     const response = yield call(auth.signOutUser);
 
@@ -9,9 +9,12 @@ export default function* signOutUser() {
       console.log('signOutUserResponse', response);
     }
 
-    yield put({
-      type: 'SIGN_OUT_USER',
-    });
+    if (action.nextAction) {
+      yield put({
+        ...action.nextAction,
+        payload: response,
+      });
+    }
   } catch (error) {
     yield put({
       type: 'SET_MESSAGE',

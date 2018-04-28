@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* getUserAuth() {
+export default function* getUserAuth(action) {
   try {
     const response = yield call(auth.getUserAuth);
 
@@ -10,10 +10,12 @@ export default function* getUserAuth() {
     }
 
     if (response) {
-      yield put({
-        type: 'SIGN_IN_USER',
-        payload: response,
-      });
+      if (action.nextAction) {
+        yield put({
+          ...action.nextAction,
+          payload: response,
+        });
+      }
     } else {
       yield put({
         type: 'signInUserAnonymously',

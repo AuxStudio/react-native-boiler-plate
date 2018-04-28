@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* getUserCredentialFromFacebook() {
+export default function* getUserCredentialFromFacebook(action) {
   try {
     const response = yield call(auth.getUserCredentialFromFacebook);
 
@@ -9,10 +9,12 @@ export default function* getUserCredentialFromFacebook() {
       console.log('getUserCredentialFromFacebook', response);
     }
 
-    yield put({
-      type: 'linkUserWithCredential',
-      payload: response,
-    });
+    if (action.nextAction) {
+      yield put({
+        ...action.nextAction,
+        payload: response,
+      });
+    }
   } catch (error) {
     yield put({
       type: 'SET_MESSAGE',

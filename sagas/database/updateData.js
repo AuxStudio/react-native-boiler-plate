@@ -12,6 +12,7 @@ export default function* updateData(action) {
     if (action.nextAction) {
       yield put({
         ...action.nextAction,
+        payload: response,
       });
     }
   } catch (error) {
