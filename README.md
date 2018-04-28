@@ -21,3 +21,5 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * CodePush integration
 * Testing integration
 * Write script to generate project in one go (saves up to 3 hrs)
+* Add phone authentication
+* Full in-app password reset methods

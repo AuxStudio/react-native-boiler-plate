@@ -51,7 +51,7 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 
 Enter a password and your details.
 
-Move the generated **my-release-key.keystore** to ./android/app/
+Move the generated **./src/my-release-key.keystore** to ./android/app/
 
 In **./android/gradle.properties**, add:
 
@@ -83,15 +83,38 @@ In the same file add (in android.buildTypes.release object):
 signingConfig signingConfigs.release
 ```
 
-## 6. Install dependencies
+## 6. Set SDK version
+
+Android only.
+
+In **./android/app/build.gradle** (in android object) (replace as necessary):
+
+```
+compileSdkVersion: 25
+buildToolsVersion: "25.0.3"
+```
+
+Same file as above (in android.defaultConfig object):
+
+```
+targetSdkVersion: 25
+```
+
+Same file as above (in dependencies object):
+
+```
+compile "com.android.support:appcompat-v7:25.0.0"
+```
+
+## 7. Install dependencies
 
 Remove what you don't need.
 
 ```
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder react-native-fs axios
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder
 ```
 
-## 7. Link and setup dependencies
+## 8. Link and setup dependencies
 
 ### Android
 
@@ -114,11 +137,13 @@ Add Firebase app in [Firebase console](https://console.firebase.google.com/).
 Get the hash keys from the keytool commands below.
 
 ```
-react-native link react-native-firebase
-
 keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
 
 keytool -exportcert -list -v -alias my-key-alias -keystore ./android/app/my-release-key.keystore
+```
+
+```
+react-native link react-native-firebase
 ```
 
 From Firebase console, download **google-services.json** to
@@ -149,6 +174,7 @@ Same file as above add (to dependencies object) (remove what you don't need):
 ```
 compile "com.google.android.gms:play-services-base:11.4.2"
 compile "com.google.firebase:firebase-core:11.4.2"
+compile "com.google.firebase:firebase-analytics:11.4.2"
 compile "com.google.firebase:firebase-auth:11.4.2"
 compile "com.google.firebase:firebase-database:11.4.2"
 compile "com.google.firebase:firebase-storage:11.4.2"
@@ -157,6 +183,7 @@ compile "com.google.firebase:firebase-storage:11.4.2"
 In **./android/app/src/main/java/MainApplication.java** add (at top):
 
 ```
+import io.invertase.firebase.auth.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
@@ -165,12 +192,33 @@ import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 Same file as above add (in packages object) (remove what you don't need):
 
 ```
+new RNFirebaseAnalyticsPackage(),
 new RNFirebaseAuthPackage(),
 new RNFirebaseDatabasePackage(),
 new RNFirebaseStoragePackage()
 ```
 
 #### react-native-fbsdk
+
+Add [Facebook](https://developers.facebook.com/apps/) app (you can skip the steps besides 3 and 6).
+
+\*\* Adding key hashes to Facebook app:
+
+Run the below command twice. First with android as password and second with your project password. This will generate two debug key hashes.
+
+```
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+```
+
+Run the below command once with your project password. This will an additional key hash (which will enable the fbsdk on your production app).
+
+```
+keytool -exportcert -alias my-key-alias -keystore ./android/app/my-release-key.keystore | openssl sha1 -binary | openssl base64
+```
+
+You should have a total of 3 key hashes added to your Facebook app.
+
+`NOTE: Once Facebook app setup is complete, there is a toggle button at the top of the page that will default to development mode. When in production, switch this to live (you will need a privacy policy link). Otherwise your production build facebook logins will fail with all other users who are not admins.`
 
 ```
 react-native link react-native-fbsdk
@@ -183,7 +231,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 ```
 
-Same file as above add (beginning of class):
+Same file as above add (beginning of public class MainApplication...):
 
 ```
 private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -193,7 +241,7 @@ protected static CallbackManager getCallbackManager() {
 }
 ```
 
-Same file as above overwrite:
+Same file as above overwrite @Override (public void onCreate()):
 
 ```
 @Override
@@ -215,7 +263,7 @@ In **./android/app/src/main/java/MainActivity.java** add (top of file):
 import android.content.Intent;
 ```
 
-Same file as above, add (at beginning of class):
+Same file as above, add (at beginning of public class MainActivity):
 
 ```
 @Override
@@ -237,7 +285,7 @@ In **./android/app/build.gradle** add (to dependencies object):
 compile 'com.facebook.android:facebook-login:[4,5)'
 ```
 
-In **./android/app/src/main/res/values/strings.xml** add:
+In **./android/app/src/main/res/values/strings.xml** add (completed as part of step 6 in Facebook app setup):
 
 ```
 <string name="facebook_app_id">FACEBOOK_APP_ID</string>
@@ -259,28 +307,6 @@ In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags
 </activity>
 ```
 
-Add [Facebook](https://developers.facebook.com/apps/) app.
-
-`NOTE: There is a toggle button at the top of the page that will default to development mode. When in production, switch this to live (you will need a privacy policy link). Otherwise your production build facebook logins will fail with all other users who are not admins.`
-
-Add app name and main activity name to Facebook app.
-
-Add key hashes to Facebook app:
-
-Run the below command twice. First with android as password and second with your project password. This will generate two debug key hashes.
-
-```
-keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
-```
-
-Run the below command once with your project password. This will an additional key hash (which will enable the fbsdk on your production app).
-
-```
-keytool -exportcert -alias my-key-alias -keystore ./android/app/my-release-key.keystore | openssl sha1 -binary | openssl base64
-```
-
-You should have a total of 3 key hashes added to your Facebook app.
-
 #### react-native-google-signin
 
 ```
@@ -295,24 +321,6 @@ compile(project(":react-native-google-signin")){
 }
 compile 'com.google.android.gms:play-services-auth:11.4.2'
 ```
-
-Add web client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/index.js**.
-
-Add key hashes to Firebase app (these are encrypted differently to the Facebook key hashes so these steps are necessary):
-
-Run the below command twice. First with android as password and second with your project password. This will generate two debug key hashes.
-
-```
-keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
-```
-
-Run the below command once with your project password. This will an additional key hash (which will enable the fbsdk on your production app).
-
-```
-keytool -exportcert -list -v -alias my-key-alias -keystore ./android/app/my-release-key.keystore
-```
-
-You should have a total of 3 key hashes added to your Firebase app.
 
 #### react-native-permissions
 
@@ -350,14 +358,6 @@ react-native link react-native-image-picker
 
 ```
 react-native link react-native-image-resizer
-```
-
-#### react-native-fs
-
-_NOTE: This package is only necessary for RN versions < 0.54._
-
-```
-react-native link react-native-fs
 ```
 
 ### iOS
@@ -497,44 +497,13 @@ If link command did not work in android setup, [link](https://facebook.github.io
 * Drag **./node_modules/react-native-image-resizer/ios/RNImageResizer.xcodeproj** into XCode project.
 * Add libRNImageResizer.a to Link Binary with Libraries.
 
-#### react-native-fs
-
-_NOTE: This package is only necessary for RN versions < 0.54._
-
-No extra steps necessary (linked in Android setup).
-
-## 8. Set SDK version
-
-Android only.
-
-In **./android/app/build.gradle** (in android object) (replace appropriately):
-
-```
-compileSdkVersion: 25
-buildToolsVersion: "25.0.3"
-android.defaultConfig.targetSdkVersion: 25
-depenencies (com.android.support): 25.0.0
-```
-
-Same file as above (in android.defaultConfig object):
-
-```
-targetSdkVersion: 25
-```
-
-Same file as above (in dependencies object):
-
-```
-compile "com.android.support:appcompat-v7:25.0.0"
-```
-
-## 9. Copy the source files
+## 10. Copy the source files
 
 ```
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 ```
 
-In **./src/index.js** replace content with:
+In **./index.js** replace content with:
 
 ```
 import { AppRegistry } from "react-native";
@@ -543,15 +512,23 @@ import App from "./src/App";
 AppRegistry.registerComponent("PROJECT_NAME", () => App);
 ```
 
-Clean git files.
+Delete unnecessary files.
 
 ```
-sudo rm ./App.js && sudo rm -R ./src/.git
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git
 ```
 
-Delete any code you don't need.
+**\* Necessary for react-native-google-signin
+Add google web client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/googleSignIn.js\*\*.
 
-## 10. Setup extra app icons
+## 11. Setup ESLint and Prettier
+
+```
+yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
+sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
+```
+
+## 11. Setup extra app icons
 
 Copy the following to **./package.json**:
 
@@ -565,20 +542,19 @@ Copy the following to **./package.json**:
 
 Copy **./src/assets/fonts/AppIcons.ttf** to
 
-* **./android/app/src/assets/fonts**
+* **./android/app/src/assets/fonts** (you'll need to create the assets/fonts/ directory)
 * **./ios/PROJECT_NAME/**
 
-## 11. Enable Firebase authentication methods
+## 12. Enable Firebase authentication methods
 
 Remove what you don't need.
 
 * Anonymous
-* Facebook
+* Facebook (add Facebook App ID and App secret and add OAuth redirect URI to Facebook app as per Firebase docs)
 * Google (download and replace new google-services.json and GoogleService-Info.plist)
 * Email
-* Phone
 
-## 12. Add your custom fonts
+## 13. Add your custom fonts
 
 Optional.
 
