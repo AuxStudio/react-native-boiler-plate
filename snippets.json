@@ -145,12 +145,14 @@
     "body": [
       "import { call, put } from 'redux-saga/effects';",
       "import { $1 } from '../../services';",
+      "$3",
       "export default function* $2(action) {",
       "  try {",
       "    const { payload, error } = yield call($1.$2);",
       "    if (__DEV__) {",
       "      console.log('$2', payload);",
       "    }",
+      "$3",
       "  if (error) {",
       "    yield put({",
       "      type: 'SET_MESSAGE',",
@@ -171,6 +173,7 @@
       "    });",
       "  }",
       "}"
+      "$3"
     ]
   }
 }
