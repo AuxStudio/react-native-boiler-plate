@@ -15,12 +15,10 @@ const ConnectedRouter = connect()(Router);
 // import GeolocationHandler from "./wrappers/GeolocationHandler";
 // import SnackBarHandler from "./wrappers/SnackBarHandler";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <ConnectedRouter navigator={navigator} />
-      </Provider>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <ConnectedRouter navigator={navigator} />
+    </Provider>
+  );
 }
