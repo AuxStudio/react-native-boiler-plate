@@ -98,6 +98,27 @@ In the same file add (in android.buildTypes.release object):
 signingConfig signingConfigs.release
 ```
 
+## 7 Update android versioning
+
+In **./android/app/build.gradle**, update in android object:
+
+```
+compileSdkVersion 26
+buildToolsVersion "26.0.1"
+```
+
+Same file as above, update in android.defaultConfig:
+
+```
+targetSdkVersion 26
+```
+
+Same file as above, update in dependencies:
+
+```
+implementation "com.android.support:appcompat-v7:25.0.0"
+```
+
 ## 7 Setup Cocoapods
 
 ```
@@ -242,13 +263,7 @@ FacebookSdk.sdkInitialize(getApplicationContext());
 }
 ```
 
-Same file as above remove (from link) (in packages object):
-
-```
-new FBSDKPackage(),
-```
-
-Same file as above add (in packages object):
+Same file as above replace (in packages object):
 
 ```
 new FBSDKPackage(mCallbackManager),
@@ -270,16 +285,11 @@ MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, d
 }
 ```
 
-In **./android/build.gradle** add (to allprojects.repositories object):
+In **./android/app/build.gradle** add/replace (to dependencies object):
 
 ```
-mavenCentral()
-```
-
-In **./android/app/build.gradle** add (to dependencies object):
-
-```
-compile 'com.facebook.android:facebook-login:[4,5)'
+implementation project(':react-native-fbsdk')
+implementation 'com.facebook.android:facebook-login:[4,5)'
 ```
 
 In **./android/app/src/main/res/values/strings.xml** add (completed as part of step 6 in Facebook app setup):
@@ -292,14 +302,21 @@ In **./android/app/src/main/res/values/strings.xml** add (completed as part of s
 In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags):
 
 ```
-<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
-<activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+<meta-data android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id"/>
+
+<activity android:name="com.facebook.FacebookActivity"
+    android:configChanges=
+            "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+    android:label="@string/app_name" />
+<activity
+    android:name="com.facebook.CustomTabActivity"
+    android:exported="true">
     <intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="@string/fb_login_protocol_scheme" />
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="@string/fb_login_protocol_scheme" />
     </intent-filter>
 </activity>
 ```
