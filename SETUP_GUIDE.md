@@ -327,20 +327,18 @@ In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags
 react-native link react-native-google-signin
 ```
 
-In **./android/app/build.gradle** add (dependencies):
+In **./android/app/build.gradle** add/replace (dependencies):
 
 ```
-compile(project(":react-native-google-signin")){
+implementation(project(":react-native-google-signin")){
     exclude group: "com.google.android.gms" // very important
 }
-compile 'com.google.android.gms:play-services-auth:15.0.0'
+implementation 'com.google.android.gms:play-services-auth:12.0.1'
 ```
 
 #### react-native-permissions
 
-```
-react-native link react-native-permissions
-```
+No android linking necessary.
 
 Add permissions to **./android/app/src/main/AndroidManifest.xml** (remove what you don't need):
 
@@ -358,84 +356,149 @@ Add permissions to **./android/app/src/main/AndroidManifest.xml** (remove what y
 
 #### react-native-geocoder
 
+1.  In `android/setting.gradle`
+
+```gradle
+...
+include ':react-native-geocoder', ':app'
+project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
 ```
-react-native link react-native-geocoder
+
+3.  In `android/app/build.gradle`
+
+```gradle
+...
+dependencies {
+    ...
+    compile project(':react-native-geocoder')
+}
 ```
+
+4.  register module (in MainApplication.java)
+
+```java
+import com.devfd.RNGeocoder.RNGeocoderPackage; // <--- import
+
+public class MainActivity extends ReactActivity {
+  ......
+
+  @Override
+  protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new RNGeocoderPackage()); // <------ add this
+  }
+
+  ......
+
+}
 
 #### react-native-image-picker
-
-```
-react-native link react-native-image-picker
 ```
 
+1.  Add the following lines to `android/settings.gradle`:
+
+    ```gradle
+    include ':react-native-image-picker'
+    project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
+    ```
+
+2.  Add the compile line to the dependencies in `android/app/build.gradle`:
+
+    ```gradle
+    dependencies {
+        compile project(':react-native-image-picker')
+    }
+    ```
+
+3.  Add the required permissions in `AndroidManifest.xml` (this was done when linking react-native-permissions):
+
+    ```xml
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    ```
+
+4.  Add the import and link the package in `MainApplication.java`:
+
+    ```java
+    import com.imagepicker.ImagePickerPackage; // <-- add this import
+
+    public class MainApplication extends Application implements ReactApplication {
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                new MainReactPackage(),
+                new ImagePickerPackage() // <-- add this
+            );
+        }
+    }
+    ```
+
+```
 #### react-native-image-resizer
+```
+
+react-native link react-native-image-resizer
 
 ```
-react-native link react-native-image-resizer
-```
+`NOTE: This will add a pod to your podfile (./ios/PodFile). Remove this. It will break react-native-google-signin.`
 
 ### iOS
-
 ```
+
 #### react-native-vector-icons
 
 In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
 
 In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
-```
 
+```
 <string>MaterialIcons.ttf</string>
-
 ```
+
 #### react-native-firebase
 
 Add iOS app to [Firebase console](https://console.firebase.google.com/u/0/)
 Download the generated GoogleService-Info.plist to **./ios/** (copy the file in XCode).
 
 In **./ios/PROJECT_NAME/AppDelegate.m**, add to top of file:
-```
 
+```
 #import <Firebase.h>
-
 ```
+
 Same file as above, add to beginning of didFinishLaunchingWithOptions method:
-```
 
+```
 [FIRApp configure];
-
 ```
+
 In **./ios/PodFile**, uncomment:
-```
 
+```
 platform :ios, '9.0'
-
 ```
+
 Same files as above, add these pods:
-```
 
+```
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
-
 ```
 
 ```
-
 cd ios && pod update && pod install
-
 ```
+
 #### react-native-fbsdk
 
 Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
 
-Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip) and drag Bolts.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
+Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip) and drag Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
 
 #### react-native-google-signin
-
-In XCode add **./node_modules/react-native-google-signin/iosRNGoogleSignin.xcodeproj** to your project.
-
-In XCode build phases -> Link binary with libraries, add libRNGoogleSignin.a, AddressBook.framework, SafariServices.framework, SystemConfiguration.framework and libz.tbd.
 
 Drag and drop contents of the **./node_modules/react-native-google-signin/ios/GoogleSdk** folder to your XCode project. (make sure Copy items if needed is ticked) (copy this folder to **./ios/** if you don't see it there).
 
@@ -445,108 +508,117 @@ Configure URL types in the Info panel:
 * add Identifier and URL Schemes set to your bundle id
 
 Add top of **./ios/AppDelegate.m**:
-```
 
+```
 #import <RNGoogleSignin/RNGoogleSignin.h>
-
 ```
+
 Same file as above, replace openUrl function with:
-```
 
-* (BOOL)application:(UIApplication \*)application openURL:(NSURL \_)url
+* (BOOL)application:(UIApplication _)application openURL:(NSURL _)url
   sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
-  return [
-  [FBSDKApplicationDelegate sharedInstance] application:application
+
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
   openURL:url
   sourceApplication:sourceApplication
   annotation:annotation
   ]
-  ||
-  [RNGoogleSignin application:application
+  || [RNGoogleSignin application:application
   openURL:url
   sourceApplication:sourceApplication
   annotation:annotation
   ];
   }
 
+NB: In XCode, change the Framework Search Paths of RNGoogleSignIn to:
+
 ```
-Add Firebase iOS client id (which can be found in your GoogleServices-Info.plist - under "CLIENT_ID") to **./src/config/index.js**.
+$(inherited) non-recursize
+$(PROJECT_DIR) recursive
+```
 
 #### react-native-permissions
 
-Add necessary permissions to **./ios/PROJECT_NAME/Info.plist** (remove what you don't need):
-```
+1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ Add Files to <...>
+2.  Go to node_modules ➜ react-native-permissions ➜ select ReactNativePermissions.xcodeproj
+3.  Add libReactNativePermissions.a to Build Phases -> Link Binary With Libraries
 
+Add necessary permissions to **./ios/PROJECT_NAME/Info.plist** (remove what you don't need):
+
+```
 <key>NSCameraUsageDescription</key>
 <string></string>
 <key>NSLocationWhenInUseUsageDescription</key>
 <string></string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string></string>
-
+<key>NSCameraUsageDescription</key>
+<string></string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string></string>
 ```
+
 #### react-native-geocoder
 
-No extra steps necessary (linked in Android setup).
+1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ Add Files to <...>
+2.  Go to node_modules ➜ react-native-geocoder and add ios/RNGeocoder.xcodeproj file
+3.  Add libRNGeocoder.a to "Build Phases" -> "Link Binary With Libraries"
 
 #### react-native-image-picker
 
-If link command did not work in android setup, [link manually](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
-
-* Drag **./node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj** into XCode project.
-* Add libRNImagePicker.a to Link Binary with Libraries.
-* For iOS 10+, add the NSPhotoLibraryUsageDescription, NSCameraUsageDescription, and NSMicrophoneUsageDescription (if allowing video) keys to your Info.plist with strings describing why your app needs these permissions. Note: You will get a SIGABRT crash if you don't complete this step
+1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
+2.  Go to `node_modules` ➜ `react-native-image-picker` ➜ `ios` ➜ select `RNImagePicker.xcodeproj`
+3.  Add `RNImagePicker.a` to `Build Phases -> Link Binary With Libraries`
 
 #### react-native-image-resizer
 
-If link command did not work in android setup, [link manually](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
-
-* Drag **./node_modules/react-native-image-resizer/ios/RNImageResizer.xcodeproj** into XCode project.
-* Add libRNImageResizer.a to Link Binary with Libraries.
+1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
+2.  Go to `node_modules` ➜ `react-native-image-resizer` ➜ `ios` ➜ select `RNImageResizer.xcodeproj`
+3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
 ## 10. Copy the source files
-```
 
+```
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
-
 ```
+
 In **./index.js** replace content with:
-```
 
+```
 import { AppRegistry } from "react-native";
 import App from "./src/App";
 
 AppRegistry.registerComponent("PROJECT_NAME", () => App);
-
 ```
+
 Delete unnecessary files. FIXME: surely there is a better way?
-```
 
+```
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git
-
 ```
+
 **\* Necessary for react-native-google-signin
-Add google web client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/googleSignIn.js\*\*.
+Add google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/googleSignIn.js\*\*.
 
 ## 11. Setup ESLint and Prettier
-```
 
+```
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
-
 ```
+
 ## 11. Setup extra app icons
 
 Copy the following to **./package.json**:
-```
 
+```
 "rnpm": {
 "assets": [
 "./src/assets/fonts",
 ]
 }
-
 ```
+
 Copy **./src/assets/fonts/AppIcons.ttf** to
 
 * **./android/app/src/assets/fonts** (you'll need to create the assets/fonts/ directory)
@@ -576,4 +648,7 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 ## TODOS:
 
 * Storybook setup
+
+```
+
 ```
