@@ -39,16 +39,23 @@ Project => General => Bundle Identifier = NEW_PACKAGE_NAME
 Create file **local.properties** in ./android with the following contents:
 
 ```
-ndk.dir=PATH_TO_NDK_BUNDLE
 sdk.dir=PATH_TO_SDK
 ```
 
 ## 5. Make Android builds waaay smaller
 
-In **./android/app/build.gradle**, change:
+In **./android/app/build.gradle**, replace as necessary:
 
 ```
 def enableSeparateBuildPerCPUArchitecture = true
+```
+
+Same file as above, remove (from android.defaultConfig):
+
+```
+ndk {
+    abiFilters "armeabi-v7a", "x86"
+}
 ```
 
 ## 6. Generate android app signing
@@ -91,45 +98,17 @@ In the same file add (in android.buildTypes.release object):
 signingConfig signingConfigs.release
 ```
 
-## 7. Set android versioning
-
-In **./android/build.gradle**, add (to buildscript.repositories object and to all projects.repositories):
+## 7 Setup Cocoapods
 
 ```
-google()
+cd ios
+pod init
 ```
 
-Same file as above, delete (from allprojects.repositories):
+In PodFile delete duplicate PROJECT_NAME-tvOSTests within main project target.
 
 ```
-maven {
-    url 'https://maven.google.com'
-}
-```
-
-In **./android/app/build.gradle** (in android object) (replace as necessary):
-
-```
-compileSdkVersion: 27
-buildToolsVersion: "26.0.1"
-```
-
-Same file as above (in android.defaultConfig object):
-
-```
-targetSdkVersion: 27
-```
-
-Same file as above (in dependencies object):
-
-```
-compile "com.android.support:appcompat-v7:25.0.0"
-```
-
-In ** ./android/gradle/gradle-wrapper.properties**, replace:
-
-```
-distributionUrl=https\://services.gradle.org/distributions/gradle-4.1-all.zip
+pod update
 ```
 
 ## 8. Install dependencies
@@ -137,10 +116,10 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-4.1-all.zip
 Remove what you don't need.
 
 ```
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-firebase redux react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-firebase@4.0.6 redux@4.0.0 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
-## 9. Link and setup dependencies
+## 9. Link dependencies
 
 ### Android
 
@@ -150,7 +129,7 @@ In **./android/app/build.gradle** (at bottom of file add):
 
 ```
 project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
+iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
@@ -158,75 +137,56 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 #### react-native-firebase
 
-Add Firebase app in [Firebase console](https://console.firebase.google.com/).
-
-Get the hash keys from the keytool commands below.
-
-```
-keytool -exportcert -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
-
-keytool -exportcert -list -v -alias my-key-alias -keystore ./android/app/my-release-key.keystore
-```
-
 ```
 react-native link react-native-firebase
 ```
 
-From Firebase console, download **google-services.json** to
-./android/app/
+Add android app to [Firebase console](https://console.firebase.google.com/u/0/)
+Download the generated google-services.json to **./android/app/**
 
-In **./android/build.gradle** add (in buildscript.dependencies) (replace as necessary):
-
-```
-classpath 'com.android.tools.build:gradle:3.0.1'
-classpath 'com.google.gms:google-services:3.1.1'
-```
-
-Same file as above, add (in buildscript.repositories):
+In **./android/build.gradle**, add/update to buildscript.dependencies object:
 
 ```
-google()
+classpath 'com.android.tools.build:gradle:3.1.0'
+classpath 'com.google.gms:google-services:3.1.2'
 ```
 
-Same file as above add (to allprojects.repositories object):
+Same file as above, add to buildscript.repositories and allprojects.repositories objects:
 
 ```
 google()
 ```
 
-In **./android/app/build.gradle** add (at very bottom):
+In **./android/app/build.gradle**, add to bottom of file:
 
 ```
 apply plugin: 'com.google.gms.google-services'
 ```
 
-Same file as above add (to dependencies object) (remove what you don't need):
+Same file as above, add to dependencies object:
 
 ```
-compile "com.google.android.gms:play-services-base:12.0.1"
-compile "com.google.firebase:firebase-core:12.0.1"
-compile "com.google.firebase:firebase-analytics:12.0.1"
-compile "com.google.firebase:firebase-auth:12.0.1"
-compile "com.google.firebase:firebase-database:12.0.1"
-compile "com.google.firebase:firebase-storage:12.0.1"
+    // Firebase dependencies
+    implementation "com.google.android.gms:play-services-base:12.0.1
+    implementation "com.google.firebase:firebase-core:12.0.1
+    implementation "com.google.firebase:firebase-analytics:12.0.1
+    implementation "com.google.firebase:firebase-auth:12.0.1
+    implementation "com.google.firebase:firebase-database:12.0.1
+    implementation "com.google.firebase:firebase-storage:12.0.1
 ```
 
-In **./android/app/src/main/java/MainApplication.java** add (at top):
+Same file as above, in dependencies object, update all compile statements to use implementation, e.g.:
 
 ```
-import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
-import io.invertase.firebase.auth.RNFirebaseAuthPackage;
-import io.invertase.firebase.database.RNFirebaseDatabasePackage;
-import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+implementation(project(':react-native-firebase')) {
+    transitive = false
+}
 ```
 
-Same file as above add (in packages object) (remove what you don't need):
+In **./android/gradlew/wrapper/gradle-wrapper.properties**, update:
 
 ```
-new RNFirebaseAnalyticsPackage(),
-new RNFirebaseAuthPackage(),
-new RNFirebaseDatabasePackage(),
-new RNFirebaseStoragePackage()
+distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 ```
 
 #### react-native-fbsdk
@@ -268,7 +228,7 @@ Same file as above add (beginning of public class MainApplication...):
 private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
 protected static CallbackManager getCallbackManager() {
-    return mCallbackManager;
+return mCallbackManager;
 }
 ```
 
@@ -277,8 +237,8 @@ Same file as above overwrite @Override (public void onCreate()):
 ```
 @Override
 public void onCreate() {
-    super.onCreate();
-    FacebookSdk.sdkInitialize(getApplicationContext());
+super.onCreate();
+FacebookSdk.sdkInitialize(getApplicationContext());
 }
 ```
 
@@ -305,8 +265,8 @@ Same file as above, add (at beginning of public class MainActivity):
 ```
 @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+super.onActivityResult(requestCode, resultCode, data);
+MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
 }
 ```
 
@@ -356,7 +316,7 @@ In **./android/app/build.gradle** add (dependencies):
 compile(project(":react-native-google-signin")){
     exclude group: "com.google.android.gms" // very important
 }
-compile 'com.google.android.gms:play-services-auth:12.0.1'
+compile 'com.google.android.gms:play-services-auth:15.0.0'
 ```
 
 #### react-native-permissions
@@ -399,62 +359,55 @@ react-native link react-native-image-resizer
 
 ### iOS
 
-#### Setup Cocoapods:
-
 ```
-cd ios
-pod init
-```
-
-In PodFile delete duplicate PROJECT_NAME-tvOSTests within main project target.
-
-```
-pod update
-```
-
 #### react-native-vector-icons
 
 In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
 
 In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
-
 ```
+
 <string>MaterialIcons.ttf</string>
-```
 
+```
 #### react-native-firebase
 
-Add ios app to [Firebase console](https://console.firebase.google.com/).
-Download GoogleServices-Info.plist to **./ios**
+Add iOS app to [Firebase console](https://console.firebase.google.com/u/0/)
+Download the generated GoogleService-Info.plist to **./ios/** (copy the file in XCode).
 
-In **./ios/podfile**, uncomment platform :ios, '9.0' (change to '8.0' if on Mac version < 10.2).
+In **./ios/PROJECT_NAME/AppDelegate.m**, add to top of file:
+```
 
-Same file add (remove what you don't need):
+#import <Firebase.h>
 
 ```
-pod 'Firebase', '4.3.0' // necessary for pod to use latest firebase modules
+Same file as above, add to beginning of didFinishLaunchingWithOptions method:
+```
+
+[FIRApp configure];
+
+```
+In **./ios/PodFile**, uncomment:
+```
+
+platform :ios, '9.0'
+
+```
+Same files as above, add these pods:
+```
+
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+
 ```
 
 ```
-cd ios pod install && pod update
-```
 
-In **./ios/PROJECT_NAME/AppDelegate.m** add (at top of file):
+cd ios && pod update && pod install
 
 ```
-#import <Firebase.h>
-```
-
-Same file as above (before return):
-
-```
-[FIRApp configure];
-```
-
 #### react-native-fbsdk
 
 Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
@@ -475,46 +428,46 @@ Configure URL types in the Info panel:
 * add Identifier and URL Schemes set to your bundle id
 
 Add top of **./ios/AppDelegate.m**:
-
 ```
+
 #import <RNGoogleSignin/RNGoogleSignin.h>
-```
 
+```
 Same file as above, replace openUrl function with:
-
-```
-- (BOOL)application:(UIApplication *)application openURL:(NSURL \_)url
-sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
-    return [
-        [FBSDKApplicationDelegate sharedInstance] application:application
-        openURL:url
-        sourceApplication:sourceApplication
-        annotation:annotation
-        ]
-        ||
-        [RNGoogleSignin application:application
-        openURL:url
-        sourceApplication:sourceApplication
-        annotation:annotation
-        ];
-}
 ```
 
+* (BOOL)application:(UIApplication \*)application openURL:(NSURL \_)url
+  sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
+  return [
+  [FBSDKApplicationDelegate sharedInstance] application:application
+  openURL:url
+  sourceApplication:sourceApplication
+  annotation:annotation
+  ]
+  ||
+  [RNGoogleSignin application:application
+  openURL:url
+  sourceApplication:sourceApplication
+  annotation:annotation
+  ];
+  }
+
+```
 Add Firebase iOS client id (which can be found in your GoogleServices-Info.plist - under "CLIENT_ID") to **./src/config/index.js**.
 
 #### react-native-permissions
 
 Add necessary permissions to **./ios/PROJECT_NAME/Info.plist** (remove what you don't need):
-
 ```
+
 <key>NSCameraUsageDescription</key>
 <string></string>
 <key>NSLocationWhenInUseUsageDescription</key>
 <string></string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string></string>
-```
 
+```
 #### react-native-geocoder
 
 No extra steps necessary (linked in Android setup).
@@ -535,48 +488,48 @@ If link command did not work in android setup, [link manually](https://facebook.
 * Add libRNImageResizer.a to Link Binary with Libraries.
 
 ## 10. Copy the source files
-
 ```
+
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
-```
 
+```
 In **./index.js** replace content with:
-
 ```
+
 import { AppRegistry } from "react-native";
 import App from "./src/App";
 
 AppRegistry.registerComponent("PROJECT_NAME", () => App);
-```
 
+```
 Delete unnecessary files. FIXME: surely there is a better way?
-
 ```
+
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git
-```
 
+```
 **\* Necessary for react-native-google-signin
 Add google web client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/googleSignIn.js\*\*.
 
 ## 11. Setup ESLint and Prettier
-
 ```
+
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
-```
 
+```
 ## 11. Setup extra app icons
 
 Copy the following to **./package.json**:
-
 ```
+
 "rnpm": {
-    "assets": [
-        "./src/assets/fonts",
-    ]
+"assets": [
+"./src/assets/fonts",
+]
 }
-```
 
+```
 Copy **./src/assets/fonts/AppIcons.ttf** to
 
 * **./android/app/src/assets/fonts** (you'll need to create the assets/fonts/ directory)
@@ -606,3 +559,4 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 ## TODOS:
 
 * Storybook setup
+```
