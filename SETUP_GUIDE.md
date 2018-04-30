@@ -609,7 +609,7 @@ git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 import { AppRegistry } from 'react-native';
 import App from './src/App';
 
-AppRegistry.RegisterComponent('PROJECT_NAME', () => App);
+AppRegistry.registerComponent('PROJECT_NAME', () => App);
 ```
 
 3.  Delete unnecessary files. FIXME: surely there is a better way?
