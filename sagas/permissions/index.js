@@ -1,9 +1,7 @@
 import checkPermission from './checkPermission';
 import requestPermission from './requestPermission';
 
-const analytics = {
+module.exports = {
   checkPermission,
   requestPermission,
 };
-
-export default analytics;

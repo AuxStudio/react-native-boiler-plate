@@ -1,12 +1,11 @@
 import { call, put } from 'redux-saga/effects';
-import { location } from '../../services';
+import { storage } from '../../services';
 
-export default function* getFormattedAddressFromCoords(action) {
+export default function* uploadFile(action) {
   try {
-    const response = yield call(location.getFormattedAddressFromCoords);
-
+    const response = yield call(storage.uploadFile);
     if (__DEV__) {
-      console.log('getFormattedAddressFromCoords', response);
+      console.log('uploadFile', response);
     }
 
     if (action.nextAction) {

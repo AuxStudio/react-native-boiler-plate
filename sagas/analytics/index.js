@@ -1,7 +1,5 @@
 import logEvent from './logEvent';
 
-const analytics = {
+module.exports = {
   logEvent,
 };
-
-export default analytics;

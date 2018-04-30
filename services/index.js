@@ -7,7 +7,7 @@ import location from './location';
 import permissions from './permissions';
 import storage from './storage';
 
-const services = {
+module.exports = {
   analytics,
   auth,
   database,
@@ -17,5 +17,3 @@ const services = {
   permissions,
   storage,
 };
-
-export default services;

@@ -150,7 +150,7 @@
       "  try {",
       "    const response = yield call($1.$2);",
       "    if (__DEV__) {",
-      "      console.log('$2', payload);",
+      "      console.log('$2', response);",
       "    }",
       "$3",
       "  if (action.nextAction) {",

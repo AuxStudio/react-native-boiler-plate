@@ -17,16 +17,19 @@ import {
 } from './auth';
 
 // Location
-import { getDeviceLocation, getFormattedAddressFromCoordinates } from './location';
+import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 
 // Database
-import { getData, updateData, setData, pushData, deleteData } from './database';
+import { getData, updateData, setData, pushData } from './database';
 
 // Images
-import { handleImage } from './images';
+import { cropImage, resizeImage, showImagePicker } from './images';
 
 // HTTP
-import { get } from './http';
+import { get, post } from './http';
+
+// Storage
+import { uploadFile } from './storage';
 
 export default function* sagas() {
   yield all([
@@ -46,19 +49,24 @@ export default function* sagas() {
 
     // Location
     fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
-    fork(takeLatest, 'getFormattedAddressFromCoordinates', getFormattedAddressFromCoordinates),
+    fork(takeLatest, 'getFormattedAddressFromCoords', getFormattedAddressFromCoords),
 
     // Database
     fork(takeEvery, 'getData', getData),
     fork(takeEvery, 'updateData', updateData),
     fork(takeEvery, 'setData', setData),
     fork(takeEvery, 'pushData', pushData),
-    fork(takeEvery, 'deleteData', deleteData),
 
     // Images
-    fork(takeLatest, 'handleImage', handleImage),
+    fork(takeLatest, 'cropImage', cropImage),
+    fork(takeLatest, 'resizeImage', resizeImage),
+    fork(takeLatest, 'showImagePicker', showImagePicker),
 
     // HTTP
     fork(takeLatest, 'get', get),
+    fork(takeLatest, 'post', post),
+
+    // Storage
+    fork(takeLatest, 'uploadFile', uploadFile),
   ]);
 }

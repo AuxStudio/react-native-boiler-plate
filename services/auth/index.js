@@ -8,7 +8,7 @@ import signInUserWithCredential from './signInUserWithCredential';
 import sendPasswordResetEmail from './sendPasswordResetEmail';
 import signOutUser from './signOutUser';
 
-const auth = {
+module.exports = {
   getUserAuth,
   signInUserAnonymously,
   getUserCredentialFromEmail,
@@ -19,5 +19,3 @@ const auth = {
   sendPasswordResetEmail,
   signOutUser,
 };
-
-export default auth;
