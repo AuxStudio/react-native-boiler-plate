@@ -22,7 +22,7 @@ import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 import { getData, updateData, setData, pushData } from './database';
 
 // Images
-import { cropImage, resizeImage, showImagePicker } from './images';
+import { resizeImage, showImagePicker } from './images';
 
 // HTTP
 import { get, post } from './http';
@@ -56,7 +56,6 @@ export default function* sagas() {
     fork(takeEvery, 'pushData', pushData),
 
     // Images
-    fork(takeLatest, 'cropImage', cropImage),
     fork(takeLatest, 'resizeImage', resizeImage),
     fork(takeLatest, 'showImagePicker', showImagePicker),
 
