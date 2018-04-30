@@ -12,13 +12,13 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 * Continue testing src files
 * Add push notifications setup
+* Add storybook setup
 * Refactor wrappers (some of them don't need to be wrappers, they can just be components)
 * Create ErrorBoundary component
 * Error logging to DB component
 * System messages management
 * FileSystem sagas and services based on new RN
 * Add a CHANGELOG
-* SETUP_GUIDE (Storybook)
 * Fastlane integration
 * CodePush integration
 * Testing integration

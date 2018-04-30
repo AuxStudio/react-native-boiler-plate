@@ -6,8 +6,6 @@ If anything is unclear or does not work, please let me know via [email](mailto:s
 
 ## 1. Initialise project
 
-1.  In terminal:
-
 ```
 react-native init PROJECT_NAME
 ```
@@ -32,7 +30,7 @@ npm install -g react-native-rename
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
-In Xcode, Project => General => Bundle Identifier = NEW_PACKAGE_NAME.
+In Xcode, `Project` ➜ `General` ➜ `Bundle Identifie` ➜ `NEW_PACKAGE_NAME`.
 
 ## 4. Add reference to Android SDK path
 
@@ -72,11 +70,11 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 
 4.  In `./android/gradle.properties`, add:
 
-```java
+```gradle
 MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
 MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-MYAPP_RELEASE_STORE_PASSWORD=`
-MYAPP_RELEASE_KEY_PASSWORD=`
+MYAPP_RELEASE_STORE_PASSWORD=YOUR_PASSWORD
+MYAPP_RELEASE_KEY_PASSWORD=YOUR_PASSWORD
 ```
 
 5.  In .`/android/app/build.gradle`, add (in android.defaultConfig):
@@ -552,11 +550,11 @@ $(PROJECT_DIR) recursive
 
 #### react-native-permissions
 
-1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ Add Files to <...>
+1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
 
-2.  Go to node_modules ➜ react-native-permissions ➜ select ReactNativePermissions.xcodeproj
+2.  Go to `node_modules` ➜ `react-native-permissions` ➜ `ios` ➜ select `ReactNativePermissions.xcodeproj`
 
-3.  Add libReactNativePermissions.a to Build Phases -> Link Binary With Libraries
+3.  Add `libReactNativePermissions.a` to `Build Phases -> Link Binary With Libraries`
 
 4.  Add necessary permissions to `./ios/PROJECT_NAME/Info.plist` (remove what you don't need):
 
@@ -666,7 +664,3 @@ Copy the fonts to `./android/app/src/assets/fonts`.
 ### iOS
 
 Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts-to-react-native-b266b41bff7f).
-
-## TODOS:
-
-* Storybook setup
