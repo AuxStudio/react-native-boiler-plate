@@ -7,7 +7,7 @@ export default function post(action) {
     fetch(action.payload.url, {
       method: 'POST',
       headers: action.payload.headers,
-      body: JSON.stringify(action.payload.params),
+      body: JSON.stringify(action.payload.body),
     })
       .then((response) => {
         resolve(response);

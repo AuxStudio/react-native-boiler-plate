@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { http } from '../../services';
 
-export default function* get(action) {
+export default function* post(action) {
   try {
     const response = yield call(http.get, action);
 
