@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class Home extends React.Component {
-  propTypes = {};
+  static propTypes = {};
 
-  defaultProps = {};
+  static defaultProps = {};
 
   state = {};
 
