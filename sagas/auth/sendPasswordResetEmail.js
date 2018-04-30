@@ -9,13 +9,11 @@ export default function* sendPasswordResetEmail(action) {
       console.log('sendPasswordResetEmail', response);
     }
 
-    if (response) {
-      if (action.nextAction) {
-        yield put({
-          ...action.nextAction,
-          payload: response,
-        });
-      }
+    if (action.nextAction) {
+      yield put({
+        ...action.nextAction,
+        payload: response,
+      });
     }
   } catch (error) {
     const payload = error instanceof Error ? error : new Error(error);

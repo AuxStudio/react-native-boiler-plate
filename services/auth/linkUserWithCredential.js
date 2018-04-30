@@ -8,7 +8,7 @@ export default function linkUserWithCredential(action) {
 
     firebase
       .auth()
-      .currentUser.linkWithCredential(action.payload)
+      .currentUser.linkAndRetrieveDataWithCredential(action.payload)
       .then((user) => {
         resolve(user);
       })

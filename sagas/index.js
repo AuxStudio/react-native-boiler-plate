@@ -11,7 +11,6 @@ import {
   sendPasswordResetEmail,
   getUserCredentialFromFacebook,
   getUserCredentialFromGoogle,
-  linkUserWithCredential,
   signInUserWithCredential,
   signOutUser,
 } from './auth';
@@ -43,7 +42,6 @@ export default function* sagas() {
     fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
     fork(takeLatest, 'getUserCredentialFromFacebook', getUserCredentialFromFacebook),
     fork(takeLatest, 'getUserCredentialFromGoogle', getUserCredentialFromGoogle),
-    fork(takeLatest, 'linkUserWithCredential', linkUserWithCredential),
     fork(takeLatest, 'signInUserWithCredential', signInUserWithCredential),
     fork(takeLatest, 'signOutUser', signOutUser),
 
