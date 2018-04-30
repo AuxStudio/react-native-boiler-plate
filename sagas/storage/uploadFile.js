@@ -3,7 +3,8 @@ import { storage } from '../../services';
 
 export default function* uploadFile(action) {
   try {
-    const response = yield call(storage.uploadFile);
+    const response = yield call(storage.uploadFile, action);
+
     if (__DEV__) {
       console.log('uploadFile', response);
     }

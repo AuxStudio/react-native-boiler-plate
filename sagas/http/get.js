@@ -3,7 +3,7 @@ import { http } from '../../services';
 
 export default function* get(action) {
   try {
-    const response = yield call(http.get);
+    const response = yield call(http.get, action);
 
     if (__DEV__) {
       console.log('get', response);

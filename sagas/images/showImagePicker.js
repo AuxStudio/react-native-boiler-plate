@@ -3,7 +3,7 @@ import { images } from '../../services';
 
 export default function* showImagePicker(action) {
   try {
-    const response = yield call(images.showImagePicker);
+    const response = yield call(images.showImagePicker, action);
 
     if (__DEV__) {
       console.log('showImagePicker', response);

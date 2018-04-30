@@ -3,7 +3,7 @@ import { images } from '../../services';
 
 export default function* cropImage(action) {
   try {
-    const response = yield call(images.cropImage);
+    const response = yield call(images.cropImage, action);
 
     if (__DEV__) {
       console.log('cropImage', response);

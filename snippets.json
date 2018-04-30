@@ -148,7 +148,7 @@
       "$3",
       "export default function* $2(action) {",
       "  try {",
-      "    const response = yield call($1.$2);",
+      "    const response = yield call($1.$2, action);",
       "    if (__DEV__) {",
       "      console.log('$2', response);",
       "    }",
