@@ -160,6 +160,8 @@
       "      });",
       "    }",
       "  } catch (error) {",
+      "    const payload = error instanceof Error ? error : new Error(error);",
+      "$3",
       "    yield put({",
       "      type: 'SET_SYSTEM_MESSAGE',",
       "      payload: new Error(error),",
