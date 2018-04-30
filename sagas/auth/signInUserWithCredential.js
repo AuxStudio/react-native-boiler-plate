@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga';
 import { auth } from '../../services';
-import config from '../../config';
 
 export default function* signInUserWithCredential(action) {
   try {
@@ -20,7 +19,9 @@ export default function* signInUserWithCredential(action) {
     if (error.message.code === 'auth/account-exists-with-different-credential') {
       yield put({
         type: 'SET_MESSAGE',
-        payload: new Error(config.messages.auth.accountAlreadyExists),
+        payload: new Error(
+          "Hello! You've already signed in with someone else. Please try another option.",
+        ),
         error: true,
       });
     } else {

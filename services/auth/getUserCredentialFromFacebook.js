@@ -1,6 +1,5 @@
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
-import config from '../../config';
 
 export default function getUserCredentialFromFacebook() {
   return new Promise((resolve, reject) => {
@@ -12,7 +11,7 @@ export default function getUserCredentialFromFacebook() {
     LoginManager.logInWithReadPermissions(['public_profile']).then(
       (result) => {
         if (result.isCancelled) {
-          reject(new Error(config.messages.auth.facebook.loginCancelled));
+          reject(new Error('User cancelled login'));
         } else {
           AccessToken.getCurrentAccessToken()
             .then((user) => {

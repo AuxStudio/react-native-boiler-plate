@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 
 export default function getUserCredentialFromEmail(action) {
   return new Promise((resolve) => {
