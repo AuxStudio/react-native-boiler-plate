@@ -8,6 +8,8 @@ const images = {
     },
   },
   imageResizerOptions: [
+    100, // maxWidth
+    100, // maxHeight
     'PNG', // format
     100, // quality
     0, // rotation

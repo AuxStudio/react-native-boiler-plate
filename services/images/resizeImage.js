@@ -7,13 +7,9 @@ export default function resizeImage(action) {
       console.log(`Resizing image: ${JSON.stringify(action.payload)}`);
     }
 
-    const portrait = action.payload.height > action.payload.width;
-
     const imageResizerOptions = [
       action.payload.uri, // uri to image
-      portrait ? action.payload.maxWidth : action.payload.maxWidth * 2, // maxWidth
-      portrait ? action.payload.maxWidth * 2 : action.payload.maxWidth, // maxHeight
-      ...config.images.imageResizerOptions, // format, quality, rotation
+      ...config.images.imageResizerOptions, // maxWidth, maxHeight, format, quality, rotation
     ];
 
     ImageResizer.createResizedImage(...imageResizerOptions)
