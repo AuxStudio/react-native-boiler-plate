@@ -5,13 +5,13 @@ export default function pushData(action) {
     const ref = action.payload.node;
 
     if (__DEV__) {
-      console.log(`Dispatching get at ${ref}`);
+      console.log(`Dispatching push at ${ref}`);
     }
 
     firebase
       .database()
       .ref(ref)
-      .push(action.payload)
+      .push(action.payload.data)
       .then(() => {
         resolve(true);
       })

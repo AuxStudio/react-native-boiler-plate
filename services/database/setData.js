@@ -5,13 +5,13 @@ export default function setData(action) {
     const ref = action.payload.node;
 
     if (__DEV__) {
-      console.log(`Dispatching get at ${ref}`);
+      console.log(`Dispatching set at ${ref}`);
     }
 
     firebase
       .database()
       .ref(ref)
-      .set(action.payload)
+      .set(action.payload.data)
       .then(() => {
         resolve(true);
       })

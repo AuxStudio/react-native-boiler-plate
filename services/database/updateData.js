@@ -5,13 +5,13 @@ export default function updateData(action) {
     const ref = action.payload.node;
 
     if (__DEV__) {
-      console.log(`Dispatching get at ${ref}`);
+      console.log(`Dispatching update at ${ref}`);
     }
 
     firebase
       .database()
       .ref(ref)
-      .update(action.payload)
+      .update(action.payload.data)
       .then(() => {
         resolve(true);
       })
