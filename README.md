@@ -10,7 +10,8 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Include FCM in react-native-firebase setup guide
+* Continue testing src files
+* Add push notifications setup
 * Refactor wrappers (some of them don't need to be wrappers, they can just be components)
 * Create ErrorBoundary component
 * Error logging to DB component

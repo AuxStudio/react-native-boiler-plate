@@ -2,9 +2,11 @@
 
 This is a work in progress.
 
-It is rather difficult keeping this up to date with the new RN and dependencies versions so if anything is unclear or does not work, please let me know via [email](mailto:shaun@aux.co.za) or create an issue/PR and I will attend to it as soon as I can.
+If anything is unclear or does not work, please let me know via [email](mailto:shaun@aux.co.za) or create an issue/PR and I will attend to it as soon as I can.
 
 ## 1. Initialise project
+
+1.  In terminal:
 
 ```
 react-native init PROJECT_NAME
@@ -30,13 +32,11 @@ npm install -g react-native-rename
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
-In Xcode:
-
-Project => General => Bundle Identifier = NEW_PACKAGE_NAME
+In Xcode, Project => General => Bundle Identifier = NEW_PACKAGE_NAME.
 
 ## 4. Add reference to Android SDK path
 
-Create file **local.properties** in ./android with the following contents:
+Create file `./android/local.properties` with the following contents:
 
 ```
 sdk.dir=PATH_TO_SDK
@@ -44,15 +44,15 @@ sdk.dir=PATH_TO_SDK
 
 ## 5. Make Android builds waaay smaller
 
-In **./android/app/build.gradle**, replace as necessary:
+1.  In `./android/app/build.gradle`, replace as necessary:
 
-```
+```java
 def enableSeparateBuildPerCPUArchitecture = true
 ```
 
-Same file as above, remove (from android.defaultConfig):
+2.  Same file as above, remove (from android.defaultConfig):
 
-```
+```java
 ndk {
     abiFilters "armeabi-v7a", "x86"
 }
@@ -60,26 +60,28 @@ ndk {
 
 ## 6. Generate android app signing
 
+1.  Generate keystore:
+
 ```
 keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 ```
 
-Enter a password and your details.
+2.  Enter a password and your details.
 
-Move the generated **./src/my-release-key.keystore** to ./android/app/
+3.  Move the generated `./src/my-release-key.keystore` to `./android/app/`.
 
-In **./android/gradle.properties**, add:
+4.  In `./android/gradle.properties`, add:
 
-```
+```java
 MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
 MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-MYAPP_RELEASE_STORE_PASSWORD=******
-MYAPP_RELEASE_KEY_PASSWORD=******
+MYAPP_RELEASE_STORE_PASSWORD=`
+MYAPP_RELEASE_KEY_PASSWORD=`
 ```
 
-In .**/android/app/build.gradle**, add (in android.defaultConfig object):
+5.  In .`/android/app/build.gradle`, add (in android.defaultConfig):
 
-```
+```java
 signingConfigs {
     release {
         if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
@@ -92,47 +94,34 @@ signingConfigs {
 }
 ```
 
-In the same file add (in android.buildTypes.release object):
+6.  In the same file add (in android.buildTypes.release):
 
-```
+```java
 signingConfig signingConfigs.release
 ```
 
 ## 7 Update android versioning
 
-In **./android/app/build.gradle**, update in android object:
+1.  In `./android/app/build.gradle`, update in android:
 
-```
+```java
 compileSdkVersion 26
 buildToolsVersion "26.0.1"
 ```
 
-Same file as above, update in android.defaultConfig:
+2.  Same file as above, update in android.defaultConfig:
 
-```
+```java
 targetSdkVersion 26
 ```
 
-Same file as above, update in dependencies:
+3.  Same file as above, update in dependencies:
 
-```
+```java
 implementation "com.android.support:appcompat-v7:25.0.0"
 ```
 
-## 7 Setup Cocoapods
-
-```
-cd ios
-pod init
-```
-
-In PodFile delete duplicate PROJECT_NAME-tvOSTests within main project target.
-
-```
-pod update
-```
-
-## 8. Install dependencies
+## 7. Install dependencies
 
 Remove what you don't need.
 
@@ -140,15 +129,15 @@ Remove what you don't need.
 yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-firebase@4.0.6 redux@4.0.0 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
-## 9. Link dependencies
+## 8. Link dependencies
 
 ### Android
 
 #### react-native-vector-icons
 
-In **./android/app/build.gradle** (at bottom of file add):
+In `./android/app/build.gradle` (at bottom of file add):
 
-```
+```gradle
 project.ext.vectoricons = [
 iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
 ]
@@ -158,35 +147,38 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 #### react-native-firebase
 
+1.  Link:
+
 ```
 react-native link react-native-firebase
 ```
 
-Add android app to [Firebase console](https://console.firebase.google.com/u/0/)
-Download the generated google-services.json to **./android/app/**
+2.  Add android app to [Firebase console](https://console.firebase.google.com/u/0/).
 
-In **./android/build.gradle**, add/update to buildscript.dependencies object:
+3.  Download the generated google-services.json to `./android/app/`
 
-```
+4.  In `./android/build.gradle`, add/update to buildscript.dependencies:
+
+```java
 classpath 'com.android.tools.build:gradle:3.1.0'
 classpath 'com.google.gms:google-services:3.1.2'
 ```
 
-Same file as above, add to buildscript.repositories and allprojects.repositories objects:
+5.  Same file as above, add to buildscript.repositories and allprojects.repositoriess:
 
-```
+```java
 google()
 ```
 
-In **./android/app/build.gradle**, add to bottom of file:
+6.  In `./android/app/build.gradle`, add to bottom of file:
 
-```
+```java
 apply plugin: 'com.google.gms.google-services'
 ```
 
-Same file as above, add to dependencies object:
+7.  Same file as above, add to dependencies:
 
-```
+```java
     // Firebase dependencies
     implementation "com.google.android.gms:play-services-base:12.0.1
     implementation "com.google.firebase:firebase-core:12.0.1
@@ -196,15 +188,15 @@ Same file as above, add to dependencies object:
     implementation "com.google.firebase:firebase-storage:12.0.1
 ```
 
-Same file as above, in dependencies object, update all compile statements to use implementation, e.g.:
+8.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
 
-```
+```java
 implementation(project(':react-native-firebase')) {
     transitive = false
 }
 ```
 
-In **./android/gradlew/wrapper/gradle-wrapper.properties**, update:
+8.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
@@ -212,9 +204,9 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 
 #### react-native-fbsdk
 
-Add [Facebook](https://developers.facebook.com/apps/) app (you can skip the steps besides 3 and 6).
+1.  Add [Facebook](https://developers.facebook.com/apps/) app (you can skip the steps besides 3 and 6).
 
-\*\* Adding key hashes to Facebook app:
+2.  Add key hashes to Facebook app.
 
 Run the below command twice. First with android as password and second with your project password. This will generate two debug key hashes.
 
@@ -232,20 +224,22 @@ You should have a total of 3 key hashes added to your Facebook app.
 
 `NOTE: Once Facebook app setup is complete, there is a toggle button at the top of the page that will default to development mode. When in production, switch this to live (you will need a privacy policy link). Otherwise your production build facebook logins will fail with all other users who are not admins.`
 
+3.  Link:
+
 ```
 react-native link react-native-fbsdk
 ```
 
-In **./android/app/src/main/java/MainApplication.java** add (at top):
+4.  In `./android/app/src/main/java/MainApplication.java` add (at top):
 
-```
+```java
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 ```
 
-Same file as above add (beginning of public class MainApplication...):
+5.  Same file as above add (beginning of public class MainApplication...):
 
-```
+```java
 private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
 protected static CallbackManager getCallbackManager() {
@@ -253,9 +247,9 @@ return mCallbackManager;
 }
 ```
 
-Same file as above overwrite @Override (public void onCreate()):
+6.  Same file as above overwrite @Override (public void onCreate()):
 
-```
+```java
 @Override
 public void onCreate() {
 super.onCreate();
@@ -263,21 +257,21 @@ FacebookSdk.sdkInitialize(getApplicationContext());
 }
 ```
 
-Same file as above replace (in packages object):
+7.  Same file as above replace (in packages):
 
-```
+```java
 new FBSDKPackage(mCallbackManager),
 ```
 
-In **./android/app/src/main/java/MainActivity.java** add (top of file):
+8.  In `./android/app/src/main/java/MainActivity.java` add (top of file):
 
-```
+```java
 import android.content.Intent;
 ```
 
-Same file as above, add (at beginning of public class MainActivity):
+9.  Same file as above, add (at beginning of public class MainActivity):
 
-```
+```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
 super.onActivityResult(requestCode, resultCode, data);
@@ -285,23 +279,23 @@ MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, d
 }
 ```
 
-In **./android/app/build.gradle** add/replace (to dependencies object):
+10. In `./android/app/build.gradle` add/replace (to dependencies):
 
-```
+```java
 implementation project(':react-native-fbsdk')
 implementation 'com.facebook.android:facebook-login:[4,5)'
 ```
 
-In **./android/app/src/main/res/values/strings.xml** add (completed as part of step 6 in Facebook app setup):
+11. In `./android/app/src/main/res/values/strings.xml` add (completed as part of step 6 in Facebook app setup):
 
-```
+```xml
 <string name="facebook_app_id">FACEBOOK_APP_ID</string>
 <string name="fb_login_protocol_scheme">FACEBOOK_LOGIN_SCHEME</string>
 ```
 
-In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags):
+12. In `./android/app/src/main/AndroidManifest.xml` add (within <application> tags):
 
-```
+```xml
 <meta-data android:name="com.facebook.sdk.ApplicationId"
         android:value="@string/facebook_app_id"/>
 
@@ -323,13 +317,15 @@ In **./android/app/src/main/AndroidManifest.xml** add (within <application> tags
 
 #### react-native-google-signin
 
+1.  Link:
+
 ```
 react-native link react-native-google-signin
 ```
 
-In **./android/app/build.gradle** add/replace (dependencies):
+2.  In `./android/app/build.gradle` add/replace (dependencies):
 
-```
+```java
 implementation(project(":react-native-google-signin")){
     exclude group: "com.google.android.gms" // very important
 }
@@ -340,9 +336,9 @@ implementation 'com.google.android.gms:play-services-auth:12.0.1'
 
 No android linking necessary.
 
-Add permissions to **./android/app/src/main/AndroidManifest.xml** (remove what you don't need):
+Add permissions to `./android/app/src/main/AndroidManifest.xml` (remove what you don't need):
 
-```
+```xml
 <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
@@ -370,11 +366,11 @@ project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, 
 ...
 dependencies {
     ...
-    compile project(':react-native-geocoder')
+    implementation project(':react-native-geocoder')
 }
 ```
 
-4.  register module (in MainApplication.java)
+4.  Register module (in MainApplication.java)
 
 ```java
 import com.devfd.RNGeocoder.RNGeocoderPackage; // <--- import
@@ -392,9 +388,9 @@ public class MainActivity extends ReactActivity {
   ......
 
 }
+```
 
 #### react-native-image-picker
-```
 
 1.  Add the following lines to `android/settings.gradle`:
 
@@ -403,11 +399,11 @@ public class MainActivity extends ReactActivity {
     project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
     ```
 
-2.  Add the compile line to the dependencies in `android/app/build.gradle`:
+2.  Add the implementation line to the dependencies in `android/app/build.gradle`:
 
     ```gradle
     dependencies {
-        compile project(':react-native-image-picker')
+        implementation project(':react-native-image-picker')
     }
     ```
 
@@ -434,23 +430,21 @@ public class MainActivity extends ReactActivity {
     }
     ```
 
-```
 #### react-native-image-resizer
-```
 
+```
 react-native link react-native-image-resizer
-
 ```
+
 `NOTE: This will add a pod to your podfile (./ios/PodFile). Remove this. It will break react-native-google-signin.`
 
 ### iOS
-```
 
 #### react-native-vector-icons
 
-In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
+1.  In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
 
-In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
+2.  In `./ios/PROJECT_NAME/info.plist` add (in UIAppFonts (within array)):
 
 ```
 <string>MaterialIcons.ttf</string>
@@ -458,79 +452,98 @@ In **./ios/PROJECT_NAME/info.plist** add (in UIAppFonts (within array)):
 
 #### react-native-firebase
 
-Add iOS app to [Firebase console](https://console.firebase.google.com/u/0/)
-Download the generated GoogleService-Info.plist to **./ios/** (copy the file in XCode).
+1.  Add iOS app to [Firebase console](https://console.firebase.google.com/u/0/)
 
-In **./ios/PROJECT_NAME/AppDelegate.m**, add to top of file:
+2.  Download the generated GoogleService-Info.plist to `./ios/` (copy the file in XCode).
+
+3.  In `./ios/PROJECT_NAME/AppDelegate.m`, add to top of file:
 
 ```
 #import <Firebase.h>
 ```
 
-Same file as above, add to beginning of didFinishLaunchingWithOptions method:
+4.  Same file as above, add to beginning of didFinishLaunchingWithOptions method:
 
 ```
 [FIRApp configure];
 ```
 
-In **./ios/PodFile**, uncomment:
+5.  Setup cocoapods:
+
+```
+cd ios
+pod init
+```
+
+6.  In `./ios/PodFile` delete duplicate PROJECT_NAME-tvOSTests within main project target.
+
+```
+pod update
+```
+
+7.  Same file as above, uncomment:
 
 ```
 platform :ios, '9.0'
 ```
 
-Same files as above, add these pods:
+8.  Same file as above, add these pods:
 
 ```
 pod 'Firebase/Core'
+pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 ```
 
+9.  Install the pods:
+
 ```
-cd ios && pod update && pod install
+pod install
 ```
 
 #### react-native-fbsdk
 
-Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
+1.  Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
 
-Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip) and drag Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
+2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip) and drag Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
 
 #### react-native-google-signin
 
-Drag and drop contents of the **./node_modules/react-native-google-signin/ios/GoogleSdk** folder to your XCode project. (make sure Copy items if needed is ticked) (copy this folder to **./ios/** if you don't see it there).
+1.  Drag and drop contents of the `./node_modules/react-native-google-signin/ios/GoogleSdk` folder to your XCode project. (make sure Copy items if needed is ticked) (copy this folder to `./ios/` if you don't see it there).
 
-Configure URL types in the Info panel:
+2.  Configure URL types in the Info panel:
 
 * add Identifier and URL Schemes with your REVERSED\*CLIENT_ID (found inside the plist)
 * add Identifier and URL Schemes set to your bundle id
 
-Add top of **./ios/AppDelegate.m**:
+3.  Add top of `./ios/AppDelegate.m`:
 
 ```
 #import <RNGoogleSignin/RNGoogleSignin.h>
 ```
 
-Same file as above, replace openUrl function with:
+4.  Same file as above, replace openUrl function with:
 
-* (BOOL)application:(UIApplication _)application openURL:(NSURL _)url
-  sourceApplication:(NSString \*)sourceApplication annotation:(id)annotation {
+```
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 
   return [[FBSDKApplicationDelegate sharedInstance] application:application
-  openURL:url
-  sourceApplication:sourceApplication
-  annotation:annotation
-  ]
-  || [RNGoogleSignin application:application
-  openURL:url
-  sourceApplication:sourceApplication
-  annotation:annotation
-  ];
-  }
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation
+         ]
+         || [RNGoogleSignin application:application
+                                openURL:url
+                      sourceApplication:sourceApplication
+                             annotation:annotation
+            ];
+}
+```
 
-NB: In XCode, change the Framework Search Paths of RNGoogleSignIn to:
+5.  `NB`: In XCode, change the Framework Search Paths of RNGoogleSignIn to:
 
 ```
 $(inherited) non-recursize
@@ -540,10 +553,12 @@ $(PROJECT_DIR) recursive
 #### react-native-permissions
 
 1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ Add Files to <...>
+
 2.  Go to node_modules ➜ react-native-permissions ➜ select ReactNativePermissions.xcodeproj
+
 3.  Add libReactNativePermissions.a to Build Phases -> Link Binary With Libraries
 
-Add necessary permissions to **./ios/PROJECT_NAME/Info.plist** (remove what you don't need):
+4.  Add necessary permissions to `./ios/PROJECT_NAME/Info.plist` (remove what you don't need):
 
 ```
 <key>NSCameraUsageDescription</key>
@@ -560,58 +575,65 @@ Add necessary permissions to **./ios/PROJECT_NAME/Info.plist** (remove what you 
 
 #### react-native-geocoder
 
-1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ Add Files to <...>
-2.  Go to node_modules ➜ react-native-geocoder and add ios/RNGeocoder.xcodeproj file
-3.  Add libRNGeocoder.a to "Build Phases" -> "Link Binary With Libraries"
+1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
+
+2.  Go to `node_modules` ➜ `react-native-geocoder` ➜ `ios` ➜ select `RNGeocoder.xcodeproj`
+
+3.  Add `libRNGeocoder.a` to `Build Phases -> Link Binary With Libraries`
 
 #### react-native-image-picker
 
 1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
+
 2.  Go to `node_modules` ➜ `react-native-image-picker` ➜ `ios` ➜ select `RNImagePicker.xcodeproj`
+
 3.  Add `RNImagePicker.a` to `Build Phases -> Link Binary With Libraries`
 
 #### react-native-image-resizer
 
 1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
+
 2.  Go to `node_modules` ➜ `react-native-image-resizer` ➜ `ios` ➜ select `RNImageResizer.xcodeproj`
+
 3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
 ## 10. Copy the source files
+
+1.  Clone the source files:
 
 ```
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 ```
 
-In **./index.js** replace content with:
+2.  In `./index.js` replace content with:
 
+```js
+import { AppRegistry } from 'react-native';
+import App from './src/App';
+
+AppRegistry.RegisterComponent('PROJECT_NAME', () => App);
 ```
-import { AppRegistry } from "react-native";
-import App from "./src/App";
 
-AppRegistry.registerComponent("PROJECT_NAME", () => App);
-```
-
-Delete unnecessary files. FIXME: surely there is a better way?
+3.  Delete unnecessary files. FIXME: surely there is a better way?
 
 ```
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git
 ```
 
-**\* Necessary for react-native-google-signin
-Add google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to **./src/config/googleSignIn.js\*\*.
+4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
 
-## 11. Setup ESLint and Prettier
+## 9. Setup ESLint and Prettier
 
 ```
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
 ```
 
-## 11. Setup extra app icons
+## 10. Setup extra app icons
 
-Copy the following to **./package.json**:
+1.  Copy the following to `./package.json`:
 
-```
+```json
 "rnpm": {
 "assets": [
 "./src/assets/fonts",
@@ -619,12 +641,12 @@ Copy the following to **./package.json**:
 }
 ```
 
-Copy **./src/assets/fonts/AppIcons.ttf** to
+2.  Copy `./src/assets/fonts/AppIcons.ttf` to
 
-* **./android/app/src/assets/fonts** (you'll need to create the assets/fonts/ directory)
-* **./ios/PROJECT_NAME/**
+* `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
+* `./ios/PROJECT_NAME/`
 
-## 12. Enable Firebase authentication methods
+## 11. Enable Firebase authentication methods
 
 Remove what you don't need.
 
@@ -633,13 +655,13 @@ Remove what you don't need.
 * Google (download and replace new google-services.json and GoogleService-Info.plist)
 * Email
 
-## 13. Add your custom fonts
+## 12. Add your custom fonts
 
 Optional.
 
 ### Android
 
-Copy the fonts to **./android/app/src/assets/fonts**.
+Copy the fonts to `./android/app/src/assets/fonts`.
 
 ### iOS
 
@@ -648,7 +670,3 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 ## TODOS:
 
 * Storybook setup
-
-```
-
-```
