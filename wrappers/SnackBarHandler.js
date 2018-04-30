@@ -23,7 +23,7 @@ export class SnackBarHandler extends React.Component {
 
   resetError() {
     this.props.dispatch({
-      type: 'RESET_MESSAGE',
+      type: 'RESET_SYSTEM_MESSAGE',
     });
   }
 

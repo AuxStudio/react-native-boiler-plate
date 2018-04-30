@@ -17,7 +17,7 @@ export default function* getUserCredentialFromEmail(action) {
     }
   } catch (error) {
     yield put({
-      type: 'SET_MESSAGE',
+      type: 'SET_SYSTEM_MESSAGE',
       payload: new Error(error),
       error: true,
     });

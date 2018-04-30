@@ -18,16 +18,18 @@ export default function* signInUserWithCredential(action) {
   } catch (error) {
     if (error.message.code === 'auth/account-exists-with-different-credential') {
       yield put({
-        type: 'SET_MESSAGE',
+        type: 'SET_SYSTEM_MESSAGE',
         payload: new Error(
           "Hello! You've already signed in with someone else. Please try another option.",
         ),
         error: true,
       });
     } else {
+      const payload = error instanceof Error ? error : new Error(error);
+
       yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(error),
+        type: 'SET_SYSTEM_MESSAGE',
+        payload,
         error: true,
       });
     }

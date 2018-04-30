@@ -46,7 +46,7 @@ export class HighLatencyDetector extends React.Component {
       Analytics.logEvent('network_high_latency');
 
       this.props.dispatch({
-        type: 'SET_MESSAGE',
+        type: 'SET_SYSTEM_MESSAGE',
         errorType: 'NETWORK',
         message: 'Slow network detected.',
         iconName: 'error-outline',

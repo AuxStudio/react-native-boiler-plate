@@ -1,18 +1,9 @@
 const initialState = {
   appStart: false,
   loading: true,
-  // TODO: refactor this error object
-  error: {
-    errorType: null,
+  systemMessage: {
     message: null,
-    iconName: null,
-    success: null,
-    autoHide: null,
-    action: {
-      type: null,
-      text: null,
-      data: null,
-    },
+    error: null,
   },
   deviceLocation: null,
   temporaryImage: null,

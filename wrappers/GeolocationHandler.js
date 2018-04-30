@@ -27,7 +27,7 @@ export class GeolocationHandler extends React.Component {
   getLocationPermission() {
     Permissions.handlePermission('location', this.getDeviceLocation(), () => {
       this.props.dispatch({
-        type: 'SET_MESSAGE',
+        type: 'SET_SYSTEM_MESSAGE',
         errorType: 'PERMISSIONS',
         message: 'We need your permission to get your location',
         iconName: 'error-outline',

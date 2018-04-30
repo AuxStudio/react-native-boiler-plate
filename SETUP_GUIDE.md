@@ -622,9 +622,13 @@ sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json 
 
 ## 9. Setup ESLint and Prettier
 
+1.  Install dependencies:
+
 ```
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
 ```
+
+2.  Move config files:
 
 ```
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc

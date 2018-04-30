@@ -27,9 +27,11 @@ export default function* linkUserWithCredential(action) {
           payload: response,
         });
       } catch (error) {
+        const payload = error instanceof Error ? error : new Error(error);
+
         yield put({
-          type: 'SET_MESSAGE',
-          payload: new Error(error),
+          type: 'SET_SYSTEM_MESSAGE',
+          payload,
           error: true,
         });
       }
@@ -45,9 +47,11 @@ export default function* linkUserWithCredential(action) {
         payload: action.payload.credential,
       });
     } else {
+      const payload = error instanceof Error ? error : new Error(error);
+
       yield put({
-        type: 'SET_MESSAGE',
-        payload: new Error(error),
+        type: 'SET_SYSTEM_MESSAGE',
+        payload,
         error: true,
       });
     }

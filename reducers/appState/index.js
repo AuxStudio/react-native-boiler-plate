@@ -7,52 +7,44 @@ export default function appStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SET_APP_START':
       newState = utils.cloneObject(state);
-      newState.appState.appStart = !newState.appState.appStart;
+      newState.appStart = !newState.appStart;
       return newState;
 
     case 'TOGGLE_LOADING':
       newState = utils.cloneObject(state);
-      newState.appState.loading = !newState.appState.loading;
+      newState.loading = !newState.loading;
       return newState;
 
     case 'SET_DEVICE_LOCATION':
       newState = utils.cloneObject(state);
-      newState.appState.deviceLocation = action.payload;
+      newState.deviceLocation = action.payload;
       return newState;
 
     case 'SET_TEMPORARY_IMAGE':
       newState = utils.cloneObject(state);
-      newState.appState.temporaryImage = action.payload;
+      newState.temporaryImage = action.payload;
       return newState;
 
     case 'CLEAR_TEMPORARY_IMAGE':
       newState = utils.cloneObject(state);
-      newState.appState.temporaryImage = null;
-      return newState;
-
-    case 'SET_USER_PHOTO':
-      newState = utils.cloneObject(state);
-      newState.userData.profile.userPhotoURL = action.payload;
+      newState.temporaryImage = null;
       return newState;
 
     case 'TOGGLE_FEEDBACK_POSTED':
       newState = utils.cloneObject(state);
-      newState.appState.feedbackPosted = !newState.appState.feedbackPosted;
-      newState.appState.loading = false;
+      newState.feedbackPosted = !newState.feedbackPosted;
+      newState.loading = false;
       return newState;
 
-    // TODO: Refactor
-    case 'SET_MESSAGE':
+    case 'SET_SYSTEM_MESSAGE':
       newState = utils.cloneObject(state);
-      newState.appState.error = {
-        ...action.payload,
-      };
+      newState.systemMessage.message = action.payload.message; // instanceof Error
+      newState.systemMessage.error = action.error;
       return newState;
 
-    // TODO: Refactor
-    case 'RESET_MESSAGE':
+    case 'RESET_SYSTEM_MESSAGE':
       newState = utils.cloneObject(state);
-      newState.appState.error = initialState.appState.error;
+      newState.systemMessage = initialState.message;
       return newState;
 
     default:

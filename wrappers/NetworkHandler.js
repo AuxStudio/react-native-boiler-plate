@@ -34,7 +34,7 @@ export class NetworkHandler extends React.Component {
       Analytics.logEvent('network_offline');
 
       this.props.dispatch({
-        type: 'SET_MESSAGE',
+        type: 'SET_SYSTEM_MESSAGE',
         errorType: 'NETWORK',
         message: "Oh no! It looks like you're offline.",
         iconName: 'error-outline',
@@ -42,7 +42,7 @@ export class NetworkHandler extends React.Component {
     } else if (this.props.appStart) {
       // Only dispatch this action if we were previously offline
       this.props.dispatch({
-        type: 'SET_MESSAGE',
+        type: 'SET_SYSTEM_MESSAGE',
         errorType: 'NETWORK',
         message: 'Good to go! You are back online.',
         autoHide: true,
