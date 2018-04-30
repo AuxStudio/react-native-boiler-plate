@@ -6,7 +6,7 @@ export default function logEvent(action) {
     if (__DEV__) {
       console.log(`Logging analytics: ${action.payload}`);
     } else {
-      firebase.analytics().logEvent(action.payload.event, {});
+      firebase.analytics().logEvent(action.payload, {});
     }
     resolve(true);
   });
