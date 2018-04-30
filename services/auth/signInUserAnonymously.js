@@ -8,7 +8,7 @@ export default function signInUserAnonymously() {
 
     firebase
       .auth()
-      .signInAnonymously()
+      .signInAnonymouslyAndRetrieveData()
       .then((user) => {
         resolve(user);
       })

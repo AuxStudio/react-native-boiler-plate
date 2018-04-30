@@ -11,10 +11,9 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 # TODOS
 
 * Continue testing src files
-  Fix root sagas (check all)
-  signOutUser is in analytics
 * Add push notifications setup
 * Add storybook setup
+* Add loginWithEmail, loginWithFacebook, loginWithGoogle sagas and services
 * Refactor wrappers (some of them don't need to be wrappers, they can just be components)
 * Create ErrorBoundary component
 * Error logging to DB component

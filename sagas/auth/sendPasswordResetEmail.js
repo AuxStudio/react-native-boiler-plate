@@ -1,9 +1,13 @@
-import { call, put } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
 export default function* sendPasswordResetEmail(action) {
   try {
     const response = yield call(auth.sendPasswordResetEmail, action);
+
+    if (__DEV__) {
+      console.log('sendPasswordResetEmail', response);
+    }
 
     if (response) {
       if (action.nextAction) {
