@@ -3,7 +3,7 @@ import RNPermissions from 'react-native-permissions';
 export default function requestPermission(action) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Requesting permission ${action.payload}`);
+      console.log(`Requesting permission ${JSON.stringify(action.payload)}`);
     }
 
     RNPermissions.request(action.payload.permission)

@@ -3,7 +3,7 @@ import RNPermissions from 'react-native-permissions';
 export default function checkPermission(action) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Checking permission: ${action.payload}`);
+      console.log(`Checking permission: ${JSON.stringify(action.payload)}`);
     }
 
     RNPermissions.check(action.payload.permission)

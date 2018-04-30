@@ -4,7 +4,7 @@ import config from '../../config';
 export default function resizeImage(action) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Resizing image: ${action.payload}`);
+      console.log(`Resizing image: ${JSON.stringify(action.payload)}`);
     }
 
     const portrait = action.payload.height > action.payload.width;

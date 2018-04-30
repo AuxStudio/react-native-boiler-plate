@@ -3,7 +3,7 @@ import { ImageEditor } from 'react-native';
 export default function cropImage(action) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Cropping image: ${action.payload}`);
+      console.log(`Cropping image: ${JSON.stringify(action.payload)}`);
     }
 
     const offsetX = action.payload.portrait

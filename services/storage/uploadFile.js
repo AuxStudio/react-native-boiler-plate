@@ -5,7 +5,7 @@ export default function uploadFile(action) {
     const ref = action.payload.node;
 
     if (__DEV__) {
-      console.log(`Uploading file: ${ref}, ${action.payload}`);
+      console.log(`Uploading file: ${ref}, ${JSON.stringify(action.payload)}`);
     }
 
     firebase

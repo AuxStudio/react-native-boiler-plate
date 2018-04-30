@@ -1,7 +1,7 @@
 export default function post(action) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`HTTP post to: ${action.payload.url}, ${action.payload}`);
+      console.log(`HTTP post to: ${action.payload.url}, ${JSON.stringify(action.payload)}`);
     }
 
     fetch(action.payload.url, {
