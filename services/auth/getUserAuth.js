@@ -10,7 +10,7 @@ export default function getUserAuth() {
       if (user) {
         resolve(user);
       } else {
-        resolve(true);
+        resolve(false);
       }
     });
   });
