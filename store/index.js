@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducers from '../reducers';
-import sagas from '../sagas';
+import { sagas } from '../sagas';
 
 // add the middlewares
 const middlewares = [];
@@ -18,4 +18,4 @@ const store = createStore(reducers, middleware);
 sagaMiddleware.run(sagas);
 
 // export
-export default store;
+export default { store };
