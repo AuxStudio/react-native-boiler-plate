@@ -8,7 +8,7 @@ export default function signInUserWithCredential(action) {
 
     firebase
       .auth()
-      .signInAndRetrieveDataWithCredential(action.payload)
+      .signInAndRetrieveDataWithCredential(action.payload.credential)
       .then((user) => {
         resolve(user);
       })

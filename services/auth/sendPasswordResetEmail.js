@@ -8,7 +8,7 @@ export default function sendPasswordResetEmail(action) {
 
     firebase
       .auth()
-      .sendPasswordResetEmail(action.payload)
+      .sendPasswordResetEmail(action.payload.email)
       .then(() => {
         resolve(true);
       })

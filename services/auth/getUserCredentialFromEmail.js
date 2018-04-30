@@ -3,11 +3,7 @@ import firebase from 'react-native-firebase';
 export default function getUserCredentialFromEmail(action) {
   return new Promise((resolve) => {
     if (__DEV__) {
-      console.log(
-        `Getting user credential from email: ${action.payload.email}, password: ${
-          action.payload.password
-        }}`,
-      );
+      console.log(`Getting user credential from email: ${JSON.stringify(action.payload)}`);
     }
 
     const credential = firebase.auth.EmailAuthProvider.credential(
