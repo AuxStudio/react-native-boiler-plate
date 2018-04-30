@@ -624,6 +624,9 @@ sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json 
 
 ```
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
+```
+
+```
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
 ```
 
