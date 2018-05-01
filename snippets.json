@@ -164,7 +164,7 @@
       "$3",
       "    yield put({",
       "      type: 'SET_SYSTEM_MESSAGE',",
-      "      payload: new Error(error),",
+      "      payload,",
       "      error: true,",
       "    });",
       "  }",

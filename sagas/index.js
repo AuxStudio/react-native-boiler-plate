@@ -28,7 +28,7 @@ import { resizeImage, showImagePicker } from './images';
 import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 
 // Permissions
-import { checkPermission, requestPermission } from './permissions';
+import { checkPermission, requestPermission, checkAndRequestPermission } from './permissions';
 
 // Storage
 import { uploadFile } from './storage';
@@ -69,6 +69,7 @@ export default function* sagas() {
     // Permissions
     fork(takeLatest, 'checkPermission', checkPermission),
     fork(takeLatest, 'requestPermission', requestPermission),
+    fork(takeLatest, 'checkAndRequestPermission', checkAndRequestPermission),
 
     // Storage
     fork(takeLatest, 'uploadFile', uploadFile),
