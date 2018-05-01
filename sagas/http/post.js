@@ -7,16 +7,16 @@ export default function* post(action) {
       http.post,
       action.payload.url,
       action.payload.headers,
-      action.payload.data,
+      action.payload.body,
     );
 
     if (__DEV__) {
       console.log('get', response);
     }
 
-    if (action.meta.nextAction) {
+    if (action.nextAction) {
       yield put({
-        ...action.meta.nextAction,
+        ...action.nextAction,
         payload: response,
       });
     }
