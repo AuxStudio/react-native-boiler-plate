@@ -13,10 +13,7 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * Testing src files
   Sagas and services ✔
   Reducers
-* Find way of attaching saga response to payloadKey of payload for next action?
 * new Errors should only be created in services if error not already instanceof Error
-* getCredentialandSignIn saga
-* Add loginWithEmail, loginWithFacebook, loginWithGoogle sagas and services
 * Add push notifications setup
 * Add storybook setup
 * Refactor wrappers (some of them don't need to be wrappers, they can just be components)

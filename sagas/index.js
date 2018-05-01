@@ -8,9 +8,10 @@ import {
   getAuth,
   signInAnonymously,
   getCredentialFromEmail,
-  sendPasswordResetEmail,
   getCredentialFromFacebook,
   getCredentialFromGoogle,
+  getCredentialAndSignIn,
+  sendPasswordResetEmail,
   signInWithCredential,
   signOut,
 } from './auth';
@@ -42,9 +43,10 @@ export default function* sagas() {
     fork(takeLatest, 'getAuth', getAuth),
     fork(takeLatest, 'signInAnonymously', signInAnonymously),
     fork(takeLatest, 'getCredentialFromEmail', getCredentialFromEmail),
-    fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
     fork(takeLatest, 'getCredentialFromFacebook', getCredentialFromFacebook),
     fork(takeLatest, 'getCredentialFromGoogle', getCredentialFromGoogle),
+    fork(takeLatest, 'getCredentialAndSignIn', getCredentialAndSignIn),
+    fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
     fork(takeLatest, 'signInWithCredential', signInWithCredential),
     fork(takeLatest, 'signOut', signOut),
 
