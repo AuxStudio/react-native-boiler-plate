@@ -1,13 +1,16 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function logEvent(event, params) {
   return new Promise((resolve) => {
-    // Only log events to analytics if in production
-    if (__DEV__) {
-      console.log(`Logging analytics: ${event}, ${JSON.stringify(params)}`);
-    } else {
-      firebase.analytics().logEvent(event, params);
+    utils.log('start logEvent', { event, params });
+
+    if (!__DEV__) {
+      // Only log events to analytics if in production
+      firebase.analytics().log(event, params);
     }
-    resolve(true);
+
+    utils.log('end logEvent');
+    resolve();
   });
 }

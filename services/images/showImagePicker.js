@@ -1,15 +1,18 @@
 import ImagePicker from 'react-native-image-picker';
+import utils from '../../utils';
 
 export default function showImagePicker() {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log('Show image picker');
-    }
+    utils.log('start showImagePicker');
 
     ImagePicker.showImagePicker(null, ({ uri, error }) => {
       if (error) {
-        reject(new Error(error));
+        utils.log('end showImagePicker', { error });
+
+        reject(utils.createError(error));
       } else {
+        utils.log('end showImagePicker', { uri });
+
         resolve(uri);
       }
     });

@@ -1,10 +1,9 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function uploadFile(ref, filePath) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Uploading file: ${ref}, ${filePath}`);
-    }
+    utils.log('start uploadFile', { ref, filePath });
 
     firebase
       .storage()
@@ -12,15 +11,20 @@ export default function uploadFile(ref, filePath) {
       .putFile(filePath)
       .on(
         'state_changed',
-        () => {
+        (snapshot) => {
           // snapshot
           // Current upload state
           // Ignore for now (need redux-saga's eventChannel)
+          utils.log('progress uploadFile', { snapshot });
         },
         (error) => {
-          reject(new Error(error));
+          utils.log('end uploadFile', { error });
+
+          reject(utils.createError(error));
         },
         (uploadedFile) => {
+          utils.log('end uploadFile', { uploadedFile });
+
           resolve(uploadedFile);
         },
       );

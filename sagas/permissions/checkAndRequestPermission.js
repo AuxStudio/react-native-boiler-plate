@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { permissions } from '../../services';
 import { Platform } from 'react-native';
+import utils from '../../utils';
 
 export default function* checkAndRequestPermission(action) {
   try {
@@ -8,10 +9,6 @@ export default function* checkAndRequestPermission(action) {
       permissions.checkPermission,
       action.payload.permission,
     );
-
-    if (__DEV__) {
-      console.log('checkPermission', checkPermissionResponse);
-    }
 
     if (checkPermissionResponse === 'authorized') {
       if (action.nextAction) {
@@ -25,14 +22,7 @@ export default function* checkAndRequestPermission(action) {
       (checkPermissionResponse === 'denied' && Platform.OS === 'android')
     ) {
       try {
-        const requestPermissionResponse = yield call(
-          permissions.requestPermission,
-          action.payload.permission,
-        );
-
-        if (__DEV__) {
-          console.log('requestPermission', requestPermissionResponse);
-        }
+        yield call(permissions.requestPermission, action.payload.permission);
 
         if (action.nextAction) {
           yield put({
@@ -41,11 +31,9 @@ export default function* checkAndRequestPermission(action) {
           });
         }
       } catch (error) {
-        const payload = error instanceof Error ? error : new Error(error);
-
         yield put({
           type: 'SET_SYSTEM_MESSAGE',
-          payload,
+          payload: utils.createError(error),
           error: true,
         });
       }
@@ -55,16 +43,16 @@ export default function* checkAndRequestPermission(action) {
     ) {
       yield put({
         type: 'SET_SYSTEM_MESSAGE',
-        payload: new Error(`We need your permission to access your: ${action.payload.permission}`),
+        payload: utils.createError(
+          `We need your permission to access your: ${action.payload.permission}`,
+        ),
         error: true,
       });
     }
   } catch (error) {
-    const payload = error instanceof Error ? error : new Error(error);
-
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload,
+      payload: utils.createError(error),
       error: true,
     });
   }

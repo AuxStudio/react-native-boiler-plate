@@ -1,20 +1,23 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function updateData(ref, data) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Dispatching update at ${ref}`);
-    }
+    utils.log('start updateData', { ref, data });
 
     firebase
       .database()
       .ref(ref)
       .update(data)
       .then(() => {
-        resolve(true);
+        utils.log('end updateData');
+
+        resolve();
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end updateData', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

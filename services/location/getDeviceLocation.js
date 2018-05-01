@@ -1,15 +1,19 @@
+import utils from '../../utils';
+
 export default function getDeviceLocation() {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log('Getting device location');
-    }
+    utils.log('start getDeviceLocation');
 
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
+        utils.log('end getDeviceLocation', { coords });
+
         resolve(coords);
       },
       (error) => {
-        reject(new Error(error));
+        utils.log('end getDeviceLocation', { error });
+
+        reject(utils.createError(error));
       },
     );
   });

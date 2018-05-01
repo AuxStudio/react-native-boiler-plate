@@ -1,20 +1,23 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function setData(ref, data) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Dispatching set at ${ref}`);
-    }
+    utils.log('start setData', { ref, data });
 
     firebase
       .database()
       .ref(ref)
       .set(data)
       .then(() => {
-        resolve(true);
+        utils.log('end setData');
+
+        resolve();
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end setData', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

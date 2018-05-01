@@ -1,12 +1,11 @@
 import { GoogleSignin } from 'react-native-google-signin';
 import firebase from 'react-native-firebase';
 import config from '../../config';
+import utils from '../../utils';
 
 export default function getCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log('Getting user credential from Google');
-    }
+    utils.log('start getCredentialFromGoogle');
 
     GoogleSignin.hasPlayServices({ autoResolve: true })
       .then(() => {
@@ -21,18 +20,26 @@ export default function getCredentialFromGoogle() {
                   user.accessToken,
                 );
 
+                utils.log('end getCredentialFromGoogle', { credential });
+
                 resolve(credential);
               })
               .catch((error) => {
-                reject(new Error(error));
+                utils.log('end getCredentialFromGoogle', { error });
+
+                reject(utils.createError(error));
               });
           })
           .catch((error) => {
-            reject(new Error(error));
+            utils.log('end getCredentialFromGoogle', { error });
+
+            reject(utils.createError(error));
           });
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end getCredentialFromGoogle', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

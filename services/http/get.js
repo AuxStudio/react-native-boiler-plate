@@ -1,15 +1,19 @@
+import utils from '../../utils';
+
 export default function get(url) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`HTTP get at: ${url}`);
-    }
+    utils.log('start get', { url });
 
     fetch(url)
       .then((response) => {
+        utils.log('end get', { response });
+
         resolve(response);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end get', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

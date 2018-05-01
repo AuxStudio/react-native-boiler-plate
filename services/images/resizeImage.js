@@ -1,11 +1,10 @@
 import ImageResizer from 'react-native-image-resizer';
 import config from '../../config';
+import utils from '../../utils';
 
 export default function resizeImage(imageURI) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Resizing image: ${imageURI}`);
-    }
+    utils.log('start resizeImage', { imageURI });
 
     const imageResizerOptions = [
       imageURI, // uri to image
@@ -14,10 +13,14 @@ export default function resizeImage(imageURI) {
 
     ImageResizer.createResizedImage(...imageResizerOptions)
       .then(({ uri }) => {
+        utils.log('end resizeImage', { uri });
+
         resolve(uri);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end resizeImage', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

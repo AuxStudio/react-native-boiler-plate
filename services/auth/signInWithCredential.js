@@ -1,19 +1,22 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function signInWithCredential(credential) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Signing in user with credential: ${JSON.stringify(credential)}`);
-    }
+    utils.log('start signInWithCredential', { credential });
 
     firebase
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
       .then((user) => {
+        utils.log('end signInWithCredential', { user });
+
         resolve(user);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end signInWithCredential', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

@@ -1,20 +1,23 @@
 import Geocoder from 'react-native-geocoder';
+import utils from '../../utils';
 
 export default function getFormattedAddressFromCoords(lat, lng) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Getting formatted address from coords: ${lat}, ${lng}`);
-    }
+    utils.log('start getFormattedAddressFromCoords', { lat, lng });
 
     Geocoder.geocodePosition({
       lat,
       lng,
     })
       .then((data) => {
+        utils.log('end getFormattedAddressFromCoords', { data });
+
         resolve(data);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end getFormattedAddressFromCoords', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

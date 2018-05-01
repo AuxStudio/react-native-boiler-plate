@@ -1,13 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 import { permissions } from '../../services';
+import utils from '../../utils';
 
 export default function* checkPermission(action) {
   try {
     const response = yield call(permissions.checkPermission, action.payload.permission);
-
-    if (__DEV__) {
-      console.log('checkPermission', response);
-    }
 
     if (action.meta.nextAction) {
       yield put({
@@ -16,11 +13,9 @@ export default function* checkPermission(action) {
       });
     }
   } catch (error) {
-    const payload = error instanceof Error ? error : new Error(error);
-
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload,
+      payload: utils.createError(error),
       error: true,
     });
   }

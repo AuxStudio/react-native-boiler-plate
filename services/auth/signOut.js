@@ -1,19 +1,22 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function signOut() {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log('Signing user out');
-    }
+    utils.log('start signOut');
 
     firebase
       .auth()
       .signOut()
       .then((user) => {
+        utils.log('end signOut', { user });
+
         resolve(user);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end signOut', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

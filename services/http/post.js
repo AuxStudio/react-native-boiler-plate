@@ -1,10 +1,8 @@
+import utils from '../../utils';
+
 export default function post(url, headers, body) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(
-        `HTTP post to: ${url}, headers: ${JSON.stringify(headers)}, data: ${JSON.stringify(body)}`,
-      );
-    }
+    utils.log('start post', { url, headers, body });
 
     fetch(url, {
       method: 'POST',
@@ -12,10 +10,14 @@ export default function post(url, headers, body) {
       body,
     })
       .then((response) => {
+        utils.log('end post', { response });
+
         resolve(response);
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end post', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

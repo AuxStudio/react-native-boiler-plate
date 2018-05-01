@@ -11,7 +11,8 @@
     "import/no-named-as-default": 0,
     "function-paren-newline": ["error", "consistent"],
     "no-console": "off",
-    "no-mixed-operators": "off"
+    "no-mixed-operators": "off",
+    "prefer-rest-params": "off"
   },
   "plugins": ["react", "react-native"],
   "globals": {

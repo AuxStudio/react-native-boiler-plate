@@ -1,19 +1,22 @@
 import firebase from 'react-native-firebase';
+import utils from '../../utils';
 
 export default function sendPasswordResetEmail(email) {
   return new Promise((resolve, reject) => {
-    if (__DEV__) {
-      console.log(`Sending password reset email: ${email}`);
-    }
+    utils.log('start sendPasswordResetEmail', { email });
 
     firebase
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        resolve(true);
+        utils.log('end sendPasswordResetEmail');
+
+        resolve();
       })
       .catch((error) => {
-        reject(new Error(error));
+        utils.log('end sendPasswordResetEmail', { error });
+
+        reject(utils.createError(error));
       });
   });
 }

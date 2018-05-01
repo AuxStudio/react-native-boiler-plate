@@ -1,13 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
+import utils from '../../utils';
 
 export default function* getAuth(action) {
   try {
     const response = yield call(auth.getAuth);
-
-    if (__DEV__) {
-      console.log('getAuth', response);
-    }
 
     if (response) {
       if (action.meta.nextAction) {
@@ -22,11 +19,9 @@ export default function* getAuth(action) {
       });
     }
   } catch (error) {
-    const payload = error instanceof Error ? error : new Error(error);
-
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload,
+      payload: utils.createError(error),
       error: true,
     });
   }

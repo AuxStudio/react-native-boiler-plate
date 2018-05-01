@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { location } from '../../services';
+import utils from '../../utils';
 
 export default function* getFormattedAddressFromCoords(action) {
   try {
@@ -9,10 +10,6 @@ export default function* getFormattedAddressFromCoords(action) {
       action.payload.longitude,
     );
 
-    if (__DEV__) {
-      console.log('getFormattedAddressFromCoords', response);
-    }
-
     if (action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
@@ -20,11 +17,9 @@ export default function* getFormattedAddressFromCoords(action) {
       });
     }
   } catch (error) {
-    const payload = error instanceof Error ? error : new Error(error);
-
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload,
+      payload: utils.createError(error),
       error: true,
     });
   }
