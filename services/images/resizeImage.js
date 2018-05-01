@@ -4,7 +4,7 @@ import config from '../../config';
 export default function resizeImage(imageURI) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Resizing image: ${JSON.stringify(imageURI)}`);
+      console.log(`Resizing image: ${imageURI}`);
     }
 
     const imageResizerOptions = [

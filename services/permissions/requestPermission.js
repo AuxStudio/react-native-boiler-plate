@@ -1,12 +1,12 @@
-import RNPermissions from 'react-native-permissions';
+import Permissions from 'react-native-permissions';
 
 export default function requestPermission(permission) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`Requesting permission ${JSON.stringify(permission)}`);
+      console.log(`Requesting permission ${permission}`);
     }
 
-    RNPermissions.request(permission)
+    Permissions.request(permission)
       .then((response) => {
         resolve(response);
       })
