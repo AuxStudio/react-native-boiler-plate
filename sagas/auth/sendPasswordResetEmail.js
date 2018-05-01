@@ -3,7 +3,7 @@ import { auth } from '../../services';
 
 export default function* sendPasswordResetEmail(action) {
   try {
-    const response = yield call(auth.sendPasswordResetEmail, action);
+    const response = yield call(auth.sendPasswordResetEmail, action.payload.email);
 
     if (__DEV__) {
       console.log('sendPasswordResetEmail', response);

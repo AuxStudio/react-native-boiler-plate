@@ -3,7 +3,7 @@ import { auth } from '../../services';
 
 export default function* signInUserWithCredential(action) {
   try {
-    const response = yield call(auth.signInUserWithCredential, action);
+    const response = yield call(auth.signInUserWithCredential, action.payload.credential);
 
     if (__DEV__) {
       console.log('signInUserWithCredentialResponse', response);

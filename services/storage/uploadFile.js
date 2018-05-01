@@ -1,17 +1,15 @@
 import firebase from 'react-native-firebase';
 
-export default function uploadFile(action) {
+export default function uploadFile(ref, filePath) {
   return new Promise((resolve, reject) => {
-    const ref = action.payload.node;
-
     if (__DEV__) {
-      console.log(`Uploading file: ${ref}, ${JSON.stringify(action.payload)}`);
+      console.log(`Uploading file: ${ref}, ${filePath}`);
     }
 
     firebase
       .storage()
       .ref(ref)
-      .putFile(action.payload.filePath)
+      .putFile(filePath)
       .on(
         'state_changed',
         () => {

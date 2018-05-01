@@ -3,7 +3,7 @@ import { auth } from '../../services';
 
 export default function* getUserCredentialFromEmail(action) {
   try {
-    const response = yield call(auth.getUserCredentialFromEmail, action);
+    const response = yield call(auth.getUserCredentialFromEmail, action.email, action.password);
 
     if (__DEV__) {
       console.log('getUserCredentialFromEmail', response);

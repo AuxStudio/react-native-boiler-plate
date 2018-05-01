@@ -1,9 +1,7 @@
 import firebase from 'react-native-firebase';
 
-export default function getData(action) {
+export default function getData(ref) {
   return new Promise((resolve, reject) => {
-    const ref = action.payload.node;
-
     if (__DEV__) {
       console.log(`Dispatching get at ${ref}`);
     }

@@ -1,9 +1,7 @@
 import firebase from 'react-native-firebase';
 
-export default function setData(action) {
+export default function setData(ref, data) {
   return new Promise((resolve, reject) => {
-    const ref = action.payload.node;
-
     if (__DEV__) {
       console.log(`Dispatching set at ${ref}`);
     }
@@ -11,7 +9,7 @@ export default function setData(action) {
     firebase
       .database()
       .ref(ref)
-      .set(action.payload.data)
+      .set(data)
       .then(() => {
         resolve(true);
       })

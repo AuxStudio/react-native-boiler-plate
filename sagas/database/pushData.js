@@ -3,7 +3,7 @@ import { database } from '../../services';
 
 export default function* pushData(action) {
   try {
-    const response = yield call(database.pushData, action);
+    const response = yield call(database.pushData, action.payload.ref, action.payload.data);
 
     if (__DEV__) {
       console.log('pushData', response);

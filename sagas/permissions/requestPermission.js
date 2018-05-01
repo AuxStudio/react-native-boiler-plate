@@ -3,7 +3,7 @@ import { permissions } from '../../services';
 
 export default function* requestPermission(action) {
   try {
-    const response = yield call(permissions.requestPermission, action);
+    const response = yield call(permissions.requestPermission, action.payload.permission);
 
     if (__DEV__) {
       console.log('requestPermission', response);

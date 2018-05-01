@@ -1,13 +1,17 @@
-export default function post(action) {
+export default function post(url, headers, data) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`HTTP post to: ${action.payload.url}, ${JSON.stringify(action.payload)}`);
+      console.log(
+        `HTTP post to: ${url}, headers: ${JSON.stringify(headers)}, data: ${JSON.stringify(
+          headers,
+        )}`,
+      );
     }
 
-    fetch(action.payload.url, {
+    fetch(url, {
       method: 'POST',
-      headers: action.payload.headers,
-      body: JSON.stringify(action.payload.body),
+      headers,
+      body: JSON.stringify(data),
     })
       .then((response) => {
         resolve(response);

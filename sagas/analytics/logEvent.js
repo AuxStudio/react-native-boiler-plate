@@ -3,7 +3,7 @@ import { analytics } from '../../services';
 
 export default function* logEvent(action) {
   try {
-    const response = yield call(analytics.logEvent, action);
+    const response = yield call(analytics.logEvent, action.payload.event, action.payload.params);
 
     if (__DEV__) {
       console.log('logEvent', response);

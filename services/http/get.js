@@ -1,10 +1,10 @@
-export default function get(action) {
+export default function get(url) {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log(`HTTP get at: ${action.payload.url}`);
+      console.log(`HTTP get at: ${url}`);
     }
 
-    fetch(action.payload.url)
+    fetch(url)
       .then((response) => {
         resolve(response);
       })

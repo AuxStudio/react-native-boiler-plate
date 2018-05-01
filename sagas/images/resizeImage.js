@@ -3,7 +3,7 @@ import { images } from '../../services';
 
 export default function* resizeImage(action) {
   try {
-    const response = yield call(images.resizeImage, action);
+    const response = yield call(images.resizeImage, action.payload.uri);
 
     if (__DEV__) {
       console.log('resizeImage', response);

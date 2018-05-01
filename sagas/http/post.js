@@ -3,7 +3,12 @@ import { http } from '../../services';
 
 export default function* post(action) {
   try {
-    const response = yield call(http.get, action);
+    const response = yield call(
+      http.get,
+      action.payload.url,
+      action.payload.headers,
+      action.payload.data,
+    );
 
     if (__DEV__) {
       console.log('get', response);

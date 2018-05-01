@@ -1,9 +1,7 @@
 import firebase from 'react-native-firebase';
 
-export default function updateData(action) {
+export default function updateData(ref, data) {
   return new Promise((resolve, reject) => {
-    const ref = action.payload.node;
-
     if (__DEV__) {
       console.log(`Dispatching update at ${ref}`);
     }
@@ -11,7 +9,7 @@ export default function updateData(action) {
     firebase
       .database()
       .ref(ref)
-      .update(action.payload.data)
+      .update(data)
       .then(() => {
         resolve(true);
       })
