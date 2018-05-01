@@ -10,9 +10,9 @@ export default function* getAuth(action) {
     }
 
     if (response) {
-      if (action.nextAction) {
+      if (action.meta.nextAction) {
         yield put({
-          ...action.nextAction,
+          ...action.meta.nextAction,
           payload: response,
         });
       }

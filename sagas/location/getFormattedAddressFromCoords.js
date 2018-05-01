@@ -9,9 +9,9 @@ export default function* getFormattedAddressFromCoords(action) {
       console.log('getFormattedAddressFromCoords', response);
     }
 
-    if (action.nextAction) {
+    if (action.meta.nextAction) {
       yield put({
-        ...action.nextAction,
+        ...action.meta.nextAction,
         payload: response,
       });
     }

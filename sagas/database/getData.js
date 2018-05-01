@@ -9,9 +9,9 @@ export default function* getData(action) {
       console.log('getData', response);
     }
 
-    if (action.nextAction) {
+    if (action.meta.nextAction) {
       yield put({
-        ...action.nextAction,
+        ...action.meta.nextAction,
         payload: response,
       });
     }

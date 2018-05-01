@@ -9,9 +9,9 @@ export default function* requestPermission(action) {
       console.log('requestPermission', response);
     }
 
-    if (action.nextAction) {
+    if (action.meta.nextAction) {
       yield put({
-        ...action.nextAction,
+        ...action.meta.nextAction,
         payload: response,
       });
     }

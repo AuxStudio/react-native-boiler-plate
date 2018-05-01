@@ -3,15 +3,19 @@ import { auth } from '../../services';
 
 export default function* getCredentialFromEmail(action) {
   try {
-    const response = yield call(auth.getCredentialFromEmail, action.email, action.password);
+    const response = yield call(
+      auth.getCredentialFromEmail,
+      action.payload.email,
+      action.payload.password,
+    );
 
     if (__DEV__) {
       console.log('getCredentialFromEmail', response);
     }
 
-    if (action.nextAction) {
+    if (action.meta.nextAction) {
       yield put({
-        ...action.nextAction,
+        ...action.meta.nextAction,
         payload: response,
       });
     }

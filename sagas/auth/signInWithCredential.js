@@ -9,9 +9,9 @@ export default function* signInWithCredential(action) {
       console.log('signInUserWithCredentialResponse', response);
     }
 
-    if (action.nextAction) {
+    if (action.meta.nextAction) {
       yield put({
-        ...action.nextAction,
+        ...action.meta.nextAction,
         payload: response,
       });
     }
