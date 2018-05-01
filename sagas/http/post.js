@@ -4,7 +4,7 @@ import { http } from '../../services';
 export default function* post(action) {
   try {
     const response = yield call(
-      http.get,
+      http.post,
       action.payload.url,
       action.payload.headers,
       action.payload.data,
