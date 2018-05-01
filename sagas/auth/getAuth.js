@@ -1,18 +1,24 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* getUserCredentialFromEmail(action) {
+export default function* getAuth(action) {
   try {
-    const response = yield call(auth.getUserCredentialFromEmail, action.email, action.password);
+    const response = yield call(auth.getAuth);
 
     if (__DEV__) {
-      console.log('getUserCredentialFromEmail', response);
+      console.log('getAuth', response);
     }
 
-    if (action.nextAction) {
+    if (response) {
+      if (action.nextAction) {
+        yield put({
+          ...action.nextAction,
+          payload: response,
+        });
+      }
+    } else {
       yield put({
-        ...action.nextAction,
-        payload: response,
+        type: 'signInAnonymously',
       });
     }
   } catch (error) {

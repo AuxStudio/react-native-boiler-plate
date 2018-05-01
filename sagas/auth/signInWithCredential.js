@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* signInUserWithCredential(action) {
+export default function* signInWithCredential(action) {
   try {
-    const response = yield call(auth.signInUserWithCredential, action.payload.credential);
+    const response = yield call(auth.signInWithCredential, action.payload.credential);
 
     if (__DEV__) {
       console.log('signInUserWithCredentialResponse', response);

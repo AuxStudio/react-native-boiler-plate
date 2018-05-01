@@ -1,14 +1,14 @@
 import firebase from 'react-native-firebase';
 
-export default function signOutUser() {
+export default function signInAnonymously() {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
-      console.log('Signing user out');
+      console.log('Signing in anonymously');
     }
 
     firebase
       .auth()
-      .signOut()
+      .signInAnonymouslyAndRetrieveData()
       .then((user) => {
         resolve(user);
       })

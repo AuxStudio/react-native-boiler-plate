@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* signOutUser(action) {
+export default function* signInAnonymously(action) {
   try {
-    const response = yield call(auth.signOutUser);
+    const response = yield call(auth.signInAnonymously);
 
     if (__DEV__) {
-      console.log('signOutUserResponse', response);
+      console.log('signInAnonymously', response);
     }
 
     if (action.nextAction) {

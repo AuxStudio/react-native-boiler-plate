@@ -1,7 +1,7 @@
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
 
-export default function getUserCredentialFromFacebook() {
+export default function getCredentialFromFacebook() {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
       console.log('Getting user credential from facebook');

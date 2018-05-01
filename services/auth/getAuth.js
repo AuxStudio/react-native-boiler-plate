@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 
-export default function getUserAuth() {
+export default function getAuth() {
   return new Promise((resolve) => {
     if (__DEV__) {
       console.log('Getting user authentication');

@@ -2,7 +2,7 @@ import { GoogleSignin } from 'react-native-google-signin';
 import firebase from 'react-native-firebase';
 import config from '../../config';
 
-export default function getUserCredentialFromGoogle() {
+export default function getCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
     if (__DEV__) {
       console.log('Getting user credential from Google');

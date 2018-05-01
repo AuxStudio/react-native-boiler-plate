@@ -1,19 +1,19 @@
-import getUserAuth from './getUserAuth';
-import signInUserAnonymously from './signInUserAnonymously';
-import getUserCredentialFromEmail from './getUserCredentialFromEmail';
-import getUserCredentialFromFacebook from './getUserCredentialFromFacebook';
-import getUserCredentialFromGoogle from './getUserCredentialFromGoogle';
-import signInUserWithCredential from './signInUserWithCredential';
+import getAuth from './getAuth';
+import signInAnonymously from './signInAnonymously';
+import getCredentialFromEmail from './getCredentialFromEmail';
+import getCredentialFromFacebook from './getCredentialFromFacebook';
+import getCredentialFromGoogle from './getCredentialFromGoogle';
+import signInWithCredential from './signInWithCredential';
 import sendPasswordResetEmail from './sendPasswordResetEmail';
-import signOutUser from './signOutUser';
+import signOut from './signOut';
 
 module.exports = {
-  getUserAuth,
-  signInUserAnonymously,
-  getUserCredentialFromEmail,
-  getUserCredentialFromFacebook,
-  getUserCredentialFromGoogle,
-  signInUserWithCredential,
+  getAuth,
+  signInAnonymously,
+  getCredentialFromEmail,
+  getCredentialFromFacebook,
+  getCredentialFromGoogle,
+  signInWithCredential,
   sendPasswordResetEmail,
-  signOutUser,
+  signOut,
 };

@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 import { auth } from '../../services';
 
-export default function* getUserCredentialFromGoogle(action) {
+export default function* getCredentialFromFacebook(action) {
   try {
-    const response = yield call(auth.getUserCredentialFromGoogle);
+    const response = yield call(auth.getCredentialFromFacebook);
 
     if (__DEV__) {
-      console.log('getUserCredentialFromGoogle', response);
+      console.log('getCredentialFromFacebook', response);
     }
 
     if (action.nextAction) {

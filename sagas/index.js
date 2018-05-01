@@ -5,14 +5,14 @@ import { logEvent } from './analytics';
 
 // Auth
 import {
-  getUserAuth,
-  signInUserAnonymously,
-  getUserCredentialFromEmail,
+  getAuth,
+  signInAnonymously,
+  getCredentialFromEmail,
   sendPasswordResetEmail,
-  getUserCredentialFromFacebook,
-  getUserCredentialFromGoogle,
-  signInUserWithCredential,
-  signOutUser,
+  getCredentialFromFacebook,
+  getCredentialFromGoogle,
+  signInWithCredential,
+  signOut,
 } from './auth';
 
 // Database
@@ -39,14 +39,14 @@ export default function* sagas() {
     fork(takeLatest, 'logEvent', logEvent),
 
     // Auth
-    fork(takeLatest, 'getUserAuth', getUserAuth),
-    fork(takeLatest, 'signInUserAnonymously', signInUserAnonymously),
-    fork(takeLatest, 'getUserCredentialFromEmail', getUserCredentialFromEmail),
+    fork(takeLatest, 'getAuth', getAuth),
+    fork(takeLatest, 'signInAnonymously', signInAnonymously),
+    fork(takeLatest, 'getCredentialFromEmail', getCredentialFromEmail),
     fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
-    fork(takeLatest, 'getUserCredentialFromFacebook', getUserCredentialFromFacebook),
-    fork(takeLatest, 'getUserCredentialFromGoogle', getUserCredentialFromGoogle),
-    fork(takeLatest, 'signInUserWithCredential', signInUserWithCredential),
-    fork(takeLatest, 'signOutUser', signOutUser),
+    fork(takeLatest, 'getCredentialFromFacebook', getCredentialFromFacebook),
+    fork(takeLatest, 'getCredentialFromGoogle', getCredentialFromGoogle),
+    fork(takeLatest, 'signInWithCredential', signInWithCredential),
+    fork(takeLatest, 'signOut', signOut),
 
     // Database
     fork(takeEvery, 'getData', getData),
