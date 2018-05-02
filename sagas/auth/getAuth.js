@@ -12,10 +12,18 @@ export default function* getAuth(action) {
           ...action.meta.nextAction,
           payload: response,
         });
+      } else {
+        yield put({
+          type: 'SIGN_IN_USER',
+          payload: response,
+        });
       }
     } else {
       yield put({
         type: 'signInAnonymously',
+        meta: {
+          nextAction: action.meta && action.meta.nextAction,
+        },
       });
     }
   } catch (error) {

@@ -11,6 +11,14 @@ export default function* sendPasswordResetEmail(action) {
         ...action.meta.nextAction,
         payload: response,
       });
+    } else {
+      yield put({
+        type: 'SET_SYSTEM_MESSAGE',
+        payload: {
+          message: 'Email sent successfully',
+        },
+        error: true,
+      });
     }
   } catch (error) {
     yield put({

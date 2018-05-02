@@ -5,11 +5,17 @@ import utils from '../../utils';
 export default function* signInAnonymously(action) {
   try {
     const response = yield call(auth.signInAnonymously);
+    const { user } = response; // omits additionalUserInfo
 
     if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
-        payload: response,
+        payload: user,
+      });
+    } else {
+      yield put({
+        type: 'SIGN_IN_USER',
+        payload: user,
       });
     }
   } catch (error) {

@@ -11,6 +11,11 @@ export default function* getCredentialFromGoogle(action) {
         ...action.meta.nextAction,
         payload: response,
       });
+    } else {
+      yield put({
+        type: 'SIGN_IN_USER',
+        payload: response,
+      });
     }
   } catch (error) {
     yield put({

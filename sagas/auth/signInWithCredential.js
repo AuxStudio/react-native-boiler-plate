@@ -11,22 +11,17 @@ export default function* signInWithCredential(action) {
         ...action.meta.nextAction,
         payload: response,
       });
-    }
-  } catch (error) {
-    if (error.message.code === 'auth/account-exists-with-different-credential') {
-      yield put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.createError(
-          "Hello! You've already signed in with someone else. Please try another option.",
-        ),
-        error: true,
-      });
     } else {
       yield put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.createError(error),
-        error: true,
+        type: 'SIGN_IN_USER',
+        payload: response,
       });
     }
+  } catch (error) {
+    yield put({
+      type: 'SET_SYSTEM_MESSAGE',
+      payload: utils.createError(error),
+      error: true,
+    });
   }
 }

@@ -11,6 +11,10 @@ export default function* signOut(action) {
         ...action.meta.nextAction,
         payload: response,
       });
+    } else {
+      yield put({
+        type: 'SIGN_OUT_USER',
+      });
     }
   } catch (error) {
     yield put({
