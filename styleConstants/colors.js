@@ -1,18 +1,16 @@
-const colors = {};
-
-colors.primary = '#3D84A8';
-colors.lightPrimary = '#46CDCF';
-colors.darkPrimary = '#48466D';
-colors.secondary = '#88304E';
-colors.lightSecondary = '#E23E57';
-colors.darkSecondary = '#522546';
-colors.white = '#FFFFFF';
-colors.transWhite = 'rgba(255, 255, 255, 0.70)';
-colors.transBlack = 'rgba(0, 0, 0, 0.70)';
-colors.primaryText = '#212121';
-colors.secondaryText = '#757575';
-colors.dividerColor = '#E0E0E0';
-colors.success = '#4caf50';
-colors.danger = '#d32f2f';
+const colors = {
+  primary: '#3D84A8',
+  lightPrimary: '#46CDCF',
+  darkPrimary: '#48466D',
+  secondary: '#88304E',
+  white: '#FFFFFF',
+  transWhite: 'rgba(255, 255, 255, 0.70)',
+  transBlack: 'rgba(0, 0, 0, 0.70)',
+  primaryText: '#212121',
+  secondaryText: '#757575',
+  dividerColor: '#E0E0E0',
+  success: '#4caf50',
+  danger: '#d32f2f',
+};
 
 export default colors;

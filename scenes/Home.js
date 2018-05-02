@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Page } from 'react-native-simple-components';
 
 import Example from '../components/Example';
 
@@ -14,9 +14,9 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <View>
-        <Example title="Home" />
-      </View>
+      <Page>
+        <Example title="home" />
+      </Page>
     );
   }
 }
