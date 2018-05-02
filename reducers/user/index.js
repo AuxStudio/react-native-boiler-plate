@@ -5,16 +5,6 @@ export default function userReducer(state = initialState, action = {}) {
   let newState;
 
   switch (action.type) {
-    case 'UPDATE_USER_EMAIL':
-      newState = utils.cloneObject(state);
-      newState.email = action.payload.email;
-      return newState;
-
-    case 'UPDATE_USER_PASSWORD':
-      newState = utils.cloneObject(state);
-      newState.password = action.payload.password;
-      return newState;
-
     case 'SIGN_IN_USER':
       newState = utils.cloneObject(state);
       newState = {
@@ -23,14 +13,18 @@ export default function userReducer(state = initialState, action = {}) {
       newState.authenticated = true;
       return newState;
 
+    case 'UPDATE_USER_PROFILE_DATA': {
+      newState = utils.cloneObject(state);
+      // Get the ref from the key of the payload
+      const refs = Object.keys(action.payload);
+      const ref = refs[0];
+      newState[ref] = action.payload[ref];
+      return newState;
+    }
+
     case 'SIGN_OUT_USER':
       newState = utils.cloneObject(state);
       newState = initialState;
-      return newState;
-
-    case 'SET_USER_PHOTO':
-      newState = utils.cloneObject(state);
-      newState.userPhotoURL = action.payload.url;
       return newState;
 
     default:
