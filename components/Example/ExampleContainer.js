@@ -1,19 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
-
-import styles from './styles';
 
 import Example from './Example';
 
-const propTypes = {};
+const propTypes = {
+  title: PropTypes.string,
+};
 
-const defaultProps = {};
+const defaultProps = {
+  title: 'Example',
+};
 
-const ExampleContainer = ({ someProp }) => {
-  const newProp = someProp; // do some business logic
+const ExampleContainer = ({ title }) => {
+  const upperCasedTitle = title.toUpperCase(); // do some business logic
 
-  return <Example someProp={newProp} />;
+  return <Example title={upperCasedTitle} />;
 };
 
 ExampleContainer.propTypes = propTypes;
