@@ -6,7 +6,7 @@ export default function* get(action) {
   try {
     const response = yield call(http.get, action.payload.url);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

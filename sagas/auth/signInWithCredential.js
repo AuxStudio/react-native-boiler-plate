@@ -6,7 +6,7 @@ export default function* signInWithCredential(action) {
   try {
     const response = yield call(auth.signInWithCredential, action.payload.credential);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

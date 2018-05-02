@@ -7,18 +7,18 @@ export default function userReducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'UPDATE_USER_EMAIL':
       newState = utils.cloneObject(state);
-      newState.userEmail = action.payload;
+      newState.email = action.payload.email;
       return newState;
 
     case 'UPDATE_USER_PASSWORD':
       newState = utils.cloneObject(state);
-      newState.userPassword = action.payload;
+      newState.password = action.payload.password;
       return newState;
 
     case 'SIGN_IN_USER':
       newState = utils.cloneObject(state);
       newState = {
-        ...action.payload,
+        ...action.payload._user,
       };
       newState.authenticated = true;
       return newState;
@@ -30,7 +30,7 @@ export default function userReducer(state = initialState, action = {}) {
 
     case 'SET_USER_PHOTO':
       newState = utils.cloneObject(state);
-      newState.userPhotoURL = action.payload;
+      newState.userPhotoURL = action.payload.url;
       return newState;
 
     default:

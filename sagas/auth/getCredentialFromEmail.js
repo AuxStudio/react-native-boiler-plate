@@ -10,7 +10,7 @@ export default function* getCredentialFromEmail(action) {
       action.payload.password,
     );
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

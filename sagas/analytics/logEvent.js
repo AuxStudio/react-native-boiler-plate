@@ -6,7 +6,7 @@ export default function* logEvent(action) {
   try {
     const response = yield call(analytics.logEvent, action.payload.event, action.payload.params);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

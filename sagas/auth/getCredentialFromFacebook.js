@@ -6,7 +6,7 @@ export default function* getCredentialFromFacebook(action) {
   try {
     const response = yield call(auth.getCredentialFromFacebook);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

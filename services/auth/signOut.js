@@ -8,10 +8,10 @@ export default function signOut() {
     firebase
       .auth()
       .signOut()
-      .then((user) => {
-        utils.log('end signOut', { user });
+      .then(() => {
+        utils.log('end signOut');
 
-        resolve(user);
+        resolve();
       })
       .catch((error) => {
         utils.log('end signOut', { error });

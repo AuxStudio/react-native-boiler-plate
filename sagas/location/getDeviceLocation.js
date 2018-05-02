@@ -6,7 +6,7 @@ export default function* getDeviceLocation(action) {
   try {
     const response = yield call(location.getDeviceLocation);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

@@ -6,7 +6,7 @@ export default function* requestPermission(action) {
   try {
     const response = yield call(permissions.requestPermission, action.payload.permission);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

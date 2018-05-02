@@ -6,7 +6,7 @@ export default function* sendPasswordResetEmail(action) {
   try {
     const response = yield call(auth.sendPasswordResetEmail, action.payload.email);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

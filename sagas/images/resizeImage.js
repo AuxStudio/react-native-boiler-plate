@@ -6,7 +6,7 @@ export default function* resizeImage(action) {
   try {
     const response = yield call(images.resizeImage, action.payload.uri);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

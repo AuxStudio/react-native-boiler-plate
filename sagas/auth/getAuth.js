@@ -7,7 +7,7 @@ export default function* getAuth(action) {
     const response = yield call(auth.getAuth);
 
     if (response) {
-      if (action.meta.nextAction) {
+      if (action.meta && action.meta.nextAction) {
         yield put({
           ...action.meta.nextAction,
           payload: response,

@@ -11,7 +11,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 # TODOS
 
 * Testing src files
-  Sagas and services
   Reducers
 * Add push notifications setup
 * Add storybook setup

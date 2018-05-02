@@ -6,7 +6,7 @@ export default function* setData(action) {
   try {
     const response = yield call(database.setData, action.payload.ref, action.payload.data);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

@@ -12,7 +12,8 @@
     "function-paren-newline": ["error", "consistent"],
     "no-console": "off",
     "no-mixed-operators": "off",
-    "prefer-rest-params": "off"
+    "prefer-rest-params": "off",
+    "no-underscore-dangle": "off"
   },
   "plugins": ["react", "react-native"],
   "globals": {

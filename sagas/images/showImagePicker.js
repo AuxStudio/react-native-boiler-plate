@@ -6,7 +6,7 @@ export default function* showImagePicker(action) {
   try {
     const response = yield call(images.showImagePicker);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

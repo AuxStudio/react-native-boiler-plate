@@ -6,7 +6,7 @@ export default function* getCredentialFromGoogle(action) {
   try {
     const response = yield call(auth.getCredentialFromGoogle);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,
