@@ -10,13 +10,27 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-named-as-default": 0,
     "function-paren-newline": ["error", "consistent"],
-    "no-console": "off",
-    "no-mixed-operators": "off",
+    "no-console": "off", // console logging is extremely useful
+    "no-mixed-operators": "off", // I personally don't see anything wrong with x + y / z
     "prefer-rest-params": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off", // firebase loves returning props with leading underscores
+    "prefer-destructuring": [
+      "error",
+      {
+        "array": false,
+        "object": true
+      }
+    ]
   },
   "plugins": ["react", "react-native"],
   "globals": {
     "__DEV__": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".android.js", ".ios.js"]
+      }
+    }
   }
 }

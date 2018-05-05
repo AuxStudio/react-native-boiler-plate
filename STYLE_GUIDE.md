@@ -82,3 +82,7 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 ### Firebase
 
 * Do not use arrays in Firebase. Use objects indexed by IDs.
+
+### Lists
+
+* When you need to iterate through lists of data, create static IDs before hand.
