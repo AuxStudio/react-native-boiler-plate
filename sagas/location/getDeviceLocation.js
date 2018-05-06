@@ -11,6 +11,11 @@ export default function* getDeviceLocation(action) {
         ...action.meta.nextAction,
         payload: response,
       });
+    } else {
+      yield put({
+        type: 'SET_DEVICE_LOCATION',
+        payload: response,
+      });
     }
   } catch (error) {
     yield put({
