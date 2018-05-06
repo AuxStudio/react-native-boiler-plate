@@ -14,9 +14,7 @@ export default function* sendPasswordResetEmail(action) {
     } else {
       yield put({
         type: 'SET_SYSTEM_MESSAGE',
-        payload: {
-          message: 'Email sent successfully',
-        },
+        payload: utils.createError('Email sent successfully'),
         error: true,
       });
     }

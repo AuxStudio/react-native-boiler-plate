@@ -15,7 +15,14 @@ utils.createError = createError;
 function log(descriptor, data) {
   // logs a descriptor and data if in dev mode
   if (__DEV__) {
-    console.log(descriptor, JSON.stringify(data));
+    let dataString;
+    // JSON.stringify fails on circular objects
+    try {
+      dataString = JSON.stringify(data);
+    } catch (error) {
+      dataString = data;
+    }
+    console.log(descriptor, dataString);
   }
 }
 utils.log = log;

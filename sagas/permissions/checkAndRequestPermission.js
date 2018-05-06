@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { permissions } from '../../services';
 import { Platform } from 'react-native';
+import { permissions } from '../../services';
 import utils from '../../utils';
 
 export default function* checkAndRequestPermission(action) {
@@ -11,9 +11,9 @@ export default function* checkAndRequestPermission(action) {
     );
 
     if (checkPermissionResponse === 'authorized') {
-      if (action.nextAction) {
+      if (action.meta.nextAction) {
         yield put({
-          ...action.nextAction,
+          ...action.meta.nextAction,
           payload: checkPermissionResponse,
         });
       }
@@ -24,9 +24,9 @@ export default function* checkAndRequestPermission(action) {
       try {
         yield call(permissions.requestPermission, action.payload.permission);
 
-        if (action.nextAction) {
+        if (action.meta.nextAction) {
           yield put({
-            ...action.nextAction,
+            ...action.meta.nextAction,
             payload: checkPermissionResponse,
           });
         }
