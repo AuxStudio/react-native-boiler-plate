@@ -10,19 +10,16 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Testing src files
-  Reducers
+* Refactor wrappers (some of them don't need to be wrappers, they can just be components)
+* FileSystem sagas and services based on new RN
+* Create ErrorBoundary component and log errors to DB
+* System messages management
+* Add a CHANGELOG
 * Add push notifications setup
 * Add storybook setup
-* Refactor wrappers (some of them don't need to be wrappers, they can just be components)
-* Create ErrorBoundary component
-* Error logging to DB component
-* System messages management
-* FileSystem sagas and services based on new RN
-* Add a CHANGELOG
 * Fastlane integration
 * CodePush integration
 * Testing integration
-* Write script to generate project in one go (saves up to 3 hrs)
 * Add phone authentication
 * Full in-app password reset methods
+* Write script to generate project in one go (saves up to 3 hrs)

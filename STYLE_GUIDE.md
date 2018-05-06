@@ -35,6 +35,7 @@ src
 			index.js	// import and export
 			styles.js
 	config
+	containers
 	scenes
 		Home.js
 	navigation
@@ -72,6 +73,10 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 * Presentational components should not contain any business logic.
 * Presentational components should be wired up to Storybook (TODO).
 * Components should be able to manage state internally where possible to allow for testing in Storybook and unit testing.
+
+### Containers
+
+* These are React components that purely handle logic and either do not render anything or they render children only.
 
 ### Services and sagas
 

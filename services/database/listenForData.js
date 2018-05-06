@@ -1,9 +1,9 @@
 import firebase from 'react-native-firebase';
 import utils from '../../utils';
 
-export default function listenForData(ref, callback) {
-  return new Promise((resolve, reject) => {
-    utils.log('start listenForData', { ref, callback });
+export default function listenForData(ref, successCallback, errorCallback) {
+  return new Promise((resolve) => {
+    utils.log('start listenForData', { ref, successCallback, errorCallback });
 
     firebase
       .database()
@@ -15,12 +15,12 @@ export default function listenForData(ref, callback) {
 
           utils.log('end listenForData', { data });
 
-          resolve(callback(data));
+          resolve(successCallback(data));
         },
         (error) => {
           utils.log('end listenForData', { error });
 
-          reject(utils.createError(error));
+          resolve(errorCallback(error));
         },
       );
   });
