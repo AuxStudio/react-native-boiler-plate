@@ -1,12 +1,11 @@
 const initialState = {
-  appStart: false,
-  loading: true,
+  appStart: null,
+  loading: true, // assume true on app open
   systemMessage: {
     message: null,
     error: null,
   },
   deviceLocation: null,
-  temporaryImage: null,
 };
 
 export default initialState;
