@@ -34,6 +34,9 @@ import { checkPermission, requestPermission, checkAndRequestPermission } from '.
 // Storage
 import { uploadFile } from './storage';
 
+// Errors
+import { logError } from './errors';
+
 export default function* sagas() {
   yield all([
     // Analytics
@@ -75,5 +78,8 @@ export default function* sagas() {
 
     // Storage
     fork(takeLatest, 'uploadFile', uploadFile),
+
+    // Erros
+    fork(takeLatest, 'logError', logError),
   ]);
 }

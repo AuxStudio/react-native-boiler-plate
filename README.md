@@ -10,10 +10,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Refactor wrappers (some of them don't need to be wrappers, they can just be components)
-* FileSystem sagas and services based on new RN
-* Create ErrorBoundary component and log errors to DB
-* System messages management (array of messages displayed sequentially)
 * Add a CHANGELOG
 * NetworkHandler needs to direct offline operations on db
 * LocationHandler permissions handling could be more robust
@@ -22,6 +18,11 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * Fastlane integration
 * CodePush integration
 * Testing integration
-* Add phone authentication
-* Full in-app password reset methods
+
+# NICE TO HAVES
+
+* System messages management (array of messages displayed sequentially)
+* FileSystem sagas and services (moveFile, deleteFile etc)
+* Phone authentication
+* Password reset in-app (fully fledged)
 * Write script to generate project in one go (saves up to 3 hrs)
