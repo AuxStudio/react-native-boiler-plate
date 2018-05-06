@@ -20,7 +20,8 @@
         "array": false,
         "object": true
       }
-    ]
+    ],
+    "react/require-default-props": "off"
   },
   "plugins": ["react", "react-native"],
   "globals": {
