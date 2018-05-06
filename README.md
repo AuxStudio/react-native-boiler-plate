@@ -10,17 +10,16 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add a CHANGELOG
-* NetworkHandler needs to direct offline operations on db
 * LocationHandler permissions handling could be more robust
 * Add push notifications setup
 * Add storybook setup
 * Fastlane integration
 * CodePush integration
-* Testing integration
+* Testing
 
 # NICE TO HAVES
 
+* Add a CHANGELOG and proper versioning
 * System messages management (array of messages displayed sequentially)
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication

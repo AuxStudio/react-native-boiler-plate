@@ -7,6 +7,7 @@ const initialState = {
     error: null,
   },
   network: null,
+  realtimeDatabaseMode: true, // assume true on app open
 };
 
 export default initialState;

@@ -17,7 +17,7 @@ import {
 } from './auth';
 
 // Database
-import { getData, updateData, setData, pushData } from './database';
+import { getData, updateData, setData, pushData, goOffline, goOnline } from './database';
 
 // HTTP
 import { get, post } from './http';
@@ -58,6 +58,8 @@ export default function* sagas() {
     fork(takeEvery, 'updateData', updateData),
     fork(takeEvery, 'setData', setData),
     fork(takeEvery, 'pushData', pushData),
+    fork(takeEvery, 'goOffline', goOffline),
+    fork(takeEvery, 'goOnline', goOnline),
 
     // HTTP
     fork(takeLatest, 'get', get),

@@ -32,6 +32,11 @@ export default function appStateReducer(state = initialState, action = {}) {
       newState.network = action.payload.network;
       return newState;
 
+    case 'TOGGLE_REALTIME_DATABASE_MODE':
+      newState = utils.cloneObject(state);
+      newState.realtimeDatabaseMode = !newState.realtimeDatabaseMode;
+      return newState;
+
     default:
       return state;
   }

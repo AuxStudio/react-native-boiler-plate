@@ -7,6 +7,7 @@ export class NetworkHandler extends React.Component {
   static get propTypes() {
     return {
       dispatch: PropTypes.func,
+      realtimeDatabaseMode: PropTypes.bool,
     };
   }
 
@@ -25,6 +26,41 @@ export class NetworkHandler extends React.Component {
         network: connectionInfo,
       },
     });
+
+    if (
+      this.props.realtimeDatabaseMode &&
+      (connectionInfo.type === 'none' ||
+        (connectionInfo.type === 'cellular' && connectionInfo.effectiveType === '2g'))
+    ) {
+      this.goOffline();
+    } else if (
+      !this.props.realtimeDatabaseMode &&
+      (connectionInfo.type !== 'none' && connectionInfo.effectiveType !== '2g')
+    ) {
+      this.goOnline();
+    }
+  };
+
+  goOffline = () => {
+    this.props.dispatch({
+      type: 'goOffline',
+      meta: {
+        nextAction: {
+          type: 'TOGGLE_REALTIME_DATABASE_MODE',
+        },
+      },
+    });
+  };
+
+  goOnline = () => {
+    this.props.dispatch({
+      type: 'goOnline',
+      meta: {
+        nextAction: {
+          type: 'TOGGLE_REALTIME_DATABASE_MODE',
+        },
+      },
+    });
   };
 
   render() {
@@ -32,4 +68,10 @@ export class NetworkHandler extends React.Component {
   }
 }
 
-export default connect()(NetworkHandler);
+function mapStateToProps(state) {
+  return {
+    realtimeDatabaseMode: state.appState.realtimeDatabaseMode,
+  };
+}
+
+export default connect(mapStateToProps)(NetworkHandler);
