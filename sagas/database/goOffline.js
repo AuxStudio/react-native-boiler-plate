@@ -6,7 +6,7 @@ export default function* goOffline(action) {
   try {
     const response = yield call(database.goOffline);
 
-    if (action.meta.nextAction) {
+    if (action.meta && action.meta.nextAction) {
       yield put({
         ...action.meta.nextAction,
         payload: response,

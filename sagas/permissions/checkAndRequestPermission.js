@@ -11,7 +11,7 @@ export default function* checkAndRequestPermission(action) {
     );
 
     if (checkPermissionResponse === 'authorized') {
-      if (action.meta.nextAction) {
+      if (action.meta && action.meta.nextAction) {
         yield put({
           ...action.meta.nextAction,
           payload: checkPermissionResponse,
@@ -24,7 +24,7 @@ export default function* checkAndRequestPermission(action) {
       try {
         yield call(permissions.requestPermission, action.payload.permission);
 
-        if (action.meta.nextAction) {
+        if (action.meta && action.meta.nextAction) {
           yield put({
             ...action.meta.nextAction,
             payload: checkPermissionResponse,

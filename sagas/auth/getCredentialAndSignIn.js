@@ -17,7 +17,7 @@ export default function* getCredentialAndSignIn(action) {
         getCredentialResponse, // the credential
       );
 
-      if (action.meta.nextAction) {
+      if (action.meta && action.meta.nextAction) {
         yield put({
           ...action.meta.nextAction,
           payload: getCredentialResponse,
