@@ -10,7 +10,7 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* LocationHandler permissions handling could be more robust
+* LocationHandler permissions handling could be more robust?
 * Add a CHANGELOG
 * Git versioning
 * Add push notifications setup

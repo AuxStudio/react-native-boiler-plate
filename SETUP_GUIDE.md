@@ -159,7 +159,7 @@ react-native link react-native-firebase
 
 ```java
 classpath 'com.android.tools.build:gradle:3.1.0'
-classpath 'com.google.gms:google-services:3.1.2'
+classpath 'com.google.gms:google-services:3.2.1'
 ```
 
 5.  Same file as above, add to buildscript.repositories and allprojects.repositoriess:
