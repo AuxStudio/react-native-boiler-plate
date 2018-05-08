@@ -12,7 +12,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-function SnackBarComponent({ message, handleClose, shouldAutoHide }) {
+const SnackBarComponent = ({ message, handleClose, shouldAutoHide }) => {
   return (
     <SnackBar
       text={message}
@@ -22,7 +22,7 @@ function SnackBarComponent({ message, handleClose, shouldAutoHide }) {
       textStyle={styles.text}
     />
   );
-}
+};
 
 SnackBarComponent.propTypes = propTypes;
 SnackBarComponent.defaultProps = defaultProps;

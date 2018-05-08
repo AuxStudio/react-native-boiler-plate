@@ -22,8 +22,8 @@
     "prefix": "dumb",
     "body": [
       "import React from 'react';",
-      "import { View } from 'react-native';",
       "import PropTypes from 'prop-types';",
+      "import { View } from 'react-native';",
       "$2",
       "import styles from './styles';",
       "$2",

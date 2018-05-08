@@ -11,6 +11,8 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 # TODOS
 
 * LocationHandler permissions handling could be more robust
+* Add a CHANGELOG
+* Git versioning
 * Add push notifications setup
 * Add storybook setup
 * Fastlane integration
@@ -19,7 +21,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # NICE TO HAVES
 
-* Add a CHANGELOG and proper versioning
 * System messages management (array of messages displayed sequentially)
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication
