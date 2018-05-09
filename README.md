@@ -8,9 +8,16 @@ A react-native, redux, redux-saga and firebase project.
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)
 
+# BUGS
+
+* UploadFile on android is not currently working. Refer to this [link](https://github.com/invertase/react-native-firebase/issues/1057)
+
 # TODOS
 
 * LocationHandler permissions handling could be more robust?
+* Incorporate development/production db nodes
+* Add troubleshooting doc
+* Add terminology doc eg. ref (!node)
 * Add a CHANGELOG
 * Git versioning
 * Add push notifications setup
