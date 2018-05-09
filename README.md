@@ -10,20 +10,19 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # BUGS
 
-* UploadFile on android is not currently working. Refer to this [link](https://github.com/invertase/react-native-firebase/issues/1057)
+* UploadFile on android is not currently working. Refer to this [link](https://github.com/invertase/react-native-firebase/issues/1057).
 
 # TODOS
 
-* Add a CHANGELOG
-* Git versioning
-
+* Add TOC to SETUP_GUIDE and STYLE_GUIDE
+* Add a CHANGELOG with version control
 * Add troubleshooting doc
 * Add terminology doc eg. ref (!node)
 * Add push notifications setup
-* Add storybook setup
 * Fastlane integration
 * CodePush integration
 * Testing
+* Continuous integration
 
 # NICE TO HAVES
 

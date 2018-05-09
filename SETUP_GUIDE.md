@@ -615,7 +615,7 @@ AppRegistry.registerComponent('PROJECT_NAME', () => App);
 3.  Delete unnecessary files. FIXME: surely there is a better way?
 
 ```
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package-lock.json && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/yarn.lock && sudo rm -R ./src/.git
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/.git
 ```
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
@@ -671,3 +671,14 @@ Copy the fonts to `./android/app/src/assets/fonts`.
 ### iOS
 
 Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts-to-react-native-b266b41bff7f).
+
+13. Add Storybook
+
+1.  Setup:
+
+```
+npm i -g @storybook/cli
+getstorybook
+```
+
+2.  Remove boilerplate code, ie. Button, Welcome.
