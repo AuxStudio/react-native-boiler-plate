@@ -20,8 +20,8 @@ fonts.sizes = {
 // Font types
 fonts.types = {
   title: {
-    fontFamily: fonts.primaryFontFamily,
-    fontSize: fonts.largeFont,
+    fontFamily: fonts.families.primary,
+    fontSize: fonts.sizes.large,
     color: colors.primaryText,
   },
 };

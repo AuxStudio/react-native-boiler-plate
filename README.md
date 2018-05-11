@@ -14,6 +14,7 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
+* Add Firebase CLI setup
 * Add TOC to SETUP_GUIDE and STYLE_GUIDE
 * Add a CHANGELOG with version control
 * Add troubleshooting doc

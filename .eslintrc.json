@@ -22,7 +22,8 @@
       }
     ],
     "react/require-default-props": "off",
-    "arrow-body-style": 0 // don't enforce arrow-body-style, block body (() => { ... }) and single expression (() => ...) depends on use case
+    "arrow-body-style": 0, // don't enforce arrow-body-style, block body (() => { ... }) and single expression (() => ...) depends on use case
+    "object-curly-newline": "off" // prettier is no longer placing props on new lines so we'll disable this rule until they fix it
   },
   "plugins": ["react", "react-native"],
   "globals": {
