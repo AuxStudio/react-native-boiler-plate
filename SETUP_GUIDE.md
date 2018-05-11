@@ -6,13 +6,13 @@ If anything is unclear or does not work, please let me know via [email](mailto:s
 
 ## 1. Initialise project
 
-```
+```shell
 react-native init PROJECT_NAME
 ```
 
 ## 2. Setup git
 
-```
+```shell
 cd PROJECT_NAME
 git init
 git remote add origin GIT_REPO_URL
@@ -21,11 +21,17 @@ git commit -m "Initialise Project"
 git push -u origin master
 ```
 
+Tell git to track case sensitivity on the file system:
+
+```shell
+git config core.ignorecase false
+```
+
 ## 3. Update display and package name
 
 Optional.
 
-```
+```shell
 npm install -g react-native-rename
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
@@ -60,7 +66,7 @@ ndk {
 
 1.  Generate keystore:
 
-```
+```shell
 keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 ```
 
@@ -123,7 +129,7 @@ implementation "com.android.support:appcompat-v7:25.0.0"
 
 Remove what you don't need.
 
-```
+```shell
 yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-firebase@4.0.6 redux@4.0.0 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
@@ -147,7 +153,7 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 1.  Link:
 
-```
+```shell
 react-native link react-native-firebase
 ```
 
@@ -208,13 +214,13 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 
 Run the below command twice. First with android as password and second with your project password. This will generate two debug key hashes.
 
-```
+```shell
 keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
 ```
 
 Run the below command once with your project password. This will an additional key hash (which will enable the fbsdk on your production app).
 
-```
+```shell
 keytool -exportcert -alias my-key-alias -keystore ./android/app/my-release-key.keystore | openssl sha1 -binary | openssl base64
 ```
 
@@ -224,7 +230,7 @@ You should have a total of 3 key hashes added to your Facebook app.
 
 3.  Link:
 
-```
+```shell
 react-native link react-native-fbsdk
 ```
 
@@ -317,7 +323,7 @@ implementation 'com.facebook.android:facebook-login:[4,5)'
 
 1.  Link:
 
-```
+```shell
 react-native link react-native-google-signin
 ```
 
@@ -430,7 +436,7 @@ public class MainActivity extends ReactActivity {
 
 #### react-native-image-resizer
 
-```
+```shell
 react-native link react-native-image-resizer
 ```
 
@@ -468,14 +474,14 @@ react-native link react-native-image-resizer
 
 5.  Setup cocoapods:
 
-```
+```shell
 cd ios
 pod init
 ```
 
 6.  In `./ios/PodFile` delete duplicate PROJECT_NAME-tvOSTests within main project target.
 
-```
+```shell
 pod update
 ```
 
@@ -497,7 +503,7 @@ pod 'Firebase/Storage'
 
 9.  Install the pods:
 
-```
+```shell
 pod install
 ```
 
@@ -599,7 +605,7 @@ $(PROJECT_DIR) recursive
 
 1.  Clone the source files:
 
-```
+```shell
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 ```
 
@@ -614,7 +620,7 @@ AppRegistry.registerComponent('PROJECT_NAME', () => App);
 
 3.  Delete unnecessary files. FIXME: surely there is a better way?
 
-```
+```shell
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm -R ./src/.git
 ```
 
@@ -624,13 +630,13 @@ sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && su
 
 1.  Install dependencies:
 
-```
+```shell
 yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
 ```
 
 2.  Move config files:
 
-```
+```shell
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
 ```
 
@@ -676,7 +682,7 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 
 1.  Setup:
 
-```
+```shell
 npm i -g @storybook/cli
 getstorybook
 ```
