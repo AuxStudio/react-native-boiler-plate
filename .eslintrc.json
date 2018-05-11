@@ -21,7 +21,8 @@
         "object": true
       }
     ],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "arrow-body-style": 0 // don't enforce arrow-body-style, block body (() => { ... }) and single expression (() => ...) depends on use case
   },
   "plugins": ["react", "react-native"],
   "globals": {

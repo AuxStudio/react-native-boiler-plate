@@ -12,11 +12,13 @@ const defaultProps = {
   title: 'Title Text',
 };
 
-const Example = ({ title }) => (
-  <View style={styles.container}>
-    <Text style={styles.titleText}>{title}</Text>
-  </View>
-);
+const Example = ({ title }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleText}>{title}</Text>
+    </View>
+  );
+};
 
 Example.propTypes = propTypes;
 Example.defaultProps = defaultProps;
