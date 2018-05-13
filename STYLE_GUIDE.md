@@ -1,4 +1,4 @@
-# React-native style guide
+# Style guide
 
 This guide extends:
 
@@ -62,6 +62,10 @@ src
 We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
 
 ## Save hair, read these tips:
+
+### Files
+
+* All imports at the top of the file with external imports listed first, then internal (utils, config, styles, styleConstants, components).
 
 ### Components
 

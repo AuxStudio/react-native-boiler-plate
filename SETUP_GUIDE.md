@@ -1,4 +1,4 @@
-# React-native setup guide
+# Setup guide
 
 This is a work in progress.
 
