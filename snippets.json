@@ -50,8 +50,8 @@
     "prefix": "functional",
     "body": [
       "import React from 'react';",
-      "import { View } from 'react-native';",
       "import PropTypes from 'prop-types';",
+      "import { View } from 'react-native';",
       "$2",
       "import styles from './styles';",
       "$2",
@@ -77,8 +77,8 @@
     "prefix": "list",
     "body": [
       "import React from 'react';",
-      "import { View, FlatList } from 'react-native';",
       "import PropTypes from 'prop-types';",
+      "import { View, FlatList } from 'react-native';",
       "$2",
       "import styles from './styles';",
       "$2",
@@ -114,9 +114,9 @@
     "prefix": "container",
     "body": [
       "import React from 'react';",
-      "import { View } from 'react-native';",
       "import PropTypes from 'prop-types';",
       "import { connect } from 'react-redux';",
+      "import { View } from 'react-native';",
       "$2",
       "export class $1 extends React.Component {",
       "  static propTypes = {};",
