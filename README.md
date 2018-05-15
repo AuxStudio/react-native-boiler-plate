@@ -11,6 +11,9 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
+* Add setup for react-native-simple-components external deps (eg. react-native-snackbar)
+* SnackbarHandler
+* Containers/...Handlers => Handlers/
 * Work on a method of handling action's nextAction payloads (ie. one batch action with a bunch of sequential actions that depend on payloads returned by the previous action)
 * Style the troubleshooting guide
 * Add Firebase CLI setup
