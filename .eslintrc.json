@@ -23,10 +23,12 @@
     ],
     "react/require-default-props": "off",
     "arrow-body-style": 0, // don't enforce arrow-body-style, block body (() => { ... }) and single expression (() => ...) depends on use case
-    "object-curly-newline": "off", // prettier is no longer placing props on new lines so we'll disable this rule until they fix it
+    "object-curly-newline": "off",
     "react/no-did-update-set-state": "off", // sometimes this is necessary
     "arrow-parens": "off", // parenthesis around single argument or not, depends on the use case
-    "no-bitwise": "off" // allow bitwise operators
+    "no-bitwise": "off",
+    "no-nested-ternary": "off", // I personally prefer nested ternaries
+    "react/jsx-indent": "off" // conflicts with prettier
   },
   "plugins": ["react", "react-native"],
   "globals": {
