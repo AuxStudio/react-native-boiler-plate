@@ -170,5 +170,21 @@
       "}",
       "$3"
     ]
+  },
+  "Blank stylesheet": {
+    "prefix": "styles",
+    "body": [
+      "import { StyleSheet } from 'react-native';",
+      "$1",
+      "import styleConstants from '../../styleConstants';",
+      "$1",
+      "const styles = StyleSheet.create({});",
+      "$1",
+      "export default styles;"
+    ]
+  },
+  "Blank component index": {
+    "prefix": "index",
+    "body": ["import $1 from './$1';", "$2", "export default $1;"]
   }
 }
