@@ -14,7 +14,7 @@ export default function* getCredentialAndSignIn(action) {
     try {
       const signInWithCredentialResponse = yield call(
         auth.signInWithCredential,
-        getCredentialResponse, // the credential
+        getCredentialResponse.credential,
       );
       const nextAction = utils.prepareNextAction(action, signInWithCredentialResponse);
 
