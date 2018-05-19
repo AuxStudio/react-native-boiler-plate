@@ -10,7 +10,7 @@ import AuthHandler from './handlers/AuthHandler';
 import DatabaseHandler from './handlers/DatabaseHandler';
 import NetworkHandler from './handlers/NetworkHandler';
 import LocationHandler from './handlers/LocationHandler';
-import SnackBarHandler from './handlers/SnackBarHandler';
+import SnackbarHandler from './handlers/SnackbarHandler';
 
 // Connect router to store
 const ConnectedRouter = connect()(Router);
@@ -23,9 +23,8 @@ export default function App() {
         <DatabaseHandler />
         <NetworkHandler />
         <LocationHandler />
-        <SnackBarHandler>
-          <ConnectedRouter navigator={navigator} />
-        </SnackBarHandler>
+        <SnackbarHandler />
+        <ConnectedRouter navigator={navigator} />
       </ErrorHandler>
     </Provider>
   );

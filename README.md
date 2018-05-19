@@ -11,8 +11,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add components for external deps
-* SnackbarHandler
 * Work on a method of handling action's nextAction payloads (ie. one batch action with a bunch of sequential actions that depend on payloads returned by the previous action)
 * Style the troubleshooting guide
 * Performance improvements:
