@@ -10,9 +10,9 @@ export default function getFormattedAddressFromCoords(lat, lng) {
       lng,
     })
       .then((data) => {
-        utils.log('end getFormattedAddressFromCoords', { data });
-
-        resolve(data);
+        const response = data && { data };
+        utils.log('end getFormattedAddressFromCoords', response);
+        resolve(response);
       })
       .catch((error) => {
         utils.log('end getFormattedAddressFromCoords', { error });

@@ -5,12 +5,10 @@ import utils from '../../utils';
 export default function* get(action) {
   try {
     const response = yield call(http.get, action.payload.url);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
+    if (nextAction) {
+      yield put(nextAction);
     }
   } catch (error) {
     yield put({

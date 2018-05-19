@@ -9,8 +9,9 @@ export default function post(url, headers, body) {
       headers,
       body,
     })
-      .then((response) => {
-        utils.log('end post', { response });
+      .then((data) => {
+        const response = data && { data };
+        utils.log('end post', response);
 
         resolve(response);
       })

@@ -5,13 +5,11 @@ import utils from '../../utils';
 export default function* getDeviceLocation(action) {
   try {
     const response = yield call(location.getDeviceLocation);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
-    } else {
+    if (nextAction) {
+      yield put(nextAction);
+    } else if (response) {
       yield put({
         type: 'SET_DEVICE_LOCATION',
         payload: response,

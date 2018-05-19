@@ -9,42 +9,46 @@ export default function* checkAndRequestPermission(action) {
       permissions.checkPermission,
       action.payload.permission,
     );
+    const nextActionOne = utils.prepareNextAction(action, checkPermissionResponse);
 
-    if (checkPermissionResponse === 'authorized') {
-      if (action.meta && action.meta.nextAction) {
-        yield put({
-          ...action.meta.nextAction,
-          payload: checkPermissionResponse,
-        });
-      }
+    if (checkPermissionResponse.message === 'authorized' && nextActionOne) {
+      yield put(nextActionOne);
     } else if (
-      checkPermissionResponse === 'undetermined' ||
-      (checkPermissionResponse === 'denied' && Platform.OS === 'android')
+      checkPermissionResponse.message === 'undetermined' ||
+      (checkPermissionResponse.message === 'denied' && Platform.OS === 'android')
     ) {
       try {
-        yield call(permissions.requestPermission, action.payload.permission);
+        const requestPermissionResponse = yield call(
+          permissions.requestPermission,
+          action.payload.permission,
+        );
+        const nextActionTwo = utils.prepareNextAction(action, checkPermissionResponse);
 
-        if (action.meta && action.meta.nextAction) {
+        if (requestPermissionResponse.message === 'authorized' && nextActionTwo) {
+          yield put(nextActionTwo);
+        } else {
           yield put({
-            ...action.meta.nextAction,
-            payload: checkPermissionResponse,
+            type: 'SET_SYSTEM_MESSAGE',
+            payload: utils.createError(
+              `We need your permission to access your ${action.payload.permission}`,
+            ),
+            error: true,
           });
         }
       } catch (error) {
         yield put({
           type: 'SET_SYSTEM_MESSAGE',
           payload: utils.createError(error),
-          error: true,
         });
       }
     } else if (
-      (checkPermissionResponse === 'denied' && Platform.OS === 'ios') ||
-      checkPermissionResponse === 'restricted'
+      (checkPermissionResponse.message === 'denied' && Platform.OS === 'ios') ||
+      checkPermissionResponse.message === 'restricted'
     ) {
       yield put({
         type: 'SET_SYSTEM_MESSAGE',
         payload: utils.createError(
-          `We need your permission to access your: ${action.payload.permission}`,
+          `We need your permission to access your ${action.payload.permission}`,
         ),
         error: true,
       });

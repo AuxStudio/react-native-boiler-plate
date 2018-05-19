@@ -5,12 +5,10 @@ import utils from '../../utils';
 export default function* logEvent(action) {
   try {
     const response = yield call(analytics.logEvent, action.payload.event, action.payload.params);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
+    if (nextAction) {
+      yield put(nextAction);
     }
   } catch (error) {
     yield put({

@@ -8,12 +8,12 @@ export default function showImagePicker() {
     ImagePicker.showImagePicker(null, ({ uri, error }) => {
       if (error) {
         utils.log('end showImagePicker', { error });
-
         reject(utils.createError(error));
       } else {
-        utils.log('end showImagePicker', { uri });
+        const response = uri && { uri }; // if the user cancels, there is no response
+        utils.log('end showImagePicker', response);
 
-        resolve(uri);
+        resolve(response);
       }
     });
   });

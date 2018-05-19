@@ -14,10 +14,11 @@ export default function getData(relativeRef) {
       .once('value')
       .then((snapshot) => {
         const data = snapshot.val();
+        const response = data && { data };
 
-        utils.log('end getData', { data });
+        utils.log('end getData', response);
 
-        resolve(data);
+        resolve(response);
       })
       .catch((error) => {
         utils.log('end getData', { error });

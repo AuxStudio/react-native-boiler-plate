@@ -16,13 +16,11 @@ export default function* getCredentialAndSignIn(action) {
         auth.signInWithCredential,
         getCredentialResponse, // the credential
       );
+      const nextAction = utils.prepareNextAction(action, signInWithCredentialResponse);
 
-      if (action.meta && action.meta.nextAction) {
-        yield put({
-          ...action.meta.nextAction,
-          payload: getCredentialResponse,
-        });
-      } else {
+      if (nextAction) {
+        yield put(nextAction);
+      } else if (signInWithCredentialResponse) {
         yield put({
           type: 'SIGN_IN_USER',
           payload: signInWithCredentialResponse,

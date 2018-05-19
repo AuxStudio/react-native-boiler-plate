@@ -1,14 +1,14 @@
 import firebase from 'react-native-firebase';
 import utils from '../../utils';
 
-export default function uploadFile(ref, filePath) {
+export default function uploadFile(ref, uri) {
   return new Promise((resolve, reject) => {
-    utils.log('start uploadFile', { ref, filePath });
+    utils.log('start uploadFile', { ref, uri });
 
     firebase
       .storage()
       .ref(ref)
-      .putFile(filePath)
+      .putFile(uri)
       .on(
         'state_changed',
         (snapshot) => {
@@ -19,13 +19,12 @@ export default function uploadFile(ref, filePath) {
         },
         (error) => {
           utils.log('end uploadFile', { error });
-
           reject(utils.createError(error));
         },
         (uploadedFile) => {
-          utils.log('end uploadFile', { uploadedFile });
-
-          resolve(uploadedFile);
+          const response = uploadedFile && { uploadedFile };
+          utils.log('end uploadFile', response);
+          resolve(response);
         },
       );
   });

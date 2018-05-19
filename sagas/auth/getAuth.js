@@ -5,25 +5,19 @@ import utils from '../../utils';
 export default function* getAuth(action) {
   try {
     const response = yield call(auth.getAuth);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (response) {
-      if (action.meta && action.meta.nextAction) {
-        yield put({
-          ...action.meta.nextAction,
-          payload: response,
-        });
-      } else {
-        yield put({
-          type: 'SIGN_IN_USER',
-          payload: response,
-        });
-      }
+    if (nextAction) {
+      // effectively response && nextAction
+      yield put(nextAction);
+    } else if (response) {
+      yield put({
+        type: 'SIGN_IN_USER',
+        payload: response,
+      });
     } else {
       yield put({
         type: 'signInAnonymously',
-        meta: {
-          nextAction: action.meta && action.meta.nextAction,
-        },
       });
     }
   } catch (error) {

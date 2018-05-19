@@ -17,10 +17,11 @@ export default function getCredentialFromFacebook() {
           AccessToken.getCurrentAccessToken()
             .then((user) => {
               const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
+              const response = credential && { credential };
 
-              utils.log('end getcredentialFromFacebook', { credential });
+              utils.log('end getcredentialFromFacebook', response);
 
-              resolve(credential);
+              resolve(response);
             })
             .catch((error) => {
               utils.log('end getcredentialFromFacebook', { error });

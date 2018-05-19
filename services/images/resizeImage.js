@@ -4,7 +4,7 @@ import utils from '../../utils';
 
 export default function resizeImage(imageURI) {
   return new Promise((resolve, reject) => {
-    utils.log('start resizeImage', { imageURI });
+    utils.log('start resizeImage', { uri: imageURI });
 
     const imageResizerOptions = [
       imageURI, // uri to image
@@ -13,9 +13,9 @@ export default function resizeImage(imageURI) {
 
     ImageResizer.createResizedImage(...imageResizerOptions)
       .then(({ uri }) => {
-        utils.log('end resizeImage', { uri });
-
-        resolve(uri);
+        const response = uri && { uri };
+        utils.log('end resizeImage', response);
+        resolve(response);
       })
       .catch((error) => {
         utils.log('end resizeImage', { error });

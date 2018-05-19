@@ -8,7 +8,7 @@ export default function userReducer(state = initialState, action = {}) {
     case 'SIGN_IN_USER':
       newState = utils.cloneObject(state);
       newState = {
-        ...action.payload._user,
+        ...action.payload.user._user,
       };
       newState.authenticated = true;
       return newState;

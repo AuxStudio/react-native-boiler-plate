@@ -5,12 +5,10 @@ import utils from '../../utils';
 export default function* getData(action) {
   try {
     const response = yield call(database.getData, action.payload.ref);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
+    if (nextAction) {
+      yield put(nextAction);
     }
   } catch (error) {
     yield put({

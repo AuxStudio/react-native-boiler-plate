@@ -9,9 +9,13 @@ A react-native, redux, redux-saga and firebase project.
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)
 
+# BUGS
+
+* Signing in new users with email and password is not currently working
+* requestPermission contacts on ios crashes the app
+
 # TODOS
 
-* Work on a method of handling action's nextAction payloads (ie. one batch action with a bunch of sequential actions that depend on payloads returned by the previous action)
 * Style the troubleshooting guide
 * Performance improvements:
   * Consider react-native-navigation

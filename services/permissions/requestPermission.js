@@ -6,14 +6,13 @@ export default function requestPermission(permission) {
     utils.log('start requestPermission', { permission });
 
     Permissions.request(permission)
-      .then((response) => {
-        utils.log('end requestPermission', { response });
-
+      .then((message) => {
+        const response = message && { message };
+        utils.log('end requestPermission', response);
         resolve(response);
       })
       .catch((error) => {
         utils.log('end requestPermission', { error });
-
         reject(utils.createError(error));
       });
   });

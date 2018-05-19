@@ -19,10 +19,11 @@ export default function getCredentialFromGoogle() {
                   user.idToken,
                   user.accessToken,
                 );
+                const response = credential && { credential };
 
-                utils.log('end getCredentialFromGoogle', { credential });
+                utils.log('end getCredentialFromGoogle', response);
 
-                resolve(credential);
+                resolve(response);
               })
               .catch((error) => {
                 utils.log('end getCredentialFromGoogle', { error });

@@ -6,9 +6,10 @@ export default function getCredentialFromEmail(email, password) {
     utils.log('start getCredentialFromEmail', { email, password });
 
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+    const response = credential && { credential };
 
-    utils.log('end getCredentialFromEmail', { credential });
+    utils.log('end getCredentialFromEmail', response);
 
-    resolve(credential);
+    resolve(response);
   });
 }

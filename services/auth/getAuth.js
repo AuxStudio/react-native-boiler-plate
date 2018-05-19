@@ -6,13 +6,9 @@ export default function getAuth() {
     utils.log('start getAuth');
 
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        utils.log('end getAuth', { user });
-        resolve(user);
-      } else {
-        utils.log('end getAuth');
-        resolve(false);
-      }
+      const response = user && { user };
+      utils.log('end getAuth', response);
+      resolve(response);
     });
   });
 }

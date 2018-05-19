@@ -12,7 +12,7 @@ export default function appStateReducer(state = initialState, action = {}) {
 
     case 'SET_DEVICE_LOCATION':
       newState = utils.cloneObject(state);
-      newState.deviceLocation = action.payload;
+      newState.deviceLocation = action.payload.coords;
       return newState;
 
     case 'SET_SYSTEM_MESSAGE':

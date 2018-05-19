@@ -6,14 +6,13 @@ export default function checkPermission(permission) {
     utils.log('start checkPermission', { permission });
 
     Permissions.check(permission)
-      .then((response) => {
-        utils.log('end checkPermission', { response });
-
+      .then((message) => {
+        const response = message & { message };
+        utils.log('end checkPermission', response);
         resolve(response);
       })
       .catch((error) => {
         utils.log('end checkPermission', { error });
-
         reject(utils.createError(error));
       });
   });

@@ -9,9 +9,10 @@ export default function signInWithCredential(credential) {
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
       .then((user) => {
-        utils.log('end signInWithCredential', { user });
+        const response = user; // response is already keyed by user
+        utils.log('end signInWithCredential', response);
 
-        resolve(user);
+        resolve(response);
       })
       .catch((error) => {
         utils.log('end signInWithCredential', { error });

@@ -6,9 +6,9 @@ export default function getDeviceLocation() {
 
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
-        utils.log('end getDeviceLocation', { coords });
-
-        resolve(coords);
+        const response = { coords };
+        utils.log('end getDeviceLocation', response);
+        resolve(response);
       },
       (error) => {
         utils.log('end getDeviceLocation', { error });

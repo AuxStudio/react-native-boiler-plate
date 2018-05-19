@@ -4,13 +4,11 @@ import utils from '../../utils';
 
 export default function* uploadFile(action) {
   try {
-    const response = yield call(storage.uploadFile, action.payload.ref, action.payload.filePath);
+    const response = yield call(storage.uploadFile, action.payload.ref, action.payload.uri);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
+    if (nextAction) {
+      yield put(nextAction);
     }
   } catch (error) {
     yield put({

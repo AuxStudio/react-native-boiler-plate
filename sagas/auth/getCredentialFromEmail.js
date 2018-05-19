@@ -9,13 +9,11 @@ export default function* getCredentialFromEmail(action) {
       action.payload.email,
       action.payload.password,
     );
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
-    } else {
+    if (nextAction) {
+      yield put(nextAction);
+    } else if (response) {
       yield put({
         type: 'SIGN_IN_USER',
         payload: response,

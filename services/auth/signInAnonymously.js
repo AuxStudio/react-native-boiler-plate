@@ -9,9 +9,10 @@ export default function signInAnonymously() {
       .auth()
       .signInAnonymouslyAndRetrieveData()
       .then((user) => {
-        utils.log('end signInAnonymously', { user });
+        const response = user && { user };
+        utils.log('end signInAnonymously', response);
 
-        resolve(user);
+        resolve(response);
       })
       .catch((error) => {
         utils.log('end signInAnonymously', { error });

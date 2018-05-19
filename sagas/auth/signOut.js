@@ -5,12 +5,10 @@ import utils from '../../utils';
 export default function* signOut(action) {
   try {
     const response = yield call(auth.signOut);
+    const nextAction = utils.prepareNextAction(action, response);
 
-    if (action.meta && action.meta.nextAction) {
-      yield put({
-        ...action.meta.nextAction,
-        payload: response,
-      });
+    if (nextAction) {
+      yield put(nextAction);
     } else {
       yield put({
         type: 'SIGN_OUT_USER',
