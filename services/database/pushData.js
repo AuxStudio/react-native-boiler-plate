@@ -2,7 +2,7 @@ import firebase from 'react-native-firebase';
 import config from '../../config';
 import utils from '../../utils';
 
-export default function pushData(relativeRef) {
+export default function pushData(relativeRef, data) {
   return new Promise((resolve, reject) => {
     const ref = `${config.environment}/${relativeRef}`;
 
