@@ -13,23 +13,22 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 * Add components for external deps
 * SnackbarHandler
-* Containers/...Handlers => Handlers/
 * Work on a method of handling action's nextAction payloads (ie. one batch action with a bunch of sequential actions that depend on payloads returned by the previous action)
 * Style the troubleshooting guide
 * Performance improvements:
-  - Consider react-native-navigation
-  - App state caching (for first opens)
-  - Add a launch screen
-  - Add notes to move images to app package (Xcode asset catalog and Android drawable folder)
-  - Remote image caching (react-native-fast-image)
-  - Optimise images and use JPEG where possible
-  - Track unnecessary renders (renderCountProp from react-redux)
+  * Consider react-native-navigation
+  * App state caching (for first opens)
+  * Add a launch screen
+  * Add notes to move images to app package (Xcode asset catalog and Android drawable folder)
+  * Remote image caching (react-native-fast-image)
+  * Optimise images and use JPEG where possible
+  * Track unnecessary renders (renderCountProp from react-redux)
     -- react-native-slowlog
     -- Track state and prop changes in componentWillUpdate and lodash difference
-  - Consider reselect selector library
-  - Track performance results in a spreadsheet
-  - Test reducers performance (redux-log-slow-reducers)
-  - Measure and minimise overdraw (number of times pixels have been redrawn)
+  * Consider reselect selector library
+  * Track performance results in a spreadsheet
+  * Test reducers performance (redux-log-slow-reducers)
+  * Measure and minimise overdraw (number of times pixels have been redrawn)
 * Add Firebase CLI setup
 * Add TOC to SETUP_GUIDE and STYLE_GUIDE
 * Add version control (react-native-version)

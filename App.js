@@ -5,12 +5,12 @@ import { Provider, connect } from 'react-redux';
 import store from './store';
 import navigator from './navigation';
 
-import ErrorHandler from './containers/ErrorHandler';
-import AuthHandler from './containers/AuthHandler';
-import DatabaseHandler from './containers/DatabaseHandler';
-import NetworkHandler from './containers/NetworkHandler';
-import LocationHandler from './containers/LocationHandler';
-import SnackBarHandler from './containers/SnackBarHandler';
+import ErrorHandler from './handlers/ErrorHandler';
+import AuthHandler from './handlers/AuthHandler';
+import DatabaseHandler from './handlers/DatabaseHandler';
+import NetworkHandler from './handlers/NetworkHandler';
+import LocationHandler from './handlers/LocationHandler';
+import SnackBarHandler from './handlers/SnackBarHandler';
 
 // Connect router to store
 const ConnectedRouter = connect()(Router);
