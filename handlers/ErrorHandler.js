@@ -38,17 +38,19 @@ export class ErrorHandler extends React.Component {
 
   logErrorToDatabase = (error) => {
     // Log error to database
-    this.props.dispatch({
-      type: 'logError',
-      payload: {
-        data: {
-          message: error.message,
-          code: error.code,
-          date: Date.now(),
-          uid: this.props.uid,
+    if (!__DEV__) {
+      this.props.dispatch({
+        type: 'logError',
+        payload: {
+          data: {
+            message: error.message,
+            code: error.code,
+            date: Date.now(),
+            uid: this.props.uid,
+          },
         },
-      },
-    });
+      });
+    }
   };
 
   render() {
