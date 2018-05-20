@@ -13,6 +13,12 @@ export class DatabaseHandler extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.authenticated) {
+      this.listenForData();
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.authenticated && !prevProps.authenticated) {
       this.listenForData();

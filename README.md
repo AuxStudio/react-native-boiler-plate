@@ -16,9 +16,7 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Performance improvements:
-* Consider react-native-navigation
-* App state caching (for first opens)
+* App state caching (redux-persist)
 * Add a launch screen
 * Add notes to move images to app package (Xcode asset catalog and Android drawable folder)
 * Remote image caching (react-native-fast-image)
@@ -40,6 +38,10 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * CodePush integration
 * Testing
 * Continuous integration
+
+# TBA
+
+* Consider react-native-navigation (apparently a performance improvement since it's native). Not very stable. Waiting for V2.
 
 # ENHANCEMENTS
 
