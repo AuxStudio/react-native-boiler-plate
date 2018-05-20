@@ -658,10 +658,10 @@ import App from './src/App';
 AppRegistry.registerComponent('PROJECT_NAME', () => App);
 ```
 
-3.  Delete unnecessary files. FIXME: surely there is a better way?
+3.  Delete unnecessary files and move CHANGELOG to root. FIXME: surely there is a better way?
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm ./src/TROUBLESHOOTING.md && sudo rm -R ./src/.git
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm ./src/TROUBLESHOOTING.md && sudo rm -R ./src/.git && sudo mv ./src/CHANGELOG.md ./CHANGELOG.md
 ```
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
@@ -737,4 +737,4 @@ firebase login
 firebase init
 ```
 
-See the (docs)[https://github.com/firebase/firebase-tools] for a list of useful commands.
+See the [docs](https://github.com/firebase/firebase-tools) for a list of useful commands.
