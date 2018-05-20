@@ -11,7 +11,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add terminolgy notes to style guide eg. ref (!node)
 * Add push notifications setup
 * Fastlane integration
 * CodePush integration

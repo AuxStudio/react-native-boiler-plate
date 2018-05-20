@@ -61,6 +61,12 @@ src
 
 We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
 
+## Terminology
+
+Some common terminology that we use.
+
+* Ref - refers to a reference in a database
+
 ## Save hair, read these tips:
 
 ### Files
