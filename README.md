@@ -16,10 +16,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add a launch screen
-* Add notes to move images to app package (Xcode asset catalog and Android drawable folder)
-* Remote image caching (react-native-fast-image)
-* Optimise images and use JPEG where possible
 * Track unnecessary renders (renderCountProp from react-redux)
   -- react-native-slowlog
   -- Track state and prop changes in componentWillUpdate and lodash difference

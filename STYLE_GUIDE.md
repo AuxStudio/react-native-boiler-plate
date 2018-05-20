@@ -95,3 +95,13 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 ### Lists
 
 * When you need to iterate through lists of data, create static IDs before hand.
+
+### Images
+
+* Store images in the XCode asset catalog and android/app/src/main/res/drawable folder and require them with { uri: IMAGE_NAME }. This greatly improves image performance.
+* For remote images, use the RemoteImage component. This will handle image caching and improve image performance.
+* Optimise/compress images and use JPEG where possible.
+
+### Performance
+
+* Use a launch screen (it improves perceived loading time)

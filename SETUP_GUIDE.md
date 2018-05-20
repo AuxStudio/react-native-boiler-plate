@@ -130,7 +130,7 @@ implementation "com.android.support:appcompat-v7:25.0.0"
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-firebase@4.0.6 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.0.6 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
 ## 8. Link dependencies
@@ -153,6 +153,12 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 ```shell
 react-native link react-native-snackbar
+```
+
+#### react-native-fast-image
+
+```shell
+react-native link react-native-fast-image
 ```
 
 #### react-native-firebase
@@ -473,6 +479,20 @@ pod 'RNSnackbar', :path => '../node_modules/react-native-snackbar'
 3.  Go to `node_modules` ➜ `react-native-snackbar` ➜ `ios` ➜ select `RNSnackbar.xcodeproj`
 
 4.  Add `libRNSnackbar.a` to `Build Phases -> Link Binary With Libraries`
+
+#### react-native-fast-image
+
+1.  In `./ios/PodFile`, remove the line:
+
+```
+pod 'react-native-fast-image', :path => '../node_modules/react-native-fast-image'
+```
+
+2.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
+
+3.  Go to `node_modules` ➜ `react-native-fast-image` ➜ `ios` ➜ select `FastImage.xcodeproj`
+
+4.  Add `libFastImage.a` to `Build Phases -> Link Binary With Libraries`
 
 #### react-native-firebase
 
