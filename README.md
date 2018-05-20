@@ -16,7 +16,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* App state caching (redux-persist)
 * Add a launch screen
 * Add notes to move images to app package (Xcode asset catalog and Android drawable folder)
 * Remote image caching (react-native-fast-image)

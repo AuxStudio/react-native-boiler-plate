@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Snackbar from 'react-native-snackbar';
 
 import Error from '../scenes/Error';
 
-export class ErrorHandler extends React.Component {
+export class SystemMessageHandler extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
     children: PropTypes.node,
@@ -23,9 +24,15 @@ export class ErrorHandler extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    // Log errors that stream in from store
-    if (this.props.systemMessage.error && !prevProps.systemMessage.error) {
-      this.logErrorToDatabase(this.props.systemMessage);
+    if (
+      this.props.systemMessage.message &&
+      this.props.systemMessage.message !== prevProps.systemMessage.message
+    ) {
+      if (this.props.systemMessage.error) {
+        this.logErrorToDatabase();
+      }
+
+      this.showSnackbar();
     }
   }
 
@@ -36,15 +43,34 @@ export class ErrorHandler extends React.Component {
     this.logErrorToDatabase(error);
   }
 
-  logErrorToDatabase = (error) => {
-    // Log error to database
+  SNACKBAR_DURATION = 2750;
+
+  showSnackbar = () => {
+    Snackbar.show({
+      title: this.props.systemMessage.message,
+      duration: this.SNACKBAR_DURATION,
+    });
+
+    setTimeout(() => {
+      this.resetError();
+    }, this.SNACKBAR_DURATION); // Snackbar.LENGTH_LONG does not work here so we need to manually add the duration
+  };
+
+  resetError = () => {
+    this.props.dispatch({
+      type: 'RESET_SYSTEM_MESSAGE',
+    });
+  };
+
+  logErrorToDatabase = () => {
+    // Log error to database if not in development mode
     if (!__DEV__) {
       this.props.dispatch({
         type: 'logError',
         payload: {
           data: {
-            message: error.message,
-            code: error.code,
+            message: this.props.systemMessage.message,
+            code: this.props.systemMessage.code,
             date: Date.now(),
             uid: this.props.uid,
           },
@@ -69,4 +95,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ErrorHandler);
+export default connect(mapStateToProps)(SystemMessageHandler);
