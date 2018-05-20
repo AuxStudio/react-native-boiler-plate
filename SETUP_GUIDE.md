@@ -718,7 +718,7 @@ Copy the fonts to `./android/app/src/assets/fonts`.
 
 Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts-to-react-native-b266b41bff7f).
 
-13. Add Storybook
+## 13. Add Storybook
 
 1.  Setup:
 
@@ -728,3 +728,13 @@ getstorybook
 ```
 
 2.  Remove boilerplate code, ie. Button, Welcome.
+
+## 14. Add firebase-cli
+
+```shell
+npm install -g firebase-tools
+firebase login
+firebase init
+```
+
+See the (docs)[https://github.com/firebase/firebase-tools] for a list of useful commands.

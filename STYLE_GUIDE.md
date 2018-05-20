@@ -90,6 +90,7 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 
 ### Firebase
 
+* Avoid manipulating the Firebase database via the console. It's much safer (and faster) to use the cli.
 * Do not use arrays in Firebase. Use objects indexed by IDs.
 
 ### Lists

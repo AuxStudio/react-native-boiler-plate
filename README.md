@@ -11,7 +11,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add Firebase CLI setup
 * Add TOC to SETUP_GUIDE and STYLE_GUIDE
 * Add version control (react-native-version)
 * Add a CHANGELOG that ships with project
@@ -28,8 +27,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # ENHANCEMENTS
 
-* LocationHandler permissions handling could be more robust?
-* System messages management (array of messages displayed sequentially)
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication
 * Password reset in-app (fully fledged)
