@@ -105,3 +105,7 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 ### Performance
 
 * Use a launch screen (it improves perceived loading time)
+* Track renders in each component you create (they should make sense)
+* Track state and prop changes in componentWillUpdate and lodash difference
+* Measure and minimise overdraw (number of times pixels have been redrawn) (android only - developer options - debug GPU overdraw)
+* Track performance results in a spreadsheet
