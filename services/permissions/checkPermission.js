@@ -7,7 +7,7 @@ export default function checkPermission(permission) {
 
     Permissions.check(permission)
       .then((message) => {
-        const response = message & { message };
+        const response = message && { message };
         utils.log('end checkPermission', response);
         resolve(response);
       })
