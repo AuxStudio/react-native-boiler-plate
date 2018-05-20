@@ -9,25 +9,13 @@ A react-native, redux, redux-saga and firebase project.
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)
 
-# BUGS
-
-* Signing in new users with email and password is not currently working
-* requestPermission contacts on ios crashes the app
-
 # TODOS
 
-* Track unnecessary renders (renderCountProp from react-redux)
-  -- react-native-slowlog
-  -- Track state and prop changes in componentWillUpdate and lodash difference
-* Consider reselect selector library
-* Track performance results in a spreadsheet
-* Test reducers performance (redux-log-slow-reducers)
-* Measure and minimise overdraw (number of times pixels have been redrawn)
 * Add Firebase CLI setup
 * Add TOC to SETUP_GUIDE and STYLE_GUIDE
 * Add version control (react-native-version)
-* Add a CHANGELOG
-* Add terminology doc eg. ref (!node)
+* Add a CHANGELOG that ships with project
+* Add terminolgy notes to style guide eg. ref (!node)
 * Add push notifications setup
 * Fastlane integration
 * CodePush integration
@@ -46,3 +34,4 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * Phone authentication
 * Password reset in-app (fully fledged)
 * Write script to generate project in one go (saves up to 3 hrs)
+* Consider reselect selector library
