@@ -196,12 +196,13 @@ apply plugin: 'com.google.gms.google-services'
 
 ```java
     // Firebase dependencies
-    implementation "com.google.android.gms:play-services-base:12.0.1
-    implementation "com.google.firebase:firebase-core:12.0.1
-    implementation "com.google.firebase:firebase-analytics:12.0.1
-    implementation "com.google.firebase:firebase-auth:12.0.1
-    implementation "com.google.firebase:firebase-database:12.0.1
-    implementation "com.google.firebase:firebase-storage:12.0.1
+    implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.firebase:firebase-core:15.0.0"
+    implementation "com.google.firebase:firebase-analytics:15.0.2"
+    implementation "com.google.firebase:firebase-auth:15.1.0"
+    implementation "com.google.firebase:firebase-database:15.0.0"
+    implementation "com.google.firebase:firebase-storage:15.0.2"
+    implementation "com.google.firebase:firebase-messaging:15.0.2"
 ```
 
 8.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
@@ -212,10 +213,32 @@ implementation(project(':react-native-firebase')) {
 }
 ```
 
-8.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
+9.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
+```
+
+10. In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
+
+```java
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+```
+
+Same file as above, in getPackages(), add:
+
+```java
+    new RNFirebasePackage(),
+    new RNFirebaseAnalyticsPackage(),
+    new RNFirebaseAuthPackage(),
+    new RNFirebaseDatabasePackage(),
+    new RNFirebaseStoragePackage(),
+    new RNFirebaseMessagingPackage()
 ```
 
 #### react-native-fbsdk
