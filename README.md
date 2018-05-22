@@ -14,12 +14,13 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * Add push notifications setup
 * Fastlane integration
 * CodePush integration
-* Testing
+* Testing (unit testing, component testing, E2E)
 * Continuous integration
 
 # TBA
 
-* Consider react-native-navigation (apparently a performance improvement since it's native). Not very stable. Waiting for V2.
+* Consider react-native-navigation (apparently a performance improvement since it's native).
+  -- Not very stable. Waiting for V2.
 
 # ENHANCEMENTS
 
