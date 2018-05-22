@@ -11,7 +11,6 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Add push notifications setup
 * Fastlane integration
 
 ## Necessary but new territory (for me at least)

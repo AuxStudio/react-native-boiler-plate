@@ -761,3 +761,26 @@ firebase init
 ```
 
 See the [docs](https://github.com/firebase/firebase-tools) for a list of useful commands.
+
+## 14. Add Push Notifications
+
+### Android
+
+Most of it was already set up in the react-native-firebase step.
+
+1. In `./android/app/src/main/AndroidManifest.xml`, add to application component:
+
+```xml
+  <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
+    <intent-filter>
+      <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+  </service>
+  <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
+    <intent-filter>
+      <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+    </intent-filter>
+  </service>
+```
+
+### iOS
