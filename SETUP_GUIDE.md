@@ -125,7 +125,13 @@ targetSdkVersion 26
 implementation "com.android.support:appcompat-v7:25.0.0"
 ```
 
-## 7. Install dependencies
+## 8. Add app to consoles
+
+* [Google Play console](https://play.google.com/apps/publish)
+* [Apple Developer portal](https://developer.apple.com/account/)
+* [iTunes Connect](https://itunesconnect.apple.com/)
+
+## 9. Install dependencies
 
 Remove what you don't need.
 
@@ -133,7 +139,7 @@ Remove what you don't need.
 yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.0.6 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.7.0 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
-## 8. Link dependencies
+## 10. Link dependencies
 
 ### Android
 
@@ -170,6 +176,13 @@ react-native link react-native-firebase
 ```
 
 2.  Add android app to [Firebase console](https://console.firebase.google.com/u/0/).
+
+2.1. You'll need to get your debug certificate fingerprint with this command (password: android):
+
+```shell
+keytool -exportcert -list -v \
+-alias androiddebugkey -keystore ~/.android/debug.keystore
+```
 
 3.  Download the generated google-services.json to `./android/app/`
 
@@ -562,6 +575,7 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+pod 'Firebase/Messaging'
 ```
 
 9.  Install the pods:
@@ -664,7 +678,7 @@ $(PROJECT_DIR) recursive
 
 3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
-## 10. Copy the source files
+## 11. Copy the source files
 
 1.  Clone the source files:
 
@@ -689,7 +703,7 @@ sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && su
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
 
-## 9. Setup ESLint and Prettier
+## 12. Setup ESLint and Prettier
 
 1.  Install dependencies:
 
@@ -703,7 +717,7 @@ yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import esl
 sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./prettierrc
 ```
 
-## 10. Setup extra app icons
+## 13. Setup extra app icons
 
 1.  Copy the following to `./package.json`:
 
@@ -720,7 +734,7 @@ sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./pre
 * `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
 * `./ios/PROJECT_NAME/`
 
-## 11. Enable Firebase authentication methods
+## 14. Enable Firebase authentication methods
 
 Remove what you don't need.
 
@@ -729,7 +743,7 @@ Remove what you don't need.
 * Google (download and replace new google-services.json and GoogleService-Info.plist)
 * Email
 
-## 12. Add your custom fonts
+## 15. Add your custom fonts
 
 Optional.
 
@@ -741,7 +755,7 @@ Copy the fonts to `./android/app/src/assets/fonts`.
 
 Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts-to-react-native-b266b41bff7f).
 
-## 13. Add Storybook
+## 16. Add Storybook
 
 1.  Setup:
 
@@ -752,7 +766,7 @@ getstorybook
 
 2.  Remove boilerplate code, ie. Button, Welcome.
 
-## 14. Add firebase-cli
+## 17. Add firebase-cli
 
 ```shell
 npm install -g firebase-tools
@@ -762,7 +776,7 @@ firebase init
 
 See the [docs](https://github.com/firebase/firebase-tools) for a list of useful commands.
 
-## 14. Add Push Notifications
+## 18. Add Push Notifications
 
 ### Android
 
@@ -784,3 +798,73 @@ Most of it was already set up in the react-native-firebase step.
 ```
 
 ### iOS
+
+1. Setup certificates
+
+Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
+
+2. Enable capabilities
+
+In XCode, enable the following capabilities:
+* Push Notifications
+* Background modes ➜ Remote notifications
+
+3. Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
+
+## 19. Fastlane integration
+
+Saves sooo much time! We normally just set it up to automate beta distribution and manually release to production but fastlane has tools to do that too.
+
+### Install fastlane globally:
+
+```shell
+sudo gem install fastlane -NV
+```
+
+### android
+
+1. Get your json secret_key file
+
+Follow the steps [here](https://docs.fastlane.tools/actions/supply/#setup).
+
+2. Save the downloaded file to `./android/app/secret_key.json`
+
+3. Initialise fastlane
+
+```shell
+cd android
+fastlane init
+```
+4. Follow the steps and enter the relevant information:
+
+4.1. Enter ./app/secret_key.json
+4.2. Enter n
+
+5. Add the following to `./android/fastlane/Fastfile`:
+
+```
+  desc "Deploy a new version to the Beta track"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store(track: 'beta')
+  end
+```
+
+and remove the existing beta task (ie. the other block of code with `lane :beta do`)
+
+### ios
+
+1. Initialise fastlane
+
+```shell
+cd ios
+fastlane init
+```
+2. Follow the steps and enter the relevant information:
+
+2.1. Enter 2 (to select Automate beta distribution to TestFlight)
+2.2. Select the correct scheme (it's usually just PROJECT_NAME)
+2.3. Enter your developer login credentials
+2.4. Select the correct APP ID.
+
+TODO: Finish these steps

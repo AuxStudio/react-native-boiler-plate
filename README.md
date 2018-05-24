@@ -11,22 +11,23 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
-* Fastlane integration
-
-## Necessary but new territory (for me at least)
-
+* Fastlane
+  -- Finish iOS setup
+* Add notes on tools, ie. react-native-version, fastlane commands etc.
+* Fastlane
+  -- Screenshots
 * CodePush integration
 * Testing (unit testing, component testing, E2E)
 * Continuous integration
 
-## Stuff that should happen in the future, but not now
+## FUTURE
 
 * Consider react-native-navigation (apparently a performance improvement since it's native).
   -- Not very stable. Waiting for V2.
 * Consider reselect selector library.
 * Write generator script to generate project in one go (could save up to 3 hrs).
 
-## Enhancements to be developed as needed
+## ENHANCEMENTS
 
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication
