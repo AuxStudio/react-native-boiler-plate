@@ -81,7 +81,7 @@ export default function* sagas() {
     // Storage
     fork(takeLatest, 'uploadFile', uploadFile),
 
-    // Erros
+    // Errors
     fork(takeLatest, 'logError', logError),
   ]);
 }
