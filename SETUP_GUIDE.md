@@ -726,17 +726,7 @@ sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.pr
 
 ## 13. Setup extra app icons
 
-1.  Copy the following to `./package.json`:
-
-```json
-"rnpm": {
-"assets": [
-"./src/assets/fonts",
-]
-}
-```
-
-2.  Copy `./src/assets/fonts/AppIcons.ttf` to
+1.  Copy `./src/assets/fonts/AppIcons.ttf` to
 
 * `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
 * `./ios/PROJECT_NAME/`

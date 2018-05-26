@@ -1,3 +1,5 @@
+import time from './time';
+
 const utils = {};
 
 function cloneObject(object) {
@@ -41,8 +43,10 @@ function createUID() {
 }
 utils.createUID = createUID;
 
-// Used in sagas to prepare the next action object using the response and meta data on the original action
-// Very useful when you want to chain saga actions together, e.g. showImagePicker, resizeImage, uploadFile, SET_SYSTEM_MESSAGE
+// Used in sagas to prepare the next action object using
+// the response and meta data on the original action
+// Very useful when you want to chain saga actions together,
+// e.g. showImagePicker, resizeImage, uploadFile, SET_SYSTEM_MESSAGE
 function prepareNextAction(action, response) {
   if (response && action.meta && action.meta.nextAction) {
     let payload = {};
@@ -67,5 +71,7 @@ function prepareNextAction(action, response) {
   return null;
 }
 utils.prepareNextAction = prepareNextAction;
+
+utils.time = time;
 
 export default utils;
