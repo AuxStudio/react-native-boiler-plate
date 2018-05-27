@@ -1,3 +1,4 @@
+import strings from './strings';
 import time from './time';
 
 const utils = {};
@@ -72,6 +73,7 @@ function prepareNextAction(action, response) {
 }
 utils.prepareNextAction = prepareNextAction;
 
+utils.strings = strings;
 utils.time = time;
 
 export default utils;

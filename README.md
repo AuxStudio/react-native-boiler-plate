@@ -11,6 +11,7 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
+* No need for named file in components, e.g. Input. Just use index.js.
 * Add notes about spacing and borderRadius from styleConstants and how parents should control a child components layout to STYLE_GUIDE
 * Add README template with development, storybook and deployment notes
 * Need a docs folder

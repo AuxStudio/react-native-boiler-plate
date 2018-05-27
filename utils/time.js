@@ -1,3 +1,5 @@
+import strings from './strings';
+
 const time = {};
 
 // Takes a unix timestamp and returns a pretty date in the format: Sat, 3 Feb
@@ -26,7 +28,7 @@ time.getPrettyDate = getPrettyDate;
 // Takes a unix timestamp and returns the time in the format: 13:00
 function getTime(timestamp) {
   const date = new Date(timestamp);
-  return `${date.getHours()}:${date.getMinutes()}`;
+  return `${strings.addZeroPadding(date.getHours())}:${strings.addZeroPadding(date.getMinutes())}`;
 }
 time.getTime = getTime;
 
