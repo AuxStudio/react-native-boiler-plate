@@ -1,7 +1,12 @@
+import app from './app';
 import strings from './strings';
 import time from './time';
 
 const utils = {};
+
+utils.app = app; // app-specific utils
+utils.strings = strings;
+utils.time = time;
 
 function cloneObject(object) {
   // returns a copy of an object
@@ -72,8 +77,5 @@ function prepareNextAction(action, response) {
   return null;
 }
 utils.prepareNextAction = prepareNextAction;
-
-utils.strings = strings;
-utils.time = time;
 
 export default utils;
