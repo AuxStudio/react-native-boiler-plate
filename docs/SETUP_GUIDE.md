@@ -702,10 +702,10 @@ import App from './src/App';
 AppRegistry.registerComponent('PROJECT_NAME', () => App);
 ```
 
-3.  Delete unnecessary files and move CHANGELOG to root. FIXME: surely there is a better way?
+3.  Delete unnecessary files and move CHANGELOG to root. FIXME: script
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/SETUP_GUIDE.md && sudo rm ./src/snippets.json && sudo rm ./src/STYLE_GUIDE.md && sudo rm ./src/TROUBLESHOOTING.md && sudo rm -R ./src/.git && sudo mv ./src/CHANGELOG.md ./CHANGELOG.md
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs
 ```
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
@@ -862,5 +862,4 @@ fastlane init
 2.2. Select the correct scheme (it's usually just PROJECT_NAME)
 2.3. Enter your developer login credentials
 2.4. Select the correct APP ID.
-
-TODO: Finish these steps
+...

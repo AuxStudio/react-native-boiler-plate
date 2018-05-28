@@ -81,8 +81,9 @@ Some common terminology that we use.
 * The same goes for props, e.g. userImage prop should be named imageSourceURL.
 * Components should only be given the props that they need. Object destructuring is handy for this, e.g. function ({ imagePhotoURL }) { return ( <CircularImage imagePhotoURL={imagePhotoURL} )}
 * Presentational components should not contain any business logic.
-* Presentational components should be wired up to Storybook (TODO).
+* Presentational components should be wired up to Storybook.
 * Components should be able to manage state internally where possible to allow for testing in Storybook and unit testing.
+* Parent components should control a child's layout, i.e. margin should come from a parent component.
 
 ### Handlers
 

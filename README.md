@@ -2,21 +2,15 @@
 
 A react-native, redux, redux-saga and firebase project.
 
-* [Style guide](./STYLE_GUIDE.md)
-* [Setup guide](./SETUP_GUIDE.md)
+* [Style guide](./docs/STYLE_GUIDE.md)
+* [Setup guide](./docs/SETUP_GUIDE.md)
 * [VSCode snippets](./snippets.json) for sagas, stylesheet, component index, dumb, functional and container components (makes life _waaay_ easier)
-* [Troubleshooting](./TROUBLESHOOTING.md)
+* [Troubleshooting](./docs/TROUBLESHOOTING.md)
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)
 
 # TODOS
 
-* Add notes about spacing and borderRadius from styleConstants and how parents should control a child components layout to STYLE_GUIDE
-* Add README template with development, storybook and deployment notes
-* Need a docs folder
-* Fastlane
-  -- Finish iOS setup
-* Add notes on tools, ie. fastlane commands etc.
 * Setup project to handle multiple Firebase apps (development and production). Remove config.environment and associated code.
 
 * Fastlane
@@ -37,3 +31,19 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication
 * Password reset in-app (fully fledged)
+
+# DEPLOYMENT
+
+To deploy to the stores, use:
+
+```shell
+cd android
+fastlane beta
+```
+
+and
+
+```shell
+cd ios
+fastlane beta
+```
