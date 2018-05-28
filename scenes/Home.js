@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Page } from 'react-native-simple-components';
-
-import Example from '../components/Example';
+import { Text } from 'react-native';
 
 export class Home extends React.Component {
   static propTypes = {};
@@ -14,8 +13,8 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <Page>
-        <Example title="home" />
+      <Page verticalCenter horizontalCenter>
+        <Text>Hello World!</Text>
       </Page>
     );
   }

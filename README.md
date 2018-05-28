@@ -11,13 +11,15 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
+* Setup project to handle multiple Firebase apps (development and production). Remove config.environment and associated code.
 * No need for named file in components, e.g. Input. Just use index.js.
 * Add notes about spacing and borderRadius from styleConstants and how parents should control a child components layout to STYLE_GUIDE
 * Add README template with development, storybook and deployment notes
 * Need a docs folder
 * Fastlane
   -- Finish iOS setup
-* Add notes on tools, ie. react-native-version, fastlane commands etc.
+* Add notes on tools, ie. fastlane commands etc.
+
 * Fastlane
   -- Screenshots
 * CodePush integration
