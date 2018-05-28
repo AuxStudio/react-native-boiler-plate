@@ -24,7 +24,8 @@ export class Error extends React.Component {
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          padding: styleConstants.dimensions.padding.large,
+          paddingVertical: styleConstants.dimensions.spacing.vertical,
+          paddingHorizontal: styleConstants.dimensions.spacing.horizontal,
         }}
       >
         <InfoBlock title="Error" description={message} />

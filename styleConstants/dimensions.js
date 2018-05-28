@@ -8,14 +8,11 @@ dimensions.window = {
   height,
 };
 
-dimensions.padding = {
-  small: 8,
-  large: 16,
+dimensions.spacing = {
+  vertical: 10,
+  horizontal: 15,
 };
 
-dimensions.margin = {
-  small: 8,
-  large: 16,
-};
+dimensions.borderRadius = 10;
 
 export default dimensions;
