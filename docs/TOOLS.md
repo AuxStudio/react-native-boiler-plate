@@ -1,5 +1,21 @@
 # Tools
 
+# Deployment
+
+To deploy to the stores, use:
+
+```shell
+cd android
+fastlane beta
+```
+
+and
+
+```shell
+cd ios
+fastlane beta
+```
+
 ## Generating assets
 
 1.  Save source icon to `./design/icon.png`. It should be > 1024 x 1024 px.

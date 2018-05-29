@@ -32,19 +32,3 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 * FileSystem sagas and services (moveFile, deleteFile etc)
 * Phone authentication
 * Password reset in-app (fully fledged)
-
-# DEPLOYMENT
-
-To deploy to the stores, use:
-
-```shell
-cd android
-fastlane beta
-```
-
-and
-
-```shell
-cd ios
-fastlane beta
-```
