@@ -11,9 +11,12 @@ Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or sug
 
 # TODOS
 
+* Add process documentation
+* Add license to docs
+* Add iPhoneX helper to styleConstants
+* Get set for transfer to AUX
 * Setup project to handle multiple Firebase apps (development and production). Remove config.environment and associated code.
 * Consider these tools: https://github.com/bamlab/generator-rn-toolbox. It does everything we need and more.
-
 * Fastlane
   -- Screenshots
 * CodePush integration
