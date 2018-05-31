@@ -8,6 +8,7 @@ A react-native, redux, redux-saga and firebase project.
 * [Process](./docs/PROCESS.md)
 * [Tools](./docs/TOOLS.md)
 * [Troubleshooting](./docs/TROUBLESHOOTING.md)
+* [Licence](./docs/LICENCE)
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)
 
