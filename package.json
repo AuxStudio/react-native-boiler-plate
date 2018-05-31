@@ -8,21 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaunsaker/react-native-boiler-plate.git"
+    "url": "git+https://github.com/AuxStudio/react-native-boiler-plate.git"
   },
-  "keywords": [
-    "react",
-    "react-native",
-    "redux",
-    "firebase",
-    "redux-saga"
-  ],
+  "keywords": ["react", "react-native", "redux", "firebase", "redux-saga"],
   "author": "Shaun Saker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaunsaker/react-native-boiler-plate/issues"
+    "url": "https://github.com/AuxStudio/react-native-boiler-plate/issues"
   },
-  "homepage": "https://github.com/shaunsaker/react-native-boiler-plate#readme",
+  "homepage": "https://github.com/AuxStudio/react-native-boiler-plate/README.md",
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
