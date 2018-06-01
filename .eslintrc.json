@@ -28,7 +28,8 @@
     "arrow-parens": "off", // parenthesis around single argument or not, depends on the use case
     "no-bitwise": "off",
     "react/jsx-indent": "off", // conflicts with prettier
-    "no-nested-ternary": "off" // often looks better than if else block
+    "no-nested-ternary": "off", // often looks better than if else block
+    "class-methods-use-this": "off" // class methods are great for self-documentation
   },
   "plugins": ["react", "react-native"],
   "globals": {
