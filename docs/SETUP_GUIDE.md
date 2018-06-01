@@ -550,37 +550,26 @@ react-native link react-native-image-resizer
 react-native link react-native-firebase
 ```
 
-2.  Add android app to [Firebase console](https://console.firebase.google.com/u/0/).
-
-2.1. You'll need to get your debug certificate fingerprint with this command (password: android):
-
-```shell
-keytool -exportcert -list -v \
--alias androiddebugkey -keystore ~/.android/debug.keystore
-```
-
-3.  Download the generated google-services.json to `./android/app/`
-
-4.  In `./android/build.gradle`, add/update to buildscript.dependencies:
+2.  In `./android/build.gradle`, add/update to buildscript.dependencies:
 
 ```java
 classpath 'com.android.tools.build:gradle:3.1.0'
 classpath 'com.google.gms:google-services:3.2.1'
 ```
 
-5.  Same file as above, add to buildscript.repositories and allprojects.repositoriess:
+3.  Same file as above, add to buildscript.repositories and allprojects.repositoriess:
 
 ```java
 google()
 ```
 
-6.  In `./android/app/build.gradle`, add to bottom of file:
+4.  In `./android/app/build.gradle`, add to bottom of file:
 
 ```java
 apply plugin: 'com.google.gms.google-services'
 ```
 
-7.  Same file as above, add to dependencies:
+5.  Same file as above, add to dependencies:
 
 ```java
     // Firebase dependencies
@@ -593,7 +582,7 @@ apply plugin: 'com.google.gms.google-services'
     implementation "com.google.firebase:firebase-messaging:15.0.2"
 ```
 
-8.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
+6.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
 
 ```java
 implementation(project(':react-native-firebase')) {
@@ -601,13 +590,13 @@ implementation(project(':react-native-firebase')) {
 }
 ```
 
-9.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
+7.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 ```
 
-10. In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
+8.  In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
 
 ```java
 import io.invertase.firebase.RNFirebasePackage;
@@ -631,42 +620,38 @@ Same file as above, in getPackages(), add:
 
 #### iOS
 
-1.  Add iOS app to [Firebase console](https://console.firebase.google.com/u/0/)
-
-2.  Download the generated GoogleService-Info.plist to `./ios/` (copy the file in XCode).
-
-3.  In `./ios/PROJECT_NAME/AppDelegate.m`, add to top of file:
+1.  In `./ios/PROJECT_NAME/AppDelegate.m`, add to top of file:
 
 ```
 #import <Firebase.h>
 ```
 
-4.  Same file as above, add to beginning of didFinishLaunchingWithOptions method:
+2.  Same file as above, add to beginning of didFinishLaunchingWithOptions method:
 
 ```
 [FIRApp configure];
 ```
 
-5.  Setup cocoapods:
+3.  Setup cocoapods:
 
 ```shell
 cd ios
 pod init
 ```
 
-6.  In `./ios/PodFile` delete duplicate PROJECT_NAME-tvOSTests within main project target.
+4.  In `./ios/PodFile` delete duplicate PROJECT_NAME-tvOSTests within main project target.
 
 ```shell
 pod update
 ```
 
-7.  Same file as above, uncomment:
+5.  Same file as above, uncomment:
 
 ```
 platform :ios, '9.0'
 ```
 
-8.  Same file as above, add these pods:
+6.  Same file as above, add these pods:
 
 `NOTE: react-native-firebase is not yet compatible with the new firebase release (V5), so we force it to 4.13.0 for now. See this [issue](https://github.com/invertase/react-native-firebase/issues/1062).`
 
@@ -679,7 +664,7 @@ pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
 ```
 
-9.  Install the pods:
+7.  Install the pods:
 
 ```shell
 pod install
@@ -769,43 +754,7 @@ firebase init
 
 See the [docs](https://github.com/firebase/firebase-tools) for a list of useful commands.
 
-## 18. Add Push Notifications
-
-### Android
-
-Most of it was already set up in the react-native-firebase step.
-
-1.  In `./android/app/src/main/AndroidManifest.xml`, add to application component:
-
-```xml
-  <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
-    <intent-filter>
-      <action android:name="com.google.firebase.MESSAGING_EVENT" />
-    </intent-filter>
-  </service>
-  <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
-    <intent-filter>
-      <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-    </intent-filter>
-  </service>
-```
-
-### iOS
-
-1.  Setup certificates
-
-Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
-
-2.  Enable capabilities
-
-In XCode, enable the following capabilities:
-
-* Push Notifications
-* Background modes ➜ Remote notifications
-
-3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
-
-## 19. Fastlane integration
+## 18. Fastlane integration
 
 Saves sooo much time! We normally just set it up to automate beta distribution and manually release to production but fastlane has tools to do that too.
 
@@ -863,3 +812,62 @@ fastlane init
 2.3. Enter your developer login credentials
 2.4. Select the correct APP ID.
 ...
+
+## 19. Setup Firebase environments
+
+1.  Add two projects to the [Firebase console](), one named PROJECT_NAME-development and the other, PROJECT_NAME-production.
+
+2.  Add ios and android apps to each and download the appropriate config files to `./firebase_environments/development` and `./firebase_environments/production`.
+
+3.  Add the following scripts to `./package.json`, scripts object:
+
+```shell
+    "android-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev react-native run-android",
+    "android-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-android",
+    "ios-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev && react-native run-ios",
+    "ios-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-ios",
+    "beta":
+      "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha && cd ../ios && fastlane beta && cd .."
+```
+
+Done! Use the scripts to develop or release the beta builds, e.g:
+
+```shell
+yarn run ios-dev
+```
+
+## 20. Add Push Notifications
+
+### Android
+
+Most of it was already set up in the react-native-firebase step.
+
+1.  In `./android/app/src/main/AndroidManifest.xml`, add to application component:
+
+```xml
+  <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
+    <intent-filter>
+      <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+  </service>
+  <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
+    <intent-filter>
+      <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+    </intent-filter>
+  </service>
+```
+
+### iOS
+
+1.  Setup certificates
+
+Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
+
+2.  Enable capabilities
+
+In XCode, enable the following capabilities:
+
+* Push Notifications
+* Background modes ➜ Remote notifications
+
+3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
