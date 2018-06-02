@@ -9,7 +9,7 @@ A react-native, redux, redux-saga and firebase project.
 * Auth (all of it besides phone authentication)
 * Realtime database
 * Cloud storage
-* Network and system message management
+* Network, error and system message management
 * Image [handling](https://github.com/react-community/react-native-image-picker), [caching](https://github.com/DylanVann/react-native-fast-image) and [resizing](https://github.com/bamlab/react-native-image-resizer)
 * [Location](https://github.com/devfd/react-native-geocoder)
 * [Permissions](https://github.com/yonahforst/react-native-permissions)
