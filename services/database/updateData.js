@@ -1,11 +1,8 @@
 import firebase from 'react-native-firebase';
-import config from '../../config';
 import utils from '../../utils';
 
-export default function updateData(relativeRef, data) {
+export default function updateData(ref, data) {
   return new Promise((resolve, reject) => {
-    const ref = `${config.environment}/${relativeRef}`;
-
     utils.log('start updateData', { ref, data });
 
     firebase
