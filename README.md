@@ -17,6 +17,12 @@ A react-native, redux, redux-saga and firebase project.
 * Automated beta app distribution thanks to [fastlane](https://github.com/fastlane/fastlane)
 * A collection of useful docs (seen below)
 
+## In the pipeline
+
+* Testing (unit and E2E)
+* CodePush
+* Continous integration
+
 ## Docs
 
 * [Style guide](./docs/STYLE_GUIDE.md)
