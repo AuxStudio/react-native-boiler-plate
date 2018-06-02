@@ -30,6 +30,8 @@ src
 		index.js
 	components
 		Example
+			__tests__
+				Example.js // test spec
 			Example.js	// presentational component
 			ExampleContainer.js	// business logic (optional)
 			index.js	// import and export
