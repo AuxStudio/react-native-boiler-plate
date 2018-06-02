@@ -817,7 +817,7 @@ fastlane init
 
 1.  Add two projects to the [Firebase console](), one named PROJECT_NAME-development and the other, PROJECT_NAME-production.
 
-2.  Add ios and android apps to each and download the appropriate config files to `./firebase_environments/development` and `./firebase_environments/production`.
+2.  Add ios and android apps to each and download the config files to `./firebase_environments/development` and `./firebase_environments/production`.
 
 3.  Add the following scripts to `./package.json`, scripts object:
 
@@ -829,6 +829,8 @@ fastlane init
     "beta":
       "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha && cd ../ios && fastlane beta && cd .."
 ```
+
+4.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
 
 Done! Use the scripts to develop or release the beta builds, e.g:
 
