@@ -817,7 +817,7 @@ fastlane init
 
 1.  Add two projects to the [Firebase console](), one named PROJECT_NAME-development and the other, PROJECT_NAME-production.
 
-2.  Add ios and android apps to each and download the config files to `./firebase_environments/development` and `./firebase_environments/production`.
+2.  Add ios and android apps to each and download the config files to `./config/firebase/development` and `./config/firebase/production`.
 
 3.  Add the following scripts to `./package.json`, scripts object:
 
