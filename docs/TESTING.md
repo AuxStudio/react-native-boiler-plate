@@ -2,6 +2,10 @@
 
 ## Unit testing
 
-We use [Jest]() for our unit testing.
+We use [Jest](https://facebook.github.io/jest/) for unit testing.
 
-When writing tests for components, be sure to test all the props (with the exception of any style or style derivative props, e.g. textStyle).
+### Conventions
+
+- All test files should end in `.test.js`, e.g. `Example.test.js`.
+- All test files should be located in the `__tests__` folder within the component folder as per the [style guide](./STYLE_GUIDE.md#directory-structure).
+- When writing tests for components, be sure to test all the props as well as testing that the component works when no required props are passed in.
