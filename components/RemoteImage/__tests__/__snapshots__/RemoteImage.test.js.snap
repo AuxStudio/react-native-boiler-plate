@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a RemoteImage 1`] = `
+<View
+  style={Object {}}
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {},
+          Object {
+            "borderRadius": 10,
+          },
+          Object {
+            "backgroundColor": "blue",
+          },
+        ],
+        Object {
+          "overflow": "hidden",
+        },
+      ]
+    }
+  >
+    <FastImageView
+      onFastImageError={[Function]}
+      onFastImageLoadEnd={[Function]}
+      resizeMode="cover"
+      source={
+        Object {
+          "uri": "https://d3iw72m71ie81c.cloudfront.net/male-47.jpg",
+        }
+      }
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#E0E0E0",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "borderRadius": 10,
+        },
+      ]
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="green"
+      hidesWhenStopped={true}
+      size="large"
+    />
+  </View>
+</View>
+`;
+
+exports[`renders a RemoteImage with minimum required props 1`] = `
+<View
+  style={Object {}}
+>
+  <Image
+    onError={[Function]}
+    onLoadEnd={[Function]}
+    resizeMode="cover"
+    style={
+      Array [
+        Object {},
+        undefined,
+        undefined,
+      ]
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#E0E0E0",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#212121"
+      hidesWhenStopped={true}
+      size="large"
+    />
+  </View>
+</View>
+`;
