@@ -4,13 +4,19 @@
   "description": "A boiler-plate project for React-native, Redux and Firebase apps",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AuxStudio/react-native-boiler-plate.git"
   },
-  "keywords": ["react", "react-native", "redux", "firebase", "redux-saga"],
+  "keywords": [
+    "react",
+    "react-native",
+    "redux",
+    "firebase",
+    "redux-saga"
+  ],
   "author": "Shaun Saker",
   "license": "MIT",
   "bugs": {
@@ -24,7 +30,12 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "eslint-plugin-react-native": "^3.2.1"
+    "eslint-plugin-react-native": "^3.2.1",
+    "jest": "^23.1.0",
+    "jest-react-native": "^18.0.0",
+    "react": "^16.4.0",
+    "react-native": "^0.55.4",
+    "react-test-renderer": "^16.4.0"
   },
   "dependencies": {}
 }
