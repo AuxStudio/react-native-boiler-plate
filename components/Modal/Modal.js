@@ -6,7 +6,7 @@ import Modal from 'react-native-modal';
 const propTypes = {
   isVisible: PropTypes.bool,
   handleClose: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 const defaultProps = {};
