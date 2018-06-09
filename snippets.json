@@ -190,6 +190,7 @@
   "Blank test": {
     "prefix": "test",
     "body": [
+      "/* eslint-disable import/first */",
       "import React from 'react';",
       "import renderer from 'react-test-renderer';",
       "$2",
@@ -197,7 +198,12 @@
       "$2",
       "it('renders a $1', () => {",
       "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
-      "});"
+      "});",
+      "$2",
+      "it('renders a $1 with no props', () => {",
+      "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
+      "});",
+      "/* eslint-enable */"
     ]
   }
 }
