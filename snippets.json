@@ -152,7 +152,7 @@
       "export default function* $2(action) {",
       "  try {",
       "    const response = yield call($1.$2, action);",
-      "    const nextAction = utils.app.prepareNextAction(action, response);",
+      "    const nextAction = utils.prepareNextAction(action, response);",
       "$3",
       "  if (nextAction) {",
       "      yield put(",
@@ -163,7 +163,7 @@
       "$3",
       "    yield put({",
       "      type: 'SET_SYSTEM_MESSAGE',",
-      "      payload: utils.app.createError(error),",
+      "      payload: utils.createError(error),",
       "      error: true,",
       "    });",
       "  }",
@@ -214,6 +214,16 @@
       "  const { root } = component;",
       "  const instance = component.getInstance();",
       "});"
+    ]
+  },
+  "Blank utility test": {
+    "prefix": "testu",
+    "body": [
+      "import $1 from '../';",
+      "$5",
+      "it('should $2', () => {",
+      "  expect($1($3)).toBe($4);",
+      "})"
     ]
   }
 }
