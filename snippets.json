@@ -209,23 +209,11 @@
   "Blank functional test": {
     "prefix": "testf",
     "body": [
-      "/* eslint-disable import/first */",
-      "import React from 'react';",
-      "import renderer from 'react-test-renderer';",
-      "$2",
-      "import $1 from '../$1';",
-      "$2",
       "it('renders a $1', () => {",
       "  const component = renderer.create(<$1 />);",
-      "  expect(component).toMatchSnapshot();",
-      "$2",
+      "  const { root } = component;",
       "  const instance = component.getInstance();",
-      "});",
-      "$2",
-      "it('renders a $1 with no props', () => {",
-      "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
-      "});",
-      "/* eslint-enable */"
+      "});"
     ]
   }
 }
