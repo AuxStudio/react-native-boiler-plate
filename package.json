@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "jest-react-native",
+    "setupTestFrameworkScriptFile": "./__mocks__/react-native-firebase",
+    "automock": false
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,7 @@
     "react": "^16.4.0",
     "react-native": "^0.55.4",
     "react-native-fast-image": "^4.0.14",
+    "react-native-firebase": "^4.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.5.0",
     "react-native-material-menu": "^0.3.1",
     "react-native-material-textfield": "^0.12.0",
