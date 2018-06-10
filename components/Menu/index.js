@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ViewPropTypes, Text } from 'react-native';
 import Menu, { MenuItem } from 'react-native-material-menu';
-import { Touchable } from 'react-native-simple-components';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
+
+import MenuButton from './MenuButton';
 
 export default class MenuComponent extends React.Component {
   static propTypes = {
@@ -47,16 +47,10 @@ export default class MenuComponent extends React.Component {
   };
 
   render() {
-    const menuButtonComponent = (
-      <Touchable onPress={this.showMenu} style={styles.menuButton}>
-        <Icon name="menu" style={styles.menuButtonIcon} />
-      </Touchable>
-    );
-
     return (
       <Menu
         ref={this.setMenuRef}
-        button={menuButtonComponent}
+        button={<MenuButton handlePress={this.showMenu} />}
         style={[styles.container, this.props.containerStyle]}
       >
         {this.props.options &&
