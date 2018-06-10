@@ -31,6 +31,8 @@ export default class RemoteImage extends React.Component {
     this.setState({
       hasError: true,
     });
+
+    this.setLoading(false);
   };
 
   setLoading = (isLoading) => {
@@ -46,7 +48,7 @@ export default class RemoteImage extends React.Component {
     if (this.state.hasError) {
       backgroundComponent = (
         <View style={[styles.backgroundContainer, borderRadiusStyles]}>
-          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} />
+          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} testID="icon" />
         </View>
       );
     } else if (this.state.isLoading) {
