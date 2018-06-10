@@ -2,7 +2,7 @@
 
 ## Unit testing
 
-We use [Jest](https://facebook.github.io/jest/) for unit testing.
+We use [Jest](https://facebook.github.io/jest/) and [react-test-renderer](https://reactjs.org/docs/test-renderer.html) for unit testing.
 
 ### Conventions
 
