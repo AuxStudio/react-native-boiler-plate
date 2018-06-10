@@ -70,6 +70,7 @@ We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standa
 Some common terminology that we use.
 
 - Ref - refers to a reference in a database
+- Handler - refers to a container component that handles a part of the app's logic, e.g. AuthHandler dispatches the getAuth action.
 
 ## Save hair, read these tips:
 
