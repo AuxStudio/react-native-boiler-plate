@@ -9,7 +9,9 @@ const log = (descriptor, data) => {
       dataString = data;
     }
     console.log(descriptor, dataString);
+    return { descriptor, data: dataString };
   }
+  return null;
 };
 
 export default log;
