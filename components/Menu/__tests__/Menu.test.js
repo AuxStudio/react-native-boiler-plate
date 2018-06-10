@@ -14,6 +14,11 @@ const OPTIONS = [
   },
 ];
 
+/*
+ TODO
+
+  Find a way to test showMenu, selectOption and hideMenu
+*/
 it('renders a Menu', () => {
   expect(
     renderer.create(
@@ -30,5 +35,21 @@ it('renders a Menu', () => {
 
 it('renders a Menu with minimum required props', () => {
   expect(renderer.create(<Menu options={OPTIONS} handlePress={jest.fn()} />)).toMatchSnapshot();
+});
+
+it('renders a Menu and sets the menu ref', () => {
+  const component = renderer.create(
+    <Menu
+      options={OPTIONS}
+      handlePress={jest.fn()}
+      itemTextStyle={{ color: 'red' }}
+      itemContainerStyle={{ backgroundColor: 'blue' }}
+      containerStyle={{ backgroundColor: 'green' }}
+    />,
+  );
+  const instance = component.getInstance();
+
+  instance.setMenuRef('test');
+  expect(instance.menu).toBe('test');
 });
 /* eslint-enable */
