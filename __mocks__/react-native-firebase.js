@@ -11,11 +11,11 @@ export default {
     signInAnonymouslyAndRetrieveData: jest.fn(() => Promise.resolve(user)),
   }),
   database: () => ({
-    ref: () => ({
+    ref: (ref) => ({
       once: jest.fn(() =>
         Promise.resolve({
           val: jest.fn(() => {
-            return database;
+            return database[ref];
           }),
         }),
       ),

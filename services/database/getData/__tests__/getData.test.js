@@ -1,9 +1,14 @@
 import getData from '../';
 import { database } from '../../../../__mocks__/mockData';
 
-it('resolves a promise and returns data', async () => {
+it('resolves a promise and returns data if ref has data', async () => {
   expect.assertions(1);
-  return getData().then((response) => expect(response).toEqual({ data: database }));
+  const ref = 'foo';
+  return getData(ref).then((response) => expect(response).toEqual({ data: database[ref] }));
 });
 
-// TODO: force an error
+it('resolves a promise and returns undefined if ref has no data', async () => {
+  expect.assertions(1);
+  const ref = 'noData';
+  return getData(ref).then((response) => expect(response).toBeUndefined());
+});
