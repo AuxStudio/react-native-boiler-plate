@@ -1,4 +1,4 @@
-import utils from '../../utils';
+import utils from '../../../utils';
 
 export default function get(url) {
   return new Promise((resolve, reject) => {
