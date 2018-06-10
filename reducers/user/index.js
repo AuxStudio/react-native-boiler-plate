@@ -13,11 +13,13 @@ export default function userReducer(state = initialState, action = {}) {
       newState.authenticated = true;
       return newState;
 
-    case 'UPDATE_USER_PROFILE_DATA': {
+    case 'UPDATE_USER_DATA': {
       newState = utils.objects.cloneObject(state);
+
       // Get the ref from the key of the payload
       const refs = Object.keys(action.payload);
       const ref = refs[0];
+
       newState[ref] = action.payload[ref];
       return newState;
     }
