@@ -5,7 +5,7 @@ import utils from '../../utils';
 export default function* getAuth(action) {
   try {
     const response = yield call(auth.getAuth);
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       // effectively response && nextAction
@@ -23,7 +23,7 @@ export default function* getAuth(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

@@ -3,15 +3,15 @@ import utils from '../../utils';
 
 export default function showImagePicker() {
   return new Promise((resolve, reject) => {
-    utils.log('start showImagePicker');
+    utils.app.log('start showImagePicker');
 
     ImagePicker.showImagePicker(null, ({ uri, error }) => {
       if (error) {
-        utils.log('end showImagePicker', { error });
-        reject(utils.createError(error));
+        utils.app.log('end showImagePicker', { error });
+        reject(utils.app.createError(error));
       } else {
         const response = uri && { uri }; // if the user cancels, there is no response
-        utils.log('end showImagePicker', response);
+        utils.app.log('end showImagePicker', response);
 
         resolve(response);
       }

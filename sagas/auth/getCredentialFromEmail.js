@@ -9,7 +9,7 @@ export default function* getCredentialFromEmail(action) {
       action.payload.email,
       action.payload.password,
     );
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -22,7 +22,7 @@ export default function* getCredentialFromEmail(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

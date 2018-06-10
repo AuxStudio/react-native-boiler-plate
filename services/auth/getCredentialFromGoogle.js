@@ -5,7 +5,7 @@ import utils from '../../utils';
 
 export default function getCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
-    utils.log('start getCredentialFromGoogle');
+    utils.app.log('start getCredentialFromGoogle');
 
     GoogleSignin.hasPlayServices({ autoResolve: true })
       .then(() => {
@@ -21,26 +21,26 @@ export default function getCredentialFromGoogle() {
                 );
                 const response = credential && { credential };
 
-                utils.log('end getCredentialFromGoogle', response);
+                utils.app.log('end getCredentialFromGoogle', response);
 
                 resolve(response);
               })
               .catch((error) => {
-                utils.log('end getCredentialFromGoogle', { error });
+                utils.app.log('end getCredentialFromGoogle', { error });
 
-                reject(utils.createError(error));
+                reject(utils.app.createError(error));
               });
           })
           .catch((error) => {
-            utils.log('end getCredentialFromGoogle', { error });
+            utils.app.log('end getCredentialFromGoogle', { error });
 
-            reject(utils.createError(error));
+            reject(utils.app.createError(error));
           });
       })
       .catch((error) => {
-        utils.log('end getCredentialFromGoogle', { error });
+        utils.app.log('end getCredentialFromGoogle', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }

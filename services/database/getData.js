@@ -3,7 +3,7 @@ import utils from '../../utils';
 
 export default function getData(ref) {
   return new Promise((resolve, reject) => {
-    utils.log('start getData', { ref });
+    utils.app.log('start getData', { ref });
 
     firebase
       .database()
@@ -13,14 +13,14 @@ export default function getData(ref) {
         const data = snapshot.val();
         const response = data && { data };
 
-        utils.log('end getData', response);
+        utils.app.log('end getData', response);
 
         resolve(response);
       })
       .catch((error) => {
-        utils.log('end getData', { error });
+        utils.app.log('end getData', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }

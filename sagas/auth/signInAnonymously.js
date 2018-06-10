@@ -6,7 +6,7 @@ export default function* signInAnonymously(action) {
   try {
     const response = yield call(auth.signInAnonymously);
     const { user } = response; // omits additionalUserInfo
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -19,7 +19,7 @@ export default function* signInAnonymously(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

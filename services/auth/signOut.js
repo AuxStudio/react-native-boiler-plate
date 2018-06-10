@@ -3,20 +3,20 @@ import utils from '../../utils';
 
 export default function signOut() {
   return new Promise((resolve, reject) => {
-    utils.log('start signOut');
+    utils.app.log('start signOut');
 
     firebase
       .auth()
       .signOut()
       .then(() => {
-        utils.log('end signOut');
+        utils.app.log('end signOut');
 
         resolve();
       })
       .catch((error) => {
-        utils.log('end signOut', { error });
+        utils.app.log('end signOut', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }

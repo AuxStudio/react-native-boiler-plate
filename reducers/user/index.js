@@ -6,7 +6,7 @@ export default function userReducer(state = initialState, action = {}) {
 
   switch (action.type) {
     case 'SIGN_IN_USER':
-      newState = utils.cloneObject(state);
+      newState = utils.objects.cloneObject(state);
       newState = {
         ...action.payload.user._user,
       };
@@ -14,7 +14,7 @@ export default function userReducer(state = initialState, action = {}) {
       return newState;
 
     case 'UPDATE_USER_PROFILE_DATA': {
-      newState = utils.cloneObject(state);
+      newState = utils.objects.cloneObject(state);
       // Get the ref from the key of the payload
       const refs = Object.keys(action.payload);
       const ref = refs[0];
@@ -23,7 +23,7 @@ export default function userReducer(state = initialState, action = {}) {
     }
 
     case 'SIGN_OUT_USER':
-      newState = utils.cloneObject(state);
+      newState = utils.objects.cloneObject(state);
       newState = initialState;
       return newState;
 

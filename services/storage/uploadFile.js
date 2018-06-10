@@ -3,7 +3,7 @@ import utils from '../../utils';
 
 export default function uploadFile(ref, uri) {
   return new Promise((resolve, reject) => {
-    utils.log('start uploadFile', { ref, uri });
+    utils.app.log('start uploadFile', { ref, uri });
 
     firebase
       .storage()
@@ -15,15 +15,15 @@ export default function uploadFile(ref, uri) {
           // snapshot
           // Current upload state
           // Ignore for now (need redux-saga's eventChannel)
-          utils.log('progress uploadFile', { snapshot });
+          utils.app.log('progress uploadFile', { snapshot });
         },
         (error) => {
-          utils.log('end uploadFile', { error });
-          reject(utils.createError(error));
+          utils.app.log('end uploadFile', { error });
+          reject(utils.app.createError(error));
         },
         (uploadedFile) => {
           const response = uploadedFile && { uploadedFile };
-          utils.log('end uploadFile', response);
+          utils.app.log('end uploadFile', response);
           resolve(response);
         },
       );

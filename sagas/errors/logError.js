@@ -5,7 +5,7 @@ import utils from '../../utils';
 export default function* logError(action) {
   try {
     const response = yield call(database.pushData, 'errors', action.payload.data);
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -13,7 +13,7 @@ export default function* logError(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

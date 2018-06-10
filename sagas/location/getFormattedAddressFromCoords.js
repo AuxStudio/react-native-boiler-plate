@@ -9,7 +9,7 @@ export default function* getFormattedAddressFromCoords(action) {
       action.payload.latitude,
       action.payload.longitude,
     );
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -17,7 +17,7 @@ export default function* getFormattedAddressFromCoords(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

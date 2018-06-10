@@ -16,7 +16,7 @@ export default function* getCredentialAndSignIn(action) {
         auth.signInWithCredential,
         getCredentialResponse.credential,
       );
-      const nextAction = utils.prepareNextAction(action, signInWithCredentialResponse);
+      const nextAction = utils.app.prepareNextAction(action, signInWithCredentialResponse);
 
       if (nextAction) {
         yield put(nextAction);
@@ -29,14 +29,14 @@ export default function* getCredentialAndSignIn(action) {
     } catch (error) {
       yield put({
         type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.createError(error),
+        payload: utils.app.createError(error),
         error: true,
       });
     }
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

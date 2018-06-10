@@ -9,7 +9,7 @@ export default function* checkAndRequestPermission(action) {
       permissions.checkPermission,
       action.payload.permission,
     );
-    const nextActionOne = utils.prepareNextAction(action, checkPermissionResponse);
+    const nextActionOne = utils.app.prepareNextAction(action, checkPermissionResponse);
 
     if (checkPermissionResponse.message === 'authorized' && nextActionOne) {
       yield put(nextActionOne);
@@ -22,14 +22,14 @@ export default function* checkAndRequestPermission(action) {
           permissions.requestPermission,
           action.payload.permission,
         );
-        const nextActionTwo = utils.prepareNextAction(action, checkPermissionResponse);
+        const nextActionTwo = utils.app.prepareNextAction(action, checkPermissionResponse);
 
         if (requestPermissionResponse.message === 'authorized' && nextActionTwo) {
           yield put(nextActionTwo);
         } else {
           yield put({
             type: 'SET_SYSTEM_MESSAGE',
-            payload: utils.createError(
+            payload: utils.app.createError(
               `We need your permission to access your ${action.payload.permission}`,
             ),
             error: true,
@@ -38,7 +38,7 @@ export default function* checkAndRequestPermission(action) {
       } catch (error) {
         yield put({
           type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.createError(error),
+          payload: utils.app.createError(error),
         });
       }
     } else if (
@@ -47,7 +47,7 @@ export default function* checkAndRequestPermission(action) {
     ) {
       yield put({
         type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.createError(
+        payload: utils.app.createError(
           `We need your permission to access your ${action.payload.permission}`,
         ),
         error: true,
@@ -56,7 +56,7 @@ export default function* checkAndRequestPermission(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

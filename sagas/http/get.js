@@ -5,7 +5,7 @@ import utils from '../../utils';
 export default function* get(action) {
   try {
     const response = yield call(http.get, action.payload.url);
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -13,7 +13,7 @@ export default function* get(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }

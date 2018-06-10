@@ -3,11 +3,11 @@ import utils from '../../utils';
 
 export default function goOffline() {
   return new Promise((resolve) => {
-    utils.log('start goOffline');
+    utils.app.log('start goOffline');
 
     firebase.database().goOffline();
 
-    utils.log('end goOffline');
+    utils.app.log('end goOffline');
     resolve();
   });
 }

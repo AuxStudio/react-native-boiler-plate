@@ -40,7 +40,7 @@ export class DatabaseHandler extends React.Component {
       (error) => {
         this.props.dispatch({
           type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.createError(error),
+          payload: utils.app.createError(error),
           error: true,
         });
       },
@@ -60,7 +60,7 @@ export class DatabaseHandler extends React.Component {
       (error) => {
         this.props.dispatch({
           type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.createError(error),
+          payload: utils.app.createError(error),
           error: true,
         });
       },

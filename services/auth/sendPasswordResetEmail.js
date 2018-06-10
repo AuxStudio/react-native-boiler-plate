@@ -3,20 +3,20 @@ import utils from '../../utils';
 
 export default function sendPasswordResetEmail(email) {
   return new Promise((resolve, reject) => {
-    utils.log('start sendPasswordResetEmail', { email });
+    utils.app.log('start sendPasswordResetEmail', { email });
 
     firebase
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        utils.log('end sendPasswordResetEmail');
+        utils.app.log('end sendPasswordResetEmail');
 
         resolve();
       })
       .catch((error) => {
-        utils.log('end sendPasswordResetEmail', { error });
+        utils.app.log('end sendPasswordResetEmail', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }

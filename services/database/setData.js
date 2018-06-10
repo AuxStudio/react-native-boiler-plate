@@ -3,21 +3,21 @@ import utils from '../../utils';
 
 export default function setData(ref, data) {
   return new Promise((resolve, reject) => {
-    utils.log('start setData', { ref, data });
+    utils.app.log('start setData', { ref, data });
 
     firebase
       .database()
       .ref(ref)
       .set(data)
       .then(() => {
-        utils.log('end setData');
+        utils.app.log('end setData');
 
         resolve();
       })
       .catch((error) => {
-        utils.log('end setData', { error });
+        utils.app.log('end setData', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }

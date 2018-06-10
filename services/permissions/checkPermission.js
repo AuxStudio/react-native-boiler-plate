@@ -3,17 +3,17 @@ import utils from '../../utils';
 
 export default function checkPermission(permission) {
   return new Promise((resolve, reject) => {
-    utils.log('start checkPermission', { permission });
+    utils.app.log('start checkPermission', { permission });
 
     Permissions.check(permission)
       .then((message) => {
         const response = message && { message };
-        utils.log('end checkPermission', response);
+        utils.app.log('end checkPermission', response);
         resolve(response);
       })
       .catch((error) => {
-        utils.log('end checkPermission', { error });
-        reject(utils.createError(error));
+        utils.app.log('end checkPermission', { error });
+        reject(utils.app.createError(error));
       });
   });
 }

@@ -3,7 +3,7 @@ import utils from '../../utils';
 
 export default function getFormattedAddressFromCoords(lat, lng) {
   return new Promise((resolve, reject) => {
-    utils.log('start getFormattedAddressFromCoords', { lat, lng });
+    utils.app.log('start getFormattedAddressFromCoords', { lat, lng });
 
     Geocoder.geocodePosition({
       lat,
@@ -11,13 +11,13 @@ export default function getFormattedAddressFromCoords(lat, lng) {
     })
       .then((data) => {
         const response = data && { data };
-        utils.log('end getFormattedAddressFromCoords', response);
+        utils.app.log('end getFormattedAddressFromCoords', response);
         resolve(response);
       })
       .catch((error) => {
-        utils.log('end getFormattedAddressFromCoords', { error });
+        utils.app.log('end getFormattedAddressFromCoords', { error });
 
-        reject(utils.createError(error));
+        reject(utils.app.createError(error));
       });
   });
 }
