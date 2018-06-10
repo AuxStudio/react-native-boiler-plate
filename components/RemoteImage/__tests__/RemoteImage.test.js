@@ -2,7 +2,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import RemoteImage from '../RemoteImage';
+import RemoteImage from '../';
 
 const IMAGE_SOURCE = 'https://d3iw72m71ie81c.cloudfront.net/male-47.jpg';
 

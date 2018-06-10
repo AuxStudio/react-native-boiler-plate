@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import Input from '../Input';
+import Input from '../';
 
 // NOTE: autofocus is not tested due to it not being supported by jest
 it('renders a Input', () => {

@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import InputContainer from '../InputContainer';
+import InputContainer from '../';
 
 it('renders a InputContainer', () => {
   expect(

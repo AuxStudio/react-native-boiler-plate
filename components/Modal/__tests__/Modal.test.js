@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import Modal from '../Modal';
+import Modal from '../';
 
 it('renders a Modal', () => {
   expect(

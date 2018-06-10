@@ -31,10 +31,12 @@ src
 	components
 		Example
 			__tests__
-				Example.test.js // test spec
-			Example.js	// presentational component
-			ExampleContainer.js	// business logic (optional)
-			index.js	// import and export
+				Example.test.js
+			ExampleDependentComponent
+				__tests__
+					ExampleDependentComponent.test.js
+				index.js
+			index.js // container component if applicable
 			styles.js
 	config
 	handlers
