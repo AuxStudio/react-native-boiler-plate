@@ -194,7 +194,7 @@
       "import React from 'react';",
       "import renderer from 'react-test-renderer';",
       "$2",
-      "import $1 from '../$1';",
+      "import $1 from '../';",
       "$2",
       "it('renders a $1', () => {",
       "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
