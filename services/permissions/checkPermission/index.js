@@ -1,5 +1,6 @@
 import Permissions from 'react-native-permissions';
-import utils from '../../utils';
+
+import utils from '../../../utils';
 
 export default function checkPermission(permission) {
   return new Promise((resolve, reject) => {
