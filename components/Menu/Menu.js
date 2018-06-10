@@ -29,6 +29,8 @@ export default class MenuComponent extends React.Component {
     this.menu = ref;
   };
 
+  menu = null;
+
   showMenu = () => {
     this.menu.show();
   };
