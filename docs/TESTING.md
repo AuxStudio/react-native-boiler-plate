@@ -7,6 +7,52 @@ We use [Jest](https://facebook.github.io/jest/) and [react-test-renderer](https:
 ### Conventions
 
 - All test files should end in `.test.js`, e.g. `Example.test.js`.
-- All test files should be located in the `__tests__` folder within the component folder as per the [style guide](./STYLE_GUIDE.md#directory-structure).
+- All test files should be located in the `__tests__` folder within the component folder as per the [style guide](./STYLE_GUIDE.md#directory*structure).
 - When writing tests for components, be sure to test all the props as well as testing that the component works when no required props are passed in.
-- If the component you are testing has class methods, test those (especially if it involves updating state).
+- When writing tests for classes, test its methods and check that the state is updating. If any internal components are dependent on that state, test that they are doing what they should be doing.
+- When writing tests for classes, list your snapshot tests at the top of the file and your instance/root tests at the bottom, ie.
+
+```js
+// Snapshot test
+it('renders a SmartImage', () => {
+  expect(
+    renderer.create(
+      <SmartImage
+        source={IMAGE_SOURCE_LOCAL}
+        iconStyle={{ color: 'red' }}
+        style={{ backgroundColor: 'blue' }}
+        loaderColor="green"
+      />,
+    ),
+  ).toMatchSnapshot();
+});
+
+// Another snapshot test
+it('renders a SmartImage with no props', () => {
+  expect(renderer.create(<SmartImage />)).toMatchSnapshot();
+});
+
+// Instance and root test
+it('renders a SmartImage with offline error', () => {
+  const component = renderer.create(<SmartImage source={IMAGE_SOURCE_LOCAL} />);
+  const { root } = component;
+  const instance = component.getInstance();
+
+  expect(component).toMatchSnapshot();
+
+  // Set offline error
+  instance.setError({
+    nativeEvent: {
+      error: 'The Internet connection appears to be offline.',
+    },
+  });
+  expect(instance.state.hasError).toBe(true);
+  expect(instance.state.isOffline).toBe(true);
+  expect(instance.state.isLoading).toBe(false);
+
+  // Should now see icon
+  const icon = root.findByProps({ testID: 'icon' });
+  expect(icon).toBeDefined();
+  expect(icon.props.name).toBe('signal-cellular-off');
+});
+```
