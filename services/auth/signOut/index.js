@@ -1,5 +1,6 @@
 import firebase from 'react-native-firebase';
-import utils from '../../utils';
+
+import utils from '../../../utils';
 
 export default function signOut() {
   return new Promise((resolve, reject) => {

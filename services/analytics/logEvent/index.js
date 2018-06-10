@@ -1,4 +1,5 @@
 import firebase from 'react-native-firebase';
+
 import utils from '../../../utils';
 
 export default function logEvent(event, params) {
