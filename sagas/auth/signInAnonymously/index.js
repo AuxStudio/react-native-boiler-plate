@@ -6,15 +6,14 @@ import utils from '../../../utils';
 export default function* signInAnonymously(action) {
   try {
     const response = yield call(auth.signInAnonymously);
-    const { user } = response; // omits additionalUserInfo
     const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
-    } else if (user) {
+    } else if (response) {
       yield put({
         type: 'SIGN_IN_USER',
-        payload: user,
+        payload: response,
       });
     }
   } catch (error) {
