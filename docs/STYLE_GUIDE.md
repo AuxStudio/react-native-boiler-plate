@@ -65,7 +65,7 @@ src
 
 We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
 
-To dispatch actions on sagas, we use a slightly different approach. By attaching the nextAction(s) on the meta prop of each action, we can completely customise and chain our actions on the fly, without having to write more explicit sagas, i.e:
+To dispatch actions on sagas, we use a slightly different approach. By attaching the nextAction(s) on the meta prop of each action, we can completely customise and chain our actions on the fly, without having to write more implicit sagas, i.e:
 
 ```js
 this.props.dispatch({
