@@ -60,7 +60,9 @@ it('renders a SmartImage with offline error', () => {
 
 ### Testing sagas
 
-#### Typical types of tests carried out
+Don't be alarmed when looking at these tests, there are distinct patterns.
+
+#### Patterns
 
 - Testing the saga without a nextAction and without a response from the api
 - Testing the saga without a nextAction and with a response from the api

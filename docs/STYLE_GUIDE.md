@@ -65,6 +65,30 @@ src
 
 We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
 
+To dispatch actions on sagas, we use a slightly different approach. By attaching the nextAction(s) on the meta prop of each action, we can completely customise and chain our actions on the fly, without having to write more explicit sagas, i.e:
+
+```js
+this.props.dispatch({
+	type: 'getAuth',
+	meta: {
+		nextAction: {
+			type: 'SIGN_IN_USER',
+			payload: {
+				...
+			},
+			meta: {
+				nextAction: {
+					type: 'SET_SYSTEM_MESSAGE',
+					payload: {
+						message: 'Sign in successful'
+					}
+				}
+			}
+		}
+	}
+})
+```
+
 ## Terminology
 
 Some common terminology that we use.
