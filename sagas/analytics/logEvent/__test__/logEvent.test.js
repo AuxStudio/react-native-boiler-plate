@@ -16,27 +16,62 @@ const action = {
       foo: 'bar',
     },
   },
-  meta: {
-    nextAction: {
-      type: 'LOG_EVENT_SUCCESS',
-    },
-  },
 };
 
-describe('When testing the logEvent saga', () => {
+const nextAction = {
+  type: 'SUCCESS',
+};
+
+const actionWithNextAction = { ...action, meta: { nextAction } };
+
+const response = null;
+
+describe('When testing the saga without a nextAction and without a response from the api', () => {
   const it = sagaHelper(logEvent(action));
 
   it('should have called the mocked API first', (result) => {
-    // JSON.stringify is necessary here otherwise our mock function and real function comparison
-    // fail and we really don't care if they're not the same, we're just testing that
-    // the correct calls and puts happen
+    expect(JSON.stringify(result)).toEqual(
+      JSON.stringify(call(analytics.logEvent, action.payload.event, action.payload.params)),
+    );
+  });
+
+  // Insert test for default nextAction (if any)
+
+  it('and then nothing', (result) => {
+    expect(result).toBeUndefined();
+  });
+});
+
+describe('When testing the saga without a nextAction and with a response from the api', () => {
+  const it = sagaHelper(logEvent(action));
+
+  it('should have called the mocked API first', (result) => {
+    expect(JSON.stringify(result)).toEqual(
+      JSON.stringify(call(analytics.logEvent, action.payload.event, action.payload.params)),
+    );
+
+    // mock return respone from api
+    return response;
+  });
+
+  // Insert test for default nextAction (if any)
+
+  it('and then nothing', (result) => {
+    expect(result).toBeUndefined();
+  });
+});
+
+describe('When testing the saga with a nextAction and without a response from the api', () => {
+  const it = sagaHelper(logEvent(actionWithNextAction));
+
+  it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(analytics.logEvent, action.payload.event, action.payload.params)),
     );
   });
 
   it('and then trigger an action', (result) => {
-    expect(result).toEqual(put({ ...action.meta.nextAction, payload: {} }));
+    expect(result).toEqual(put({ ...nextAction, payload: {} }));
   });
 
   it('and then nothing', (result) => {
@@ -44,14 +79,31 @@ describe('When testing the logEvent saga', () => {
   });
 });
 
-describe('When testing the logEvent saga for error', () => {
+describe('When testing the saga with a nextAction and with a response from the api', () => {
+  const it = sagaHelper(logEvent(actionWithNextAction));
+
+  it('should have called the mocked API first', (result) => {
+    expect(JSON.stringify(result)).toEqual(
+      JSON.stringify(call(analytics.logEvent, action.payload.event, action.payload.params)),
+    );
+
+    return response;
+  });
+
+  it('and then trigger an action', (result) => {
+    expect(result).toEqual(put({ ...nextAction, payload: {} }));
+  });
+
+  it('and then nothing', (result) => {
+    expect(result).toBeUndefined();
+  });
+});
+
+describe('When testing the saga when an error is thrown from the api', () => {
   const it = sagaHelper(logEvent(action));
   const errorMessage = 'Something went wrong';
 
   it('should have called the mocked API first', (result) => {
-    // JSON.stringify is necessary here otherwise our mock function and real function comparison
-    // fail and we really don't care if they're not the same, we're just testing that
-    // the correct calls and puts happen
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(analytics.logEvent, action.payload.event, action.payload.params)),
     );
