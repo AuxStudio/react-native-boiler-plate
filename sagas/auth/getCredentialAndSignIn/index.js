@@ -6,11 +6,17 @@ import utils from '../../../utils';
 export default function* getCredentialAndSignIn(action) {
   try {
     const service = `getCredentialFrom${action.payload.provider}`;
-    const getCredentialResponse = yield call(
-      auth[service],
-      action.payload.email,
-      action.payload.password,
-    ); // NOTE: only getCredentialFromEmail is expecting email and password
+    let getCredentialResponse;
+
+    if (action.payload.provider === 'Email') {
+      getCredentialResponse = yield call(
+        auth.getCredentialFromEmail,
+        action.payload.email,
+        action.payload.password,
+      );
+    } else {
+      getCredentialResponse = yield call(auth[service]);
+    }
 
     try {
       const signInWithCredentialResponse = yield call(
