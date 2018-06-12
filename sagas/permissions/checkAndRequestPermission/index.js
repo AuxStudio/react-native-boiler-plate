@@ -23,11 +23,11 @@ export default function* checkAndRequestPermission(action) {
           permissions.requestPermission,
           action.payload.permission,
         );
-        const nextActionTwo = utils.app.prepareNextAction(action, checkPermissionResponse);
+        const nextActionTwo = utils.app.prepareNextAction(action);
 
         if (requestPermissionResponse.message === 'authorized' && nextActionTwo) {
           yield put(nextActionTwo);
-        } else {
+        } else if (requestPermissionResponse.message !== 'authorized') {
           yield put({
             type: 'SET_SYSTEM_MESSAGE',
             payload: utils.app.createError(
@@ -40,6 +40,7 @@ export default function* checkAndRequestPermission(action) {
         yield put({
           type: 'SET_SYSTEM_MESSAGE',
           payload: utils.app.createError(error),
+          error: true,
         });
       }
     } else if (
