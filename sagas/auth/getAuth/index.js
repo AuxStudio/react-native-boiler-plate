@@ -9,7 +9,6 @@ export default function* getAuth(action) {
     const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
-      // effectively response && nextAction
       yield put(nextAction);
     } else if (response) {
       yield put({
