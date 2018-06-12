@@ -6,7 +6,7 @@ import utils from '../../../utils';
 export default function* logEvent(action) {
   try {
     const response = yield call(analytics.logEvent, action.payload.event, action.payload.params);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response); // TODO: this should work regardless of a response or not
 
     if (nextAction) {
       yield put(nextAction);
