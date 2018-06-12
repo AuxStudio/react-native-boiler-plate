@@ -18,6 +18,29 @@ it('should return a valid action from true response and nextAction with no paylo
   });
 });
 
+it('should return a valid action from null response and nextAction with payload', () => {
+  expect(
+    prepareNextAction(
+      {
+        meta: {
+          nextAction: {
+            type: 'test',
+            payload: {
+              foo: 'bar',
+            },
+          },
+        },
+      },
+      null,
+    ),
+  ).toEqual({
+    type: 'test',
+    payload: {
+      foo: 'bar',
+    },
+  });
+});
+
 it('should return a valid action from true response and nextAction with payload', () => {
   expect(
     prepareNextAction(
@@ -112,19 +135,6 @@ it('should return a valid action from response as payload and nextAction with pa
       foo: 'metaBar',
     },
   });
-});
-
-it('should not return anything if the response is null', () => {
-  expect(
-    prepareNextAction(
-      {
-        meta: {
-          nextAction: true,
-        },
-      },
-      null,
-    ),
-  ).toBe(null);
 });
 
 it('should not return anything if the meta data is null', () => {
