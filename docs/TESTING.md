@@ -36,8 +36,8 @@ it('renders a SmartImage with no props', () => {
 // Instance and root test
 it('renders a SmartImage with offline error', () => {
   const component = renderer.create(<SmartImage source={IMAGE_SOURCE_LOCAL} />);
-  const { root } = component;
-  const instance = component.getInstance();
+  const { root } = component; // used to inspect the component tree, ie. finding components by testID
+  const instance = component.getInstance(); // used to set and inspect props/state
 
   expect(component).toMatchSnapshot();
 
