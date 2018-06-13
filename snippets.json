@@ -196,7 +196,7 @@
       "$2",
       "import $1 from '../';",
       "$2",
-      "it('renders a $1', () => {",
+      "it('renders a $1 with all props', () => {",
       "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
       "});",
       "$2",
