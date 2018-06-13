@@ -8,7 +8,7 @@ import Error from '../../scenes/Error';
 export class SystemMessageHandler extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     systemMessage: PropTypes.shape({
       message: PropTypes.string,
       code: PropTypes.string,
