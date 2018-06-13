@@ -2,17 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import database from '../services/database';
-import utils from '../utils';
+import database from '../../services/database';
+import utils from '../../utils';
 
 export class DatabaseHandler extends React.Component {
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func,
-      authenticated: PropTypes.bool,
-    };
-  }
-
   componentDidMount() {
     if (this.props.authenticated) {
       this.listenForData();
@@ -23,6 +16,13 @@ export class DatabaseHandler extends React.Component {
     if (this.props.authenticated && !prevProps.authenticated) {
       this.listenForData();
     }
+  }
+
+  static get propTypes() {
+    return {
+      dispatch: PropTypes.func,
+      authenticated: PropTypes.bool,
+    };
   }
 
   listenForData = () => {

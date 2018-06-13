@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
-import Error from '../scenes/Error';
+import Error from '../../scenes/Error';
 
 export class SystemMessageHandler extends React.Component {
   static propTypes = {

@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class NetworkHandler extends React.Component {
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func,
-      realtimeDatabaseMode: PropTypes.bool,
-    };
-  }
-
   componentDidMount() {
     NetInfo.addEventListener('connectionChange', this.handleConnectionChange);
   }
 
   componentWillUnmount() {
     NetInfo.removeEventListener('connectionChange', this.handleConnectionChange);
+  }
+
+  static get propTypes() {
+    return {
+      dispatch: PropTypes.func,
+      realtimeDatabaseMode: PropTypes.bool,
+    };
   }
 
   handleConnectionChange = (connectionInfo) => {

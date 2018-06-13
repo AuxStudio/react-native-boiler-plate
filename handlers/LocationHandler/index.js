@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class LocationHandler extends React.Component {
+  componentDidMount() {
+    this.getLocationPermission();
+  }
+
   static get propTypes() {
     return {
       dispatch: PropTypes.func,
     };
-  }
-
-  componentDidMount() {
-    this.getLocationPermission();
   }
 
   getLocationPermission = () => {
