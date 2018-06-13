@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a SystemMessageHandler with all props 1`] = `<View />`;
+
+exports[`renders a SystemMessageHandler with minimum required props 1`] = `<View />`;
