@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -11,4 +10,3 @@ it('renders a DatabaseHandler', () => {
 it('renders a DatabaseHandler with minimum required props', () => {
   expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
 });
-/* eslint-enable */
