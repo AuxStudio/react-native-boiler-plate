@@ -9,7 +9,7 @@ export default function* post(action) {
       http.post,
       action.payload.url,
       action.payload.headers,
-      action.payload.body,
+      action.payload.parameters,
     );
     const nextAction = utils.app.prepareNextAction(action, response);
 

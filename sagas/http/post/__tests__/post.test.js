@@ -13,7 +13,7 @@ const action = {
   payload: {
     url: 'https://google.com',
     headers: true,
-    body: true,
+    parameters: true,
   },
 };
 
@@ -31,7 +31,7 @@ describe('When testing the saga without a nextAction and without a response from
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(
-        call(http.post, action.payload.url, action.payload.headers, action.payload.body),
+        call(http.post, action.payload.url, action.payload.headers, action.payload.parameters),
       ),
     );
   });
@@ -49,7 +49,7 @@ describe('When testing the saga without a nextAction and with a response from th
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(
-        call(http.post, action.payload.url, action.payload.headers, action.payload.body),
+        call(http.post, action.payload.url, action.payload.headers, action.payload.parameters),
       ),
     );
 
@@ -69,7 +69,7 @@ describe('When testing the saga with a nextAction and without a response from th
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(
-        call(http.post, action.payload.url, action.payload.headers, action.payload.body),
+        call(http.post, action.payload.url, action.payload.headers, action.payload.parameters),
       ),
     );
   });
@@ -89,7 +89,7 @@ describe('When testing the saga with a nextAction and with a response from the a
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(
-        call(http.post, action.payload.url, action.payload.headers, action.payload.body),
+        call(http.post, action.payload.url, action.payload.headers, action.payload.parameters),
       ),
     );
 
@@ -112,7 +112,7 @@ describe('When testing the saga when an error is thrown from the api', () => {
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(
-        call(http.post, action.payload.url, action.payload.headers, action.payload.body),
+        call(http.post, action.payload.url, action.payload.headers, action.payload.parameters),
       ),
     );
 
