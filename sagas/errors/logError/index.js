@@ -15,7 +15,7 @@ export default function* logError(action) {
     const data = {
       ...action.payload.error,
       uid: action.payload.uid,
-      date: new Date(),
+      date: action.payload.date,
     };
 
     yield all([
