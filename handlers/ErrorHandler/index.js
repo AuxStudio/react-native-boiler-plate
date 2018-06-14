@@ -30,7 +30,7 @@ export class ErrorHandler extends React.Component {
       payload: {
         data: {
           message: error.message,
-          code: error.code,
+          stack: error.stack,
           date: Date.now(),
           uid: this.props.uid,
         },
