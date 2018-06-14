@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import colors from './colors';
+import colors from '../colors';
 
 // Elevation does not work on Android V4 so we add a border as a fallback
 const isEarlyAndroid = Platform.OS === 'android' && Platform.Version <= 19;
