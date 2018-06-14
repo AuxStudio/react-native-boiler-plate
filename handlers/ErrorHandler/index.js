@@ -21,22 +21,14 @@ export class ErrorHandler extends React.Component {
     // Catch errors in children
     this.setState({ hasError: true });
 
-    this.logErrorToDatabase(error);
-  }
-
-  logErrorToDatabase = (error) => {
     this.props.dispatch({
       type: 'logError',
       payload: {
-        data: {
-          message: error.message,
-          stack: error.stack,
-          date: Date.now(),
-          uid: this.props.uid,
-        },
+        error,
+        uid: this.props.uid,
       },
     });
-  };
+  }
 
   render() {
     if (this.state.hasError) {

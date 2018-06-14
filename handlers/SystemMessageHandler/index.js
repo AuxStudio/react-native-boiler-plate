@@ -12,7 +12,6 @@ export class SystemMessageHandler extends React.Component {
       code: PropTypes.string,
       error: PropTypes.bool,
     }),
-    uid: PropTypes.string,
   };
 
   static defaultProps = {};
@@ -22,10 +21,6 @@ export class SystemMessageHandler extends React.Component {
       this.props.systemMessage.message &&
       this.props.systemMessage.message !== prevProps.systemMessage.message
     ) {
-      if (this.props.systemMessage.error) {
-        this.logErrorToDatabase();
-      }
-
       this.showSnackbar();
     }
   }
@@ -49,23 +44,6 @@ export class SystemMessageHandler extends React.Component {
     });
   };
 
-  logErrorToDatabase = () => {
-    // Log error to database if not in development mode
-    if (!__DEV__) {
-      this.props.dispatch({
-        type: 'logError',
-        payload: {
-          data: {
-            message: this.props.systemMessage.message,
-            code: this.props.systemMessage.code,
-            date: Date.now(),
-            uid: this.props.uid,
-          },
-        },
-      });
-    }
-  };
-
   render() {
     return this.props.children;
   }
@@ -74,7 +52,6 @@ export class SystemMessageHandler extends React.Component {
 function mapStateToProps(state) {
   return {
     systemMessage: state.appState.systemMessage,
-    uid: state.user.uid,
   };
 }
 
