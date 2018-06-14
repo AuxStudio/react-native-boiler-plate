@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
-import Error from '../../scenes/Error';
-
 export class SystemMessageHandler extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
@@ -19,10 +17,6 @@ export class SystemMessageHandler extends React.Component {
 
   static defaultProps = {};
 
-  state = {
-    hasError: null,
-  };
-
   componentDidUpdate(prevProps) {
     if (
       this.props.systemMessage.message &&
@@ -34,13 +28,6 @@ export class SystemMessageHandler extends React.Component {
 
       this.showSnackbar();
     }
-  }
-
-  componentDidCatch(error) {
-    // Catch errors in children
-    this.setState({ hasError: true });
-
-    this.logErrorToDatabase(error);
   }
 
   SNACKBAR_DURATION = 2750;
@@ -80,10 +67,6 @@ export class SystemMessageHandler extends React.Component {
   };
 
   render() {
-    if (this.state.hasError) {
-      return <Error />;
-    }
-
     return this.props.children;
   }
 }
