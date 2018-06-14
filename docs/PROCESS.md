@@ -1,17 +1,18 @@
 # Process
 
-We work off of the `develop` branch and use a pull request work flow. Whenever you have some work to do:
+We work with a feature-based pull request workflow. Whenever you have some work to do:
 
 ```shell
-git checkout develop
+git checkout master
 git pull
 git checkout -b "YOUR_NAME-FEATURE_NAME"
+git push -u origin "YOUR_NAME-FEATURE_NAME"
 ```
 
 Do some work.
 
 ```shell
-git push -u origin YOUR_BRANCH_NAME
+git push
 ```
 
 When you're done, create a pull request on github using the following [template](https://embeddedartistry.com/blog/2017/8/4/a-github-pull-request-template-for-your-projects).
