@@ -351,5 +351,9 @@
       "  });",
       "});"
     ]
+  },
+  "Blank string literal": {
+    "prefix": "str",
+    "body": ["`${$1}`"]
   }
 }
