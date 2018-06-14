@@ -28,6 +28,7 @@ A react-native, redux, redux-saga and firebase project.
 * [Style guide](./docs/STYLE_GUIDE.md)
 * [Setup guide](./docs/SETUP_GUIDE.md)
 * [VSCode snippets](./snippets.json) for sagas, stylesheet, component index, dumb, functional and container components (makes life _waaay_ easier)
+* [Testing](./docs/TESTING.md)
 * [Process](./docs/PROCESS.md)
 * [Tools](./docs/TOOLS.md)
 * [Troubleshooting](./docs/TROUBLESHOOTING.md)
