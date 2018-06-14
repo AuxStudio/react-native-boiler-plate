@@ -1,7 +1,9 @@
 import images from './images';
 import googleSignIn from './googleSignIn';
 
-module.exports = {
+const config = {
   images,
   googleSignIn,
 };
+
+export default config;
