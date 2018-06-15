@@ -120,7 +120,7 @@ signingConfigs {
 signingConfig signingConfigs.release
 ```
 
-## 7 Update android versioning
+## 7. Update android versioning
 
 1.  In `./android/app/build.gradle`, update in android:
 
