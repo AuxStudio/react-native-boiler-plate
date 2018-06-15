@@ -112,9 +112,11 @@ describe('When testing the saga when an error is thrown from the provider api', 
   it('and then trigger an error action with the error message', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(new Error(errorMessage)),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(errorMessage),
+          date: expect.any(Date),
+        },
       }),
     );
   });
@@ -146,9 +148,10 @@ describe('When testing the saga when an error is thrown from the signIn api', ()
   it('and then trigger an error action with the error message', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(new Error(errorMessage)),
-        error: true,
+        type: 'logError',
+        payload: expect.objectContaining({
+          error: utils.app.createError(errorMessage),
+        }),
       }),
     );
   });

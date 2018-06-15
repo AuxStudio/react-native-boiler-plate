@@ -126,11 +126,13 @@ describe('When testing the saga without a nextAction and with an undetermined re
   it('should have called SET_SYSTEM_MESSAGE to set an error next', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(
-          `We need your permission to access your ${action.payload.permission}`,
-        ),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(
+            `We need your permission to access your ${action.payload.permission}`,
+          ),
+          date: expect.any(Date),
+        },
       }),
     );
   });
@@ -162,11 +164,13 @@ describe('When testing the saga without a nextAction and with a denied response 
   it('should have called SET_SYSTEM_MESSAGE to set an error next', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(
-          `We need your permission to access your ${action.payload.permission}`,
-        ),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(
+            `We need your permission to access your ${action.payload.permission}`,
+          ),
+          date: expect.any(Date),
+        },
       }),
     );
   });
@@ -191,9 +195,11 @@ describe('When testing the saga when an error is thrown from the checkPermission
   it('and then trigger an error action with the error message', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(new Error(errorMessage)),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(errorMessage),
+          date: expect.any(Date),
+        },
       }),
     );
   });
@@ -226,9 +232,11 @@ describe('When testing the saga when an error is thrown from the requestPermissi
   it('and then trigger an error action with the error message', (result) => {
     expect(result).toEqual(
       put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(new Error(errorMessage)),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(errorMessage),
+          date: expect.any(Date),
+        },
       }),
     );
   });

@@ -29,18 +29,22 @@ export default function* checkAndRequestPermission(action) {
           yield put(nextActionTwo);
         } else if (requestPermissionResponse.message !== 'authorized') {
           yield put({
-            type: 'SET_SYSTEM_MESSAGE',
-            payload: utils.app.createError(
-              `We need your permission to access your ${action.payload.permission}`,
-            ),
-            error: true,
+            type: 'logError',
+            payload: {
+              error: utils.app.createError(
+                `We need your permission to access your ${action.payload.permission}`,
+              ),
+              date: new Date(),
+            },
           });
         }
       } catch (error) {
         yield put({
-          type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.app.createError(error),
-          error: true,
+          type: 'logError',
+          payload: {
+            error: utils.app.createError(error),
+            date: new Date(),
+          },
         });
       }
     } else if (
@@ -48,18 +52,22 @@ export default function* checkAndRequestPermission(action) {
       checkPermissionResponse.message === 'restricted'
     ) {
       yield put({
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: utils.app.createError(
-          `We need your permission to access your ${action.payload.permission}`,
-        ),
-        error: true,
+        type: 'logError',
+        payload: {
+          error: utils.app.createError(
+            `We need your permission to access your ${action.payload.permission}`,
+          ),
+          date: new Date(),
+        },
       });
     }
   } catch (error) {
     yield put({
-      type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.app.createError(error),
-      error: true,
+      type: 'logError',
+      payload: {
+        error: utils.app.createError(error),
+        date: new Date(),
+      },
     });
   }
 }

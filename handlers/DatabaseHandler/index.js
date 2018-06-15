@@ -22,6 +22,7 @@ export class DatabaseHandler extends React.Component {
     return {
       dispatch: PropTypes.func,
       authenticated: PropTypes.bool,
+      uid: PropTypes.string,
     };
   }
 
@@ -39,9 +40,12 @@ export class DatabaseHandler extends React.Component {
       },
       (error) => {
         this.props.dispatch({
-          type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.app.createError(error),
-          error: true,
+          type: 'logError',
+          payload: {
+            error: utils.app.createError(error),
+            date: new Date(),
+            uid: this.props.uid,
+          },
         });
       },
     );
@@ -59,9 +63,12 @@ export class DatabaseHandler extends React.Component {
       },
       (error) => {
         this.props.dispatch({
-          type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.app.createError(error),
-          error: true,
+          type: 'logError',
+          payload: {
+            error: utils.app.createError(error),
+            date: new Date(),
+            uid: this.props.uid,
+          },
         });
       },
     );
@@ -75,6 +82,7 @@ export class DatabaseHandler extends React.Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.user.authenticated,
+    uid: state.user.uid,
   };
 }
 
