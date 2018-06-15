@@ -4,6 +4,8 @@ This is a work in progress.
 
 If anything is unclear or does not work, please let me know via [email](mailto:shaun@aux.co.za) or create an issue/PR and I will attend to it as soon as I can.
 
+If you'd like to test that you are setting the project up correctly, do a build on iOS and android after each major step.
+
 ## 1. Initialise project
 
 ```shell
@@ -31,7 +33,8 @@ git config core.ignorecase false
 
 ## 3. Update display and package name
 
-Optional.
+Display name: The name of the app as it appears on the device screen, e.g. TapOff.
+Package name: The signature used by the app and play stores, e.g. co.za.auxstudio.tapoff.
 
 (ONCE-OFF).
 
@@ -39,13 +42,17 @@ Optional.
 npm install -g react-native-rename
 ```
 
+1.  Update the display and package name (android only):
+
+NOTE: The display name will need to be different to the name you initialised the project with.
+
 ```shell
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
-In Xcode, `Project` ➜ `General` ➜ `Bundle Identifier` ➜ `NEW_PACKAGE_NAME`.
+2.  Update the package name in XCode (iOS only):
 
-`I often run into iOS build issues here, TODO: REF ERROR. REF TROUBLESHOOTING (derivedData, clean, clean build folder).`
+In Xcode, `Project` ➜ `General` ➜ `Bundle Identifier` ➜ `NEW_PACKAGE_NAME`.
 
 ## 4. Add reference to Android SDK path
 
@@ -170,7 +177,7 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 1.  In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
 
-2.  In `./ios/PROJECT_NAME/info.plist` add:
+2.  In `./ios/PROJECT_NAME/info.plist` add to the outermost dict:
 
 ```
 <key>UIAppFonts</key>
