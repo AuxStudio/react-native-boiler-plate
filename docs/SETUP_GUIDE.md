@@ -23,7 +23,7 @@ git push -u origin master
 
 Tell git to track case sensitivity on the file system:
 
-`ONCE-OFF`.
+(ONCE-OFF).
 
 ```shell
 git config core.ignorecase false
@@ -33,8 +33,13 @@ git config core.ignorecase false
 
 Optional.
 
+(ONCE-OFF).
+
 ```shell
 npm install -g react-native-rename
+```
+
+```shell
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
@@ -133,9 +138,9 @@ compile "com.android.support:appcompat-v7:25.0.0"
 
 `TODO: Move/finish this. Do we need something that builds before this step? What is the bare minimum build we need?`
 
-* [Google Play console](https://play.google.com/apps/publish)
-* [Apple Developer portal](https://developer.apple.com/account/)
-* [iTunes Connect](https://itunesconnect.apple.com/)
+- [Google Play console](https://play.google.com/apps/publish)
+- [Apple Developer portal](https://developer.apple.com/account/)
+- [iTunes Connect](https://itunesconnect.apple.com/)
 
 ## 9. Install dependencies
 
@@ -317,7 +322,7 @@ configurations.all {
 
 1.  Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
 
-2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). `ONCE-OFF`.
+2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). (ONCE-OFF).
 
 3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework `TODO: Is this necessary for login?` into Frameworks folder of the project in XCode.
 
@@ -346,8 +351,8 @@ implementation 'com.google.android.gms:play-services-auth:12.0.1'
 
 2.  Configure URL types in the Info panel:
 
-* add Identifier and URL Schemes with your REVERSED\*CLIENT_ID (found inside the plist)
-* add Identifier and URL Schemes set to your bundle id
+- add Identifier and URL Schemes with your REVERSED\*CLIENT_ID (found inside the plist)
+- add Identifier and URL Schemes set to your bundle id
 
 3.  Add top of `./ios/AppDelegate.m`:
 
@@ -713,17 +718,17 @@ sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.pr
 
 1.  Copy `./src/assets/fonts/AppIcons.ttf` to
 
-* `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
-* `./ios/PROJECT_NAME/`
+- `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
+- `./ios/PROJECT_NAME/`
 
 ## 14. Enable Firebase authentication methods
 
 Remove what you don't need.
 
-* Anonymous
-* Facebook (add Facebook App ID and App secret and add OAuth redirect URI to Facebook app as per Firebase docs)
-* Google (download and replace new google-services.json and GoogleService-Info.plist)
-* Email
+- Anonymous
+- Facebook (add Facebook App ID and App secret and add OAuth redirect URI to Facebook app as per Firebase docs)
+- Google (download and replace new google-services.json and GoogleService-Info.plist)
+- Email
 
 ## 15. Add your custom fonts
 
@@ -739,15 +744,25 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 
 ## 16. Add Storybook
 
+(ONCE-OFF).
+
 ```shell
 npm i -g @storybook/cli
+```
+
+```shell
 getstorybook
 ```
 
 ## 17. Add firebase-cli
 
+(ONCE-OFF).
+
 ```shell
 npm install -g firebase-tools
+```
+
+```shell
 firebase login
 firebase init
 ```
@@ -869,7 +884,7 @@ Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
 
 In XCode, enable the following capabilities:
 
-* Push Notifications
-* Background modes ➜ Remote notifications
+- Push Notifications
+- Background modes ➜ Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
