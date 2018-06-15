@@ -1,16 +1,51 @@
-import { call, put } from 'redux-saga/effects';
+import { all, put } from 'redux-saga/effects';
 
-import { database } from '../../../services';
 import utils from '../../../utils';
+import config from '../../../config';
 
 export default function* logError(action) {
-  try {
-    const response = yield call(database.pushData, 'errors', action.payload.data);
-    const nextAction = utils.app.prepareNextAction(action, response);
+  /*
+      This should
+        - Log the error to the db
+        - Post it to Slack
+        - SET_SYSTEM_MESSAGE
+  */
 
-    if (nextAction) {
-      yield put(nextAction);
-    }
+  try {
+    const data = {
+      ...action.payload.error,
+      uid: action.payload.uid,
+      date: action.payload.date,
+    };
+
+    yield all([
+      put({
+        type: 'pushData',
+        payload: {
+          data,
+        },
+      }),
+      put({
+        type: 'post',
+        payload: {
+          url: config.slack.webhook,
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          parameters: {
+            channel: config.slack.channel,
+            username: config.slack.username,
+            icon_emoji: config.slack.icon_emoji,
+            text: JSON.stringify(data),
+          },
+        },
+      }),
+      put({
+        type: 'SET_SYSTEM_MESSAGE',
+        payload: {
+          ...action.payload.error,
+        },
+        error: true,
+      }),
+    ]);
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',

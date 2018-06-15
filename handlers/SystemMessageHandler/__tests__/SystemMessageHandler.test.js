@@ -23,7 +23,6 @@ it('renders a SystemMessageHandler with all props', () => {
 });
 
 // TODO: Integration: when new system message, logErrorToDatabase and showSnackbar should be called
-// TODO: Integration: componentDidCatch
 
 it('renders a SystemMessageHandler with minimum required props', () => {
   expect(

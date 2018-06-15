@@ -9,7 +9,7 @@ export default function* post(action) {
       http.post,
       action.payload.url,
       action.payload.headers,
-      action.payload.body,
+      action.payload.parameters,
     );
     const nextAction = utils.app.prepareNextAction(action, response);
 
@@ -18,9 +18,11 @@ export default function* post(action) {
     }
   } catch (error) {
     yield put({
-      type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.app.createError(error),
-      error: true,
+      type: 'logError',
+      payload: {
+        error: utils.app.createError(error),
+        date: new Date(),
+      },
     });
   }
 }

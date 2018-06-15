@@ -4,6 +4,8 @@ This is a work in progress.
 
 If anything is unclear or does not work, please let me know via [email](mailto:shaun@aux.co.za) or create an issue/PR and I will attend to it as soon as I can.
 
+If you'd like to test that you are setting the project up correctly, do a build on iOS and android after each major step.
+
 ## 1. Initialise project
 
 ```shell
@@ -23,7 +25,7 @@ git push -u origin master
 
 Tell git to track case sensitivity on the file system:
 
-`ONCE-OFF`.
+(ONCE-OFF).
 
 ```shell
 git config core.ignorecase false
@@ -31,16 +33,26 @@ git config core.ignorecase false
 
 ## 3. Update display and package name
 
-Optional.
+Display name: The name of the app as it appears on the device screen, e.g. TapOff.
+Package name: The signature used by the app and play stores, e.g. co.za.auxstudio.tapoff.
+
+(ONCE-OFF).
 
 ```shell
 npm install -g react-native-rename
+```
+
+1.  Update the display and package name (android only):
+
+NOTE: The display name will need to be different to the name you initialised the project with.
+
+```shell
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
-In Xcode, `Project` ➜ `General` ➜ `Bundle Identifier` ➜ `NEW_PACKAGE_NAME`.
+2.  Update the package name in XCode (iOS only):
 
-`I often run into iOS build issues here, TODO: REF ERROR. REF TROUBLESHOOTING (derivedData, clean, clean build folder).`
+In Xcode, `Project` ➜ `General` ➜ `Bundle Identifier` ➜ `NEW_PACKAGE_NAME`.
 
 ## 4. Add reference to Android SDK path
 
@@ -108,7 +120,7 @@ signingConfigs {
 signingConfig signingConfigs.release
 ```
 
-## 7 Update android versioning
+## 7. Update android versioning
 
 1.  In `./android/app/build.gradle`, update in android:
 
@@ -133,9 +145,9 @@ compile "com.android.support:appcompat-v7:25.0.0"
 
 `TODO: Move/finish this. Do we need something that builds before this step? What is the bare minimum build we need?`
 
-* [Google Play console](https://play.google.com/apps/publish)
-* [Apple Developer portal](https://developer.apple.com/account/)
-* [iTunes Connect](https://itunesconnect.apple.com/)
+- [Google Play console](https://play.google.com/apps/publish)
+- [Apple Developer portal](https://developer.apple.com/account/)
+- [iTunes Connect](https://itunesconnect.apple.com/)
 
 ## 9. Install dependencies
 
@@ -165,7 +177,7 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 1.  In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
 
-2.  In `./ios/PROJECT_NAME/info.plist` add:
+2.  In `./ios/PROJECT_NAME/info.plist` add to the outermost dict:
 
 ```
 <key>UIAppFonts</key>
@@ -317,7 +329,7 @@ configurations.all {
 
 1.  Follow the steps [here](https://developers.facebook.com/docs/facebook-login/ios).
 
-2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). `ONCE-OFF`.
+2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). (ONCE-OFF).
 
 3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework `TODO: Is this necessary for login?` into Frameworks folder of the project in XCode.
 
@@ -346,8 +358,8 @@ implementation 'com.google.android.gms:play-services-auth:12.0.1'
 
 2.  Configure URL types in the Info panel:
 
-* add Identifier and URL Schemes with your REVERSED\*CLIENT_ID (found inside the plist)
-* add Identifier and URL Schemes set to your bundle id
+- add Identifier and URL Schemes with your REVERSED\*CLIENT_ID (found inside the plist)
+- add Identifier and URL Schemes set to your bundle id
 
 3.  Add top of `./ios/AppDelegate.m`:
 
@@ -713,17 +725,17 @@ sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.pr
 
 1.  Copy `./src/assets/fonts/AppIcons.ttf` to
 
-* `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
-* `./ios/PROJECT_NAME/`
+- `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
+- `./ios/PROJECT_NAME/`
 
 ## 14. Enable Firebase authentication methods
 
 Remove what you don't need.
 
-* Anonymous
-* Facebook (add Facebook App ID and App secret and add OAuth redirect URI to Facebook app as per Firebase docs)
-* Google (download and replace new google-services.json and GoogleService-Info.plist)
-* Email
+- Anonymous
+- Facebook (add Facebook App ID and App secret and add OAuth redirect URI to Facebook app as per Firebase docs)
+- Google (download and replace new google-services.json and GoogleService-Info.plist)
+- Email
 
 ## 15. Add your custom fonts
 
@@ -739,15 +751,25 @@ Follow this [guide](https://medium.com/react-native-training/adding-custom-fonts
 
 ## 16. Add Storybook
 
+(ONCE-OFF).
+
 ```shell
 npm i -g @storybook/cli
+```
+
+```shell
 getstorybook
 ```
 
 ## 17. Add firebase-cli
 
+(ONCE-OFF).
+
 ```shell
 npm install -g firebase-tools
+```
+
+```shell
 firebase login
 firebase init
 ```
@@ -869,7 +891,7 @@ Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
 
 In XCode, enable the following capabilities:
 
-* Push Notifications
-* Background modes ➜ Remote notifications
+- Push Notifications
+- Background modes ➜ Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)

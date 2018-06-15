@@ -1,96 +1,58 @@
-import { call, put } from 'redux-saga/effects';
+import { put, all } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import pushData from '../';
-
-const database = {
-  pushData: jest.fn(), // this saga uses this function
-};
+import config from '../../../../config';
+import logError from '../';
 
 const action = {
-  type: 'logErrors',
+  type: 'logError',
   payload: {
-    ref: 'errors',
-    data: {
-      foo: 'bar',
-    },
+    error: new Error('test'),
+    uid: '123134234543',
   },
 };
 
-const nextAction = {
-  type: 'SUCCESS',
+const data = {
+  ...action.payload.error,
+  uid: action.payload.uid,
+  date: action.payload.date,
 };
 
-const actionWithNextAction = { ...action, meta: { nextAction } };
-
-const response = { foo: 'bar' };
-
 describe('When testing the saga without a nextAction and without a response from the api', () => {
-  const it = sagaHelper(pushData(action));
+  const it = sagaHelper(logError(action));
 
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+  it('should have yielded all of our actions', (result) => {
+    expect(result).toEqual(
+      all([
+        put({
+          type: 'pushData',
+          payload: {
+            data,
+          },
+        }),
+        put({
+          type: 'post',
+          payload: {
+            url: config.slack.webhook,
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            parameters: {
+              channel: config.slack.channel,
+              username: config.slack.username,
+              icon_emoji: config.slack.icon_emoji,
+              text: JSON.stringify(data),
+            },
+          },
+        }),
+        put({
+          type: 'SET_SYSTEM_MESSAGE',
+          payload: {
+            ...action.payload.error,
+          },
+          error: true,
+        }),
+      ]),
     );
-  });
-
-  // Insert test for default nextAction (if any)
-
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
-
-describe('When testing the saga without a nextAction and with a response from the api', () => {
-  const it = sagaHelper(pushData(action));
-
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
-
-    return response;
-  });
-
-  // Insert test for default nextAction (if any)
-
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
-
-describe('When testing the saga with a nextAction and without a response from the api', () => {
-  const it = sagaHelper(pushData(actionWithNextAction));
-
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
-  });
-
-  it('and then trigger an action', (result) => {
-    expect(result).toEqual(put({ ...nextAction, payload: {} }));
-  });
-
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
-
-describe('When testing the saga with a nextAction and with a response from the api', () => {
-  const it = sagaHelper(pushData(actionWithNextAction));
-
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
-
-    return response;
-  });
-
-  it('and then trigger an action', (result) => {
-    expect(result).toEqual(put({ ...nextAction, payload: response }));
   });
 
   it('and then nothing', (result) => {
@@ -99,12 +61,39 @@ describe('When testing the saga with a nextAction and with a response from the a
 });
 
 describe('When testing the saga when an error is thrown from the api', () => {
-  const it = sagaHelper(pushData(action));
+  const it = sagaHelper(logError(action));
   const errorMessage = 'Something went wrong';
 
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+  it('should have yielded all of our actions', (result) => {
+    expect(result).toEqual(
+      all([
+        put({
+          type: 'pushData',
+          payload: {
+            data,
+          },
+        }),
+        put({
+          type: 'post',
+          payload: {
+            url: config.slack.webhook,
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            parameters: {
+              channel: config.slack.channel,
+              username: config.slack.username,
+              icon_emoji: config.slack.icon_emoji,
+              text: JSON.stringify(data),
+            },
+          },
+        }),
+        put({
+          type: 'SET_SYSTEM_MESSAGE',
+          payload: {
+            ...action.payload.error,
+          },
+          error: true,
+        }),
+      ]),
     );
 
     return new Error(errorMessage);

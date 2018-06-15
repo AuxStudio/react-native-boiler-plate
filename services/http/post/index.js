@@ -1,13 +1,13 @@
 import utils from '../../../utils';
 
-export default function post(url, headers, body) {
+export default function post(url, headers, parameters) {
   return new Promise((resolve, reject) => {
-    utils.app.log('start post', { url, headers, body });
+    utils.app.log('start post', { url, headers, parameters });
 
     fetch(url, {
       method: 'POST',
       headers,
-      body,
+      body: JSON.stringify(parameters),
     })
       .then((data) => {
         const response = data && { data };
