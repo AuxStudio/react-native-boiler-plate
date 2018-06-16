@@ -1,5 +1,7 @@
 # React-native boiler-plate
 
+[![Build Status](https://travis-ci.com/AuxStudio/react-native-boiler-plate.svg?branch=master)](https://travis-ci.com/AuxStudio/react-native-boiler-plate)
+
 A react-native, redux, redux-saga and firebase project.
 
 ## Getting started
