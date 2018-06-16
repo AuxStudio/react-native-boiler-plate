@@ -19,3 +19,13 @@ The user has enabled 'Large Accessibility Sizes' in their settings.
 ### Solution
 
 Add `Text.defaultProps.allowFontScaling = false` to constructor in `./App.js` and be sure to import `Text`.
+
+## 3. Git is not registering a folder rename
+
+###
+
+Tell git to track case sensitivity on the file system:
+
+```shell
+git config core.ignorecase false
+```

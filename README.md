@@ -23,9 +23,8 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 
 ## In the pipeline
 
-- Testing (unit and E2E)
+- Testing (unit, integration and E2E)
 - CodePush
-- Continous integration
 
 ## Docs
 

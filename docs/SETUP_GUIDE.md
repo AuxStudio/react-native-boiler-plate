@@ -23,14 +23,6 @@ git commit -m "Initialise Project"
 git push -u origin master
 ```
 
-Tell git to track case sensitivity on the file system:
-
-(ONCE-OFF).
-
-```shell
-git config core.ignorecase false
-```
-
 ## 3. Update display and package name
 
 Display name: The name of the app as it appears on the device screen, e.g. TapOff.
