@@ -1,30 +1,35 @@
-import { GoogleSignin } from 'react-native-google-signin';
 import firebase from 'react-native-firebase';
 
-import config from '../../../config';
 import utils from '../../../utils';
+
+import checkAndResolvePlayServices from './checkAndResolvePlayServices';
+import configureGoogleSign from './configureGoogleSignIn';
+import signIn from './signIn';
+import getGoogleCredential from './getGoogleCredential';
 
 export default function getCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
     utils.app.log('start getCredentialFromGoogle');
 
-    GoogleSignin.hasPlayServices({ autoResolve: true })
+    checkAndResolvePlayServices()
       .then(() => {
-        GoogleSignin.configure({
-          ...config.googleSignIn,
-        })
+        configureGoogleSign()
           .then(() => {
-            GoogleSignin.signIn()
+            signIn()
               .then((user) => {
-                const credential = firebase.auth.GoogleAuthProvider.credential(
-                  user.idToken,
-                  user.accessToken,
-                );
-                const response = credential && { credential };
+                getGoogleCredential(user.idToken, user.accessToken)
+                  .then((credential) => {
+                    const response = credential && { credential };
 
-                utils.app.log('end getCredentialFromGoogle', response);
+                    utils.app.log('end getCredentialFromGoogle', response);
 
-                resolve(response);
+                    resolve(response);
+                  })
+                  .catch((error) => {
+                    utils.app.log('end getCredentialFromGoogle', { error });
+
+                    reject(utils.app.createError(error));
+                  });
               })
               .catch((error) => {
                 utils.app.log('end getCredentialFromGoogle', { error });
