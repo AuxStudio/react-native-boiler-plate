@@ -1,6 +1,6 @@
 import { AccessToken } from 'react-native-fbsdk';
 
-export default function getCurrentAccessToken() {
+export default function getCurrentAccessTokenFromFacebook() {
   return new Promise((resolve, reject) => {
     AccessToken.getCurrentAccessToken()
       .then((user) => {

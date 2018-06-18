@@ -1,4 +1,4 @@
-import logIn from '../';
+import logInToFacebook from '../';
 
 jest.mock('react-native-fbsdk', () => {
   return {
@@ -14,6 +14,6 @@ jest.mock('react-native-fbsdk', () => {
 
 it('resolves a promise', async () => {
   expect.assertions(1);
-  const response = await logIn();
+  const response = await logInToFacebook();
   expect(response).toBe(true);
 });

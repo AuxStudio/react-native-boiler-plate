@@ -1,6 +1,6 @@
 import getCredentialFromFacebook from '../';
 
-jest.mock('../logOut', () => {
+jest.mock('../logOutFromFacebook', () => {
   return jest.fn(() => {
     return new Promise((resolve) => {
       resolve();
@@ -8,7 +8,7 @@ jest.mock('../logOut', () => {
   });
 });
 
-jest.mock('../logIn', () => {
+jest.mock('../logInToFacebook', () => {
   return jest.fn(() => {
     return new Promise((resolve) => {
       resolve(true);
@@ -16,7 +16,7 @@ jest.mock('../logIn', () => {
   });
 });
 
-jest.mock('../getCurrentAccessToken', () => {
+jest.mock('../getCurrentAccessTokenFromFacebook', () => {
   return jest.fn(() => {
     return new Promise((resolve) => {
       resolve({ accessToken: '123123' });

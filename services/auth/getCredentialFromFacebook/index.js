@@ -1,25 +1,25 @@
 import firebase from 'react-native-firebase';
 
 import utils from '../../../utils';
-import logOut from './logOut';
-import logIn from './logIn';
-import getCurrentAccessToken from './getCurrentAccessToken';
+import logOutFromFacebook from './logOutFromFacebook';
+import logInToFacebook from './logInToFacebook';
+import getCurrentAccessTokenFromFacebook from './getCurrentAccessTokenFromFacebook';
 import getFacebookCredential from './getFacebookCredential';
 
 export default function getCredentialFromFacebook() {
   return new Promise((resolve, reject) => {
     utils.app.log('start getCredentialFromFacebook');
 
-    logOut()
+    logOutFromFacebook()
       .then(
-        logIn()
+        logInToFacebook()
           .then((result) => {
             if (result.isCancelled) {
               utils.app.log('end getcredentialFromFacebook', 'User cancelled login');
 
               reject(utils.app.createError('User cancelled login'));
             } else {
-              getCurrentAccessToken()
+              getCurrentAccessTokenFromFacebook()
                 .then((user) => {
                   getFacebookCredential(user.accessToken)
                     .then((credential) => {

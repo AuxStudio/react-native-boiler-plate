@@ -1,4 +1,4 @@
-import getCurrentAccessToken from '../';
+import getCurrentAccessTokenFromFacebook from '../';
 
 jest.mock('react-native-fbsdk', () => {
   return {
@@ -16,7 +16,7 @@ jest.mock('react-native-fbsdk', () => {
 
 it('resolves a promise', async () => {
   expect.assertions(1);
-  const response = await getCurrentAccessToken();
+  const response = await getCurrentAccessTokenFromFacebook();
   expect(response).toEqual({
     accessToken: '123123',
   });

@@ -1,6 +1,6 @@
 import { LoginManager } from 'react-native-fbsdk';
 
-export default function logOut() {
+export default function logOutFromFacebook() {
   return new Promise((resolve) => {
     LoginManager.logOut();
 
