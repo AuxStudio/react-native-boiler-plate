@@ -4,7 +4,7 @@ import utils from '../../../utils';
 
 import checkAndResolvePlayServices from './checkAndResolvePlayServices';
 import configureGoogleSign from './configureGoogleSignIn';
-import signIn from './signIn';
+import signInToGoogle from './signInToGoogle';
 import getGoogleCredential from './getGoogleCredential';
 
 export default function getCredentialFromGoogle() {
@@ -15,7 +15,7 @@ export default function getCredentialFromGoogle() {
       .then(() => {
         configureGoogleSign()
           .then(() => {
-            signIn()
+            signInToGoogle()
               .then((user) => {
                 getGoogleCredential(user.idToken, user.accessToken)
                   .then((credential) => {

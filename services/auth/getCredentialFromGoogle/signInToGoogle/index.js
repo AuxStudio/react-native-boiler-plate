@@ -2,7 +2,7 @@ import { GoogleSignIn } from 'react-native-google-signin';
 
 import utils from '../../../../utils';
 
-export default function signIn() {
+export default function signInToGoogle() {
   return new Promise((resolve, reject) => {
     utils.app.log('start signIn');
 

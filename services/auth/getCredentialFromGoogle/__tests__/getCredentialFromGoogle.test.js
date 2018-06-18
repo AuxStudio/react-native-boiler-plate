@@ -16,7 +16,7 @@ jest.mock('../configureGoogleSignIn', () => {
   });
 });
 
-jest.mock('../signIn', () => {
+jest.mock('../signInToGoogle', () => {
   return jest.fn(() => {
     return new Promise((resolve) => {
       resolve({ idToken: '123123', accessToken: '123123' });

@@ -1,4 +1,4 @@
-import signIn from '../';
+import signInToGoogle from '../';
 
 jest.mock('react-native-google-signin', () => {
   return {
@@ -16,6 +16,6 @@ jest.mock('react-native-google-signin', () => {
 
 it('resolves a promise', async () => {
   expect.assertions(1);
-  const response = await signIn();
+  const response = await signInToGoogle();
   expect(response).toEqual({ name: 'Shaun' });
 });
