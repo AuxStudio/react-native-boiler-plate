@@ -5,7 +5,6 @@ import { View } from 'react-native';
 
 import Input from '../';
 
-// NOTE: autofocus is not tested due to it not being supported by jest
 it('renders a Input', () => {
   expect(
     renderer.create(

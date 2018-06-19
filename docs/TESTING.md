@@ -10,7 +10,6 @@ We use [Jest](https://facebook.github.io/jest/) and [react-test-renderer](https:
 - All test files should be located in the `__tests__` folder within the component folder as per the [style guide](./STYLE_GUIDE.md#directory*structure).
 - When writing tests for components, be sure to test all the props as well as testing that the component works when no required props are passed in.
 - When writing tests for classes, test its methods and check that the state is updating. If any internal components are dependent on that state, test that they are doing what they should be doing.
-- Don't bother writing tests for services, this introduces too much boilerplate and the code ends up being trivial. We can assume the standard libraries work.
 - When writing tests for classes, list your snapshot tests at the top of the file and your instance/root tests at the bottom, ie.
 
 ```js

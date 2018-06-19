@@ -25,7 +25,8 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 
 ## In the pipeline
 
-- Testing (unit, integration and E2E)
+- Integration testing
+- E2E testing (Detox)
 - CodePush
 
 ## Docs
