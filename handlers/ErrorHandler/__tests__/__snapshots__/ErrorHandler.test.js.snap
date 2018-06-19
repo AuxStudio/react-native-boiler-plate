@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`catches errors in componentDidCatch 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "error": [Error: Error thrown from problem child],
+          "uid": undefined,
+        },
+        "type": "logError",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
 exports[`renders a ErrorHandler with all props 1`] = `<View />`;
 
 exports[`renders a ErrorHandler with minimum required props 1`] = `<View />`;

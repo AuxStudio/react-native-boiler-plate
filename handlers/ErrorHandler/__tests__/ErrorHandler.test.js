@@ -26,32 +26,18 @@ it('renders a ErrorHandler with minimum required props', () => {
   ).toMatchSnapshot();
 });
 
-it('renders an ErrorHandler and sets hasError', () => {
-  const component = renderer.create(
-    <ErrorHandler dispatch={jest.fn()}>
-      <View />
-    </ErrorHandler>,
-  );
-  const instance = component.getInstance();
-  const { root } = component;
-
-  instance.setHasError();
-  expect(instance.state.hasError).toBe(true);
-
-  const errorPage = root.findByProps({ testID: 'errorPage' });
-  expect(errorPage).toBeDefined();
-});
-
 it('catches errors in componentDidCatch', () => {
   function ProblemChild() {
     throw new Error('Error thrown from problem child');
     return <div>Error</div>; // eslint-disable-line
   }
 
+  const dispatch = jest.fn();
+
   jest.spyOn(ErrorHandler.prototype, 'componentDidCatch');
 
   const component = renderer.create(
-    <ErrorHandler dispatch={jest.fn()}>
+    <ErrorHandler dispatch={dispatch}>
       <ProblemChild />
     </ErrorHandler>,
   );
@@ -63,4 +49,5 @@ it('catches errors in componentDidCatch', () => {
   const errorPage = root.findByProps({ testID: 'errorPage' });
   expect(errorPage).toBeDefined();
   expect(ErrorHandler.prototype.componentDidCatch).toHaveBeenCalled();
+  expect(dispatch).toMatchSnapshot(); // dispatch function has been called
 });
