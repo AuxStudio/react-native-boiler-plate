@@ -10,8 +10,21 @@ jest.mock('react-native-permissions', () => {
   };
 });
 
-it('resolves a promise', async () => {
+it('resolves a promise when the permission type is supplied', async () => {
+  const permission = 'camera';
+
   expect.assertions(1);
-  const response = await checkPermission('camera');
+  const response = await checkPermission(permission);
   expect(response).toEqual({ message: 'authorized' });
+});
+
+it('rejects with error if the permission type is not supplied', async () => {
+  try {
+    const permission = null;
+
+    expect.assertions(1);
+    await checkPermission(permission);
+  } catch (error) {
+    expect(error).toEqual(new Error('Permission type is required'));
+  }
 });
