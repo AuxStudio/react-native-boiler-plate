@@ -1,3 +1,5 @@
+// NOTE: Unable to mock ImageResizer for testing - cannot read property apply of undefined
+
 import ImageResizer from 'react-native-image-resizer';
 
 import config from '../../../config';

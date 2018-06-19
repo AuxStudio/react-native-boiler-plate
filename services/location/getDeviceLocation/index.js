@@ -1,4 +1,4 @@
-// NOTE: Unable to mock navigator.geolocation so I am unable to write tests for this function
+// NOTE: Unable to mock navigator.geolocation for testing
 
 import utils from '../../../utils';
 
