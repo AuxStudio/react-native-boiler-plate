@@ -9,8 +9,6 @@ import getGoogleCredential from './getGoogleCredential';
 
 export default function getCredentialFromGoogle() {
   return new Promise((resolve, reject) => {
-    utils.app.log('start getCredentialFromGoogle');
-
     checkAndResolvePlayServices()
       .then(() => {
         configureGoogleSign()
@@ -20,32 +18,21 @@ export default function getCredentialFromGoogle() {
                 getGoogleCredential(user.idToken, user.accessToken)
                   .then((credential) => {
                     const response = credential && { credential };
-
-                    utils.app.log('end getCredentialFromGoogle', response);
-
                     resolve(response);
                   })
                   .catch((error) => {
-                    utils.app.log('end getCredentialFromGoogle', { error });
-
                     reject(utils.app.createError(error));
                   });
               })
               .catch((error) => {
-                utils.app.log('end getCredentialFromGoogle', { error });
-
                 reject(utils.app.createError(error));
               });
           })
           .catch((error) => {
-            utils.app.log('end getCredentialFromGoogle', { error });
-
             reject(utils.app.createError(error));
           });
       })
       .catch((error) => {
-        utils.app.log('end getCredentialFromGoogle', { error });
-
         reject(utils.app.createError(error));
       });
   });
