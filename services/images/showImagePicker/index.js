@@ -1,5 +1,3 @@
-// NOTE: I'm not sure how to mock ImagePicker.showImagePicker so no tests have been written for it
-
 import ImagePicker from 'react-native-image-picker';
 
 import utils from '../../../utils';
