@@ -14,11 +14,6 @@ const OPTIONS = [
   },
 ];
 
-/*
- TODO
-
-  Find a way to test showMenu, selectOption and hideMenu
-*/
 it('renders a Menu', () => {
   expect(
     renderer.create(

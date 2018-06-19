@@ -22,8 +22,6 @@ it('renders a SystemMessageHandler with all props', () => {
   ).toMatchSnapshot();
 });
 
-// TODO: Integration: when new system message, logErrorToDatabase and showSnackbar should be called
-
 it('renders a SystemMessageHandler with minimum required props', () => {
   expect(
     renderer.create(

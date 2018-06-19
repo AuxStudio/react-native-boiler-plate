@@ -14,8 +14,6 @@ it('renders a ErrorHandler with all props', () => {
   ).toMatchSnapshot();
 });
 
-// TODO: Integration: test componentDidCatch
-
 it('renders a ErrorHandler with minimum required props', () => {
   expect(
     renderer.create(
