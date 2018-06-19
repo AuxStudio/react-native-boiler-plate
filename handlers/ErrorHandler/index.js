@@ -19,7 +19,7 @@ export class ErrorHandler extends React.Component {
 
   componentDidCatch(error) {
     // Catch errors in children
-    this.setState({ hasError: true });
+    this.setHasError();
 
     this.props.dispatch({
       type: 'logError',
@@ -30,9 +30,13 @@ export class ErrorHandler extends React.Component {
     });
   }
 
+  setHasError = () => {
+    this.setState({ hasError: true });
+  };
+
   render() {
     if (this.state.hasError) {
-      return <Error />;
+      return <Error testID="errorPage" />;
     }
 
     return this.props.children;
