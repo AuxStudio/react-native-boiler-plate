@@ -7,7 +7,8 @@ export default function getGoogleCredential(idToken, accessToken) {
       resolve(credential);
     } else if (!idToken) {
       reject(new Error('ID token is required'));
+    } else {
+      reject(new Error('Access token is required'));
     }
-    reject(new Error('Access token is required'));
   });
 }
