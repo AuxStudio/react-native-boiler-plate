@@ -6,6 +6,7 @@ const images = {
     storageOptions: {
       skipBackup: true, // don't backup to iOS cloud
     },
+    allowsEditing: true, // ios rezise mode
   },
   imageResizerOptions: [
     100, // maxWidth
