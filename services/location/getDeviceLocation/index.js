@@ -1,3 +1,5 @@
+// NOTE: Unable to mock navigator.geolocation so I am unable to write tests for this function
+
 import utils from '../../../utils';
 
 export default function getDeviceLocation() {
