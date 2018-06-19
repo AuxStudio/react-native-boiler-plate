@@ -34,7 +34,7 @@ it('catches errors in componentDidCatch', () => {
 
   const dispatch = jest.fn();
 
-  jest.spyOn(ErrorHandler.prototype, 'componentDidCatch');
+  const spy = jest.spyOn(ErrorHandler.prototype, 'componentDidCatch');
 
   const component = renderer.create(
     <ErrorHandler dispatch={dispatch}>
@@ -48,6 +48,6 @@ it('catches errors in componentDidCatch', () => {
 
   const errorPage = root.findByProps({ testID: 'errorPage' });
   expect(errorPage).toBeDefined();
-  expect(ErrorHandler.prototype.componentDidCatch).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalled();
   expect(dispatch).toMatchSnapshot(); // dispatch function has been called
 });
