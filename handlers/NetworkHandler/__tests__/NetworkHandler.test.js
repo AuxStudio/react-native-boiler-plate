@@ -48,7 +48,7 @@ describe('NetworkHandler', () => {
   let spy;
   const dispatch = jest.fn();
 
-  it('updates the store with connection info', () => {
+  it('updates the store with connection info when WIFI connection', () => {
     const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
     const instance = component.getInstance();
     const connectionInfo = {
@@ -60,7 +60,7 @@ describe('NetworkHandler', () => {
     expect(dispatch).toMatchSnapshot();
   });
 
-  it('updates the store with connection info and goes online', () => {
+  it('updates the store with connection info and goes online when WIFI connection', () => {
     spy = jest.spyOn(NetworkHandler.prototype, 'goOnline');
     const component = renderer.create(<NetworkHandler dispatch={dispatch} />);
     const instance = component.getInstance();
@@ -74,12 +74,26 @@ describe('NetworkHandler', () => {
     expect(dispatch).toMatchSnapshot();
   });
 
-  it('updates the store with connection info and goes offline', () => {
+  it('updates the store with connection info and goes offline when no connection', () => {
     spy = jest.spyOn(NetworkHandler.prototype, 'goOffline');
     const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
     const instance = component.getInstance();
     const connectionInfo = {
       type: 'none',
+    };
+
+    instance.handleConnectionChange(connectionInfo);
+    expect(spy).toHaveBeenCalled();
+    expect(dispatch).toMatchSnapshot();
+  });
+
+  it('updates the store with connection info and goes offline when 2g connection', () => {
+    spy = jest.spyOn(NetworkHandler.prototype, 'goOffline');
+    const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
+    const instance = component.getInstance();
+    const connectionInfo = {
+      type: 'cellular',
+      effectiveType: '2g',
     };
 
     instance.handleConnectionChange(connectionInfo);
