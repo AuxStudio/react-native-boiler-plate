@@ -6,6 +6,20 @@ import database from '../../services/database';
 import utils from '../../utils';
 
 export class DatabaseHandler extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.listenForData = this.listenForData.bind(this);
+  }
+
+  static get propTypes() {
+    return {
+      dispatch: PropTypes.func,
+      authenticated: PropTypes.bool,
+      uid: PropTypes.string,
+    };
+  }
+
   componentDidMount() {
     if (this.props.authenticated) {
       this.listenForData();
@@ -18,15 +32,7 @@ export class DatabaseHandler extends React.Component {
     }
   }
 
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func,
-      authenticated: PropTypes.bool,
-      uid: PropTypes.string,
-    };
-  }
-
-  listenForData = () => {
+  listenForData() {
     database.listenForData(
       'app',
       (data) => {
@@ -72,7 +78,7 @@ export class DatabaseHandler extends React.Component {
         });
       },
     );
-  };
+  }
 
   render() {
     return null;
