@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a DatabaseHandler 1`] = `null`;
+exports[`handles props renders with all props 1`] = `null`;
 
-exports[`renders a DatabaseHandler with minimum required props 1`] = `null`;
+exports[`handles props renders with minimum required props 1`] = `null`;

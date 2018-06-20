@@ -3,12 +3,16 @@ import renderer from 'react-test-renderer';
 
 import { DatabaseHandler } from '../';
 
-it('renders a DatabaseHandler', () => {
-  expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} authenticated />)).toMatchSnapshot();
-});
+describe('handles props', () => {
+  it('renders with all props', () => {
+    expect(
+      renderer.create(<DatabaseHandler dispatch={jest.fn()} authenticated />),
+    ).toMatchSnapshot();
+  });
 
-it('renders a DatabaseHandler with minimum required props', () => {
-  expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  it('renders with minimum required props', () => {
+    expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  });
 });
 
 describe('handles its methods', () => {
