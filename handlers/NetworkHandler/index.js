@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class NetworkHandler extends React.Component {
-  componentDidMount() {
-    NetInfo.addEventListener('connectionChange', this.handleConnectionChange);
-  }
+  constructor(props) {
+    super(props);
 
-  componentWillUnmount() {
-    NetInfo.removeEventListener('connectionChange', this.handleConnectionChange);
+    this.handleConnectionChange = this.handleConnectionChange.bind(this);
+    this.goOffline = this.goOffline.bind(this);
+    this.goOnline = this.goOnline.bind(this);
   }
 
   static get propTypes() {
@@ -19,7 +19,15 @@ export class NetworkHandler extends React.Component {
     };
   }
 
-  handleConnectionChange = (connectionInfo) => {
+  componentDidMount() {
+    NetInfo.addEventListener('connectionChange', this.handleConnectionChange);
+  }
+
+  componentWillUnmount() {
+    NetInfo.removeEventListener('connectionChange', this.handleConnectionChange);
+  }
+
+  handleConnectionChange(connectionInfo) {
     this.props.dispatch({
       type: 'SET_NETWORK_CONNECTION_INFO',
       payload: {
@@ -39,9 +47,9 @@ export class NetworkHandler extends React.Component {
     ) {
       this.goOnline();
     }
-  };
+  }
 
-  goOffline = () => {
+  goOffline() {
     this.props.dispatch({
       type: 'goOffline',
       meta: {
@@ -50,9 +58,9 @@ export class NetworkHandler extends React.Component {
         },
       },
     });
-  };
+  }
 
-  goOnline = () => {
+  goOnline() {
     this.props.dispatch({
       type: 'goOnline',
       meta: {
@@ -61,7 +69,7 @@ export class NetworkHandler extends React.Component {
         },
       },
     });
-  };
+  }
 
   render() {
     return null;
