@@ -30,7 +30,11 @@
     "no-bitwise": "off",
     "react/jsx-indent": "off", // conflicts with prettier
     "no-nested-ternary": "off", // often looks better than if else block
-    "class-methods-use-this": "off" // class methods are great for self-documentation
+    "class-methods-use-this": "off", // class methods are great for self-documentation
+    "react/sort-comp": [
+      1,
+      { "order": ["constructor", "static-methods", "lifecycle", "everything-else", "render"] }
+    ]
   },
   "plugins": ["react", "react-native"],
   "globals": {
