@@ -4,30 +4,32 @@ import { View } from 'react-native';
 
 import { SystemMessageHandler } from '../';
 
-it('renders a SystemMessageHandler with all props', () => {
-  expect(
-    renderer.create(
-      <SystemMessageHandler
-        dispatch={jest.fn()}
-        systemMessage={{
-          message: 'Something went wrong',
-          code: 'AUTH',
-          error: true,
-        }}
-        uid="xxxx-xxxx-xxxx-xxxx"
-      >
-        <View />
-      </SystemMessageHandler>,
-    ),
-  ).toMatchSnapshot();
-});
+describe('SystemMessageHandler', () => {
+  it('renders with all props', () => {
+    expect(
+      renderer.create(
+        <SystemMessageHandler
+          dispatch={jest.fn()}
+          systemMessage={{
+            message: 'Something went wrong',
+            code: 'AUTH',
+            error: true,
+          }}
+          uid="xxxx-xxxx-xxxx-xxxx"
+        >
+          <View />
+        </SystemMessageHandler>,
+      ),
+    ).toMatchSnapshot();
+  });
 
-it('renders a SystemMessageHandler with minimum required props', () => {
-  expect(
-    renderer.create(
-      <SystemMessageHandler dispatch={jest.fn()}>
-        <View />
-      </SystemMessageHandler>,
-    ),
-  ).toMatchSnapshot();
+  it('renders with minimum required props', () => {
+    expect(
+      renderer.create(
+        <SystemMessageHandler dispatch={jest.fn()}>
+          <View />
+        </SystemMessageHandler>,
+      ),
+    ).toMatchSnapshot();
+  });
 });
