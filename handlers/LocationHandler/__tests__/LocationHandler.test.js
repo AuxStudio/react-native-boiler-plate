@@ -3,17 +3,17 @@ import renderer from 'react-test-renderer';
 
 import { LocationHandler } from '../';
 
-describe('handles props', () => {
+describe('LocationHandler', () => {
   it('renders with all/minimum required props', () => {
     expect(renderer.create(<LocationHandler dispatch={jest.fn()} />)).toMatchSnapshot();
   });
 });
 
-describe('handles its methods', () => {
+describe('LocationHandler', () => {
   let spy;
   const dispatch = jest.fn();
 
-  it('dispatches getLocationPermission on mount', () => {
+  it('call getLocationPermission on componentDidMount', () => {
     spy = jest.spyOn(LocationHandler.prototype, 'getLocationPermission');
 
     renderer.create(<LocationHandler dispatch={dispatch} />);

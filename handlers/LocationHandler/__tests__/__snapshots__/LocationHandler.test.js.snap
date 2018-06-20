@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles its methods dispatches getLocationPermission on mount 1`] = `
+exports[`LocationHandler call getLocationPermission on componentDidMount 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -26,4 +26,4 @@ exports[`handles its methods dispatches getLocationPermission on mount 1`] = `
 }
 `;
 
-exports[`handles props renders with all/minimum required props 1`] = `null`;
+exports[`LocationHandler renders with all/minimum required props 1`] = `null`;
