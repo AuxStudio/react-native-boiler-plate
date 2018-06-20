@@ -10,7 +10,6 @@ it('renders a AuthHandler', () => {
 it('dispatches getAuth on mount', () => {
   const dispatch = jest.fn();
 
-  jest.spyOn(AuthHandler.prototype, 'componentDidMount');
   renderer.create(<AuthHandler dispatch={dispatch} />);
 
   expect(dispatch).toMatchSnapshot(); // dispatch function has been called
