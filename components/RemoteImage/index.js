@@ -22,24 +22,31 @@ export default class RemoteImage extends React.Component {
     loaderColor: styleConstants.colors.primaryText,
   };
 
-  state = {
-    isLoading: true,
-    hasError: false,
-  };
+  constructor(props) {
+    super(props);
 
-  setError = () => {
+    this.setError = this.setError.bind(this);
+    this.setLoading = this.setLoading.bind(this);
+
+    this.state = {
+      isLoading: true,
+      hasError: false,
+    };
+  }
+
+  setError() {
     this.setState({
       hasError: true,
     });
 
     this.setLoading(false);
-  };
+  }
 
-  setLoading = (isLoading) => {
+  setLoading(isLoading) {
     this.setState({
       isLoading,
     });
-  };
+  }
 
   render() {
     const borderRadiusStyles = this.props.borderRadius && { borderRadius: this.props.borderRadius };
