@@ -6,7 +6,7 @@ export class LocationHandler extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getLocationPermisssion = this.getLocationPermissions.bind(this);
+    this.getLocationPermission = this.getLocationPermission.bind(this);
   }
 
   static get propTypes() {
