@@ -23,28 +23,37 @@ export default class MenuComponent extends React.Component {
 
   static defaultProps = {};
 
-  state = {};
+  constructor(props) {
+    super(props);
 
-  setMenuRef = (ref) => {
+    this.setMenuRef = this.setMenuRef.bind(this);
+    this.showMenu = this.showMenu.bind(this);
+    this.selectOption = this.selectOption.bind(this);
+    this.hideMenu = this.hideMenu.bind(this);
+
+    this.menu = null;
+
+    this.state = {};
+  }
+
+  setMenuRef(ref) {
     this.menu = ref;
-  };
+  }
 
-  menu = null;
-
-  showMenu = () => {
+  showMenu() {
     this.menu.show();
-  };
+  }
 
-  selectOption = (option) => {
+  selectOption(option) {
     if (this.props.handlePress) {
       this.props.handlePress(option);
     }
     this.hideMenu();
-  };
+  }
 
-  hideMenu = () => {
+  hideMenu() {
     this.menu.hide();
-  };
+  }
 
   render() {
     return (
