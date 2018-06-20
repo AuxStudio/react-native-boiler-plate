@@ -8,6 +8,18 @@ import styles from './styles';
 import styleConstants from '../../styleConstants';
 
 export default class RemoteImage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.setError = this.setError.bind(this);
+    this.setLoading = this.setLoading.bind(this);
+
+    this.state = {
+      isLoading: true,
+      hasError: false,
+    };
+  }
+
   static propTypes = {
     source: PropTypes.shape({
       uri: PropTypes.string,
@@ -21,18 +33,6 @@ export default class RemoteImage extends React.Component {
   static defaultProps = {
     loaderColor: styleConstants.colors.primaryText,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.setError = this.setError.bind(this);
-    this.setLoading = this.setLoading.bind(this);
-
-    this.state = {
-      isLoading: true,
-      hasError: false,
-    };
-  }
 
   setError() {
     this.setState({
