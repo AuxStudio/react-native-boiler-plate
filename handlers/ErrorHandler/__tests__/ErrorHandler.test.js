@@ -50,4 +50,6 @@ it('catches errors in componentDidCatch', () => {
   expect(errorPage).toBeDefined();
   expect(spy).toHaveBeenCalled();
   expect(dispatch).toMatchSnapshot(); // dispatch function has been called
+
+  spy.mockClear();
 });
