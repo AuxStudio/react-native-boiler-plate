@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles its methods dispatches getAuth on mount 1`] = `
+exports[`AuthHandler calls getAuth on componentDidMount 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -18,4 +18,4 @@ exports[`handles its methods dispatches getAuth on mount 1`] = `
 }
 `;
 
-exports[`handles props renders with all/minimum required props 1`] = `null`;
+exports[`AuthHandler renders with all/minimum required props 1`] = `null`;
