@@ -7,6 +7,8 @@ export class NetworkHandler extends React.Component {
   constructor(props) {
     super(props);
 
+    this.addNetInfoEventListener = this.addNetInfoEventListener.bind(this);
+    this.removeNetInfoEventListener = this.removeNetInfoEventListener.bind(this);
     this.handleConnectionChange = this.handleConnectionChange.bind(this);
     this.goOffline = this.goOffline.bind(this);
     this.goOnline = this.goOnline.bind(this);
@@ -20,10 +22,18 @@ export class NetworkHandler extends React.Component {
   }
 
   componentDidMount() {
-    NetInfo.addEventListener('connectionChange', this.handleConnectionChange);
+    this.addNetInfoEventListener();
   }
 
   componentWillUnmount() {
+    this.removeNetInfoEventListener();
+  }
+
+  addNetInfoEventListener() {
+    NetInfo.addEventListener('connectionChange', this.handleConnectionChange);
+  }
+
+  removeNetInfoEventListener() {
     NetInfo.removeEventListener('connectionChange', this.handleConnectionChange);
   }
 
