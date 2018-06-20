@@ -6,7 +6,7 @@ import { ErrorHandler } from '../';
 
 jest.mock('../../../scenes/Error'); // Error scene that is displayed on error
 
-describe('handles props', () => {
+describe('ErrorHandler', () => {
   it('renders with all props', () => {
     expect(
       renderer.create(
@@ -28,7 +28,7 @@ describe('handles props', () => {
   });
 });
 
-describe('handles its methods', () => {
+describe('ErrorHandler', () => {
   let spy;
   const dispatch = jest.fn();
 

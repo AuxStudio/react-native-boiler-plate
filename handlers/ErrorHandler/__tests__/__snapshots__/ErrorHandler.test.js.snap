@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles its methods catches errors in componentDidCatch 1`] = `
+exports[`ErrorHandler catches errors in componentDidCatch 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -22,6 +22,6 @@ exports[`handles its methods catches errors in componentDidCatch 1`] = `
 }
 `;
 
-exports[`handles props renders with all props 1`] = `<View />`;
+exports[`ErrorHandler renders with all props 1`] = `<View />`;
 
-exports[`handles props renders with minimum required props 1`] = `<View />`;
+exports[`ErrorHandler renders with minimum required props 1`] = `<View />`;
