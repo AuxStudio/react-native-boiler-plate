@@ -28,7 +28,8 @@ export class SystemMessageHandler extends React.Component {
   componentDidUpdate(prevProps) {
     if (
       this.props.systemMessage.message &&
-      this.props.systemMessage.message !== prevProps.systemMessage.message
+      (!prevProps.systemMessage ||
+        this.props.systemMessage.message !== prevProps.systemMessage.message)
     ) {
       this.showSnackbar();
     }
