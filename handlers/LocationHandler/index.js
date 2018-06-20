@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 export class LocationHandler extends React.Component {
-  componentDidMount() {
-    this.getLocationPermission();
+  constructor(props) {
+    super(props);
+
+    this.getLocationPermisssion = this.getLocationPermissions.bind(this);
   }
 
   static get propTypes() {
@@ -13,7 +15,11 @@ export class LocationHandler extends React.Component {
     };
   }
 
-  getLocationPermission = () => {
+  componentDidMount() {
+    this.getLocationPermission();
+  }
+
+  getLocationPermission() {
     this.props.dispatch({
       type: 'checkAndRequestPermission',
       payload: {
@@ -25,7 +31,7 @@ export class LocationHandler extends React.Component {
         },
       },
     });
-  };
+  }
 
   render() {
     return null;
