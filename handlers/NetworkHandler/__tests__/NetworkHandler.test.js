@@ -28,13 +28,11 @@ describe('NetworkHandler', () => {
   });
 
   it('calls removeNetInfoEventListener on componentWillUnmount', () => {
-    const lifecycleSpy = jest.spyOn(NetworkHandler.prototype, 'componentWillUnmount');
     spy = jest.spyOn(NetworkHandler.prototype, 'removeNetInfoEventListener');
     const instance = renderer.create(<NetworkHandler dispatch={dispatch} />);
 
     instance.unmount();
 
-    expect(lifecycleSpy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalled();
   });
 
@@ -45,9 +43,59 @@ describe('NetworkHandler', () => {
   });
 });
 
-// calls removeNet...  on unmount
 // dispatches change action on simulated change
-// calls goOffline on simulated change
-// goOffline dispatch matches snapshot
-// calls goOnline on simulated change
-// goOnline dispatch matches snapshot
+describe('NetworkHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
+  it('updates the store with connection info', () => {
+    const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
+    const instance = component.getInstance();
+    const connectionInfo = {
+      type: 'wifi',
+      effectiveType: '4g',
+    };
+
+    instance.handleConnectionChange(connectionInfo);
+    expect(dispatch).toMatchSnapshot();
+  });
+
+  it('updates the store with connection info and goes online', () => {
+    spy = jest.spyOn(NetworkHandler.prototype, 'goOnline');
+    const component = renderer.create(<NetworkHandler dispatch={dispatch} />);
+    const instance = component.getInstance();
+    const connectionInfo = {
+      type: 'wifi',
+      effectiveType: '4g',
+    };
+
+    instance.handleConnectionChange(connectionInfo);
+    expect(spy).toHaveBeenCalled();
+    expect(dispatch).toMatchSnapshot();
+  });
+
+  afterEach(() => {
+    if (spy) {
+      spy.mockReset();
+    }
+  });
+
+  it('updates the store with connection info and goes offline', () => {
+    spy = jest.spyOn(NetworkHandler.prototype, 'goOffline');
+    const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
+    const instance = component.getInstance();
+    const connectionInfo = {
+      type: 'none',
+    };
+
+    instance.handleConnectionChange(connectionInfo);
+    expect(spy).toHaveBeenCalled();
+    expect(dispatch).toMatchSnapshot();
+  });
+
+  afterEach(() => {
+    if (spy) {
+      spy.mockReset();
+    }
+  });
+});
