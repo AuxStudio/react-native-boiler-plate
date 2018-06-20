@@ -7,12 +7,22 @@ it('renders a AuthHandler', () => {
   expect(renderer.create(<AuthHandler dispatch={jest.fn()} />)).toMatchSnapshot();
 });
 
-it('dispatches getAuth on mount', () => {
-  const spy = jest.spyOn(AuthHandler.prototype, 'getAuth');
+describe('handles its methods', () => {
+  let spy;
   const dispatch = jest.fn();
 
-  renderer.create(<AuthHandler dispatch={dispatch} />);
+  it('dispatches getAuth on mount', () => {
+    spy = jest.spyOn(AuthHandler.prototype, 'getAuth');
 
-  expect(spy).toHaveBeenCalled();
-  expect(dispatch).toMatchSnapshot();
+    renderer.create(<AuthHandler dispatch={dispatch} />);
+
+    expect(spy).toHaveBeenCalled();
+    expect(dispatch).toMatchSnapshot();
+  });
+
+  afterEach(() => {
+    if (spy) {
+      spy.mockReset();
+    }
+  });
 });

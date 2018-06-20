@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dispatches getAuth on mount 1`] = `
+exports[`handles its methods dispatches getAuth on mount 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
