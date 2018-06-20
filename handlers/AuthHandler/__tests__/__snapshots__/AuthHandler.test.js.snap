@@ -18,4 +18,4 @@ exports[`handles its methods dispatches getAuth on mount 1`] = `
 }
 `;
 
-exports[`renders a AuthHandler 1`] = `null`;
+exports[`handles props renders with all/minimum required props 1`] = `null`;

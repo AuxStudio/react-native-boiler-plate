@@ -3,8 +3,10 @@ import renderer from 'react-test-renderer';
 
 import { AuthHandler } from '../';
 
-it('renders a AuthHandler', () => {
-  expect(renderer.create(<AuthHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+describe('handles props', () => {
+  it('renders with all/minimum required props', () => {
+    expect(renderer.create(<AuthHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  });
 });
 
 describe('handles its methods', () => {
