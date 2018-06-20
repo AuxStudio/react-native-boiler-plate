@@ -74,12 +74,6 @@ describe('NetworkHandler', () => {
     expect(dispatch).toMatchSnapshot();
   });
 
-  afterEach(() => {
-    if (spy) {
-      spy.mockReset();
-    }
-  });
-
   it('updates the store with connection info and goes offline', () => {
     spy = jest.spyOn(NetworkHandler.prototype, 'goOffline');
     const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);
