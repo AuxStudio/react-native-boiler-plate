@@ -3,3 +3,30 @@
 exports[`SystemMessageHandler renders with all props 1`] = `<View />`;
 
 exports[`SystemMessageHandler renders with minimum required props 1`] = `<View />`;
+
+exports[`SystemMessageHandler shows the snackbar if systemMessage changed in componentDidUpdate and calls resetError after timeout 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "type": "RESET_SYSTEM_MESSAGE",
+      },
+    ],
+    Array [
+      Object {
+        "type": "RESET_SYSTEM_MESSAGE",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
