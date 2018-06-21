@@ -12,6 +12,9 @@ jest.mock('react-native-snackbar', () => {
 });
 
 describe('SystemMessageHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
   it('renders with all props', () => {
     expect(
       renderer.create(
@@ -39,11 +42,6 @@ describe('SystemMessageHandler', () => {
       ),
     ).toMatchSnapshot();
   });
-});
-
-describe('SystemMessageHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
 
   it('shows the snackbar if systemMessage changed in componentDidUpdate', () => {
     const component = renderer.create(

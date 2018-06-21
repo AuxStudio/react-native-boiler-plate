@@ -4,14 +4,12 @@ import renderer from 'react-test-renderer';
 import { AuthHandler } from '../';
 
 describe('AuthHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
   it('renders with all/minimum required props', () => {
     expect(renderer.create(<AuthHandler dispatch={jest.fn()} />)).toMatchSnapshot();
   });
-});
-
-describe('AuthHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
 
   it('calls getAuth on componentDidMount', () => {
     spy = jest.spyOn(AuthHandler.prototype, 'getAuth');

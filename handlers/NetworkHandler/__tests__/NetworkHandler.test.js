@@ -4,6 +4,9 @@ import renderer from 'react-test-renderer';
 import { NetworkHandler } from '../';
 
 describe('NetworkHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
   it('renders with all props', () => {
     expect(
       renderer.create(<NetworkHandler dispatch={jest.fn()} realtimeDatabaseMode />),
@@ -13,11 +16,6 @@ describe('NetworkHandler', () => {
   it('renders with minimum required props', () => {
     expect(renderer.create(<NetworkHandler dispatch={jest.fn()} />)).toMatchSnapshot();
   });
-});
-
-describe('NetworkHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
 
   it('calls addNetInfoEventListener on componentDidMount', () => {
     spy = jest.spyOn(NetworkHandler.prototype, 'addNetInfoEventListener');
@@ -35,18 +33,6 @@ describe('NetworkHandler', () => {
 
     expect(spy).toHaveBeenCalled();
   });
-
-  afterEach(() => {
-    if (spy) {
-      spy.mockReset();
-    }
-  });
-});
-
-// dispatches change action on simulated change
-describe('NetworkHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
 
   it('updates the store with connection info when WIFI connection', () => {
     const component = renderer.create(<NetworkHandler dispatch={dispatch} realtimeDatabaseMode />);

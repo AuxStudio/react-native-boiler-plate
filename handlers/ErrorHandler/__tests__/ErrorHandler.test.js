@@ -7,6 +7,14 @@ import { ErrorHandler } from '../';
 jest.mock('../../../scenes/Error'); // Error scene that is displayed on error
 
 describe('ErrorHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
+  function ProblemChild() {
+    throw new Error('Error thrown from problem child');
+    return <div>Error</div>; // eslint-disable-line
+  }
+
   it('renders with all props', () => {
     expect(
       renderer.create(
@@ -26,16 +34,6 @@ describe('ErrorHandler', () => {
       ),
     ).toMatchSnapshot();
   });
-});
-
-describe('ErrorHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
-
-  function ProblemChild() {
-    throw new Error('Error thrown from problem child');
-    return <div>Error</div>; // eslint-disable-line
-  }
 
   it('catches errors in componentDidCatch', () => {
     spy = jest.spyOn(ErrorHandler.prototype, 'componentDidCatch');

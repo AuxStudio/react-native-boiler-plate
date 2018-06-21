@@ -4,6 +4,9 @@ import renderer from 'react-test-renderer';
 import { DatabaseHandler } from '../';
 
 describe('DatabaseHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
   it('renders with all props', () => {
     expect(
       renderer.create(<DatabaseHandler dispatch={jest.fn()} authenticated />),
@@ -13,11 +16,6 @@ describe('DatabaseHandler', () => {
   it('renders with minimum required props', () => {
     expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
   });
-});
-
-describe('DatabaseHandler', () => {
-  let spy;
-  const dispatch = jest.fn();
 
   it('calls listenForData on componentDidMount if authenticated prop is supplied', () => {
     spy = jest.spyOn(DatabaseHandler.prototype, 'listenForData');
