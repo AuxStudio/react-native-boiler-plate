@@ -44,16 +44,11 @@ describe('ErrorHandler', () => {
       </ErrorHandler>,
     );
     const instance = component.getInstance();
-    const { root } = component;
 
     expect(instance.state.hasError).toBe(true);
-
-    const errorPage = root.findByProps({ testID: 'errorPage' });
-    expect(errorPage).toBeDefined();
+    expect(component).toMatchSnapshot();
     expect(spy).toHaveBeenCalled();
     expect(dispatch).toMatchSnapshot(); // dispatch function has been called
-
-    spy.mockClear();
   });
 
   afterEach(() => {

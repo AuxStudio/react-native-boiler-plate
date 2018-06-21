@@ -42,7 +42,7 @@ export class ErrorHandler extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <Error testID="errorPage" />;
+      return <Error />;
     }
 
     return this.props.children;
