@@ -53,7 +53,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return providerResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('should have called the mocked credential API next with the provider API response as args', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(auth.signInWithCredential, providerResponse.credential)),
@@ -62,7 +61,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return signInResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_IN_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_IN_USER', payload: signInResponse }));
   });
@@ -81,7 +79,6 @@ describe('When testing the saga with a nextAction and with a response from the F
     return providerResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('should have called the mocked credential API next with the provider API response as args', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(auth.signInWithCredential, providerResponse.credential)),
@@ -136,7 +133,6 @@ describe('When testing the saga when an error is thrown from the signIn api', ()
     return providerResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('should have called the mocked credential API next with the provider API response as args', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(auth.signInWithCredential, providerResponse.credential)),
@@ -171,7 +167,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return providerResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('should have called the mocked credential API next with the provider API response as args', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(auth.signInWithCredential, providerResponse.credential)),
@@ -180,7 +175,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return signInResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_IN_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_IN_USER', payload: signInResponse }));
   });
@@ -204,7 +198,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return providerResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('should have called the mocked credential API next with the provider API response as args', (result) => {
     expect(JSON.stringify(result)).toEqual(
       JSON.stringify(call(auth.signInWithCredential, providerResponse.credential)),
@@ -213,7 +206,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return signInResponse;
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_IN_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_IN_USER', payload: signInResponse }));
   });

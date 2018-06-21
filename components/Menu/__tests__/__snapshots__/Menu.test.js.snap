@@ -1,6 +1,216 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Menu 1`] = `
+exports[`Menu renders a Menu with minimum required props 1`] = `
+<View
+  collapsable={false}
+>
+  <View
+    onLayout={[Function]}
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 12,
+            },
+            Object {
+              "color": undefined,
+              "fontSize": 24,
+            },
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 2,
+            "left": 0,
+            "opacity": 0,
+            "paddingVertical": 8,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 0,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "height": 48,
+                  "justifyContent": "center",
+                  "maxWidth": 248,
+                  "minWidth": 124,
+                },
+                Array [
+                  undefined,
+                  undefined,
+                ],
+                Object {
+                  "width": 0,
+                },
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "paddingHorizontal": 16,
+                  },
+                  false,
+                  Array [
+                    Object {},
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              Test
+            </Text>
+          </View>
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "height": 48,
+                  "justifyContent": "center",
+                  "maxWidth": 248,
+                  "minWidth": 124,
+                },
+                Array [
+                  undefined,
+                  undefined,
+                ],
+                Object {
+                  "width": 0,
+                },
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "paddingHorizontal": 16,
+                  },
+                  Object {
+                    "color": "#BDBDBD",
+                  },
+                  Array [
+                    Object {},
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              Disabled
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
+
+exports[`Menu renders with all props 1`] = `
 <View
   collapsable={false}
 >
@@ -204,216 +414,6 @@ exports[`renders a Menu 1`] = `
                     Object {
                       "color": "red",
                     },
-                  ],
-                ]
-              }
-            >
-              Disabled
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  </Modal>
-</View>
-`;
-
-exports[`renders a Menu with minimum required props 1`] = `
-<View
-  collapsable={false}
->
-  <View
-    onLayout={[Function]}
-  >
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": undefined,
-              "fontSize": 12,
-            },
-            Object {
-              "color": undefined,
-              "fontSize": 24,
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-          ]
-        }
-      >
-        
-      </Text>
-    </View>
-  </View>
-  <Modal
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={true}
-    visible={false}
-  >
-    <View
-      accessible={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "backgroundColor": "white",
-            "borderRadius": 2,
-            "left": 0,
-            "opacity": 0,
-            "paddingVertical": 8,
-            "position": "absolute",
-            "shadowColor": "black",
-            "shadowOffset": Object {
-              "height": 2,
-              "width": 0,
-            },
-            "shadowOpacity": 0.14,
-            "shadowRadius": 2,
-            "top": 0,
-            "transform": Array [],
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "overflow": "hidden",
-            }
-          }
-        >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
-                },
-                Array [
-                  undefined,
-                  undefined,
-                ],
-                Object {
-                  "width": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "fontSize": 14,
-                    "fontWeight": "400",
-                    "paddingHorizontal": 16,
-                  },
-                  false,
-                  Array [
-                    Object {},
-                    undefined,
-                  ],
-                ]
-              }
-            >
-              Test
-            </Text>
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
-                },
-                Array [
-                  undefined,
-                  undefined,
-                ],
-                Object {
-                  "width": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "fontSize": 14,
-                    "fontWeight": "400",
-                    "paddingHorizontal": 16,
-                  },
-                  Object {
-                    "color": "#BDBDBD",
-                  },
-                  Array [
-                    Object {},
-                    undefined,
                   ],
                 ]
               }

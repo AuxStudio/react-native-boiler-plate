@@ -29,7 +29,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return response;
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_IN_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_IN_USER', payload: response }));
   });

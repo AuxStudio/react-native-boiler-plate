@@ -5,6 +5,16 @@ import { connect } from 'react-redux';
 import Error from '../../scenes/Error';
 
 export class ErrorHandler extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.setHasError = this.setHasError.bind(this);
+
+    this.state = {
+      hasError: null,
+    };
+  }
+
   static propTypes = {
     dispatch: PropTypes.func,
     children: PropTypes.node.isRequired,
@@ -13,13 +23,9 @@ export class ErrorHandler extends React.Component {
 
   static defaultProps = {};
 
-  state = {
-    hasError: null,
-  };
-
   componentDidCatch(error) {
     // Catch errors in children
-    this.setState({ hasError: true });
+    this.setHasError();
 
     this.props.dispatch({
       type: 'logError',
@@ -28,6 +34,10 @@ export class ErrorHandler extends React.Component {
         uid: this.props.uid,
       },
     });
+  }
+
+  setHasError() {
+    this.setState({ hasError: true });
   }
 
   render() {

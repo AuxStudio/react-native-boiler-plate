@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a MenuButton 1`] = `
+exports[`MenuButton renders with all props 1`] = `
 <View
   accessible={true}
   isTVSelectable={true}
@@ -43,7 +43,7 @@ exports[`renders a MenuButton 1`] = `
 </View>
 `;
 
-exports[`renders a MenuButton with minimum required props 1`] = `
+exports[`MenuButton renders with minimum required props 1`] = `
 <View
   accessible={true}
   isTVSelectable={true}

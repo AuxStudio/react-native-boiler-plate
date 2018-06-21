@@ -4,32 +4,116 @@ import { View } from 'react-native';
 
 import { SystemMessageHandler } from '../';
 
-it('renders a SystemMessageHandler with all props', () => {
-  expect(
-    renderer.create(
+jest.mock('react-native-snackbar', () => {
+  return {
+    show: jest.fn(),
+    hide: jest.fn(),
+  };
+});
+
+describe('SystemMessageHandler', () => {
+  let spy;
+  const dispatch = jest.fn();
+
+  it('renders with all props', () => {
+    expect(
+      renderer.create(
+        <SystemMessageHandler
+          dispatch={jest.fn()}
+          systemMessage={{
+            message: 'Something went wrong',
+            code: 'AUTH',
+            error: true,
+          }}
+          uid="xxxx-xxxx-xxxx-xxxx"
+        >
+          <View />
+        </SystemMessageHandler>,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('renders with minimum required props', () => {
+    expect(
+      renderer.create(
+        <SystemMessageHandler dispatch={jest.fn()}>
+          <View />
+        </SystemMessageHandler>,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('shows the snackbar if systemMessage changed in componentDidUpdate', () => {
+    const component = renderer.create(
       <SystemMessageHandler
-        dispatch={jest.fn()}
+        dispatch={dispatch}
         systemMessage={{
           message: 'Something went wrong',
           code: 'AUTH',
           error: true,
         }}
-        uid="xxxx-xxxx-xxxx-xxxx"
       >
         <View />
       </SystemMessageHandler>,
-    ),
-  ).toMatchSnapshot();
-});
+    );
+    const instance = component.getInstance();
+    spy = jest.spyOn(instance, 'showSnackbar');
 
-// TODO: Integration: when new system message, logErrorToDatabase and showSnackbar should be called
-
-it('renders a SystemMessageHandler with minimum required props', () => {
-  expect(
-    renderer.create(
-      <SystemMessageHandler dispatch={jest.fn()}>
+    component.update(
+      <SystemMessageHandler
+        dispatch={dispatch}
+        systemMessage={{
+          message: 'Same same, but different',
+          code: 'AUTH',
+          error: true,
+        }}
+      >
         <View />
       </SystemMessageHandler>,
-    ),
-  ).toMatchSnapshot();
+    );
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('shows the snackbar if systemMessage changed in componentDidUpdate and calls resetError after timeout', (done) => {
+    const component = renderer.create(
+      <SystemMessageHandler dispatch={dispatch}>
+        <View />
+      </SystemMessageHandler>,
+    );
+    const instance = component.getInstance();
+    spy = jest.spyOn(instance, 'showSnackbar');
+
+    component.update(
+      <SystemMessageHandler
+        dispatch={dispatch}
+        systemMessage={{
+          message: 'Something went wrong',
+          code: 'AUTH',
+          error: true,
+        }}
+      >
+        <View />
+      </SystemMessageHandler>,
+    );
+
+    expect(spy).toHaveBeenCalled();
+
+    spy.mockReset();
+
+    spy = jest.spyOn(instance, 'resetError');
+
+    setTimeout(() => {
+      expect(spy).toHaveBeenCalled();
+      expect(dispatch).toMatchSnapshot();
+
+      done();
+    }, instance.snackbarDuration);
+  });
+
+  afterEach(() => {
+    if (spy) {
+      spy.mockReset();
+    }
+  });
 });

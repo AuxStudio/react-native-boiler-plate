@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`renders a ErrorHandler with all props 1`] = `<View />`;
-
-exports[`renders a ErrorHandler with minimum required props 1`] = `<View />`;

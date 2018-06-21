@@ -8,6 +8,19 @@ import styles from './styles';
 import MenuButton from './MenuButton';
 
 export default class MenuComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.setMenuRef = this.setMenuRef.bind(this);
+    this.showMenu = this.showMenu.bind(this);
+    this.selectOption = this.selectOption.bind(this);
+    this.hideMenu = this.hideMenu.bind(this);
+
+    this.menu = null;
+
+    this.state = {};
+  }
+
   static propTypes = {
     options: PropTypes.arrayOf(
       PropTypes.shape({
@@ -23,28 +36,24 @@ export default class MenuComponent extends React.Component {
 
   static defaultProps = {};
 
-  state = {};
-
-  setMenuRef = (ref) => {
+  setMenuRef(ref) {
     this.menu = ref;
-  };
+  }
 
-  menu = null;
-
-  showMenu = () => {
+  showMenu() {
     this.menu.show();
-  };
+  }
 
-  selectOption = (option) => {
+  selectOption(option) {
     if (this.props.handlePress) {
       this.props.handlePress(option);
     }
     this.hideMenu();
-  };
+  }
 
-  hideMenu = () => {
+  hideMenu() {
     this.menu.hide();
-  };
+  }
 
   render() {
     return (

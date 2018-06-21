@@ -1,5 +1,259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a NetworkHandler 1`] = `null`;
+exports[`NetworkHandler renders with all props 1`] = `null`;
 
-exports[`renders a NetworkHandler with minimum required props 1`] = `null`;
+exports[`NetworkHandler renders with minimum required props 1`] = `null`;
+
+exports[`NetworkHandler updates the store with connection info and goes offline when 2g connection 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "TOGGLE_REALTIME_DATABASE_MODE",
+          },
+        },
+        "type": "goOnline",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "type": "none",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "TOGGLE_REALTIME_DATABASE_MODE",
+          },
+        },
+        "type": "goOffline",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "2g",
+            "type": "cellular",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`NetworkHandler updates the store with connection info and goes offline when no connection 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "TOGGLE_REALTIME_DATABASE_MODE",
+          },
+        },
+        "type": "goOnline",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "type": "none",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "TOGGLE_REALTIME_DATABASE_MODE",
+          },
+        },
+        "type": "goOffline",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`NetworkHandler updates the store with connection info and goes online when WIFI connection 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "TOGGLE_REALTIME_DATABASE_MODE",
+          },
+        },
+        "type": "goOnline",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`NetworkHandler updates the store with connection info when WIFI connection 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "network": Object {
+            "effectiveType": "4g",
+            "type": "wifi",
+          },
+        },
+        "type": "SET_NETWORK_CONNECTION_INFO",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;

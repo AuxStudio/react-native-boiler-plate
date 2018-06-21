@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Modal 1`] = `
+exports[`Modal renders with all props 1`] = `
 <View>
   <Modal
     animationType="none"
@@ -82,7 +82,7 @@ exports[`renders a Modal 1`] = `
 </View>
 `;
 
-exports[`renders a Modal with minimum required props 1`] = `
+exports[`Modal renders with minimum required props 1`] = `
 <View>
   <Modal
     animationType="none"

@@ -89,6 +89,38 @@ this.props.dispatch({
 })
 ```
 
+## Typical class structure
+
+We follow the typical order set out in eslint react/sort-comp except that the constructor should be placed at the top of the class. This serves as self-documentation.
+
+```js
+export default class ExampleClass extends React.Component {
+	constructor(props) {
+		// custom method bindings
+
+		// values available to the class, e.g. this.ref
+
+		this.state = {}
+	}
+
+	static get propTypes() {
+		...
+	}
+
+	static defaultProps = {
+		...
+	}
+
+	// life cycle methods
+
+	// custom methods
+
+	render() {
+		...
+	}
+}
+```
+
 ## Terminology
 
 Some common terminology that we use.

@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
 export class SystemMessageHandler extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.showSnackbar = this.showSnackbar.bind(this);
+    this.resetError = this.resetError.bind(this);
+
+    this.snackbarDuration = 2750;
+  }
+
   static propTypes = {
     dispatch: PropTypes.func,
     children: PropTypes.node.isRequired,
@@ -19,30 +28,29 @@ export class SystemMessageHandler extends React.Component {
   componentDidUpdate(prevProps) {
     if (
       this.props.systemMessage.message &&
-      this.props.systemMessage.message !== prevProps.systemMessage.message
+      (!prevProps.systemMessage ||
+        this.props.systemMessage.message !== prevProps.systemMessage.message)
     ) {
       this.showSnackbar();
     }
   }
 
-  SNACKBAR_DURATION = 2750;
-
-  showSnackbar = () => {
+  showSnackbar() {
     Snackbar.show({
       title: this.props.systemMessage.message,
-      duration: this.SNACKBAR_DURATION,
+      duration: this.snackbarDuration,
     });
 
     setTimeout(() => {
       this.resetError();
-    }, this.SNACKBAR_DURATION); // Snackbar.LENGTH_LONG does not work here so we need to manually add the duration
-  };
+    }, this.snackbarDuration); // Snackbar.LENGTH_LONG does not work here so we need to manually add the duration
+  }
 
-  resetError = () => {
+  resetError() {
     this.props.dispatch({
       type: 'RESET_SYSTEM_MESSAGE',
     });
-  };
+  }
 
   render() {
     return this.props.children;

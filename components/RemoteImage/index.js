@@ -8,6 +8,18 @@ import styles from './styles';
 import styleConstants from '../../styleConstants';
 
 export default class RemoteImage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.setError = this.setError.bind(this);
+    this.setLoading = this.setLoading.bind(this);
+
+    this.state = {
+      isLoading: true,
+      hasError: false,
+    };
+  }
+
   static propTypes = {
     source: PropTypes.shape({
       uri: PropTypes.string,
@@ -22,24 +34,19 @@ export default class RemoteImage extends React.Component {
     loaderColor: styleConstants.colors.primaryText,
   };
 
-  state = {
-    isLoading: true,
-    hasError: false,
-  };
-
-  setError = () => {
+  setError() {
     this.setState({
       hasError: true,
     });
 
     this.setLoading(false);
-  };
+  }
 
-  setLoading = (isLoading) => {
+  setLoading(isLoading) {
     this.setState({
       isLoading,
     });
-  };
+  }
 
   render() {
     const borderRadiusStyles = this.props.borderRadius && { borderRadius: this.props.borderRadius };
@@ -48,7 +55,7 @@ export default class RemoteImage extends React.Component {
     if (this.state.hasError) {
       backgroundComponent = (
         <View style={[styles.backgroundContainer, borderRadiusStyles]}>
-          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} testID="icon" />
+          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} />
         </View>
       );
     } else if (this.state.isLoading) {

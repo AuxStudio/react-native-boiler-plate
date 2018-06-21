@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -14,13 +13,30 @@ const OPTIONS = [
   },
 ];
 
-/*
- TODO
+describe('Menu', () => {
+  let spy;
 
-  Find a way to test showMenu, selectOption and hideMenu
-*/
-it('renders a Menu', () => {
-  expect(
+  it('renders with all props', () => {
+    expect(
+      renderer.create(
+        <Menu
+          options={OPTIONS}
+          handlePress={jest.fn()}
+          itemTextStyle={{ color: 'red' }}
+          itemContainerStyle={{ backgroundColor: 'blue' }}
+          containerStyle={{ backgroundColor: 'green' }}
+        />,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('renders a Menu with minimum required props', () => {
+    expect(renderer.create(<Menu options={OPTIONS} handlePress={jest.fn()} />)).toMatchSnapshot();
+  });
+
+  it('calls setMenuRef on componentDidMount', () => {
+    spy = jest.spyOn(Menu.prototype, 'setMenuRef');
+
     renderer.create(
       <Menu
         options={OPTIONS}
@@ -29,27 +45,7 @@ it('renders a Menu', () => {
         itemContainerStyle={{ backgroundColor: 'blue' }}
         containerStyle={{ backgroundColor: 'green' }}
       />,
-    ),
-  ).toMatchSnapshot();
+    );
+    expect(spy).toHaveBeenCalled();
+  });
 });
-
-it('renders a Menu with minimum required props', () => {
-  expect(renderer.create(<Menu options={OPTIONS} handlePress={jest.fn()} />)).toMatchSnapshot();
-});
-
-it('renders a Menu and sets the menu ref', () => {
-  const component = renderer.create(
-    <Menu
-      options={OPTIONS}
-      handlePress={jest.fn()}
-      itemTextStyle={{ color: 'red' }}
-      itemContainerStyle={{ backgroundColor: 'blue' }}
-      containerStyle={{ backgroundColor: 'green' }}
-    />,
-  );
-  const instance = component.getInstance();
-
-  instance.setMenuRef('test');
-  expect(instance.menu).toBe('test');
-});
-/* eslint-enable */
