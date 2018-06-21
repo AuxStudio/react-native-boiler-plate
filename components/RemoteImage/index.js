@@ -55,7 +55,7 @@ export default class RemoteImage extends React.Component {
     if (this.state.hasError) {
       backgroundComponent = (
         <View style={[styles.backgroundContainer, borderRadiusStyles]}>
-          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} testID="icon" />
+          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} />
         </View>
       );
     } else if (this.state.isLoading) {
