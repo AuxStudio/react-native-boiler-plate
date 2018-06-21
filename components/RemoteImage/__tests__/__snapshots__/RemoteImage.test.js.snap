@@ -191,7 +191,6 @@ exports[`RemoteImage renders with error 1`] = `
           },
         ]
       }
-      testID="icon"
     >
       
     </Text>
