@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a InputContainer 1`] = `
+exports[`InputContainer renders with all props 1`] = `
 <View
   style={
     Array [
@@ -53,7 +53,7 @@ exports[`renders a InputContainer 1`] = `
 </View>
 `;
 
-exports[`renders a InputContainer with minimum required props 1`] = `
+exports[`InputContainer renders with minimum required props 1`] = `
 <View
   style={
     Array [
