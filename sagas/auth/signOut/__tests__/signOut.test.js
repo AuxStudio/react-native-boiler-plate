@@ -27,7 +27,6 @@ describe('When testing the saga without a nextAction and without a response from
     expect(JSON.stringify(result)).toEqual(JSON.stringify(call(auth.signOut)));
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_OUT_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_OUT_USER' }));
   });
@@ -46,7 +45,6 @@ describe('When testing the saga without a nextAction and with a response from th
     return response;
   });
 
-  // Insert test for default nextAction (if any)
   it('and then trigger the SIGN_OUT_USER action', (result) => {
     expect(result).toEqual(put({ type: 'SIGN_OUT_USER' }));
   });

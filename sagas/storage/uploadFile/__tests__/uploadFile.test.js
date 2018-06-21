@@ -33,8 +33,6 @@ describe('When testing the saga without a nextAction and without a response from
     );
   });
 
-  // Insert test for default nextAction (if any)
-
   it('and then nothing', (result) => {
     expect(result).toBeUndefined();
   });
@@ -50,8 +48,6 @@ describe('When testing the saga without a nextAction and with a response from th
 
     return response;
   });
-
-  // Insert test for default nextAction (if any)
 
   it('and then nothing', (result) => {
     expect(result).toBeUndefined();
