@@ -888,6 +888,6 @@ In XCode, enable the following capabilities:
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
 
-## 21 Setup Detox for E2E testing
+## 21. Setup Detox for E2E testing
 
 Follow the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
