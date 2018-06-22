@@ -25,9 +25,8 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 
 ## In the pipeline
 
-- Integration testing
-- E2E testing (Detox)
 - CodePush
+- Firestore
 
 ## Docs
 
