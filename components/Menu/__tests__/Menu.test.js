@@ -48,4 +48,10 @@ describe('Menu', () => {
     );
     expect(spy).toHaveBeenCalled();
   });
+
+  afterEach(() => {
+    if (spy) {
+      spy.mockReset();
+    }
+  });
 });
