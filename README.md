@@ -33,7 +33,7 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 
 - [Style guide](./docs/STYLE_GUIDE.md)
 - [Setup guide](./docs/SETUP_GUIDE.md)
-- [VSCode snippets](./snippets.json) for sagas, stylesheet, component index, dumb, functional and container components (makes life _waaay_ easier)
+- [VSCode snippets](./snippets.json) for sagas, stylesheet, component index, dumb, functional and container components, tests and various others (makes life _waaay_ easier)
 - [Testing](./docs/TESTING.md)
 - [Process](./docs/PROCESS.md)
 - [Tools](./docs/TOOLS.md)
