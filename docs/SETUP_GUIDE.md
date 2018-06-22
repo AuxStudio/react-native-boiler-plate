@@ -840,8 +840,9 @@ fastlane init
     "android-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-android",
     "ios-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev && react-native run-ios",
     "ios-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-ios",
-    "beta":
-      "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha && cd ../ios && fastlane beta && cd .."
+    "beta": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha && cd ../ios && fastlane beta",
+    "beta-android": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha",
+    "beta-ios": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd ios && fastlane beta"
 ```
 
 4.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
