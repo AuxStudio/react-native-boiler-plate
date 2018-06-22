@@ -801,10 +801,10 @@ fastlane init
 5.  Add the following to `./android/fastlane/Fastfile`:
 
 ```
-  desc "Deploy a new version to the Beta track"
-  lane :beta do
+  desc "Deploy a new version to the Alpha track"
+  lane :alpha do
     gradle(task: "clean assembleRelease")
-    upload_to_play_store(track: 'beta')
+    upload_to_play_store(track: 'alpha')
   end
 ```
 
