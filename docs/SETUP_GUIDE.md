@@ -887,3 +887,22 @@ In XCode, enable the following capabilities:
 - Background modes ➜ Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
+
+## 21. Setup Detox for E2E testing
+
+1.  Follow the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
+2.  You will need to remove the mocha.opts file from `./e2e` and instead add `config.json` with the contents:
+
+```json
+
+```
+
+3.  In `./e2e/init.js`, there are bugs. Change the `before` and `after` to `beforeEach` and `afterEach`.
+4.  Test the setup with:
+
+```shell
+detox build
+detox test
+```
+
+Your first test will fail.

@@ -73,3 +73,7 @@ Don't be alarmed when looking at these tests, there are distinct patterns.
 #### Note
 
 You will notice that we JSON.stringify the results in our expect functions. JSON.stringify is necessary here otherwise our mock function and real function comparison fail and we really don't care if they're not the same, we're just testing that the correct calls and puts happen.
+
+## E2E testing
+
+We use [Detox](https://github.com/wix/detox/) for end to end testing.

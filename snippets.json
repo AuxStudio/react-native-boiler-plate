@@ -372,5 +372,9 @@
   "Blank string literal": {
     "prefix": "str",
     "body": ["`${$1}`"]
+  },
+  "Blank ref": {
+    "prefix": "ref",
+    "body": ["ref={(c) => {", "  this.$1 = c;", "}}"]
   }
 }
