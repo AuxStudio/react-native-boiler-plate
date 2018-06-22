@@ -847,6 +847,12 @@ fastlane init
 
 4.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
 
+5.  Set permissions on env script:
+
+```shell
+chmod +x envscript.sh
+```
+
 Done! Use the scripts to develop or release the beta builds, e.g:
 
 ```shell
