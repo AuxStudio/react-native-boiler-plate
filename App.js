@@ -2,6 +2,7 @@ import React from 'react';
 import { Router } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import codepush from 'react-native-code-push';
 
 import { store, persistor } from './store';
 import navigator from './navigation';
@@ -16,7 +17,7 @@ import LocationHandler from './handlers/LocationHandler';
 // Connect router to store
 const ConnectedRouter = connect()(Router);
 
-export default function App() {
+export function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -33,3 +34,5 @@ export default function App() {
     </Provider>
   );
 }
+
+export default codepush(App);
