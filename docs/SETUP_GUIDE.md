@@ -31,7 +31,7 @@ Package name: The signature used by the app and play stores, e.g. co.za.auxstudi
 (ONCE-OFF).
 
 ```shell
-npm install -g react-native-rename
+yarn global add react-native-rename
 ```
 
 1.  Update the display and package name (android only):
@@ -758,7 +758,7 @@ getstorybook
 (ONCE-OFF).
 
 ```shell
-npm install -g firebase-tools
+yarn global add firebase-tools
 ```
 
 ```shell
