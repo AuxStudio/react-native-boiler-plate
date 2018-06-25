@@ -943,6 +943,20 @@ yarn add react-native-code-push
 react-native link
 ```
 
+4.  Add multi-dex support for Android:
+
+At this point, you'll run into a build error without doing this step. In `./android/app/build.gradle`, android.defaultConfig, add:
+
+```java
+multiDexEnabled true
+```
+
+Same file as above, in dependencies, add:
+
+```java
+implementation 'com.android.support:multidex:1.0.3'
+```
+
 Done! Release updates with:
 
 ```shell
