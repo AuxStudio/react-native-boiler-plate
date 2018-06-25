@@ -22,10 +22,10 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 - Redux store [persistence](https://github.com/rt2zz/redux-persist)
 - Automated beta app distribution thanks to [fastlane](https://github.com/fastlane/fastlane)
 - A collection of useful docs (seen below)
+- Code-Push
 
 ## In the pipeline
 
-- CodePush
 - Firestore
 
 ## Docs
