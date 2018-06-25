@@ -917,3 +917,37 @@ Your first test will fail.
 ## 22. Add Slack config
 
 We log errors to Slack. If you'd like this functionality, you'll need to update the Slack config object in `./src/config/slack/index.js`.
+
+## 23. Setup Code-Push
+
+1.  Install the Code-Push cli and add apps:
+
+```shell
+yarn global add code-push-cli
+code-push login
+code-push app add PROJECT_NAMEAndroid android react-native
+code-push app add PROJECT_NAMEIOS ios react-native
+```
+
+2.  Get your `production` deployment keys for step 3:
+
+```shell
+code-push deployment ls PROJECT_NAME-android -k
+code-push deployment ls PROJECT_NAME-ios -k
+```
+
+3.  Link to react-native:
+
+```shell
+yarn add react-native-code-push
+react-native link
+```
+
+Done! Release updates with:
+
+```shell
+code-push release-react PROJECT_NAME-android android --deploymentName "Production"
+code-push release-react PROJECT_NAME-ios ios --deploymentName "Production"
+```
+
+`TODO: add this to scripts in package.json once we've worked out a good flow.`
