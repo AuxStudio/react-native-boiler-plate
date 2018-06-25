@@ -694,7 +694,7 @@ AppRegistry.registerComponent('PROJECT_NAME', () => App);
 3.  Delete and move files. FIXME: script
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo mv ./src/envscript.sh ./envscript.sh
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock
 ```
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
