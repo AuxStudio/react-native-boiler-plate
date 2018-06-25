@@ -913,3 +913,7 @@ detox test
 ```
 
 Your first test will fail.
+
+## 22. Add Slack config
+
+We log errors to Slack. If you'd like this functionality, you'll need to update the Slack config object in `./src/config/slack/index.js`.

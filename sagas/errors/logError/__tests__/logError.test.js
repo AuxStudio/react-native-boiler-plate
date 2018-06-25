@@ -32,25 +32,13 @@ describe('When testing the saga without a nextAction and without a response from
           },
         }),
         put({
-          type: 'post',
-          payload: {
-            url: config.slack.webhook,
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-            parameters: {
-              channel: config.slack.channel,
-              username: config.slack.username,
-              icon_emoji: config.slack.icon_emoji,
-              text: JSON.stringify(data),
-            },
-          },
-        }),
-        put({
           type: 'SET_SYSTEM_MESSAGE',
           payload: {
             ...action.payload.error,
           },
           error: true,
         }),
+        // NOTE: no slack action should be called since there is no slack config
       ]),
     );
   });
@@ -71,19 +59,6 @@ describe('When testing the saga when an error is thrown from the api', () => {
           type: 'pushData',
           payload: {
             data,
-          },
-        }),
-        put({
-          type: 'post',
-          payload: {
-            url: config.slack.webhook,
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-            parameters: {
-              channel: config.slack.channel,
-              username: config.slack.username,
-              icon_emoji: config.slack.icon_emoji,
-              text: JSON.stringify(data),
-            },
           },
         }),
         put({

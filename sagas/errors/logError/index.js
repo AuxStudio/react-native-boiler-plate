@@ -7,8 +7,8 @@ export default function* logError(action) {
   /*
       This should
         - Log the error to the db
-        - Post it to Slack
         - SET_SYSTEM_MESSAGE
+        - Post it to Slack if Slack config has been set up
   */
 
   try {
@@ -18,24 +18,11 @@ export default function* logError(action) {
       date: action.payload.date,
     };
 
-    yield all([
+    const actions = [
       put({
         type: 'pushData',
         payload: {
           data,
-        },
-      }),
-      put({
-        type: 'post',
-        payload: {
-          url: config.slack.webhook,
-          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-          parameters: {
-            channel: config.slack.channel,
-            username: config.slack.username,
-            icon_emoji: config.slack.icon_emoji,
-            text: JSON.stringify(data),
-          },
         },
       }),
       put({
@@ -45,7 +32,26 @@ export default function* logError(action) {
         },
         error: true,
       }),
-    ]);
+    ];
+    const slackAction = put({
+      type: 'post',
+      payload: {
+        url: config.slack.webhook,
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        parameters: {
+          channel: config.slack.channel,
+          username: config.slack.username,
+          icon_emoji: config.slack.icon_emoji,
+          text: JSON.stringify(data),
+        },
+      },
+    });
+
+    if (config.slack.webhook) {
+      actions.push(slackAction);
+    }
+
+    yield all(actions);
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
