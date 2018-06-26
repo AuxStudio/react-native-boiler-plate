@@ -6,7 +6,7 @@ import utils from '../../../utils';
 export default function* enableNetwork(action) {
   try {
     const response = yield call(firestore.enableNetwork);
-    const nextAction = utils.prepareNextAction(action, response);
+    const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -14,7 +14,7 @@ export default function* enableNetwork(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.createError(error),
+      payload: utils.app.createError(error),
       error: true,
     });
   }
