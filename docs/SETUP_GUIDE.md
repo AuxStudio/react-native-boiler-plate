@@ -584,6 +584,7 @@ apply plugin: 'com.google.gms.google-services'
     implementation "com.google.firebase:firebase-database:15.0.0"
     implementation "com.google.firebase:firebase-storage:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
+    implementation "com.google.firebase:firebase-firestore:16.0.0"
 ```
 
 6.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
@@ -609,6 +610,7 @@ import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 ```
 
 Same file as above, in getPackages(), add:
@@ -619,7 +621,8 @@ Same file as above, in getPackages(), add:
     new RNFirebaseAuthPackage(),
     new RNFirebaseDatabasePackage(),
     new RNFirebaseStoragePackage(),
-    new RNFirebaseMessagingPackage()
+    new RNFirebaseMessagingPackage(),
+    new RNFirebaseFirestorePackage()
 ```
 
 #### iOS
