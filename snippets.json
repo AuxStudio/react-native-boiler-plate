@@ -161,21 +161,22 @@
     "prefix": "saga",
     "body": [
       "import { call, put } from 'redux-saga/effects';",
+      "$4",
       "import { $1 } from '../../../services';",
       "import utils from '../../../utils';",
-      "$3",
+      "$4",
       "export default function* $2(action) {",
       "  try {",
-      "    const response = yield call($1.$2, action);",
+      "    const response = yield call($1.$2, $3);",
       "    const nextAction = utils.prepareNextAction(action, response);",
-      "$3",
+      "$4",
       "  if (nextAction) {",
       "      yield put(",
       "        nextAction",
       "      );",
       "    }",
       "  } catch (error) {",
-      "$3",
+      "$4",
       "    yield put({",
       "      type: 'SET_SYSTEM_MESSAGE',",
       "      payload: utils.createError(error),",
@@ -183,7 +184,7 @@
       "    });",
       "  }",
       "}",
-      "$3"
+      "$4"
     ]
   },
   "Blank stylesheet": {
