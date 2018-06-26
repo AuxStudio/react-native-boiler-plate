@@ -664,6 +664,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
+pod 'Firebase/Firestore'
 ```
 
 7.  Install the pods:
