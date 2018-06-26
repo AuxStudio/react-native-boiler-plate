@@ -161,8 +161,8 @@
     "prefix": "saga",
     "body": [
       "import { call, put } from 'redux-saga/effects';",
-      "import { $1 } from '../../services';",
-      "import utils from '../../utils';",
+      "import { $1 } from '../../../services';",
+      "import utils from '../../../utils';",
       "$3",
       "export default function* $2(action) {",
       "  try {",
