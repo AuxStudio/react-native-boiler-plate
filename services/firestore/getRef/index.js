@@ -7,18 +7,24 @@ import utils from '../../../utils';
 // and returns a firestore ref
 export default function getRef(pathParts) {
   return new Promise((resolve, reject) => {
-    let ref = firebase.firestore();
-    let isCollection = true; // always starts with a collection
+    if (pathParts) {
+      let ref = firebase.firestore();
+      let isCollection = true; // always starts with a collection
 
-    try {
-      pathParts.forEach((pathPart) => {
-        ref = isCollection ? ref.collection(pathPart) : ref.doc(pathPart);
-        isCollection = !isCollection;
-      });
+      try {
+        pathParts.forEach((pathPart) => {
+          ref = isCollection ? ref.collection(pathPart) : ref.doc(pathPart);
+          isCollection = !isCollection;
+        });
 
-      resolve(ref);
-    } catch (error) {
-      reject(utils.app.createError(error));
+        resolve(ref);
+      } catch (error) {
+        reject(utils.app.createError(error));
+      }
+    } else {
+      reject(
+        utils.app.createError('Please provide an array of alternating collections and documents'),
+      );
     }
   });
 }
