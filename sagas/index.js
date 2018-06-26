@@ -16,6 +16,17 @@ import {
 
 import { getData, updateData, setData, pushData, goOffline, goOnline } from './database';
 
+import {
+  addDocument,
+  deleteDocument,
+  disableNetwork,
+  enableNetwork,
+  getCollection,
+  getDocument,
+  setDocument,
+  updateDocument,
+} from './firestore';
+
 import { get, post } from './http';
 
 import { resizeImage, showImagePicker } from './images';
@@ -48,6 +59,15 @@ export default function* sagas() {
     fork(takeEvery, 'pushData', pushData),
     fork(takeEvery, 'goOffline', goOffline),
     fork(takeEvery, 'goOnline', goOnline),
+
+    fork(takeEvery, 'addDocument', addDocument),
+    fork(takeEvery, 'deleteDocument', deleteDocument),
+    fork(takeEvery, 'disableNetwork', disableNetwork),
+    fork(takeEvery, 'enableNetwork', enableNetwork),
+    fork(takeEvery, 'getCollection', getCollection),
+    fork(takeEvery, 'getDocument', getDocument),
+    fork(takeEvery, 'setDocument', setDocument),
+    fork(takeEvery, 'updateDocument', updateDocument),
 
     fork(takeLatest, 'get', get),
     fork(takeLatest, 'post', post),
