@@ -1,7 +1,7 @@
 import utils from '../../../utils';
 import getRef from '../getRef';
 
-export default function syncDocument(pathParts, callback) {
+export default function sync(pathParts, callback) {
   return new Promise((resolve, reject) => {
     getRef(pathParts)
       .then((ref) => {
