@@ -14,6 +14,7 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 - Multiple Firebase environments (development, production etc.)
 - Auth (all of it besides phone authentication)
 - Realtime database
+- Firestore
 - Cloud storage
 - Network and system message management
 - Image [handling](https://github.com/react-community/react-native-image-picker), [caching](https://github.com/DylanVann/react-native-fast-image) and [resizing](https://github.com/bamlab/react-native-image-resizer)
@@ -26,7 +27,7 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 
 ## In the pipeline
 
-- Firestore
+- We have all the bells and whistles we need for now
 
 ## Docs
 
