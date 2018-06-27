@@ -2,17 +2,14 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import deleteDocument from '../';
+import disableNetwork from '../';
 
 const firestore = {
-  deleteDocument: jest.fn(),
+  disableNetwork: jest.fn(),
 };
 
 const action = {
-  type: 'deleteDocument',
-  meta: {
-    pathParts: ['collection', 'document'],
-  },
+  type: 'disableNetwork',
 };
 
 const nextAction = {
@@ -24,12 +21,10 @@ const actionWithNextAction = { ...action, meta: { ...action.meta, nextAction } }
 const response = { foo: 'bar' };
 
 describe('When testing the saga without a nextAction and without a response from the api', () => {
-  const it = sagaHelper(deleteDocument(action));
+  const it = sagaHelper(disableNetwork(action));
 
   it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.deleteDocument, action.meta.pathParts)),
-    );
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(call(firestore.disableNetwork)));
   });
 
   it('and then nothing', (result) => {
@@ -38,12 +33,10 @@ describe('When testing the saga without a nextAction and without a response from
 });
 
 describe('When testing the saga without a nextAction and with a response from the api', () => {
-  const it = sagaHelper(deleteDocument(action));
+  const it = sagaHelper(disableNetwork(action));
 
   it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.deleteDocument, action.meta.pathParts)),
-    );
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(call(firestore.disableNetwork)));
 
     return response;
   });
@@ -54,12 +47,10 @@ describe('When testing the saga without a nextAction and with a response from th
 });
 
 describe('When testing the saga with a nextAction and without a response from the api', () => {
-  const it = sagaHelper(deleteDocument(actionWithNextAction));
+  const it = sagaHelper(disableNetwork(actionWithNextAction));
 
   it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.deleteDocument, action.meta.pathParts)),
-    );
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(call(firestore.disableNetwork)));
   });
 
   it('and then trigger an action', (result) => {
@@ -72,12 +63,10 @@ describe('When testing the saga with a nextAction and without a response from th
 });
 
 describe('When testing the saga with a nextAction and with a response from the api', () => {
-  const it = sagaHelper(deleteDocument(actionWithNextAction));
+  const it = sagaHelper(disableNetwork(actionWithNextAction));
 
   it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.deleteDocument, action.meta.pathParts)),
-    );
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(call(firestore.disableNetwork)));
 
     return response;
   });
@@ -92,13 +81,11 @@ describe('When testing the saga with a nextAction and with a response from the a
 });
 
 describe('When testing the saga when an error is thrown from the api', () => {
-  const it = sagaHelper(deleteDocument(action));
+  const it = sagaHelper(disableNetwork(action));
   const errorMessage = 'Something went wrong';
 
   it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.deleteDocument, action.meta.pathParts)),
-    );
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(call(firestore.disableNetwork)));
 
     return new Error(errorMessage);
   });
