@@ -1,10 +1,37 @@
 import cloneObject from '../';
 
-const object = {
+const emptyObject = {};
+
+const shallowObject = {
   foo: 'bar',
   bar: 'foo',
 };
 
-it('should return a copy of an object', () => {
-  expect(cloneObject(object)).toEqual(object);
+const deeplyNestedObject = {
+  foo: 'bar',
+  bar: {
+    foo: 'bar',
+    bar: {
+      foo: 'bar',
+      bar: {
+        foo: 'bar',
+        bar: {
+          foo: 'bar',
+          bar: 'foo',
+        },
+      },
+    },
+  },
+};
+
+it('should return a copy of an empty object', () => {
+  expect(cloneObject(emptyObject)).toEqual(emptyObject);
+});
+
+it('should return a copy of a shallow object', () => {
+  expect(cloneObject(shallowObject)).toEqual(shallowObject);
+});
+
+it('should return a copy of deeply nested object', () => {
+  expect(cloneObject(deeplyNestedObject)).toEqual(deeplyNestedObject);
 });
