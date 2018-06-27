@@ -9,16 +9,18 @@ const data = {
   array: ['foo', 'bar'],
 };
 
-it('should return the descriptor and data being logged as strings', () => {
-  expect(log('test', data)).toEqual({
-    descriptor: 'test',
-    data: JSON.stringify(data),
+describe('log', () => {
+  it('should return the descriptor and data being logged as strings', () => {
+    expect(log('test', data)).toEqual({
+      descriptor: 'test',
+      data: JSON.stringify(data),
+    });
   });
-});
 
-it('should return the descriptor and no data if no data is being logged', () => {
-  expect(log('test', null)).toEqual({
-    descriptor: 'test',
-    data: JSON.stringify(null),
+  it('should return the descriptor and no data if no data is being logged', () => {
+    expect(log('test', null)).toEqual({
+      descriptor: 'test',
+      data: JSON.stringify(null),
+    });
   });
 });
