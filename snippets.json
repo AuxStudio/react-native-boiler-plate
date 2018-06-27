@@ -276,7 +276,7 @@
       "  type: 'SUCCESS',",
       "};",
       "${4}",
-      "const actionWithNextAction = { ...action, meta: { nextAction } };",
+      "const actionWithNextAction = { ...action, meta: { ...action.meta, nextAction } };",
       "${4}",
       "const response = { foo: 'bar' };",
       "${4}",
