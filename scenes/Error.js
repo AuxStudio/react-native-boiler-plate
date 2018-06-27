@@ -6,6 +6,12 @@ import { Page, InfoBlock } from 'react-native-simple-components';
 import styleConstants from '../styleConstants';
 
 export class Error extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   static propTypes = {
     message: PropTypes.string,
   };
@@ -13,8 +19,6 @@ export class Error extends React.Component {
   static defaultProps = {
     message: 'Something went wrong.',
   };
-
-  state = {};
 
   render() {
     const { message } = this.props;

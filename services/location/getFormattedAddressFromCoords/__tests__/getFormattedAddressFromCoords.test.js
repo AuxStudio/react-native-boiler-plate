@@ -10,35 +10,37 @@ jest.mock('react-native-geocoder', () => {
   };
 });
 
-it('resolves a promise if lat and lng are supplied', async () => {
-  const lat = 32;
-  const lng = 28;
-
-  expect.assertions(1);
-  const response = await getFormattedAddressFromCoords(lat, lng);
-  expect(response).toEqual({ data: { address: 'Some place' } });
-});
-
-it('rejects with error if lat is not supplied', async () => {
-  try {
-    const lat = null;
+describe('getFormattedAddressFromCoords', () => {
+  it('resolves a promise if lat and lng are supplied', async () => {
+    const lat = 32;
     const lng = 28;
 
     expect.assertions(1);
-    await getFormattedAddressFromCoords(lat, lng);
-  } catch (error) {
-    expect(error).toEqual(new Error('Latitude is required'));
-  }
-});
+    const response = await getFormattedAddressFromCoords(lat, lng);
+    expect(response).toEqual({ data: { address: 'Some place' } });
+  });
 
-it('rejects with error if lng is not supplied', async () => {
-  try {
-    const lat = 32;
-    const lng = null;
+  it('rejects with error if lat is not supplied', async () => {
+    try {
+      const lat = null;
+      const lng = 28;
 
-    expect.assertions(1);
-    await getFormattedAddressFromCoords(lat, lng);
-  } catch (error) {
-    expect(error).toEqual(new Error('Longitude is required'));
-  }
+      expect.assertions(1);
+      await getFormattedAddressFromCoords(lat, lng);
+    } catch (error) {
+      expect(error).toEqual(new Error('Latitude is required'));
+    }
+  });
+
+  it('rejects with error if lng is not supplied', async () => {
+    try {
+      const lat = 32;
+      const lng = null;
+
+      expect.assertions(1);
+      await getFormattedAddressFromCoords(lat, lng);
+    } catch (error) {
+      expect(error).toEqual(new Error('Longitude is required'));
+    }
+  });
 });

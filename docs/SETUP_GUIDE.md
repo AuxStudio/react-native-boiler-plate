@@ -146,7 +146,7 @@ compile "com.android.support:appcompat-v7:25.0.0"
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.0.6 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
 ```
 
 ## 10. Link dependencies
@@ -584,6 +584,7 @@ apply plugin: 'com.google.gms.google-services'
     implementation "com.google.firebase:firebase-database:15.0.0"
     implementation "com.google.firebase:firebase-storage:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
+    implementation "com.google.firebase:firebase-firestore:16.0.0"
 ```
 
 6.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
@@ -609,6 +610,7 @@ import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 ```
 
 Same file as above, in getPackages(), add:
@@ -619,7 +621,8 @@ Same file as above, in getPackages(), add:
     new RNFirebaseAuthPackage(),
     new RNFirebaseDatabasePackage(),
     new RNFirebaseStoragePackage(),
-    new RNFirebaseMessagingPackage()
+    new RNFirebaseMessagingPackage(),
+    new RNFirebaseFirestorePackage()
 ```
 
 #### iOS
@@ -657,15 +660,14 @@ platform :ios, '9.0'
 
 6.  Same file as above, add these pods:
 
-`NOTE: react-native-firebase is not yet compatible with the new firebase release (V5), so we force it to 4.13.0 for now. See this [issue](https://github.com/invertase/react-native-firebase/issues/1062).`
-
 ```
-pod 'Firebase/Core', '~> 4.13.0'
+pod 'Firebase/Core',
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
+pod 'Firebase/Firestore'
 ```
 
 7.  Install the pods:

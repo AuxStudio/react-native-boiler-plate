@@ -10,8 +10,10 @@ jest.mock('react-native-firebase', () => {
   };
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await logEvent();
-  expect(response).toBeUndefined();
+describe('logEvent', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await logEvent();
+    expect(response).toBeUndefined();
+  });
 });

@@ -1,9 +1,7 @@
 import { takeLatest, takeEvery, fork, all } from 'redux-saga/effects';
 
-// Analytics
 import { logEvent } from './analytics';
 
-// Auth
 import {
   getAuth,
   signInAnonymously,
@@ -16,33 +14,36 @@ import {
   signOut,
 } from './auth';
 
-// Database
 import { getData, updateData, setData, pushData, goOffline, goOnline } from './database';
 
-// HTTP
+import {
+  addDocument,
+  deleteDocument,
+  disableNetwork,
+  enableNetwork,
+  getCollection,
+  getDocument,
+  setDocument,
+  sync,
+  updateDocument,
+} from './firestore';
+
 import { get, post } from './http';
 
-// Images
 import { resizeImage, showImagePicker } from './images';
 
-// Location
 import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 
-// Permissions
 import { checkPermission, requestPermission, checkAndRequestPermission } from './permissions';
 
-// Storage
 import { uploadFile } from './storage';
 
-// Errors
 import { logError } from './errors';
 
 export default function* sagas() {
   yield all([
-    // Analytics
     fork(takeLatest, 'logEvent', logEvent),
 
-    // Auth
     fork(takeLatest, 'getAuth', getAuth),
     fork(takeLatest, 'signInAnonymously', signInAnonymously),
     fork(takeLatest, 'getCredentialFromEmail', getCredentialFromEmail),
@@ -53,7 +54,6 @@ export default function* sagas() {
     fork(takeLatest, 'signInWithCredential', signInWithCredential),
     fork(takeLatest, 'signOut', signOut),
 
-    // Database
     fork(takeEvery, 'getData', getData),
     fork(takeEvery, 'updateData', updateData),
     fork(takeEvery, 'setData', setData),
@@ -61,27 +61,31 @@ export default function* sagas() {
     fork(takeEvery, 'goOffline', goOffline),
     fork(takeEvery, 'goOnline', goOnline),
 
-    // HTTP
+    fork(takeEvery, 'addDocument', addDocument),
+    fork(takeEvery, 'deleteDocument', deleteDocument),
+    fork(takeEvery, 'disableNetwork', disableNetwork),
+    fork(takeEvery, 'enableNetwork', enableNetwork),
+    fork(takeEvery, 'getCollection', getCollection),
+    fork(takeEvery, 'getDocument', getDocument),
+    fork(takeEvery, 'setDocument', setDocument),
+    fork(takeEvery, 'sync', sync),
+    fork(takeEvery, 'updateDocument', updateDocument),
+
     fork(takeLatest, 'get', get),
     fork(takeLatest, 'post', post),
 
-    // Images
     fork(takeLatest, 'resizeImage', resizeImage),
     fork(takeLatest, 'showImagePicker', showImagePicker),
 
-    // Location
     fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
     fork(takeLatest, 'getFormattedAddressFromCoords', getFormattedAddressFromCoords),
 
-    // Permissions
     fork(takeLatest, 'checkPermission', checkPermission),
     fork(takeLatest, 'requestPermission', requestPermission),
     fork(takeLatest, 'checkAndRequestPermission', checkAndRequestPermission),
 
-    // Storage
     fork(takeLatest, 'uploadFile', uploadFile),
 
-    // Errors
     fork(takeLatest, 'logError', logError),
   ]);
 }

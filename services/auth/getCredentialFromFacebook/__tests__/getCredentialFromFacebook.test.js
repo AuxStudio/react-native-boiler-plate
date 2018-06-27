@@ -32,10 +32,12 @@ jest.mock('../getFacebookCredential', () => {
   });
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await getCredentialFromFacebook();
-  expect(response).toEqual({
-    credential: { accessToken: '123123' },
+describe('getCredentialFromFacebook', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await getCredentialFromFacebook();
+    expect(response).toEqual({
+      credential: { accessToken: '123123' },
+    });
   });
 });

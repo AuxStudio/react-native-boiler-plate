@@ -12,8 +12,10 @@ jest.mock('react-native-fbsdk', () => {
   };
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await logOutFromFacebook();
-  expect(response).toBeUndefined();
+describe('logOutFromFacebook', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await logOutFromFacebook();
+    expect(response).toBeUndefined();
+  });
 });

@@ -5,11 +5,15 @@ import { Page } from 'react-native-simple-components';
 import { Text } from 'react-native';
 
 export class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   static propTypes = {};
 
   static defaultProps = {};
-
-  state = {};
 
   render() {
     return (
