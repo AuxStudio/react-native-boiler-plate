@@ -2,16 +2,16 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import getCollection from '../';
+import getDocument from '../';
 
 const firestore = {
-  getCollection: jest.fn(),
+  getDocument: jest.fn(),
 };
 
 const action = {
-  type: 'getCollection',
+  type: 'getDocument',
   meta: {
-    pathParts: ['collection', 'document', 'collection'],
+    pathParts: ['collection', 'document'],
   },
 };
 
@@ -24,11 +24,11 @@ const actionWithNextAction = { ...action, meta: { ...action.meta, nextAction } }
 const response = { foo: 'bar' };
 
 describe('When testing the saga without a nextAction and without a response from the api', () => {
-  const it = sagaHelper(getCollection(action));
+  const it = sagaHelper(getDocument(action));
 
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+      JSON.stringify(call(firestore.getDocument, action.meta.pathParts)),
     );
   });
 
@@ -38,11 +38,11 @@ describe('When testing the saga without a nextAction and without a response from
 });
 
 describe('When testing the saga without a nextAction and with a response from the api', () => {
-  const it = sagaHelper(getCollection(action));
+  const it = sagaHelper(getDocument(action));
 
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+      JSON.stringify(call(firestore.getDocument, action.meta.pathParts)),
     );
 
     return response;
@@ -54,11 +54,11 @@ describe('When testing the saga without a nextAction and with a response from th
 });
 
 describe('When testing the saga with a nextAction and without a response from the api', () => {
-  const it = sagaHelper(getCollection(actionWithNextAction));
+  const it = sagaHelper(getDocument(actionWithNextAction));
 
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+      JSON.stringify(call(firestore.getDocument, action.meta.pathParts)),
     );
   });
 
@@ -72,11 +72,11 @@ describe('When testing the saga with a nextAction and without a response from th
 });
 
 describe('When testing the saga with a nextAction and with a response from the api', () => {
-  const it = sagaHelper(getCollection(actionWithNextAction));
+  const it = sagaHelper(getDocument(actionWithNextAction));
 
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+      JSON.stringify(call(firestore.getDocument, action.meta.pathParts)),
     );
 
     return response;
@@ -92,12 +92,12 @@ describe('When testing the saga with a nextAction and with a response from the a
 });
 
 describe('When testing the saga when an error is thrown from the api', () => {
-  const it = sagaHelper(getCollection(action));
+  const it = sagaHelper(getDocument(action));
   const errorMessage = 'Something went wrong';
 
   it('should have called the mocked API first', (result) => {
     expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+      JSON.stringify(call(firestore.getDocument, action.meta.pathParts)),
     );
 
     return new Error(errorMessage);
