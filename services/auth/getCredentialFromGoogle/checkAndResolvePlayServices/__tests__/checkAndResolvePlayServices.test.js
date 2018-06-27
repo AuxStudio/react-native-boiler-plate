@@ -12,8 +12,10 @@ jest.mock('react-native-google-signin', () => {
   };
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await checkAndResolvePlayServices();
-  expect(response).toBeUndefined();
+describe('checkAndResolvePlayServices', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await checkAndResolvePlayServices();
+    expect(response).toBeUndefined();
+  });
 });

@@ -10,8 +10,10 @@ jest.mock('react-native-firebase', () => {
   };
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await getAuth();
-  expect(response).toEqual({ user: { name: 'Shaun' } });
+describe('getAuth', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await getAuth();
+    expect(response).toEqual({ user: { name: 'Shaun' } });
+  });
 });

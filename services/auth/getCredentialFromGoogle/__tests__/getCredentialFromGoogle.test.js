@@ -32,10 +32,12 @@ jest.mock('../getGoogleCredential', () => {
   });
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await getCredentialFromGoogle();
-  expect(response).toEqual({
-    credential: { idToken: '123123', accessToken: '123123' },
+describe('getCredentialFromGoogle', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await getCredentialFromGoogle();
+    expect(response).toEqual({
+      credential: { idToken: '123123', accessToken: '123123' },
+    });
   });
 });

@@ -14,8 +14,10 @@ jest.mock('react-native-google-signin', () => {
   };
 });
 
-it('resolves a promise', async () => {
-  expect.assertions(1);
-  const response = await signInToGoogle();
-  expect(response).toEqual({ name: 'Shaun' });
+describe('signInToGoogle', () => {
+  it('resolves a promise', async () => {
+    expect.assertions(1);
+    const response = await signInToGoogle();
+    expect(response).toEqual({ name: 'Shaun' });
+  });
 });
