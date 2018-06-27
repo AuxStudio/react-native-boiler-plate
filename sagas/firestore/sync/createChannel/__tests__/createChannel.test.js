@@ -10,12 +10,14 @@ jest.mock('../../../../../services/', () => {
   };
 });
 
-it('should work', () => {
-  expect(JSON.stringify(createChannel())).toEqual(
-    JSON.stringify(
-      eventChannel(() => {
-        return () => {}; // unsubscribe function is required
-      }),
-    ),
-  );
+describe('createChannel', () => {
+  it('should work', () => {
+    expect(JSON.stringify(createChannel())).toEqual(
+      JSON.stringify(
+        eventChannel(() => {
+          return () => {}; // unsubscribe function is required
+        }),
+      ),
+    );
+  });
 });

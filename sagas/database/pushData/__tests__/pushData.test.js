@@ -26,99 +26,101 @@ const actionWithNextAction = { ...action, meta: { nextAction } };
 
 const response = { foo: 'bar' };
 
-describe('When testing the saga without a nextAction and without a response from the api', () => {
-  const it = sagaHelper(pushData(action));
+describe('pushData saga', () => {
+  describe('When testing the saga without a nextAction and without a response from the api', () => {
+    const it = sagaHelper(pushData(action));
 
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
+    it('should have called the mocked API first', (result) => {
+      expect(JSON.stringify(result)).toEqual(
+        JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+      );
+    });
+
+    it('and then nothing', (result) => {
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
+  describe('When testing the saga without a nextAction and with a response from the api', () => {
+    const it = sagaHelper(pushData(action));
 
-describe('When testing the saga without a nextAction and with a response from the api', () => {
-  const it = sagaHelper(pushData(action));
+    it('should have called the mocked API first', (result) => {
+      expect(JSON.stringify(result)).toEqual(
+        JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+      );
 
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
+      return response;
+    });
 
-    return response;
-  });
-
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
-
-describe('When testing the saga with a nextAction and without a response from the api', () => {
-  const it = sagaHelper(pushData(actionWithNextAction));
-
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
+    it('and then nothing', (result) => {
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('and then trigger an action', (result) => {
-    expect(result).toEqual(put({ ...nextAction, payload: {} }));
+  describe('When testing the saga with a nextAction and without a response from the api', () => {
+    const it = sagaHelper(pushData(actionWithNextAction));
+
+    it('should have called the mocked API first', (result) => {
+      expect(JSON.stringify(result)).toEqual(
+        JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+      );
+    });
+
+    it('and then trigger an action', (result) => {
+      expect(result).toEqual(put({ ...nextAction, payload: {} }));
+    });
+
+    it('and then nothing', (result) => {
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
+  describe('When testing the saga with a nextAction and with a response from the api', () => {
+    const it = sagaHelper(pushData(actionWithNextAction));
 
-describe('When testing the saga with a nextAction and with a response from the api', () => {
-  const it = sagaHelper(pushData(actionWithNextAction));
+    it('should have called the mocked API first', (result) => {
+      expect(JSON.stringify(result)).toEqual(
+        JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+      );
 
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
+      return response;
+    });
 
-    return response;
-  });
+    it('and then trigger an action', (result) => {
+      expect(result).toEqual(put({ ...nextAction, payload: response }));
+    });
 
-  it('and then trigger an action', (result) => {
-    expect(result).toEqual(put({ ...nextAction, payload: response }));
-  });
-
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
-  });
-});
-
-describe('When testing the saga when an error is thrown from the api', () => {
-  const it = sagaHelper(pushData(action));
-  const errorMessage = 'Something went wrong';
-
-  it('should have called the mocked API first', (result) => {
-    expect(JSON.stringify(result)).toEqual(
-      JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
-    );
-
-    return new Error(errorMessage);
+    it('and then nothing', (result) => {
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('and then trigger an error action with the error message', (result) => {
-    expect(result).toEqual(
-      put({
-        type: 'logError',
-        payload: {
-          error: utils.app.createError(errorMessage),
-          date: expect.any(Date),
-        },
-      }),
-    );
-  });
+  describe('When testing the saga when an error is thrown from the api', () => {
+    const it = sagaHelper(pushData(action));
+    const errorMessage = 'Something went wrong';
 
-  it('and then nothing', (result) => {
-    expect(result).toBeUndefined();
+    it('should have called the mocked API first', (result) => {
+      expect(JSON.stringify(result)).toEqual(
+        JSON.stringify(call(database.pushData, action.payload.ref, action.payload.data)),
+      );
+
+      return new Error(errorMessage);
+    });
+
+    it('and then trigger an error action with the error message', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'logError',
+          payload: {
+            error: utils.app.createError(errorMessage),
+            date: expect.any(Date),
+          },
+        }),
+      );
+    });
+
+    it('and then nothing', (result) => {
+      expect(result).toBeUndefined();
+    });
   });
 });
