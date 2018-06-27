@@ -1,16 +1,7 @@
-import { eventChannel } from 'redux-saga';
 import { call, take, put } from 'redux-saga/effects';
 
-import { firestore } from '../../../services';
 import utils from '../../../utils';
-
-function createChannel(pathParts) {
-  return eventChannel((emit) => {
-    firestore.sync(pathParts, emit);
-    // The subscriber must return an unsubscribe function
-    return () => {};
-  });
-}
+import createChannel from './createChannel';
 
 export default function* sync(action) {
   const channel = yield call(createChannel, action.meta.pathParts);
