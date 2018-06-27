@@ -17,9 +17,11 @@ export default function* setDocument(action) {
     }
   } catch (error) {
     yield put({
-      type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.app.createError(error),
-      error: true,
+      type: 'logError',
+      payload: {
+        error: utils.app.createError(error),
+        date: new Date(),
+      },
     });
   }
 }
