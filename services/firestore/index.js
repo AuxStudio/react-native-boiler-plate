@@ -6,6 +6,7 @@ import getCollection from './getCollection';
 import getDocument from './getDocument';
 import getRef from './getRef';
 import setDocument from './setDocument';
+import sync from './sync';
 import updateDocument from './updateDocument';
 
 module.exports = {
@@ -17,5 +18,6 @@ module.exports = {
   getDocument,
   getRef,
   setDocument,
+  sync,
   updateDocument,
 };
