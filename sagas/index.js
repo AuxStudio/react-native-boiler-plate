@@ -24,6 +24,7 @@ import {
   getCollection,
   getDocument,
   setDocument,
+  sync,
   updateDocument,
 } from './firestore';
 
@@ -67,6 +68,7 @@ export default function* sagas() {
     fork(takeEvery, 'getCollection', getCollection),
     fork(takeEvery, 'getDocument', getDocument),
     fork(takeEvery, 'setDocument', setDocument),
+    fork(takeEvery, 'sync', sync),
     fork(takeEvery, 'updateDocument', updateDocument),
 
     fork(takeLatest, 'get', get),

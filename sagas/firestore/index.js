@@ -5,6 +5,7 @@ import enableNetwork from './enableNetwork';
 import getCollection from './getCollection';
 import getDocument from './getDocument';
 import setDocument from './setDocument';
+import sync from './sync';
 import updateDocument from './updateDocument';
 
 module.exports = {
@@ -15,5 +16,6 @@ module.exports = {
   getCollection,
   getDocument,
   setDocument,
+  sync,
   updateDocument,
 };
