@@ -180,7 +180,7 @@
       "    yield put({",
       "      type: 'logError',",
       "      payload: {",
-      "        error: utils.app.createError(error)",
+      "        error: utils.app.createError(error),",
       "        date: new Date()",
       "      }",
       "    });",
