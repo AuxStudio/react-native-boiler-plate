@@ -35,7 +35,8 @@
       1,
       { "order": ["constructor", "static-methods", "lifecycle", "everything-else", "render"] }
     ],
-    "react/jsx-one-expression-per-line": "off" // does not work well with prettier
+    "react/jsx-one-expression-per-line": "off", // does not work well with prettier
+    "react/forbid-foreign-prop-types": "off" // we will only use propTypes from React-native/Text
   },
   "plugins": ["react", "react-native"],
   "globals": {
