@@ -34,7 +34,8 @@
     "react/sort-comp": [
       1,
       { "order": ["constructor", "static-methods", "lifecycle", "everything-else", "render"] }
-    ]
+    ],
+    "react/jsx-one-expression-per-line": "off" // does not work well with prettier
   },
   "plugins": ["react", "react-native"],
   "globals": {
