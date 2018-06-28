@@ -23,6 +23,7 @@ export default function* logError(action) {
         type: 'pushData',
         payload: {
           data,
+          ref: 'errors',
         },
       }),
       put({
