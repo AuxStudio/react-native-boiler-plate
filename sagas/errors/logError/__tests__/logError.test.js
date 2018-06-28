@@ -30,6 +30,7 @@ describe('logError saga', () => {
             type: 'pushData',
             payload: {
               data,
+              ref: 'errors',
             },
           }),
           put({
@@ -60,6 +61,7 @@ describe('logError saga', () => {
             type: 'pushData',
             payload: {
               data,
+              ref: 'errors',
             },
           }),
           put({
