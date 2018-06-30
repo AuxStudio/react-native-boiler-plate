@@ -40,9 +40,9 @@ src
 			styles.js
 	config
 	handlers
-	scenes
-		Home.js
 	navigation
+	pages
+		Home.js
 	reducers
 		auth.js
 	sagas
