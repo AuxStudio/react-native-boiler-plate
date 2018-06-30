@@ -1,5 +1,14 @@
 # Testing
 
+## Table of contents
+
+1.  [Unit testing](#unit-testing)
+    1.  [Conventions](#conventions)
+    2.  [Testing sagas](#testing-sagas)
+        1.  [Patterns](#patterns)
+        2.  [Note](#note)
+2.  [E2E Testing](#e2e-testing)
+
 ## Unit testing
 
 We use [Jest](https://facebook.github.io/jest/) and [react-test-renderer](https://reactjs.org/docs/test-renderer.html) for unit testing.
