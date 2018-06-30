@@ -101,6 +101,7 @@ describe('getCredentialFromGoogle saga', () => {
           type: 'logError',
           payload: expect.objectContaining({
             error: utils.app.createError(errorMessage),
+            action,
           }),
         }),
       );

@@ -17,6 +17,7 @@ export default function* requestPermission(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

@@ -133,6 +133,7 @@ describe('checkAndRequestPermissions saga', () => {
               `We need your permission to access your ${action.payload.permission}`,
             ),
             date: expect.any(Date),
+            action,
           },
         }),
       );
@@ -171,6 +172,7 @@ describe('checkAndRequestPermissions saga', () => {
               `We need your permission to access your ${action.payload.permission}`,
             ),
             date: expect.any(Date),
+            action,
           },
         }),
       );
@@ -200,6 +202,7 @@ describe('checkAndRequestPermissions saga', () => {
           payload: {
             error: utils.app.createError(errorMessage),
             date: expect.any(Date),
+            action,
           },
         }),
       );
@@ -237,6 +240,7 @@ describe('checkAndRequestPermissions saga', () => {
           payload: {
             error: utils.app.createError(errorMessage),
             date: expect.any(Date),
+            action,
           },
         }),
       );

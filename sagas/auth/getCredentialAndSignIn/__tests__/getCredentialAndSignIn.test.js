@@ -114,6 +114,7 @@ describe('getCredentialAndSignIn saga', () => {
           payload: {
             error: utils.app.createError(errorMessage),
             date: expect.any(Date),
+            action,
           },
         }),
       );
@@ -148,6 +149,7 @@ describe('getCredentialAndSignIn saga', () => {
           type: 'logError',
           payload: expect.objectContaining({
             error: utils.app.createError(errorMessage),
+            action,
           }),
         }),
       );

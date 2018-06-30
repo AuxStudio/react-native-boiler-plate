@@ -35,6 +35,7 @@ export default function* checkAndRequestPermission(action) {
                 `We need your permission to access your ${action.payload.permission}`,
               ),
               date: new Date(),
+              action,
             },
           });
         }
@@ -44,6 +45,7 @@ export default function* checkAndRequestPermission(action) {
           payload: {
             error: utils.app.createError(error),
             date: new Date(),
+            action,
           },
         });
       }
@@ -58,6 +60,7 @@ export default function* checkAndRequestPermission(action) {
             `We need your permission to access your ${action.payload.permission}`,
           ),
           date: new Date(),
+          action,
         },
       });
     }
@@ -67,6 +70,7 @@ export default function* checkAndRequestPermission(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

@@ -16,6 +16,7 @@ export default function* logError(action) {
       ...action.payload.error,
       uid: action.payload.uid,
       date: action.payload.date,
+      action: action.payload.action,
     };
 
     const actions = [

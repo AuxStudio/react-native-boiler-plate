@@ -21,6 +21,7 @@ export default function* setDocument(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

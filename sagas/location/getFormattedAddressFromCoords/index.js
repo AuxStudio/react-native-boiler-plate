@@ -21,6 +21,7 @@ export default function* getFormattedAddressFromCoords(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

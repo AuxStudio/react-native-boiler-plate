@@ -26,6 +26,7 @@ export default function* getAuth(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

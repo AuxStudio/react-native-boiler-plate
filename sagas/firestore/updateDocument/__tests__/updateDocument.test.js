@@ -126,6 +126,7 @@ describe('updateDocument saga', () => {
           payload: {
             error: utils.app.createError(errorMessage),
             date: expect.any(Date),
+            action,
           },
         }),
       );

@@ -39,6 +39,7 @@ export default function* getCredentialAndSignIn(action) {
         payload: {
           error: utils.app.createError(error),
           date: new Date(),
+          action,
         },
       });
     }
@@ -48,6 +49,7 @@ export default function* getCredentialAndSignIn(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }
