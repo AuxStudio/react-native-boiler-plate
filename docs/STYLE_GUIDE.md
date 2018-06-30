@@ -1,5 +1,22 @@
 # Style guide
 
+## Table of contents
+
+1.  [Code linting](#code-linting)
+2.  [Directory structure](#directory-structure)
+3.  [Redux actions](#redux-actions)
+4.  [Typical class structure](#typical-class-structure)
+5.  [Terminology](#terminology)
+6.  [Tips](#tips)
+    1.  [Files](#files)
+    2.  [Components](#components)
+    3.  [Handlers](#handlers)
+    4.  [Services and sagas](#services-and-sagas)
+    5.  [Firebase](#firebase)
+    6.  [Lists](#lists)
+    7.  [Images](#images)
+    8.  [Performance](#performance)
+
 This guide extends:
 
 - [AirBNB Javascript style guide](https://github.com/airbnb/javascript)

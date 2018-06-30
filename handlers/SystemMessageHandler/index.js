@@ -26,18 +26,21 @@ export class SystemMessageHandler extends React.Component {
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
+    const { systemMessage } = this.props;
+
     if (
-      this.props.systemMessage.message &&
-      (!prevProps.systemMessage ||
-        this.props.systemMessage.message !== prevProps.systemMessage.message)
+      systemMessage.message &&
+      (!prevProps.systemMessage || systemMessage.message !== prevProps.systemMessage.message)
     ) {
       this.showSnackbar();
     }
   }
 
   showSnackbar() {
+    const { systemMessage } = this.props;
+
     Snackbar.show({
-      title: this.props.systemMessage.message,
+      title: systemMessage.message,
       duration: this.snackbarDuration,
     });
 
@@ -47,13 +50,17 @@ export class SystemMessageHandler extends React.Component {
   }
 
   resetError() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'RESET_SYSTEM_MESSAGE',
     });
   }
 
   render() {
-    return this.props.children;
+    const { children } = this.props;
+
+    return children;
   }
 }
 

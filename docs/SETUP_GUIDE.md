@@ -6,6 +6,42 @@ If anything is unclear or does not work, please let me know via [email](mailto:s
 
 If you'd like to test that you are setting the project up correctly, do a build on iOS and android after each major step.
 
+## Table of contents
+
+1.  [Intialise project](#1-initialise-project)
+2.  [Setup git](#2-setup-git)
+3.  [Update display and package name](#3-update-display-and-package-name)
+4.  [Add reference to Android SDK path](#4-add-reference-to-android-sdk-path)
+5.  [Make Android builds smaller](#5-make-android-builds-smaller)
+6.  [Generate android app signing](#6-generate-android-app-signing)
+7.  [Update android versioning](#7-update-android-versioning)
+8.  [Add app to consoles](#8-add-app-to-consoles)
+9.  [Install dependencies](#9-install-dependencies)
+10. [Link dependencies](#10-link-dependencies)
+    1.  [react-native-vector-icons](#react-native-vector-icons)
+    2.  [react-native-snackbar](#react-native-snackbar)
+    3.  [react-native-fast-image](#react-native-fast-image)
+    4.  [react-native-fbsdk](#react-native-fbsdk)
+    5.  [react-native-google-signin](#react-native-google-signin)
+    6.  [react-native-permissions](#react-native-permissions)
+    7.  [react-native-geocoder](#react-native-geocoder)
+    8.  [react-native-image-picker](#react-native-image-picker)
+    9.  [react-native-image-resizer](#react-native-image-resizer)
+    10. [react-native-firebase](#react-native-firebase)
+11. [Copy the src files](#11-copy-the-src-files)
+12. [Setup ESLint and Prettier](#12-setup-eslint-and-prettier)
+13. [Setup extra app icons](#13-setup-extra-app-icons)
+14. [Enable Firebase authentication methods](#14-enable-firebase-authentication-methods)
+15. [Add your custom fonts](#15-add-your-custom-fonts)
+16. [Add Storybook](#16-add-storybook)
+17. [Add firebase-cli](#17-add-firebase-cli)
+18. [Fastlane integration](#18-fastlane-integration)
+19. [Setup Firebase environments](#19-setup-firebase-environments)
+20. [Add Push Notifications](#20-add-push-notifications)
+21. [Setup Detox for E2E testing](#21-setup-detox-for-e2e-testing)
+22. [Add Slack config](#22-add-slack-config)
+23. [Setup Code-Push](#23-setup-code-push)
+
 ## 1. Initialise project
 
 ```shell
@@ -54,7 +90,9 @@ Create file `./android/local.properties` with the following contents:
 sdk.dir=PATH_TO_SDK
 ```
 
-## 5. Make Android builds ~33% smaller
+## 5. Make Android builds smaller
+
+Approximately 33% smaller.
 
 1.  In `./android/app/build.gradle`, replace as necessary:
 
@@ -696,7 +734,7 @@ AppRegistry.registerComponent('PROJECT_NAME', () => App);
 3.  Delete and move files. FIXME: script
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./CODE_OF_CONDUCT.md && sudo rm ./CONTRIBUTING.md && sudo rm LICENCE && sudo rm PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc
 ```
 
 4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.

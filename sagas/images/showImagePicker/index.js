@@ -17,6 +17,7 @@ export default function* showImagePicker(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

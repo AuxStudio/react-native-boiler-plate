@@ -20,7 +20,9 @@ export class LocationHandler extends React.Component {
   }
 
   getLocationPermission() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'checkAndRequestPermission',
       payload: {
         permission: 'location',

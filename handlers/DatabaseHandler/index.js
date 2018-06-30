@@ -21,22 +21,28 @@ export class DatabaseHandler extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.authenticated) {
+    const { authenticated } = this.props;
+
+    if (authenticated) {
       this.listenForData();
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.authenticated && !prevProps.authenticated) {
+    const { authenticated } = this.props;
+
+    if (authenticated && !prevProps.authenticated) {
       this.listenForData();
     }
   }
 
   listenForData() {
+    const { dispatch, uid } = this.props;
+
     database.listenForData(
       'app',
       (data) => {
-        this.props.dispatch({
+        dispatch({
           type: 'SET_APP_DATA',
           payload: {
             ref: 'app',
@@ -45,12 +51,12 @@ export class DatabaseHandler extends React.Component {
         });
       },
       (error) => {
-        this.props.dispatch({
+        dispatch({
           type: 'logError',
           payload: {
             error: utils.app.createError(error),
             date: new Date(),
-            uid: this.props.uid,
+            uid,
           },
         });
       },
@@ -59,7 +65,7 @@ export class DatabaseHandler extends React.Component {
     database.listenForData(
       'users',
       (data) => {
-        this.props.dispatch({
+        dispatch({
           type: 'SET_APP_DATA',
           payload: {
             ref: 'users',
@@ -68,12 +74,12 @@ export class DatabaseHandler extends React.Component {
         });
       },
       (error) => {
-        this.props.dispatch({
+        dispatch({
           type: 'logError',
           payload: {
             error: utils.app.createError(error),
             date: new Date(),
-            uid: this.props.uid,
+            uid: uid,
           },
         });
       },

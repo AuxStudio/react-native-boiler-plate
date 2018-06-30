@@ -24,14 +24,16 @@ export class ErrorHandler extends React.Component {
   static defaultProps = {};
 
   componentDidCatch(error) {
+    const { dispatch, uid } = this.props;
+
     // Catch errors in children
     this.setHasError();
 
-    this.props.dispatch({
+    dispatch({
       type: 'logError',
       payload: {
         error,
-        uid: this.props.uid,
+        uid,
       },
     });
   }
@@ -41,11 +43,14 @@ export class ErrorHandler extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return <Error />;
     }
 
-    return this.props.children;
+    return children;
   }
 }
 

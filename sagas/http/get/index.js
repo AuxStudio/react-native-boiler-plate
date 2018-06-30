@@ -16,6 +16,7 @@ export default function* get(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

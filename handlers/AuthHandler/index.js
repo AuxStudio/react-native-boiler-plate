@@ -20,7 +20,9 @@ export class AuthHandler extends React.Component {
   }
 
   getAuth() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'getAuth',
     });
   }

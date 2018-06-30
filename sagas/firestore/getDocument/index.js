@@ -17,6 +17,7 @@ export default function* getDocument(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }

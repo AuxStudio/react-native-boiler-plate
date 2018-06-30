@@ -35,9 +35,10 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 - [Setup guide](./docs/SETUP_GUIDE.md)
 - [VSCode snippets](./snippets.json) for sagas, stylesheet, component index, dumb, functional and container components, tests and various others (makes life _waaay_ easier)
 - [Testing](./docs/TESTING.md)
-- [Process](./docs/PROCESS.md)
 - [Tools](./docs/TOOLS.md)
 - [Troubleshooting](./docs/TROUBLESHOOTING.md)
-- [Licence](./docs/LICENCE)
+- [Licence](./LICENCE)
+- [Contributing](./CONTRIBUTING.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 Feel free to [get in touch](mailto:shaun@aux.co.za) if you have questions or suggestions :)

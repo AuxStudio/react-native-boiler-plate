@@ -22,6 +22,7 @@ export default function* post(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
+        action,
       },
     });
   }
