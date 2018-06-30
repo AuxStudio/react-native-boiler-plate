@@ -5,20 +5,24 @@
 1.  [Deployment](#deployment)
 2.  [Generating assets](#generating-assets)
 
+## Development
+
+```shell
+yarn run ios-dev
+```
+
+or
+
+```shell
+yarn run android-dev
+```
+
 ## Deployment
 
 To deploy to the stores, use:
 
 ```shell
-cd android
-fastlane beta
-```
-
-and
-
-```shell
-cd ios
-fastlane beta
+yarn run beta
 ```
 
 ## Generating assets
