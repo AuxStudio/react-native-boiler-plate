@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { ErrorHandler } from '../';
 
-jest.mock('../../../scenes/Error'); // Error scene that is displayed on error
+jest.mock('../../../pages/Error'); // Error scene that is displayed on error
 
 describe('ErrorHandler', () => {
   let spy;

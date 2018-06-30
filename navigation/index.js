@@ -1,7 +1,7 @@
 import React from 'react';
 import { Actions, Scene } from 'react-native-router-flux';
 
-import Home from '../scenes/Home';
+import Home from '../pages/Home';
 
 const navigator = Actions.create(
   <Scene key="root" hideNavBar>
