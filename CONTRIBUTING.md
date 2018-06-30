@@ -1,4 +1,4 @@
-# Process
+# Contributing
 
 We work with a feature-based pull request workflow. Whenever you have some work to do:
 
@@ -15,7 +15,7 @@ Do some work.
 git push
 ```
 
-When you're done, create a pull request on github using the following [template](https://embeddedartistry.com/blog/2017/8/4/a-github-pull-request-template-for-your-projects).
+When you're done, create a pull request on github using the following [template](./PULL_REQUEST_TEMPLATE).
 
 Once the PR has merged, the merger should delete the old feature branch:
 
