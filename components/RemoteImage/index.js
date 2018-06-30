@@ -49,19 +49,21 @@ export default class RemoteImage extends React.Component {
   }
 
   render() {
-    const borderRadiusStyles = this.props.borderRadius && { borderRadius: this.props.borderRadius };
+    const { hasError, isLoading } = this.state;
+    const { borderRadius, iconStyle, loaderColor, source, style } = this.props;
+    const borderRadiusStyles = borderRadius && { borderRadius };
     let backgroundComponent;
 
-    if (this.state.hasError) {
+    if (hasError) {
       backgroundComponent = (
         <View style={[styles.backgroundContainer, borderRadiusStyles]}>
-          <Icon name="error-outline" style={[styles.icon, this.props.iconStyle]} />
+          <Icon name="error-outline" style={[styles.icon, iconStyle]} />
         </View>
       );
-    } else if (this.state.isLoading) {
+    } else if (isLoading) {
       backgroundComponent = (
         <View style={[styles.backgroundContainer, borderRadiusStyles]}>
-          <ActivityIndicator size="large" color={this.props.loaderColor} />
+          <ActivityIndicator size="large" color={loaderColor} />
         </View>
       );
     }
@@ -69,8 +71,8 @@ export default class RemoteImage extends React.Component {
     return (
       <View style={styles.container}>
         <FastImage
-          source={this.props.source}
-          style={[styles.image, borderRadiusStyles, this.props.style]}
+          source={source}
+          style={[styles.image, borderRadiusStyles, style]}
           onLoadEnd={() => this.setLoading(false)}
           onError={this.setError}
         />

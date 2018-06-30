@@ -45,8 +45,10 @@ export default class MenuComponent extends React.Component {
   }
 
   selectOption(option) {
-    if (this.props.handlePress) {
-      this.props.handlePress(option);
+    const { handlePress } = this.props;
+
+    if (handlePress) {
+      handlePress(option);
     }
     this.hideMenu();
   }
@@ -56,21 +58,23 @@ export default class MenuComponent extends React.Component {
   }
 
   render() {
+    const { containerStyle, options, itemTextStyle, itemContainerStyle } = this.props;
+
     return (
       <Menu
         ref={this.setMenuRef}
         button={<MenuButton handlePress={this.showMenu} />}
-        style={[styles.container, this.props.containerStyle]}
+        style={[styles.container, containerStyle]}
       >
-        {this.props.options &&
-          this.props.options.map((option) => {
+        {options &&
+          options.map((option) => {
             return (
               <MenuItem
                 key={option.text}
                 onPress={() => this.selectOption(option.text)}
                 disabled={option.disabled}
-                textStyle={[styles.itemText, this.props.itemTextStyle]}
-                style={[styles.itemContaier, this.props.itemContainerStyle]}
+                textStyle={[styles.itemText, itemTextStyle]}
+                style={[styles.itemContaier, itemContainerStyle]}
               >
                 {option.text}
               </MenuItem>

@@ -38,7 +38,9 @@ export class NetworkHandler extends React.Component {
   }
 
   handleConnectionChange(connectionInfo) {
-    this.props.dispatch({
+    const { dispatch, realtimeDatabaseMode } = this.props;
+
+    dispatch({
       type: 'SET_NETWORK_CONNECTION_INFO',
       payload: {
         network: connectionInfo,
@@ -46,13 +48,13 @@ export class NetworkHandler extends React.Component {
     });
 
     if (
-      this.props.realtimeDatabaseMode &&
+      realtimeDatabaseMode &&
       (connectionInfo.type === 'none' ||
         (connectionInfo.type === 'cellular' && connectionInfo.effectiveType === '2g'))
     ) {
       this.goOffline();
     } else if (
-      !this.props.realtimeDatabaseMode &&
+      !realtimeDatabaseMode &&
       (connectionInfo.type !== 'none' && connectionInfo.effectiveType !== '2g')
     ) {
       this.goOnline();
@@ -60,7 +62,9 @@ export class NetworkHandler extends React.Component {
   }
 
   goOffline() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'goOffline',
       meta: {
         nextAction: {
@@ -71,7 +75,9 @@ export class NetworkHandler extends React.Component {
   }
 
   goOnline() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'goOnline',
       meta: {
         nextAction: {
