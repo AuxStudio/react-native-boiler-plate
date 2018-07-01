@@ -10,37 +10,39 @@ If you'd like to test that you are setting the project up correctly, do a build 
 
 1.  [Intialise project](#1-initialise-project)
 2.  [Setup git](#2-setup-git)
-3.  [Update display and package name](#3-update-display-and-package-name)
-4.  [Add reference to Android SDK path](#4-add-reference-to-android-sdk-path)
+3.  [Add reference to Android SDK path](#3-add-reference-to-android-sdk-path)
+4.  [Update display and package name](#4-update-display-and-package-name)
 5.  [Make Android builds smaller](#5-make-android-builds-smaller)
 6.  [Generate android app signing](#6-generate-android-app-signing)
 7.  [Update android versioning](#7-update-android-versioning)
-8.  [Add app to consoles](#8-add-app-to-consoles)
+8.  [Add Firebase apps](#8-add-firebase-apps)
 9.  [Install dependencies](#9-install-dependencies)
 10. [Link dependencies](#10-link-dependencies)
+
     1.  [react-native-vector-icons](#react-native-vector-icons)
     2.  [react-native-snackbar](#react-native-snackbar)
     3.  [react-native-fast-image](#react-native-fast-image)
-    4.  [react-native-fbsdk](#react-native-fbsdk)
-    5.  [react-native-google-signin](#react-native-google-signin)
-    6.  [react-native-permissions](#react-native-permissions)
-    7.  [react-native-geocoder](#react-native-geocoder)
-    8.  [react-native-image-picker](#react-native-image-picker)
-    9.  [react-native-image-resizer](#react-native-image-resizer)
-    10. [react-native-firebase](#react-native-firebase)
+    4.  [react-native-firebase](#react-native-firebase)
+    5.  [react-native-fbsdk](#react-native-fbsdk)
+    6.  [react-native-google-signin](#react-native-google-signin)
+    7.  [react-native-permissions](#react-native-permissions)
+    8.  [react-native-geocoder](#react-native-geocoder)
+    9.  [react-native-image-picker](#react-native-image-picker)
+    10. [react-native-image-resizer](#react-native-image-resizer)
+
 11. [Copy the src files](#11-copy-the-src-files)
 12. [Setup ESLint and Prettier](#12-setup-eslint-and-prettier)
 13. [Setup extra app icons](#13-setup-extra-app-icons)
 14. [Enable Firebase authentication methods](#14-enable-firebase-authentication-methods)
 15. [Add your custom fonts](#15-add-your-custom-fonts)
 16. [Add Storybook](#16-add-storybook)
-17. [Add firebase-cli](#17-add-firebase-cli)
-18. [Fastlane integration](#18-fastlane-integration)
-19. [Setup Firebase environments](#19-setup-firebase-environments)
-20. [Add Push Notifications](#20-add-push-notifications)
-21. [Setup Detox for E2E testing](#21-setup-detox-for-e2e-testing)
-22. [Add Slack config](#22-add-slack-config)
-23. [Setup Code-Push](#23-setup-code-push)
+17. [Fastlane integration](#18-fastlane-integration)
+18. [Setup Firebase apps](#19-setup-firebase-apps)
+19. [Add Push Notifications](#20-add-push-notifications)
+20. [Setup Detox for E2E testing](#21-setup-detox-for-e2e-testing)
+21. [Add Slack config](#22-add-slack-config)
+22. [Setup Code-Push](#23-setup-code-push)
+    TODO. [Add app to consoles](#8-add-app-to-consoles)
 
 ## 1. Initialise project
 
@@ -49,6 +51,10 @@ react-native init PROJECT_NAME
 ```
 
 ## 2. Setup git
+
+1.  Add repository to GitHub/Bitbucket.
+
+2.  Initialise git in project:
 
 ```shell
 cd PROJECT_NAME
@@ -59,7 +65,15 @@ git commit -m "Initialise Project"
 git push -u origin master
 ```
 
-## 3. Update display and package name
+## 3. Add reference to Android SDK path
+
+Create file `./android/local.properties` with the following contents:
+
+```
+sdk.dir=PATH_TO_SDK
+```
+
+## 4. Update display and package name
 
 Display name: The name of the app as it appears on the device screen, e.g. TapOff.
 Package name: The signature used by the app and play stores, e.g. co.za.auxstudio.tapoff.
@@ -80,15 +94,13 @@ react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 
 2.  Update the package name in XCode (iOS only):
 
-In Xcode, `Project` ➜ `General` ➜ `Bundle Identifier` ➜ `NEW_PACKAGE_NAME`.
+NOTE: Follow this step to a tee, don't modify Info.plist's bundle identifier, you will run into build issues.
 
-## 4. Add reference to Android SDK path
+In Xcode, `Project` => `General` => `Identity` => `Bundle Identifier` => `NEW_PACKAGE_NAME`.
 
-Create file `./android/local.properties` with the following contents:
+3.  Setup iOS app signing (since you have XCode open):
 
-```
-sdk.dir=PATH_TO_SDK
-```
+In Xcode, `Project` => `General` => `Signing` => Select team.
 
 ## 5. Make Android builds smaller
 
@@ -108,7 +120,7 @@ ndk {
 }
 ```
 
-## 6. Generate android app signing
+## 6. Add android app signing
 
 1.  Generate keystore:
 
@@ -150,6 +162,10 @@ signingConfigs {
 signingConfig signingConfigs.release
 ```
 
+7.  If you want to commit the keystore to git:
+
+In `./gitignore`, remove `*.keystore`.
+
 ## 7. Update android versioning
 
 1.  In `./android/app/build.gradle`, update in android:
@@ -159,7 +175,7 @@ compileSdkVersion 27
 buildToolsVersion "27.0.2"
 ```
 
-2.  Same file as above, update in android.defaultConfig `TODO: is this the correct targetSdkVersion?`:
+2.  Same file as above, update in android.defaultConfig:
 
 ```java
 targetSdkVersion 26
@@ -171,20 +187,25 @@ targetSdkVersion 26
 compile "com.android.support:appcompat-v7:25.0.0"
 ```
 
-## 8. Add app to consoles
+## 8. Add Firebase apps
 
-`TODO: Move/finish this. Do we need something that builds before this step? What is the bare minimum build we need?`
+1.  Add two projects to the [Firebase console](https://console.firebase.google.com/).
 
-- [Google Play console](https://play.google.com/apps/publish)
-- [Apple Developer portal](https://developer.apple.com/account/)
-- [iTunes Connect](https://itunesconnect.apple.com/)
+The projects should be called PROJECT_NAME-development and PROJECT_NAME-production. In [Step 18](#18-) we will configure these environments.
+
+2.  Add android and iOS apps to the `development` project.
+
+3.  Copy the `development` project config files:
+
+    1.  Copy `google-services.json` to `./android/app`.
+    2.  Copy `GoogleService-Info.plist` to `./ios/PROJECT_NAME`.
 
 ## 9. Install dependencies
 
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0 redux-logger
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0 redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu react-native-material-textfield react-native-modal
 ```
 
 ## 10. Link dependencies
@@ -198,7 +219,7 @@ In `./android/app/build.gradle` (at bottom of file add):
 ```gradle
 // react-native-vector-icons
 project.ext.vectoricons = [
-iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
+    iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
 ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 ```
@@ -312,8 +333,8 @@ MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, d
 10. In `./android/app/build.gradle` replace (to dependencies):
 
 ```java
-compile project(':react-native-fbsdk')
-compile 'com.facebook.android:facebook-login:[4,5)'
+implementation project(':react-native-fbsdk')
+implementation 'com.facebook.android:facebook-login:[4,5)'
 ```
 
 11. In `./android/app/src/main/res/values/strings.xml` add (completed as part of step 6 in Facebook app setup):
@@ -445,17 +466,15 @@ Add permissions to `./android/app/src/main/AndroidManifest.xml` (remove what you
 
 #### iOS
 
-1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
+1.  In the XCode's "Project navigator", right click on Libraries folder under your project => `Add Files to <...>`
 
-2.  Go to `node_modules` ➜ `react-native-permissions` ➜ `ios` ➜ select `ReactNativePermissions.xcodeproj`
+2.  Go to `node_modules` => `react-native-permissions` => `ios` => select `ReactNativePermissions.xcodeproj`
 
 3.  Add `libReactNativePermissions.a` to `Build Phases -> Link Binary With Libraries`
 
 4.  Add necessary permissions to `./ios/PROJECT_NAME/Info.plist` (remove what you don't need):
 
 ```
-<key>NSCameraUsageDescription</key>
-<string></string>
 <key>NSLocationWhenInUseUsageDescription</key>
 <string></string>
 <key>NSPhotoLibraryUsageDescription</key>
@@ -465,122 +484,6 @@ Add permissions to `./android/app/src/main/AndroidManifest.xml` (remove what you
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string></string>
 ```
-
-### react-native-geocoder
-
-#### Android
-
-1.  In `android/setting.gradle`
-
-```gradle
-...
-include ':react-native-geocoder', ':app'
-project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
-```
-
-3.  In `android/app/build.gradle`
-
-```gradle
-...
-dependencies {
-    ...
-    implementation project(':react-native-geocoder')
-}
-```
-
-4.  Register module (in MainApplication.java)
-
-```java
-import com.devfd.RNGeocoder.RNGeocoderPackage; // <--- import
-
-public class MainActivity extends ReactActivity {
-  ......
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new RNGeocoderPackage()); // <------ add this
-  }
-
-  ......
-
-}
-```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
-
-2.  Go to `node_modules` ➜ `react-native-geocoder` ➜ `ios` ➜ select `RNGeocoder.xcodeproj`
-
-3.  Add `libRNGeocoder.a` to `Build Phases -> Link Binary With Libraries`
-
-### react-native-image-picker
-
-#### Android
-
-1.  Add the following lines to `android/settings.gradle`:
-
-    ```gradle
-    include ':react-native-image-picker'
-    project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
-    ```
-
-2.  Add the implementation line to the dependencies in `android/app/build.gradle`:
-
-    ```gradle
-    dependencies {
-        implementation project(':react-native-image-picker')
-    }
-    ```
-
-3.  Add the required permissions in `AndroidManifest.xml` (this was done when linking react-native-permissions):
-
-    ```xml
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    ```
-
-4.  Add the import and link the package in `MainApplication.java`:
-
-    ```java
-    import com.imagepicker.ImagePickerPackage; // <-- add this import
-
-    public class MainApplication extends Application implements ReactApplication {
-        @Override
-        protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new ImagePickerPackage() // <-- add this
-            );
-        }
-    }
-    ```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
-
-2.  Go to `node_modules` ➜ `react-native-image-picker` ➜ `ios` ➜ select `RNImagePicker.xcodeproj`
-
-3.  Add `RNImagePicker.a` to `Build Phases -> Link Binary With Libraries`
-
-### react-native-image-resizer
-
-#### Android
-
-```shell
-react-native link react-native-image-resizer
-```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
-
-2.  Go to `node_modules` ➜ `react-native-image-resizer` ➜ `ios` ➜ select `RNImageResizer.xcodeproj`
-
-3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
 ### react-native-firebase
 
@@ -599,7 +502,7 @@ classpath 'com.android.tools.build:gradle:3.1.0'
 classpath 'com.google.gms:google-services:3.2.1'
 ```
 
-3.  Same file as above, add to buildscript.repositories and allprojects.repositoriess:
+3.  Same file as above, add to buildscript.repositories `AND` allprojects.repositoriess:
 
 ```java
 google()
@@ -623,9 +526,18 @@ apply plugin: 'com.google.gms.google-services'
     implementation "com.google.firebase:firebase-storage:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
     implementation "com.google.firebase:firebase-firestore:16.0.0"
+    implementation 'com.android.support:multidex:1.0.3' // needed for multidex
 ```
 
-6.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
+6.  Enable multi dex:
+
+Same file as above, in android.defaultConfig:
+
+```java
+multiDexEnabled true
+```
+
+7.  Same file as above, in dependencies, update all compile statements to use implementation, e.g.:
 
 ```java
 implementation(project(':react-native-firebase')) {
@@ -633,13 +545,13 @@ implementation(project(':react-native-firebase')) {
 }
 ```
 
-7.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
+8.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 ```
 
-8.  In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
+9.  In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
 
 ```java
 import io.invertase.firebase.RNFirebasePackage;
@@ -699,7 +611,7 @@ platform :ios, '9.0'
 6.  Same file as above, add these pods:
 
 ```
-pod 'Firebase/Core',
+pod 'Firebase/Core'
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
@@ -713,6 +625,122 @@ pod 'Firebase/Firestore'
 ```shell
 pod install
 ```
+
+### react-native-geocoder
+
+#### Android
+
+1.  In `android/settings.gradle`
+
+```gradle
+...
+include ':react-native-geocoder', ':app'
+project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
+```
+
+3.  In `android/app/build.gradle`
+
+```gradle
+...
+dependencies {
+    ...
+    implementation project(':react-native-geocoder')
+}
+```
+
+4.  Register module (in MainApplication.java)
+
+```java
+import com.devfd.RNGeocoder.RNGeocoderPackage;
+
+public class MainActivity extends ReactActivity {
+  ......
+
+  @Override
+  protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new RNGeocoderPackage()) // <------ add this
+  }
+
+  ......
+
+}
+```
+
+#### iOS
+
+1.  In the XCode's "Project navigator", right click on Libraries folder under your project => `Add Files to <...>`
+
+2.  Go to `node_modules` => `react-native-geocoder` => `ios` => select `RNGeocoder.xcodeproj`
+
+3.  Add `libRNGeocoder.a` to `Build Phases -> Link Binary With Libraries`
+
+### react-native-image-picker
+
+#### Android
+
+1.  Add the following lines to `android/settings.gradle`:
+
+    ```gradle
+    include ':react-native-image-picker'
+    project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
+    ```
+
+2.  Add the implementation line to the dependencies in `android/app/build.gradle`:
+
+    ```gradle
+    dependencies {
+        implementation project(':react-native-image-picker')
+    }
+    ```
+
+3.  Add the required permissions in `AndroidManifest.xml` (this was done when linking react-native-permissions):
+
+    ```xml
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    ```
+
+4.  Add the import and link the package in `MainApplication.java`:
+
+    ```java
+    import com.imagepicker.ImagePickerPackage; // <-- add this import
+
+    public class MainApplication extends Application implements ReactApplication {
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                new MainReactPackage(),
+                new ImagePickerPackage() // <-- add this
+            );
+        }
+    }
+    ```
+
+#### iOS
+
+1.  In the XCode's "Project navigator", right click on your project's Libraries folder => `Add Files to <...>`
+
+2.  Go to `node_modules` => `react-native-image-picker` => `ios` => select `RNImagePicker.xcodeproj`
+
+3.  Add `RNImagePicker.a` to `Build Phases -> Link Binary With Libraries`
+
+### react-native-image-resizer
+
+#### Android
+
+```shell
+react-native link react-native-image-resizer
+```
+
+#### iOS
+
+1.  In the XCode's "Project navigator", right click on your project's Libraries folder => `Add Files to <...>`
+
+2.  Go to `node_modules` => `react-native-image-resizer` => `ios` => select `RNImageResizer.xcodeproj`
+
+3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
 ## 11. Copy the source files
 
@@ -787,22 +815,7 @@ npm i -g @storybook/cli
 getstorybook
 ```
 
-## 17. Add firebase-cli
-
-(ONCE-OFF).
-
-```shell
-yarn global add firebase-tools
-```
-
-```shell
-firebase login
-firebase init
-```
-
-See the [docs](https://github.com/firebase/firebase-tools) for a list of useful commands.
-
-## 18. Fastlane integration
+## 17. Fastlane integration
 
 Saves sooo much time! We normally just set it up to automate beta distribution and manually release to production but fastlane has tools to do that too.
 
@@ -861,13 +874,13 @@ fastlane init
 2.4. Select the correct APP ID.
 ...
 
-## 19. Setup Firebase environments
+## 18. Setup Firebase environments
 
-1.  Add two projects to the [Firebase console](), one named PROJECT_NAME-development and the other, PROJECT_NAME-production.
+TODO: Change based on new Step 8.
 
-2.  Add ios and android apps to each and download the config files to `./config/firebase/development` and `./config/firebase/production`.
+1.  Download each of the config files created in [Step 8](#8-add-firebase-apps) to `./config/firebase/development` and `./config/firebase/production`.
 
-3.  Add the following scripts to `./package.json`, scripts object:
+2.  Add the following scripts to `./package.json`, scripts object:
 
 ```shell
     "android-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev react-native run-android",
@@ -879,9 +892,9 @@ fastlane init
     "beta-ios": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd ios && fastlane beta"
 ```
 
-4.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
+3.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
 
-5.  Set permissions on env script:
+4.  Set permissions on env script:
 
 ```shell
 chmod +x envscript.sh
@@ -893,7 +906,7 @@ Done! Use the scripts to develop or release the beta builds, e.g:
 yarn run ios-dev
 ```
 
-## 20. Add Push Notifications
+## 19. Add Push Notifications
 
 ### Android
 
@@ -925,11 +938,11 @@ Follow this [guide](https://firebase.google.com/docs/cloud-messaging/ios/certs).
 In XCode, enable the following capabilities:
 
 - Push Notifications
-- Background modes ➜ Remote notifications
+- Background modes => Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
 
-## 21. Setup Detox for E2E testing
+## 20. Setup Detox for E2E testing
 
 1.  Follow the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
 2.  You will need to remove the mocha.opts file from `./e2e` and instead add `config.json` with the contents:
@@ -948,11 +961,11 @@ detox test
 
 Your first test will fail.
 
-## 22. Add Slack config
+## 21. Add Slack config
 
 We log errors to Slack. If you'd like this functionality, you'll need to update the Slack config object in `./src/config/slack/index.js`.
 
-## 23. Setup Code-Push
+## 22. Setup Code-Push
 
 1.  Install the Code-Push cli and add apps:
 
@@ -977,20 +990,6 @@ yarn add react-native-code-push
 react-native link
 ```
 
-4.  Add multi-dex support for Android:
-
-At this point, you'll run into a build error without doing this step. In `./android/app/build.gradle`, android.defaultConfig, add:
-
-```java
-multiDexEnabled true
-```
-
-Same file as above, in dependencies, add:
-
-```java
-implementation 'com.android.support:multidex:1.0.3'
-```
-
 Done! Release updates with:
 
 ```shell
@@ -999,3 +998,11 @@ code-push release-react PROJECT_NAME-ios ios --deploymentName "Production"
 ```
 
 `TODO: add this to scripts in package.json once we've worked out a good flow.`
+
+## TODO: Add app to consoles
+
+`TODO: Move/finish this. Do we need something that builds before this step? What is the bare minimum build we need?`
+
+- [Google Play console](https://play.google.com/apps/publish)
+- [Apple Developer portal](https://developer.apple.com/account/)
+- [iTunes Connect](https://itunesconnect.apple.com/)
