@@ -17,16 +17,16 @@ describe('DatabaseHandler', () => {
     expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
   });
 
-  it('calls listenForData on componentDidMount if authenticated prop is supplied', () => {
-    spy = jest.spyOn(DatabaseHandler.prototype, 'listenForData');
+  it('calls syncData on componentDidMount if authenticated prop is supplied', () => {
+    spy = jest.spyOn(DatabaseHandler.prototype, 'syncData');
 
     renderer.create(<DatabaseHandler dispatch={dispatch} authenticated />);
 
     expect(spy).toHaveBeenCalled();
   });
 
-  it('does not call listenForData on componentDidMount if authenticated prop is not supplied', () => {
-    spy = jest.spyOn(DatabaseHandler.prototype, 'listenForData');
+  it('does not call syncData on componentDidMount if authenticated prop is not supplied', () => {
+    spy = jest.spyOn(DatabaseHandler.prototype, 'syncData');
 
     renderer.create(<DatabaseHandler dispatch={dispatch} />);
 
