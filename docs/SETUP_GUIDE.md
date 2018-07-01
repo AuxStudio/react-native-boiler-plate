@@ -184,7 +184,7 @@ compile "com.android.support:appcompat-v7:25.0.0"
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0 redux-logger
 ```
 
 ## 10. Link dependencies
