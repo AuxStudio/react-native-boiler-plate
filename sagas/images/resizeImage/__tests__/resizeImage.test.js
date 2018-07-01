@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import resizeImage from '../';
+import resizeImage from '..';
 
 const images = {
   resizeImage: jest.fn(),

@@ -1,4 +1,4 @@
-import logInToFacebook from '../';
+import logInToFacebook from '..';
 
 jest.mock('react-native-fbsdk', () => {
   return {

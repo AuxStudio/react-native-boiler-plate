@@ -1,4 +1,4 @@
-import signOut from '../'; // eslint-disable-line
+import signOut from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

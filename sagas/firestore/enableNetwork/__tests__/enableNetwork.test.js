@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import enableNetwork from '../';
+import enableNetwork from '..';
 
 const firestore = {
   enableNetwork: jest.fn(),

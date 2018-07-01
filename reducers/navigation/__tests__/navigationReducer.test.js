@@ -4,7 +4,7 @@ jest.mock('react-native-router-flux', () => ({
 
 /* eslint-disable import/first */
 // mock needs to be before imports
-import reducer from '../';
+import reducer from '..';
 import initialState from '../initialState';
 /* eslint-enable */
 

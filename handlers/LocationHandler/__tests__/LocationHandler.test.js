@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { LocationHandler } from '../';
+import { LocationHandler } from '..';
 
 describe('LocationHandler', () => {
   let spy;

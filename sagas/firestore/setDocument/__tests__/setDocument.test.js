@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import setDocument from '../';
+import setDocument from '..';
 
 const firestore = {
   setDocument: jest.fn(),

@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import signOut from '../';
+import signOut from '..';
 
 const auth = {
   signOut: jest.fn(),

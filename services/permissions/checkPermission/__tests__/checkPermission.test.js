@@ -1,4 +1,4 @@
-import checkPermission from '../'; // eslint-disable-line
+import checkPermission from '..'; // eslint-disable-line
 
 jest.mock('react-native-permissions', () => {
   return {

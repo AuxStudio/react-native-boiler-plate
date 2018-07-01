@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import post from '../';
+import post from '..';
 
 const http = {
   post: jest.fn(),

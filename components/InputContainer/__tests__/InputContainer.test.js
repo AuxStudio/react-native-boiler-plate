@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import InputContainer from '../';
+import InputContainer from '..';
 
 describe('InputContainer', () => {
   it('renders with all props', () => {

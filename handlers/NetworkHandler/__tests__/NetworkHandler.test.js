@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { NetworkHandler } from '../';
+import { NetworkHandler } from '..';
 
 describe('NetworkHandler', () => {
   let spy;

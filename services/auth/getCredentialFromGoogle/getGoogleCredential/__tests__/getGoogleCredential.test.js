@@ -1,4 +1,4 @@
-import getGoogleCredential from '../'; // eslint-disable-line
+import getGoogleCredential from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

@@ -1,4 +1,4 @@
-import log from '../';
+import log from '..';
 
 const data = {
   string: 'string',

@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import signInAnonymously from '../';
+import signInAnonymously from '..';
 
 const auth = {
   signInAnonymously: jest.fn(),

@@ -1,4 +1,4 @@
-import cloneObject from '../';
+import cloneObject from '..';
 
 const emptyObject = {};
 

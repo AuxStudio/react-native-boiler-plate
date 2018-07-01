@@ -1,4 +1,4 @@
-import logEvent from '../'; // eslint-disable-line
+import logEvent from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

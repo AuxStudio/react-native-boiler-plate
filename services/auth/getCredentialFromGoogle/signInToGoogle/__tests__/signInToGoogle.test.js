@@ -1,4 +1,4 @@
-import signInToGoogle from '../';
+import signInToGoogle from '..';
 
 jest.mock('react-native-google-signin', () => {
   return {

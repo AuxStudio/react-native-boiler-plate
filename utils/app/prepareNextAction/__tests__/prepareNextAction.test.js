@@ -1,4 +1,4 @@
-import prepareNextAction from '../';
+import prepareNextAction from '..';
 
 describe('prepareNextAction', () => {
   it('should return a valid action from true response and nextAction with no payload', () => {

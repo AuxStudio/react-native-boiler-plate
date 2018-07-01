@@ -1,4 +1,4 @@
-import getTime from '../';
+import getTime from '..';
 import addZeroPadding from '../../../strings/addZeroPadding';
 
 describe('getTime', () => {

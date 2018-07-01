@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import getData from '../';
+import getData from '..';
 
 const database = {
   getData: jest.fn(),

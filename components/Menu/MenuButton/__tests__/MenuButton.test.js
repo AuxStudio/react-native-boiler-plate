@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import MenuButton from '../';
+import MenuButton from '..';
 
 describe('MenuButton', () => {
   it('renders with all props', () => {

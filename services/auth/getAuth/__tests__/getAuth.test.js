@@ -1,4 +1,4 @@
-import getAuth from '../'; // eslint-disable-line
+import getAuth from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

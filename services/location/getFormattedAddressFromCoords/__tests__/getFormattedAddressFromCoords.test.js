@@ -1,4 +1,4 @@
-import getFormattedAddressFromCoords from '../'; // eslint-disable-line
+import getFormattedAddressFromCoords from '..'; // eslint-disable-line
 
 jest.mock('react-native-geocoder', () => {
   return {

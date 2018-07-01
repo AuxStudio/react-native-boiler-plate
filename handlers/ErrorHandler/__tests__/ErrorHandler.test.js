@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import { ErrorHandler } from '../';
+import { ErrorHandler } from '..';
 
 jest.mock('../../../pages/Error'); // Error scene that is displayed on error
 

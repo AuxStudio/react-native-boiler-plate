@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import Modal from '../';
+import Modal from '..';
 
 describe('Modal', () => {
   it('renders with all props', () => {

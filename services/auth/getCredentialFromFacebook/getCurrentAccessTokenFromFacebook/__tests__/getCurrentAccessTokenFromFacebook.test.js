@@ -1,4 +1,4 @@
-import getCurrentAccessTokenFromFacebook from '../';
+import getCurrentAccessTokenFromFacebook from '..';
 
 jest.mock('react-native-fbsdk', () => {
   return {

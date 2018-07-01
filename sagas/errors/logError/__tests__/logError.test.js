@@ -3,7 +3,7 @@ import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
 import config from '../../../../config';
-import logError from '../';
+import logError from '..';
 
 const action = {
   type: 'logError',

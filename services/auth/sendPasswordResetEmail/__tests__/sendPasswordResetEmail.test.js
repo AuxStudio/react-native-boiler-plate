@@ -1,4 +1,4 @@
-import sendPasswordResetEmail from '../'; // eslint-disable-line
+import sendPasswordResetEmail from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

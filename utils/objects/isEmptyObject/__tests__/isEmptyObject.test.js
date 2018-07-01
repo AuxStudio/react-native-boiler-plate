@@ -1,4 +1,4 @@
-import isEmptyObject from '../';
+import isEmptyObject from '..';
 
 describe('isEmptyObject', () => {
   it('should return false if an empty object was passed in', () => {
