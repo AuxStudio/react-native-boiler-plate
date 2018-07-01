@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/AuxStudio/react-native-boiler-plate.svg?branch=master)](https://travis-ci.com/AuxStudio/react-native-boiler-plate)
 
-A react-native, redux, redux-saga and firebase project.
+A heavily-opinionated react-native, redux, redux-saga and firebase boilerplate project used in our production apps.
 
 ## Getting started
 
