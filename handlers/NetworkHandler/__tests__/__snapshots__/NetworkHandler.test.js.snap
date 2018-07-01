@@ -20,6 +20,11 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
+        "type": "enableNetwork",
+      },
+    ],
+    Array [
+      Object {
         "payload": Object {
           "network": Object {
             "effectiveType": "4g",
@@ -31,12 +36,7 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
-        "meta": Object {
-          "nextAction": Object {
-            "type": "TOGGLE_REALTIME_DATABASE_MODE",
-          },
-        },
-        "type": "goOnline",
+        "type": "enableNetwork",
       },
     ],
     Array [
@@ -51,12 +51,7 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
-        "meta": Object {
-          "nextAction": Object {
-            "type": "TOGGLE_REALTIME_DATABASE_MODE",
-          },
-        },
-        "type": "goOffline",
+        "type": "disableNetwork",
       },
     ],
     Array [
@@ -72,6 +67,10 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
   ],
   "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
     Object {
       "isThrow": false,
       "value": undefined,
@@ -116,6 +115,11 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
+        "type": "enableNetwork",
+      },
+    ],
+    Array [
+      Object {
         "payload": Object {
           "network": Object {
             "effectiveType": "4g",
@@ -127,12 +131,7 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
-        "meta": Object {
-          "nextAction": Object {
-            "type": "TOGGLE_REALTIME_DATABASE_MODE",
-          },
-        },
-        "type": "goOnline",
+        "type": "enableNetwork",
       },
     ],
     Array [
@@ -147,16 +146,15 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
     ],
     Array [
       Object {
-        "meta": Object {
-          "nextAction": Object {
-            "type": "TOGGLE_REALTIME_DATABASE_MODE",
-          },
-        },
-        "type": "goOffline",
+        "type": "disableNetwork",
       },
     ],
   ],
   "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
     Object {
       "isThrow": false,
       "value": undefined,
@@ -197,6 +195,11 @@ exports[`NetworkHandler updates the store with connection info and goes online w
     ],
     Array [
       Object {
+        "type": "enableNetwork",
+      },
+    ],
+    Array [
+      Object {
         "payload": Object {
           "network": Object {
             "effectiveType": "4g",
@@ -208,16 +211,15 @@ exports[`NetworkHandler updates the store with connection info and goes online w
     ],
     Array [
       Object {
-        "meta": Object {
-          "nextAction": Object {
-            "type": "TOGGLE_REALTIME_DATABASE_MODE",
-          },
-        },
-        "type": "goOnline",
+        "type": "enableNetwork",
       },
     ],
   ],
   "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
     Object {
       "isThrow": false,
       "value": undefined,
@@ -248,8 +250,17 @@ exports[`NetworkHandler updates the store with connection info when WIFI connect
         "type": "SET_NETWORK_CONNECTION_INFO",
       },
     ],
+    Array [
+      Object {
+        "type": "enableNetwork",
+      },
+    ],
   ],
   "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
     Object {
       "isThrow": false,
       "value": undefined,

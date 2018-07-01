@@ -10,14 +10,13 @@ export class NetworkHandler extends React.Component {
     this.addNetInfoEventListener = this.addNetInfoEventListener.bind(this);
     this.removeNetInfoEventListener = this.removeNetInfoEventListener.bind(this);
     this.handleConnectionChange = this.handleConnectionChange.bind(this);
-    this.goOffline = this.goOffline.bind(this);
-    this.goOnline = this.goOnline.bind(this);
+    this.disableNetwork = this.disableNetwork.bind(this);
+    this.enableNetwork = this.enableNetwork.bind(this);
   }
 
   static get propTypes() {
     return {
       dispatch: PropTypes.func,
-      realtimeDatabaseMode: PropTypes.bool,
     };
   }
 
@@ -38,7 +37,7 @@ export class NetworkHandler extends React.Component {
   }
 
   handleConnectionChange(connectionInfo) {
-    const { dispatch, realtimeDatabaseMode } = this.props;
+    const { dispatch } = this.props;
 
     dispatch({
       type: 'SET_NETWORK_CONNECTION_INFO',
@@ -48,42 +47,28 @@ export class NetworkHandler extends React.Component {
     });
 
     if (
-      realtimeDatabaseMode &&
-      (connectionInfo.type === 'none' ||
-        (connectionInfo.type === 'cellular' && connectionInfo.effectiveType === '2g'))
+      connectionInfo.type === 'none' ||
+      (connectionInfo.type === 'cellular' && connectionInfo.effectiveType === '2g')
     ) {
-      this.goOffline();
-    } else if (
-      !realtimeDatabaseMode &&
-      (connectionInfo.type !== 'none' && connectionInfo.effectiveType !== '2g')
-    ) {
-      this.goOnline();
+      this.disableNetwork();
+    } else if (connectionInfo.type !== 'none' && connectionInfo.effectiveType !== '2g') {
+      this.enableNetwork();
     }
   }
 
-  goOffline() {
+  disableNetwork() {
     const { dispatch } = this.props;
 
     dispatch({
-      type: 'goOffline',
-      meta: {
-        nextAction: {
-          type: 'TOGGLE_REALTIME_DATABASE_MODE',
-        },
-      },
+      type: 'disableNetwork',
     });
   }
 
-  goOnline() {
+  enableNetwork() {
     const { dispatch } = this.props;
 
     dispatch({
-      type: 'goOnline',
-      meta: {
-        nextAction: {
-          type: 'TOGGLE_REALTIME_DATABASE_MODE',
-        },
-      },
+      type: 'enableNetwork',
     });
   }
 
@@ -94,7 +79,7 @@ export class NetworkHandler extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    realtimeDatabaseMode: state.appState.realtimeDatabaseMode,
+    network: state.appState.network,
   };
 }
 
