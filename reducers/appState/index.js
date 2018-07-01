@@ -31,9 +31,18 @@ export default function appStateReducer(state = initialState, action = {}) {
       newState.network = action.payload.network;
       return newState;
 
-    case 'TOGGLE_REALTIME_DATABASE_MODE':
+    case 'ADD_PENDING_TRANSACTION':
       newState = utils.objects.cloneObject(state);
-      newState.realtimeDatabaseMode = !newState.realtimeDatabaseMode;
+      newState.firebase.pendingTransactions.push(action.payload.event);
+      return newState;
+
+    case 'REMOVE_PENDING_TRANSACTION':
+      newState = utils.objects.cloneObject(state);
+      newState.firebase.pendingTransactions = newState.firebase.pendingTransactions.filter(
+        (event) => {
+          return event.id !== action.payload.id;
+        },
+      );
       return newState;
 
     default:
