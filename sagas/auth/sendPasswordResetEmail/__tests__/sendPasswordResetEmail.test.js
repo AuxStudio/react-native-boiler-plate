@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import sendPasswordResetEmail from '../';
+import sendPasswordResetEmail from '..';
 
 const auth = {
   sendPasswordResetEmail: jest.fn(),

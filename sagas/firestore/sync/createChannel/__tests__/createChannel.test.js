@@ -1,6 +1,6 @@
 import { eventChannel } from 'redux-saga';
 
-import createChannel from '../';
+import createChannel from '..';
 
 jest.mock('../../../../../services/', () => {
   return {

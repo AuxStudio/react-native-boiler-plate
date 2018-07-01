@@ -1,4 +1,4 @@
-import signInWithCredential from '../'; // eslint-disable-line
+import signInWithCredential from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

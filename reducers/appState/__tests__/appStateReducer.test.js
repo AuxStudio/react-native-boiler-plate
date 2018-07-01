@@ -1,4 +1,4 @@
-import reducer from '../';
+import reducer from '..';
 import initialState from '../initialState';
 
 describe('appStateReducer', () => {
@@ -72,11 +72,59 @@ describe('appStateReducer', () => {
     expect(reducer(undefined, action).network).toEqual(payload.network);
   });
 
-  it('should handle TOGGLE_REALTIME_DATABASE_MODE', () => {
-    const action = {
-      type: 'TOGGLE_REALTIME_DATABASE_MODE',
+  it('should handle ADD_PENDING_TRANSACTION', () => {
+    const payload = {
+      event: {
+        id: '1234',
+        action: {
+          type: 'addDocument',
+          meta: {
+            pathParts: ['collection'],
+          },
+          payload: {
+            document: {
+              testing: true,
+            },
+          },
+        },
+      },
     };
 
-    expect(reducer(undefined, action).realtimeDatabaseMode).toEqual(false); // initial is true
+    const action = {
+      type: 'ADD_PENDING_TRANSACTION',
+      payload,
+    };
+
+    expect(reducer(undefined, action).firebase.pendingTransactions).toEqual([payload.event]);
+  });
+
+  it('should handle REMOVE_PENDING_TRANSACTION', () => {
+    initialState.firebase.pendingTransactions = [
+      {
+        id: '1234',
+        action: {
+          type: 'addDocument',
+          meta: {
+            pathParts: ['collection'],
+          },
+          payload: {
+            document: {
+              testing: true,
+            },
+          },
+        },
+      },
+    ];
+
+    const payload = {
+      id: '1234',
+    };
+
+    const action = {
+      type: 'REMOVE_PENDING_TRANSACTION',
+      payload,
+    };
+
+    expect(reducer(initialState, action).firebase.pendingTransactions).toEqual([]);
   });
 });

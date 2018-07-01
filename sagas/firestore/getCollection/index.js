@@ -5,7 +5,7 @@ import utils from '../../../utils';
 
 export default function* getCollection(action) {
   try {
-    const response = yield call(firestore.getCollection, action.meta.pathParts);
+    const response = yield call(firestore.getCollection, action.meta.pathParts, action.meta.query);
     const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {

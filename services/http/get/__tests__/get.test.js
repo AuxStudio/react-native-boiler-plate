@@ -1,4 +1,4 @@
-import get from '../'; // eslint-disable-line
+import get from '..'; // eslint-disable-line
 
 global.fetch = jest.fn().mockImplementation(() => Promise.resolve({ foo: 'bar' }));
 

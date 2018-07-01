@@ -1,4 +1,4 @@
-import getPrettyDate from '../';
+import getPrettyDate from '..';
 
 describe('getPrettyDate', () => {
   // Sat, 3 Feb

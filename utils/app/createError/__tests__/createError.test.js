@@ -1,4 +1,4 @@
-import createError from '../';
+import createError from '..';
 
 describe('createError', () => {
   it('should create an error instance from a non error instance', () => {

@@ -1,4 +1,4 @@
-import signInAnonymously from '../'; // eslint-disable-line
+import signInAnonymously from '..'; // eslint-disable-line
 
 jest.mock('react-native-firebase', () => {
   return {

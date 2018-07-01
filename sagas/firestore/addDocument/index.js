@@ -5,11 +5,31 @@ import utils from '../../../utils';
 
 export default function* addDocument(action) {
   try {
+    const writeEventID = utils.strings.createUID();
+
+    yield put({
+      type: 'ADD_PENDING_TRANSACTION',
+      payload: {
+        event: {
+          id: writeEventID,
+          action,
+        },
+      },
+    });
+
     const response = yield call(
       firestore.addDocument,
       action.meta.pathParts,
       action.payload.document,
     );
+
+    yield put({
+      type: 'REMOVE_PENDING_TRANSACTION',
+      payload: {
+        id: writeEventID,
+      },
+    });
+
     const nextAction = utils.app.prepareNextAction(action, response);
 
     if (nextAction) {

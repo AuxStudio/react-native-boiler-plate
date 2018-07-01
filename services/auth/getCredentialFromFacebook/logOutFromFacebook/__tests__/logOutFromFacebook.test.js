@@ -1,4 +1,4 @@
-import logOutFromFacebook from '../';
+import logOutFromFacebook from '..';
 
 jest.mock('react-native-fbsdk', () => {
   return {

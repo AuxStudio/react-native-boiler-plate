@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import getCredentialFromGoogle from '../';
+import getCredentialFromGoogle from '..';
 
 const auth = {
   getCredentialFromGoogle: jest.fn(),

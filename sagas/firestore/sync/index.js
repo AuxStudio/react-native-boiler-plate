@@ -9,7 +9,24 @@ export default function* sync(action) {
   try {
     while (true) {
       const response = yield take(channel);
-      const nextAction = utils.app.prepareNextAction(action, response);
+
+      // Parse the response into data only
+      let data;
+
+      try {
+        // is document
+        data = response.data();
+      } catch (error) {
+        // is collection
+        data = response.docs.map((document) => {
+          return {
+            ...document.data(),
+            id: document.id,
+          };
+        });
+      }
+
+      const nextAction = utils.app.prepareNextAction(action, { data });
 
       if (nextAction) {
         yield put(nextAction);
@@ -21,7 +38,6 @@ export default function* sync(action) {
       payload: {
         error: utils.app.createError(error),
         date: new Date(),
-        action,
       },
     });
   }

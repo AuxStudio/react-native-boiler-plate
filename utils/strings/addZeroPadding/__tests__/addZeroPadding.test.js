@@ -1,4 +1,4 @@
-import addZeroPadding from '../';
+import addZeroPadding from '..';
 
 describe('addZeroPadding', () => {
   it('should return a zero padded string if < 10', () => {

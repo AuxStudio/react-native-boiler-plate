@@ -1,4 +1,4 @@
-import createUID from '../';
+import createUID from '..';
 
 describe('createUID', () => {
   it('creates a unique ID', () => {

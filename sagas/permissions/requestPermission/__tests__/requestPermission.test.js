@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import requestPermission from '../';
+import requestPermission from '..';
 
 const permissions = {
   requestPermission: jest.fn(),

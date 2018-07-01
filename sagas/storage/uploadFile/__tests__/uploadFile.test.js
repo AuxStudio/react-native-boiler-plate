@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import uploadFile from '../';
+import uploadFile from '..';
 
 const storage = {
   uploadFile: jest.fn(),

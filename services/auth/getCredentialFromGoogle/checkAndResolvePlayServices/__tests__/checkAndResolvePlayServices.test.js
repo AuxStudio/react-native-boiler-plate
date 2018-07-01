@@ -1,4 +1,4 @@
-import checkAndResolvePlayServices from '../';
+import checkAndResolvePlayServices from '..';
 
 jest.mock('react-native-google-signin', () => {
   return {

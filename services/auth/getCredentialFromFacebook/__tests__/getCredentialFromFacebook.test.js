@@ -1,4 +1,4 @@
-import getCredentialFromFacebook from '../';
+import getCredentialFromFacebook from '..';
 
 jest.mock('../logOutFromFacebook', () => {
   return jest.fn(() => {

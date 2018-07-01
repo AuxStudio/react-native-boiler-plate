@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import logEvent from '../';
+import logEvent from '..';
 
 const analytics = {
   logEvent: jest.fn(),

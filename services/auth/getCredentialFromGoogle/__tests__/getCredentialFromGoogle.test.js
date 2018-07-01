@@ -1,4 +1,4 @@
-import getCredentialFromGoogle from '../';
+import getCredentialFromGoogle from '..';
 
 jest.mock('../checkAndResolvePlayServices', () => {
   return jest.fn(() => {

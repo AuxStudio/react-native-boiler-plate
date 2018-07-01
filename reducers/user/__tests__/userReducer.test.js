@@ -1,4 +1,4 @@
-import reducer from '../';
+import reducer from '..';
 import initialState from '../initialState';
 
 describe('userReducer', () => {

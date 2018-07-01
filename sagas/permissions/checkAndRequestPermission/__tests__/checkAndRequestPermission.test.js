@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
 import utils from '../../../../utils';
-import checkAndRequestPermission from '../';
+import checkAndRequestPermission from '..';
 
 // This saga uses the Platform module so let's mock it to test our conditions
 jest.mock('Platform', () => {

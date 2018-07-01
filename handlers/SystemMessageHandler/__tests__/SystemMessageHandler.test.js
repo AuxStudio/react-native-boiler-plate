@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
-import { SystemMessageHandler } from '../';
+import { SystemMessageHandler } from '..';
 
 jest.mock('react-native-snackbar', () => {
   return {
