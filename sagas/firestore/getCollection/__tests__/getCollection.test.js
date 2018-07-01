@@ -12,6 +12,7 @@ const action = {
   type: 'getCollection',
   meta: {
     pathParts: ['collection', 'document', 'collection'],
+    query: ['id', '==', 1234],
   },
 };
 
@@ -29,7 +30,7 @@ describe('getCollection saga', () => {
 
     it('should have called the mocked API first', (result) => {
       expect(JSON.stringify(result)).toEqual(
-        JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+        JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
     });
 
@@ -43,7 +44,7 @@ describe('getCollection saga', () => {
 
     it('should have called the mocked API first', (result) => {
       expect(JSON.stringify(result)).toEqual(
-        JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+        JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
 
       return response;
@@ -59,7 +60,7 @@ describe('getCollection saga', () => {
 
     it('should have called the mocked API first', (result) => {
       expect(JSON.stringify(result)).toEqual(
-        JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+        JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
     });
 
@@ -77,7 +78,7 @@ describe('getCollection saga', () => {
 
     it('should have called the mocked API first', (result) => {
       expect(JSON.stringify(result)).toEqual(
-        JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+        JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
 
       return response;
@@ -98,7 +99,7 @@ describe('getCollection saga', () => {
 
     it('should have called the mocked API first', (result) => {
       expect(JSON.stringify(result)).toEqual(
-        JSON.stringify(call(firestore.getCollection, action.meta.pathParts)),
+        JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
 
       return new Error(errorMessage);
