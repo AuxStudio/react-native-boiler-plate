@@ -36,13 +36,12 @@ If you'd like to test that you are setting the project up correctly, do a build 
 14. [Enable Firebase authentication methods](#14-enable-firebase-authentication-methods)
 15. [Add your custom fonts](#15-add-your-custom-fonts)
 16. [Add Storybook](#16-add-storybook)
-17. [Fastlane integration](#18-fastlane-integration)
-18. [Setup Firebase apps](#19-setup-firebase-apps)
-19. [Add Push Notifications](#20-add-push-notifications)
-20. [Setup Detox for E2E testing](#21-setup-detox-for-e2e-testing)
-21. [Add Slack config](#22-add-slack-config)
-22. [Setup Code-Push](#23-setup-code-push)
-    TODO. [Add app to consoles](#8-add-app-to-consoles)
+17. [Fastlane integration](#17-fastlane-integration)
+18. [Setup Firebase apps](#18-setup-firebase-apps)
+19. [Setup Detox for E2E testing](#19-setup-detox-for-e2e-testing)
+20. [Add Slack config](#20-add-slack-config)
+21. [Setup Code-Push](#21-setup-code-push)
+22. [Add Push Notifications](#22-add-push-notifications)
 
 ## 1. Initialise project
 
@@ -191,7 +190,7 @@ compile "com.android.support:appcompat-v7:25.0.0"
 
 1.  Add two projects to the [Firebase console](https://console.firebase.google.com/).
 
-The projects should be called PROJECT_NAME-development and PROJECT_NAME-production. In [Step 18](#18-) we will configure these environments.
+The projects should be called PROJECT_NAME-development and PROJECT_NAME-production. In [Step 18](#18-setup-firebase-environments) we will configure these environments.
 
 2.  Add android and iOS apps to the `development` project.
 
@@ -750,22 +749,13 @@ react-native link react-native-image-resizer
 git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 ```
 
-2.  In `./index.js` replace content with:
-
-```js
-import { AppRegistry } from 'react-native';
-import App from './src/App';
-
-AppRegistry.registerComponent('PROJECT_NAME', () => App);
-```
-
-3.  Delete and move files. FIXME: script
+2.  Delete and move files. FIXME: script
 
 ```shell
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./src/CODE_OF_CONDUCT.md && sudo rm ./src/CONTRIBUTING.md && sudo rm ./src/LICENCE && sudo rm ./src/PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc
 ```
 
-4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
+3.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
 
 ## 12. Setup ESLint and Prettier
 
@@ -840,10 +830,10 @@ cd android
 fastlane init
 ```
 
-4.  Follow the steps and enter the relevant information:
+4.  Follow the steps and inpu the relevant information:
 
-4.1. Enter ./app/secret_key.json
-4.2. Enter n
+    1.  Input `./app/secret_key.json`
+    2.  Input `n`
 
 5.  Add the following to `./android/fastlane/Fastfile`:
 
@@ -855,8 +845,6 @@ fastlane init
   end
 ```
 
-and remove the existing beta task (ie. the other block of code with `lane :beta do`)
-
 ### ios
 
 1.  Initialise fastlane
@@ -866,21 +854,33 @@ cd ios
 fastlane init
 ```
 
-2.  Follow the steps and enter the relevant information:
+2.  Follow the steps and input the relevant information:
 
-2.1. Enter 2 (to select Automate beta distribution to TestFlight)
-2.2. Select the correct scheme (it's usually just PROJECT_NAME)
-2.3. Enter your developer login credentials
-2.4. Select the correct APP ID.
-...
+    1.  Input `2` (to select Automate beta distribution to TestFlight)
+    2.  Select the correct scheme (it's usually just PROJECT_NAME)
+    3.  Input your developer login credentials
+    4.  Select the correct APP ID.
+        ...
 
 ## 18. Setup Firebase environments
 
-TODO: Change based on new Step 8.
+1.  Add android and iOS apps to the `production` project.
 
-1.  Download each of the config files created in [Step 8](#8-add-firebase-apps) to `./config/firebase/development` and `./config/firebase/production`.
+NOTE: When adding android app, don't bother adding the debug signing key, you don't need it.
 
-2.  Add the following scripts to `./package.json`, scripts object:
+2.  Download each of the config files created in [Step 8](#8-add-firebase-apps) to `./config/firebase/development` and `./config/firebase/production` respectively.
+
+3.  Copy `development` project config files:
+
+```shell
+cp ./android/app/google-services.json ./config/firebase/development/google-services.json
+```
+
+```shell
+cp ./ios/PROJECT_NAME/GoogleService-Info.plist ./config/firebase/development/GoogleService-Info.plist
+```
+
+4.  Add the following scripts to `./package.json`, scripts object:
 
 ```shell
     "android-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev react-native run-android",
@@ -892,9 +892,7 @@ TODO: Change based on new Step 8.
     "beta-ios": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd ios && fastlane beta"
 ```
 
-3.  You will need to link a GoogleService-Info.plist as a resource in XCode (drag one of them into your Xcode project).
-
-4.  Set permissions on env script:
+5.  Set permissions on env script:
 
 ```shell
 chmod +x envscript.sh
@@ -906,7 +904,103 @@ Done! Use the scripts to develop or release the beta builds, e.g:
 yarn run ios-dev
 ```
 
-## 19. Add Push Notifications
+## 19. Setup Detox for E2E testing
+
+1.  Follow Step 1 of the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
+
+(ONCE-OFF).
+
+2.  Add detox as a dependency:
+
+```shell
+yarn add --dev detox
+```
+
+3.  Add the following to `./package.json`:
+
+NOTE: Replace `example` with your PROJECT_NAME.
+
+```json
+"detox": {
+  "configurations": {
+    "ios.sim.debug": {
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/example.app",
+      "build": "xcodebuild -project ios/example.xcodeproj -scheme example -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+      "type": "ios.simulator",
+      "name": "iPhone 7"
+    }
+  }
+}
+```
+
+4.  Initialise Detox
+
+```shell
+detox init -r jest
+```
+
+5.  Test the setup with:
+
+```shell
+detox build
+detox test
+```
+
+This test will fail. We just need to make sure it is building here.
+
+## 20. Add Slack config
+
+We log errors to Slack. If you'd like this functionality enabled, you'll need to update the Slack config object in `./src/config/slack/index.js`.
+
+## 21. Setup Code-Push
+
+1.  Install the Code-Push cli globally:
+
+(ONCE-OFF).
+
+```shell
+yarn global add code-push-cli
+```
+
+2.  Add apps to Code-Push:
+
+```shell
+code-push login
+code-push app add PROJECT_NAMEAndroid android react-native
+code-push app add PROJECT_NAMEIOS ios react-native
+```
+
+3.  Link dependency:
+
+```shell
+yarn add react-native-code-push
+react-native link react-native-code-push
+```
+
+NOTE: You will be asked for your deployment keys. Use the relevant production keys from Step 2 above.
+
+4.  Remove the pod added to `./ios/PodFile` in the previous step (we're going to link the dependency manually in the next step).
+
+5.  Link dependency (iOS):
+
+    1.  In the XCode's "Project navigator", right click on Libraries folder under your project => `Add Files to <...>`
+
+    2.  Go to `node_modules` => `react-native-code-push` => `ios` => select `CodePush.xcodeproj`
+
+    3.  Add `libCodePush.a` to `Build Phases -> Link Binary With Libraries`
+
+Done! Release updates with:
+
+```shell
+code-push release-react PROJECT_NAME-android android --deploymentName "Production"
+code-push release-react PROJECT_NAME-ios ios --deploymentName "Production"
+```
+
+`TODO: add this to scripts in package.json once we've worked out a good flow between fastlane, firebase environments and this.`
+
+## 22. Add Push Notifications
+
+Optional.
 
 ### Android
 
@@ -941,68 +1035,3 @@ In XCode, enable the following capabilities:
 - Background modes => Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
-
-## 20. Setup Detox for E2E testing
-
-1.  Follow the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
-2.  You will need to remove the mocha.opts file from `./e2e` and instead add `config.json` with the contents:
-
-```json
-
-```
-
-3.  In `./e2e/init.js`, there are bugs. Change the `before` and `after` to `beforeEach` and `afterEach`.
-4.  Test the setup with:
-
-```shell
-detox build
-detox test
-```
-
-Your first test will fail.
-
-## 21. Add Slack config
-
-We log errors to Slack. If you'd like this functionality, you'll need to update the Slack config object in `./src/config/slack/index.js`.
-
-## 22. Setup Code-Push
-
-1.  Install the Code-Push cli and add apps:
-
-```shell
-yarn global add code-push-cli
-code-push login
-code-push app add PROJECT_NAMEAndroid android react-native
-code-push app add PROJECT_NAMEIOS ios react-native
-```
-
-2.  Get your `production` deployment keys for step 3:
-
-```shell
-code-push deployment ls PROJECT_NAME-android -k
-code-push deployment ls PROJECT_NAME-ios -k
-```
-
-3.  Link to react-native:
-
-```shell
-yarn add react-native-code-push
-react-native link
-```
-
-Done! Release updates with:
-
-```shell
-code-push release-react PROJECT_NAME-android android --deploymentName "Production"
-code-push release-react PROJECT_NAME-ios ios --deploymentName "Production"
-```
-
-`TODO: add this to scripts in package.json once we've worked out a good flow.`
-
-## TODO: Add app to consoles
-
-`TODO: Move/finish this. Do we need something that builds before this step? What is the bare minimum build we need?`
-
-- [Google Play console](https://play.google.com/apps/publish)
-- [Apple Developer portal](https://developer.apple.com/account/)
-- [iTunes Connect](https://itunesconnect.apple.com/)
