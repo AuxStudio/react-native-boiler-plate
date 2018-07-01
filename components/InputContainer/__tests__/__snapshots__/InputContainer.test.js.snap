@@ -40,10 +40,12 @@ exports[`InputContainer renders with all props 1`] = `
     resetKeyboardSpace={[Function]}
     scrollEventThrottle={1}
     scrollForExtraHeightOnAndroid={[Function]}
+    scrollIntoView={[Function]}
     scrollToEnd={[Function]}
     scrollToFocusedInput={[Function]}
     scrollToPosition={[Function]}
     showsVerticalScrollIndicator={true}
+    update={[Function]}
     viewIsInsideTabBar={false}
   >
     <View>
@@ -86,10 +88,12 @@ exports[`InputContainer renders with minimum required props 1`] = `
     resetKeyboardSpace={[Function]}
     scrollEventThrottle={1}
     scrollForExtraHeightOnAndroid={[Function]}
+    scrollIntoView={[Function]}
     scrollToEnd={[Function]}
     scrollToFocusedInput={[Function]}
     scrollToPosition={[Function]}
     showsVerticalScrollIndicator={true}
+    update={[Function]}
     viewIsInsideTabBar={false}
   >
     <View />

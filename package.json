@@ -48,7 +48,7 @@
     "react-native-google-signin": "^0.12.0",
     "react-native-image-picker": "^0.26.10",
     "react-native-image-resizer": "^1.0.0",
-    "react-native-keyboard-aware-scroll-view": "^0.5.0",
+    "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-material-menu": "^0.3.1",
     "react-native-material-textfield": "^0.12.0",
     "react-native-modal": "^6.1.0",
