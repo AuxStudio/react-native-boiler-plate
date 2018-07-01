@@ -37,6 +37,7 @@ export class DatabaseHandler extends React.Component {
 
     // Sync data on app mount
     dispatch({
+      type: 'TEMP',
       // type: 'sync',
       // meta: {
       //   pathParts: [''],
