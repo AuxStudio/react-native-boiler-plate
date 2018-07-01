@@ -904,49 +904,67 @@ Done! Use the scripts to develop or release the beta builds, e.g:
 yarn run ios-dev
 ```
 
-## 19. Setup Detox for E2E testing
+## 19. Setup testing
 
-1.  Follow Step 1 of the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
-
-(ONCE-OFF).
-
-2.  Add detox as a dependency:
+1.  Add dev dependency needed for saga unit tests
 
 ```shell
-yarn add --dev detox
+yarn add --dev redux-saga-testing
 ```
 
-3.  Add the following to `./package.json`:
+2.  Setup Detox
 
-NOTE: Replace `example` with your PROJECT_NAME.
+    1.  Follow Step 1 of the [Getting Started](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md) guide.
 
-```json
-"detox": {
-  "configurations": {
-    "ios.sim.debug": {
-      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/example.app",
-      "build": "xcodebuild -project ios/example.xcodeproj -scheme example -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
-      "type": "ios.simulator",
-      "name": "iPhone 7"
+    (ONCE-OFF).
+
+    2.  Add detox as a dependency:
+
+    ```shell
+    yarn add --dev detox
+    ```
+
+    3.  Add the following to `./package.json`:
+
+    NOTE: Replace `example` with your PROJECT_NAME.
+
+    ```json
+    "detox": {
+    "configurations": {
+        "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/example.app",
+        "build": "xcodebuild -project ios/example.xcodeproj -scheme example -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+        }
     }
-  }
-}
-```
+    }
+    ```
 
-4.  Initialise Detox
+    4.  Same file as above, add this to the "jest" object:
 
-```shell
-detox init -r jest
-```
+    ```json
+    "testMatch": [
+        "<rootDir>/src/**/*.test.js"
+    ]
+    ```
 
-5.  Test the setup with:
+    This avoids conflics with Detox \*.spec.js files.
 
-```shell
-detox build
-detox test
-```
+    5.  Initialise Detox
 
-This test will fail. We just need to make sure it is building here.
+    ```shell
+    detox init -r jest
+    ```
+
+    6.  Test the setup with:
+
+    ```shell
+    detox build
+    detox test
+    ```
+
+    This test will fail. We just need to make sure it is building here.
 
 ## 20. Add Slack config
 
