@@ -17,6 +17,11 @@ import LocationHandler from './handlers/LocationHandler';
 // Connect router to store
 const ConnectedRouter = connect()(Router);
 
+// Helper to clear local storage during development
+// if (__DEV__) {
+//   persistor.purge();
+// }
+
 export function App() {
   return (
     <Provider store={store}>
