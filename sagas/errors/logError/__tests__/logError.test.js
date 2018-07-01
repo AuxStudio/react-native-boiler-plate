@@ -25,13 +25,7 @@ describe('logError saga', () => {
     it('should have yielded all of our actions', (result) => {
       expect(result).toEqual(
         all([
-          put({
-            type: 'pushData',
-            payload: {
-              data,
-              ref: 'errors',
-            },
-          }),
+          // NOTE: Since, __DEV__, pushData should not be called
           put({
             type: 'SET_SYSTEM_MESSAGE',
             payload: {
@@ -56,13 +50,6 @@ describe('logError saga', () => {
     it('should have yielded all of our actions', (result) => {
       expect(result).toEqual(
         all([
-          put({
-            type: 'pushData',
-            payload: {
-              data,
-              ref: 'errors',
-            },
-          }),
           put({
             type: 'SET_SYSTEM_MESSAGE',
             payload: {

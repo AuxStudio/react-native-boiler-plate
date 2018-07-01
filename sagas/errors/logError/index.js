@@ -6,9 +6,13 @@ import config from '../../../config';
 export default function* logError(action) {
   /*
       This should
-        - Log the error to the db
-        - SET_SYSTEM_MESSAGE
-        - Post it to Slack if Slack config has been set up
+        - If in production:
+          - Log the error to the db
+          - SET_SYSTEM_MESSAGE
+          - If Slack config has been set up
+            - Post to Slack
+        - If in development
+          - SET_SYSTEM_MESSAGE
   */
 
   try {
@@ -21,13 +25,6 @@ export default function* logError(action) {
 
     const actions = [
       put({
-        type: 'pushData',
-        payload: {
-          data,
-          ref: 'errors',
-        },
-      }),
-      put({
         type: 'SET_SYSTEM_MESSAGE',
         payload: {
           ...action.payload.error,
@@ -35,6 +32,15 @@ export default function* logError(action) {
         error: true,
       }),
     ];
+
+    const databaseAction = put({
+      type: 'pushData',
+      payload: {
+        data,
+        ref: 'errors',
+      },
+    });
+
     const slackAction = put({
       type: 'post',
       payload: {
@@ -49,8 +55,12 @@ export default function* logError(action) {
       },
     });
 
-    if (config.slack.webhook) {
-      actions.push(slackAction);
+    if (!__DEV__) {
+      actions.push(databaseAction);
+
+      if (config.slack.webhook) {
+        actions.push(slackAction);
+      }
     }
 
     yield all(actions);
