@@ -197,7 +197,7 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 3.  Copy the `development` project config files:
 
     1.  Copy `google-services.json` to `./android/app`.
-    2.  Copy `GoogleService-Info.plist` to `./ios/PROJECT_NAME`.
+    2.  In XCode, drag `GoogleService-Info.plist` to project (make sure Copy items if needed is ticked).
 
 ## 9. Install dependencies
 
