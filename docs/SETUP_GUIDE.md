@@ -461,6 +461,8 @@ Add permissions to `./android/app/src/main/AndroidManifest.xml` (remove what you
 <uses-permission android:name="android.permission.WRITE_INTERAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<uses-permission android:name="android.permission.VIBRATE" />
 ```
 
 #### iOS
@@ -559,6 +561,7 @@ import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 ```
 
@@ -571,6 +574,7 @@ Same file as above, in getPackages(), add:
     new RNFirebaseDatabasePackage(),
     new RNFirebaseStoragePackage(),
     new RNFirebaseMessagingPackage(),
+    new RNFirebaseNotificationsPackage(),
     new RNFirebaseFirestorePackage()
 ```
 
@@ -1036,22 +1040,39 @@ Optional.
 
 Most of it was already set up in the react-native-firebase step.
 
-1.  In `./android/app/src/main/AndroidManifest.xml`, add to application component:
+1.  In `./android/app/src/main/AndroidManifest.xml`, add to application:
 
 ```xml
-  <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
-    <intent-filter>
-      <action android:name="com.google.firebase.MESSAGING_EVENT" />
-    </intent-filter>
-  </service>
-  <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
-    <intent-filter>
-      <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-    </intent-filter>
-  </service>
+<service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
+	<intent-filter>
+		<action android:name="com.google.firebase.MESSAGING_EVENT" />
+	</intent-filter>
+</service>
+<service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
+	<intent-filter>
+		<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+	</intent-filter>
+</service>
+<meta-data
+	android:name="com.google.firebase.messaging.default_notification_channel_id"
+	android:value="@string/default_notification_channel_id"/>
+```
+
+2.  Same file as above, add to activity:
+
+```xml
+android:launchMode="singleTop"
+```
+
+3.  In `./android/app/src/main/res/values/strings.xml`, add to resources:
+
+```xml
+<string name="default_notification_channel_id">Notifications</string>
 ```
 
 ### iOS
+
+`TBC`.
 
 1.  Setup certificates
 
