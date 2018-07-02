@@ -755,7 +755,19 @@ git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./src/CODE_OF_CONDUCT.md && sudo rm ./src/CONTRIBUTING.md && sudo rm ./src/LICENCE && sudo rm ./src/PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc
 ```
 
-3.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
+3.  In `./index.js`, change:
+
+```js
+import App from './App';
+```
+
+to
+
+```js
+import App from './src/App';
+```
+
+4.  Finish react-native-google-signin setup by adding google web client id and ios client id (which can be found in your google-services.json - look for the "client_id" associated with "client_type": 3) to `./src/config/googleSignIn.js`.
 
 ## 12. Setup ESLint and Prettier
 
