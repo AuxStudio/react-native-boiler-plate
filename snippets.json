@@ -212,7 +212,7 @@
       "import React from 'react';",
       "import renderer from 'react-test-renderer';",
       "$2",
-      "import $1 from '../';",
+      "import $1 from '..';",
       "$2",
       "it('renders a $1 with all props', () => {",
       "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
@@ -237,7 +237,7 @@
   "Blank utility test": {
     "prefix": "testu",
     "body": [
-      "import $1 from '../';",
+      "import $1 from '..';",
       "$5",
       "it('should $2', () => {",
       "  expect($1($3)).toBe($4);",
@@ -247,11 +247,35 @@
   "Blank reducer test": {
     "prefix": "testr",
     "body": [
-      "import reducer from '../';",
+      "import reducer from '..';",
       "import initialState from '../initialState';",
       "$1",
       "it('should return the initial state', () => {",
       "  expect(reducer(undefined, {})).toEqual(initialState);",
+      "});"
+    ]
+  },
+  "Blank service test": {
+    "prefix": "testse",
+    "body": [
+      "import $1 from '..';",
+      "$3",
+      "jest.mock('&2', () => {",
+      "  return {",
+      "    $1: jest.fn(() => {",
+      "      return new Promise((resolve) => {",
+      "        $3",
+      "      });",
+      "    }),",
+      "  };",
+      "});",
+      "$3",
+      "describe('$1', () => {",
+      "  it('resolves a promise', async () => {",
+      "    expect.assertions(1);",
+      "    const response = await $1();",
+      "    expect(response).toEqual();",
+      "  });",
       "});"
     ]
   },
@@ -262,7 +286,7 @@
       "import sagaHelper from 'redux-saga-testing';",
       "${4}",
       "import utils from '../../../../utils';",
-      "import $1 from '../';",
+      "import $1 from '..';",
       "${4}",
       "const $2 = {",
       "  $1: jest.fn(),",
