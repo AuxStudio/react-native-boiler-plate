@@ -17,8 +17,7 @@ export default function appStateReducer(state = initialState, action = {}) {
 
     case 'SET_SYSTEM_MESSAGE':
       newState = utils.objects.cloneObject(state);
-      newState.systemMessage = action.payload;
-      newState.systemMessage.error = action.error;
+      newState.systemMessage = action.payload.message;
       return newState;
 
     case 'RESET_SYSTEM_MESSAGE':

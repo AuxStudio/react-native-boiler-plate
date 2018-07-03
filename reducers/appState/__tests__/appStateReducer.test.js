@@ -33,7 +33,6 @@ describe('appStateReducer', () => {
   it('should handle SET_SYSTEM_MESSAGE', () => {
     const payload = {
       message: 'Test',
-      code: 12345,
     };
 
     const action = {
@@ -42,8 +41,7 @@ describe('appStateReducer', () => {
       error: true,
     };
 
-    const expectedPayload = payload;
-    expectedPayload.error = action.error;
+    const expectedPayload = payload.message;
 
     expect(reducer(undefined, action).systemMessage).toEqual(expectedPayload);
   });

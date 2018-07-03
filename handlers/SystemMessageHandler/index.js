@@ -16,11 +16,7 @@ export class SystemMessageHandler extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
     children: PropTypes.node.isRequired,
-    systemMessage: PropTypes.shape({
-      message: PropTypes.string,
-      code: PropTypes.string,
-      error: PropTypes.bool,
-    }),
+    systemMessage: PropTypes.string,
   };
 
   static defaultProps = {};
@@ -28,10 +24,7 @@ export class SystemMessageHandler extends React.Component {
   componentDidUpdate(prevProps) {
     const { systemMessage } = this.props;
 
-    if (
-      systemMessage.message &&
-      (!prevProps.systemMessage || systemMessage.message !== prevProps.systemMessage.message)
-    ) {
+    if (systemMessage && (!prevProps.systemMessage || systemMessage !== prevProps.systemMessage)) {
       this.showSnackbar();
     }
   }
@@ -40,7 +33,7 @@ export class SystemMessageHandler extends React.Component {
     const { systemMessage } = this.props;
 
     Snackbar.show({
-      title: systemMessage.message,
+      title: systemMessage,
       duration: this.snackbarDuration,
     });
 

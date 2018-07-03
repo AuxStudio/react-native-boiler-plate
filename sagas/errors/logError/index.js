@@ -27,9 +27,8 @@ export default function* logError(action) {
       put({
         type: 'SET_SYSTEM_MESSAGE',
         payload: {
-          ...action.payload.error,
+          message: action.payload.error.message,
         },
-        error: true,
       }),
     ];
 

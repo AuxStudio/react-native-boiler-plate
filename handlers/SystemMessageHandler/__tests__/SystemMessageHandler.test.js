@@ -20,11 +20,7 @@ describe('SystemMessageHandler', () => {
       renderer.create(
         <SystemMessageHandler
           dispatch={jest.fn()}
-          systemMessage={{
-            message: 'Something went wrong',
-            code: 'AUTH',
-            error: true,
-          }}
+          systemMessage="Something went wrong"
           uid="xxxx-xxxx-xxxx-xxxx"
         >
           <View />
@@ -45,14 +41,7 @@ describe('SystemMessageHandler', () => {
 
   it('shows the snackbar if systemMessage changed in componentDidUpdate', () => {
     const component = renderer.create(
-      <SystemMessageHandler
-        dispatch={dispatch}
-        systemMessage={{
-          message: 'Something went wrong',
-          code: 'AUTH',
-          error: true,
-        }}
-      >
+      <SystemMessageHandler dispatch={dispatch} systemMessage="Something went wrong">
         <View />
       </SystemMessageHandler>,
     );
@@ -60,14 +49,7 @@ describe('SystemMessageHandler', () => {
     spy = jest.spyOn(instance, 'showSnackbar');
 
     component.update(
-      <SystemMessageHandler
-        dispatch={dispatch}
-        systemMessage={{
-          message: 'Same same, but different',
-          code: 'AUTH',
-          error: true,
-        }}
-      >
+      <SystemMessageHandler dispatch={dispatch} systemMessage="Same same, but different">
         <View />
       </SystemMessageHandler>,
     );
@@ -85,14 +67,7 @@ describe('SystemMessageHandler', () => {
     spy = jest.spyOn(instance, 'showSnackbar');
 
     component.update(
-      <SystemMessageHandler
-        dispatch={dispatch}
-        systemMessage={{
-          message: 'Something went wrong',
-          code: 'AUTH',
-          error: true,
-        }}
-      >
+      <SystemMessageHandler dispatch={dispatch} systemMessage="Something went wrong">
         <View />
       </SystemMessageHandler>,
     );

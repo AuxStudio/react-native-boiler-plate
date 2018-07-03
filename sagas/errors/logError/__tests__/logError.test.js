@@ -12,12 +12,6 @@ const action = {
   },
 };
 
-const data = {
-  ...action.payload.error,
-  uid: action.payload.uid,
-  date: action.payload.date,
-};
-
 describe('logError saga', () => {
   describe('When testing the saga without a nextAction and without a response from the api', () => {
     const it = sagaHelper(logError(action));
@@ -29,9 +23,8 @@ describe('logError saga', () => {
           put({
             type: 'SET_SYSTEM_MESSAGE',
             payload: {
-              ...action.payload.error,
+              message: action.payload.error.message,
             },
-            error: true,
           }),
           // NOTE: no slack action should be called since there is no slack config
         ]),
@@ -53,9 +46,8 @@ describe('logError saga', () => {
           put({
             type: 'SET_SYSTEM_MESSAGE',
             payload: {
-              ...action.payload.error,
+              message: action.payload.error.message,
             },
-            error: true,
           }),
         ]),
       );
