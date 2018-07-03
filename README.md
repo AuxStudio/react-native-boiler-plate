@@ -16,6 +16,7 @@ Follow the [Setup guide](./docs/SETUP_GUIDE.md).
 - Realtime database
 - Firestore
 - Cloud storage
+- Push notifications
 - Network and system message management
 - Image [handling](https://github.com/react-community/react-native-image-picker), [caching](https://github.com/DylanVann/react-native-fast-image) and [resizing](https://github.com/bamlab/react-native-image-resizer)
 - [Location](https://github.com/devfd/react-native-geocoder)
