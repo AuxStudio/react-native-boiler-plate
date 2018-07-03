@@ -16,6 +16,8 @@ import {
 
 import { getData, updateData, setData, pushData, goOffline, goOnline } from './database';
 
+import { logError } from './errors';
+
 import {
   addDocument,
   deleteDocument,
@@ -34,11 +36,16 @@ import { resizeImage, showImagePicker } from './images';
 
 import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 
+import {
+  createChannel,
+  getToken,
+  hasPermission,
+  requestNotificationsPermission,
+} from './notifications';
+
 import { checkPermission, requestPermission, checkAndRequestPermission } from './permissions';
 
 import { uploadFile } from './storage';
-
-import { logError } from './errors';
 
 export default function* sagas() {
   yield all([
@@ -71,6 +78,8 @@ export default function* sagas() {
     fork(takeEvery, 'sync', sync),
     fork(takeEvery, 'updateDocument', updateDocument),
 
+    fork(takeLatest, 'logError', logError),
+
     fork(takeLatest, 'get', get),
     fork(takeLatest, 'post', post),
 
@@ -80,12 +89,15 @@ export default function* sagas() {
     fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
     fork(takeLatest, 'getFormattedAddressFromCoords', getFormattedAddressFromCoords),
 
+    fork(takeLatest, 'createChannel', createChannel),
+    fork(takeLatest, 'getToken', getToken),
+    fork(takeLatest, 'hasPermission', hasPermission),
+    fork(takeLatest, 'requestNotificationsPermission', requestNotificationsPermission),
+
     fork(takeLatest, 'checkPermission', checkPermission),
     fork(takeLatest, 'requestPermission', requestPermission),
     fork(takeLatest, 'checkAndRequestPermission', checkAndRequestPermission),
 
     fork(takeLatest, 'uploadFile', uploadFile),
-
-    fork(takeLatest, 'logError', logError),
   ]);
 }
