@@ -1086,3 +1086,14 @@ In XCode, enable the following capabilities:
 - Background modes => Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
+
+## 23. Fix android release build
+
+This is a temporary fix that will allow android release builds to build. Read more [here](https://github.com/facebook/react-native/issues/16906).
+
+In `./android/gradle.properties`, add:
+
+```
+android.enableAapt2=false
+```
+
