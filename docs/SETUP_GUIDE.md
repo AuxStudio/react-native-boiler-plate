@@ -1000,8 +1000,8 @@ yarn global add code-push-cli
 
 ```shell
 code-push login
-code-push app add PROJECT_NAMEAndroid android react-native
-code-push app add PROJECT_NAMEIOS ios react-native
+code-push app add PROJECT_NAME-android android react-native
+code-push app add PROJECT_NAME-ios ios react-native
 ```
 
 3.  Link dependency:
