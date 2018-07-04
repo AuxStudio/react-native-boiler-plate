@@ -962,10 +962,13 @@ yarn add --dev redux-saga-testing
     ```json
     "testMatch": [
         "<rootDir>/src/**/*.test.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-navigation)"
     ]
     ```
 
-    This avoids conflics with Detox \*.spec.js files.
+    This avoids conflics with Detox \*.spec.js files and an [issue](https://github.com/react-navigation/react-navigation/issues/657) with react-navigation.
 
     5.  Initialise Detox
 
@@ -1096,4 +1099,3 @@ In `./android/gradle.properties`, add:
 ```
 android.enableAapt2=false
 ```
-
