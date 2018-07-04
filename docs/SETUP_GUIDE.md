@@ -970,13 +970,20 @@ yarn add --dev redux-saga-testing
 
     This avoids conflics with Detox \*.spec.js files and an [issue](https://github.com/react-navigation/react-navigation/issues/657) with react-navigation.
 
-    5.  Initialise Detox
+    5.  Same file as above update test script and add detox script:
+
+    ```json
+    "test": "jest && yarn run detox",
+    "detox": "detox build && detox test",
+    ```
+
+    6.  Initialise Detox
 
     ```shell
     detox init -r jest
     ```
 
-    6.  Test the setup with:
+    7.  Test the setup with:
 
     ```shell
     detox build
