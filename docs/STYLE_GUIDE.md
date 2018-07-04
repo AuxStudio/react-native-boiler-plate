@@ -57,24 +57,42 @@ src
 			styles.js
 	config
 	handlers
+		AuthHandler
+			__tests__
+			index.js
 	navigation
 	pages
-		Home.js
+		Home
+			__tests__
+			index.js
 	reducers
-		auth.js
-	sagas
+		appData
+			__tests__
+			index.js
+			initialState.js
 		index.js
-		auth.js
+	sagas
+		analytics
+			logEvent
+				__tests__
+				index.js
+		index.js
 	services
-		auth
+		analytics
+			logEvent
+				__tests__
+				index.js
 		index.js
 	store
 	styleConstants
 		index.js
-		dimensions.js
-		colors.js
-		fonts.js
+		dimensions
+			index.js
 	utils
+		app
+			createError
+				__tests__
+				indexjs
 	App.js
 ```
 
