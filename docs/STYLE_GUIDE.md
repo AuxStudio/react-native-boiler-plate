@@ -56,6 +56,9 @@ src
 			index.js // container component if applicable
 			styles.js
 	config
+	e2e
+		...
+		Example.spec.js
 	handlers
 		AuthHandler
 			__tests__

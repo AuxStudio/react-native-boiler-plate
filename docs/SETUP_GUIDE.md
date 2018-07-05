@@ -778,7 +778,7 @@ import App from './src/App';
 1.  Install dependencies:
 
 ```shell
-yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native
+yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-native eslint-plugin-detox
 ```
 
 ## 13. Setup extra app icons

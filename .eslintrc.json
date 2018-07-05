@@ -40,7 +40,7 @@
     "react/jsx-wrap-multilines": "off",
     "import/named": "off" // new eslint bug
   },
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "detox"],
   "globals": {
     "__DEV__": true
   },

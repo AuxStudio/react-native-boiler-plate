@@ -86,3 +86,11 @@ You will notice that we JSON.stringify the results in our expect functions. JSON
 ## E2E testing
 
 We use [Detox](https://github.com/wix/detox/) for end to end testing.
+
+Detox tests should end with the suffix .spec.js.
+
+NOTE: To get eslint and detox to play nice, add the following to the top of your detox test files:
+
+```js
+/* eslint-env detox/detox, mocha */
+```
