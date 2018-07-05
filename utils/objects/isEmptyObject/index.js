@@ -2,7 +2,7 @@
 const isEmptyObject = (object) => {
   /* eslint-disable no-unneeded-ternary */
   // necessary for correct props in test
-  return Object.keys(object).length ? true : false;
+  return Object.keys(object).length ? false : true;
   /* eslint-enable */
 };
 
