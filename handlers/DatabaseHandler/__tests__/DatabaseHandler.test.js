@@ -35,7 +35,7 @@ describe('DatabaseHandler', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });

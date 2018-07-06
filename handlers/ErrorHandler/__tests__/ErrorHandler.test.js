@@ -53,7 +53,7 @@ describe('ErrorHandler', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });

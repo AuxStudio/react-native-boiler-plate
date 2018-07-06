@@ -22,7 +22,7 @@ describe('AuthHandler', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });

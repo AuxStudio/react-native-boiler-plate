@@ -65,8 +65,17 @@ exports[`NetworkHandler updates the store with connection info and goes offline 
         "type": "SET_NETWORK_CONNECTION_INFO",
       },
     ],
+    Array [
+      Object {
+        "type": "disableNetwork",
+      },
+    ],
   ],
   "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
     Object {
       "isThrow": false,
       "value": undefined,

@@ -51,7 +51,7 @@ describe('Menu', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });

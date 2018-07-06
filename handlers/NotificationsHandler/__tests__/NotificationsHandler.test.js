@@ -88,7 +88,7 @@ describe('NotificationsHandler', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });

@@ -74,7 +74,7 @@ describe('SystemMessageHandler', () => {
 
     expect(spy).toHaveBeenCalled();
 
-    spy.mockReset();
+    spy.mockClear();
 
     spy = jest.spyOn(instance, 'resetError');
 
@@ -88,7 +88,7 @@ describe('SystemMessageHandler', () => {
 
   afterEach(() => {
     if (spy) {
-      spy.mockReset();
+      spy.mockClear();
     }
   });
 });
