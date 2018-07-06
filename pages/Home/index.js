@@ -21,8 +21,9 @@ export class Home extends React.Component {
   navigate(page, props) {
     if (page) {
       Actions[page](props);
+    } else {
+      Actions.pop(); // default action
     }
-    Actions.pop(); // default action
   }
 
   render() {
