@@ -67,6 +67,9 @@ src
 	pages
 		Home
 			__tests__
+			PAGE_FEATURE/CONTAINER
+				__tests__
+				index.js
 			index.js
 	reducers
 		appData
