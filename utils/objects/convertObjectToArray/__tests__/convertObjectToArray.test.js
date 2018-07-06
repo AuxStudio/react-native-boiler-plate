@@ -11,14 +11,7 @@ describe('convertObjectToArray()', () => {
 
   // Should work but its not the typical use case
   it('should work with a shallow object', () => {
-    expect(convertObjectToArray(data)).toEqual([
-      {
-        0: 'b',
-        1: 'a',
-        2: 'r',
-        id: 'foo',
-      },
-    ]);
+    expect(convertObjectToArray(data)).toEqual([]);
   });
 
   it('should work well with a nested object', () => {
