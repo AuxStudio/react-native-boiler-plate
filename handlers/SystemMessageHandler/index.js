@@ -10,7 +10,7 @@ export class SystemMessageHandler extends React.Component {
     this.showSnackbar = this.showSnackbar.bind(this);
     this.resetError = this.resetError.bind(this);
 
-    this.snackbarDuration = 2750;
+    this.snackbarDuration = 4000;
   }
 
   static propTypes = {
