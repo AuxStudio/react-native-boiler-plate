@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { View } from 'react-native';
 
 import Menu from '..';
 
@@ -22,6 +23,9 @@ describe('Menu', () => {
         <Menu
           options={OPTIONS}
           handlePress={jest.fn()}
+          iconName="chevron-left"
+          iconStyle={{ color: 'red' }}
+          iconContainerStyle={{ backgroundColor: 'blue' }}
           itemTextStyle={{ color: 'red' }}
           itemContainerStyle={{ backgroundColor: 'blue' }}
           containerStyle={{ backgroundColor: 'green' }}

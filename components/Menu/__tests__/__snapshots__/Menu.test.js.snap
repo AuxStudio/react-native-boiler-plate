@@ -32,10 +32,13 @@ exports[`Menu renders a Menu with minimum required props 1`] = `
               "color": undefined,
               "fontSize": 12,
             },
-            Object {
-              "color": undefined,
-              "fontSize": 24,
-            },
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              },
+              undefined,
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -228,6 +231,7 @@ exports[`Menu renders with all props 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "backgroundColor": "blue",
           "opacity": 1,
         }
       }
@@ -242,10 +246,15 @@ exports[`Menu renders with all props 1`] = `
               "color": undefined,
               "fontSize": 12,
             },
-            Object {
-              "color": undefined,
-              "fontSize": 24,
-            },
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              },
+              Object {
+                "color": "red",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -254,7 +263,7 @@ exports[`Menu renders with all props 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>

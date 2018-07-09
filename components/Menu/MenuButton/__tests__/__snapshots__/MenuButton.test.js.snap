@@ -26,10 +26,15 @@ exports[`MenuButton renders with all props 1`] = `
           "color": undefined,
           "fontSize": 12,
         },
-        Object {
-          "color": undefined,
-          "fontSize": 24,
-        },
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          },
+          Object {
+            "color": "red",
+          },
+        ],
         Object {
           "fontFamily": "Material Icons",
           "fontStyle": "normal",
@@ -38,7 +43,7 @@ exports[`MenuButton renders with all props 1`] = `
       ]
     }
   >
-    
+    
   </Text>
 </View>
 `;
@@ -69,10 +74,13 @@ exports[`MenuButton renders with minimum required props 1`] = `
           "color": undefined,
           "fontSize": 12,
         },
-        Object {
-          "color": undefined,
-          "fontSize": 24,
-        },
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          },
+          undefined,
+        ],
         Object {
           "fontFamily": "Material Icons",
           "fontStyle": "normal",

@@ -29,6 +29,9 @@ export default class MenuComponent extends React.Component {
       }),
     ).isRequired,
     handlePress: PropTypes.func.isRequired,
+    iconName: PropTypes.string,
+    iconStyle: Text.propTypes.style,
+    iconContainerStyle: ViewPropTypes.style,
     itemTextStyle: Text.propTypes.style,
     itemContainerStyle: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
@@ -58,12 +61,27 @@ export default class MenuComponent extends React.Component {
   }
 
   render() {
-    const { containerStyle, options, itemTextStyle, itemContainerStyle } = this.props;
+    const {
+      iconName,
+      iconStyle,
+      iconContainerStyle,
+      containerStyle,
+      options,
+      itemTextStyle,
+      itemContainerStyle,
+    } = this.props;
 
     return (
       <Menu
         ref={this.setMenuRef}
-        button={<MenuButton handlePress={this.showMenu} />}
+        button={
+          <MenuButton
+            handlePress={this.showMenu}
+            iconName={iconName}
+            iconStyle={iconStyle}
+            style={iconContainerStyle}
+          />
+        }
         style={[styles.container, containerStyle]}
       >
         {options &&
@@ -71,7 +89,7 @@ export default class MenuComponent extends React.Component {
             return (
               <MenuItem
                 key={option.text}
-                onPress={() => this.selectOption(option.text)}
+                onPress={() => this.selectOption(option)}
                 disabled={option.disabled}
                 textStyle={[styles.itemText, itemTextStyle]}
                 style={[styles.itemContaier, itemContainerStyle]}
