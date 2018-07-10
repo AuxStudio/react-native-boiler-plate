@@ -6,19 +6,19 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './styles';
 
 const propTypes = {
-  wrapperStyle: ViewPropTypes.style,
   containerStyle: ViewPropTypes.style,
+  contentContainerStyle: ViewPropTypes.style,
   children: PropTypes.node,
 };
 
 const defaultProps = {};
 
-const InputContainer = ({ wrapperStyle, containerStyle, children }) => {
+const InputContainer = ({ containerStyle, contentContainerStyle, children }) => {
   return (
-    <View style={[styles.container, wrapperStyle]}>
+    <View style={[styles.container, containerStyle]}>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={containerStyle}
+        contentContainerStyle={contentContainerStyle}
       >
         {children}
       </KeyboardAwareScrollView>

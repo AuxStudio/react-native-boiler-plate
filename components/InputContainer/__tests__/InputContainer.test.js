@@ -9,8 +9,8 @@ describe('InputContainer', () => {
     expect(
       renderer.create(
         <InputContainer
-          wrapperStyle={{ backgroundColor: 'red' }}
-          containerStyle={{ backgroundColor: 'blue' }}
+          containerStyle={{ backgroundColor: 'red' }}
+          contentContainerStyle={{ backgroundColor: 'blue' }}
         >
           <View />
         </InputContainer>,
