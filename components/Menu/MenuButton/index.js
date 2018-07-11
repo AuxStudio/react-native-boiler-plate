@@ -11,15 +11,16 @@ const propTypes = {
   handlePress: PropTypes.func,
   iconStyle: Text.propTypes.style,
   style: ViewPropTypes.style,
+  testID: PropTypes.string,
 };
 
 const defaultProps = {
   iconName: 'menu',
 };
 
-const MenuButton = ({ iconName, handlePress, iconStyle, style }) => {
+const MenuButton = ({ iconName, handlePress, iconStyle, style, testID }) => {
   return (
-    <Touchable onPress={handlePress} style={[styles.menuButton, style]}>
+    <Touchable onPress={handlePress} style={[styles.menuButton, style]} testID={testID}>
       <Icon name={iconName} style={[styles.menuButtonIcon, iconStyle]} />
     </Touchable>
   );

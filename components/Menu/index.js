@@ -35,6 +35,8 @@ export default class MenuComponent extends React.Component {
     itemTextStyle: Text.propTypes.style,
     itemContainerStyle: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
+
+    buttonTestID: PropTypes.string,
   };
 
   static defaultProps = {};
@@ -69,6 +71,7 @@ export default class MenuComponent extends React.Component {
       options,
       itemTextStyle,
       itemContainerStyle,
+      buttonTestID,
     } = this.props;
 
     return (
@@ -80,6 +83,7 @@ export default class MenuComponent extends React.Component {
             iconName={iconName}
             iconStyle={iconStyle}
             style={iconContainerStyle}
+            testID={buttonTestID}
           />
         }
         style={[styles.container, containerStyle]}
@@ -88,6 +92,7 @@ export default class MenuComponent extends React.Component {
           options.map((option) => {
             return (
               <MenuItem
+                testID={`menu.item.${option.text}`}
                 key={option.text}
                 onPress={() => this.selectOption(option)}
                 disabled={option.disabled}
