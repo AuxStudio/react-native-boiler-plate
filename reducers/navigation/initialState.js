@@ -1,5 +1,5 @@
 const initialState = {
-  pages: [],
+  scene: null,
 };
 
 export default initialState;
