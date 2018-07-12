@@ -185,7 +185,7 @@ describe('When testing the saga with shouldReplace', () => {
     );
   });
 
-  it('should call RESET_PAGES', (result) => {
+  it('should call REPLACE_PAGES', (result) => {
     expect(result).toEqual(
       put({
         type: 'REPLACE_PAGE',
