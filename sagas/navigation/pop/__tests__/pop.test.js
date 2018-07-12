@@ -52,7 +52,6 @@ describe('When testing the saga with a nextAction and without a response from th
       }),
     );
   });
-  a;
 
   it('and then trigger an action', (result) => {
     expect(result).toEqual(put({ ...nextAction, payload: {} }));
