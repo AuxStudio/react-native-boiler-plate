@@ -4,7 +4,7 @@
   "description": "A boiler-plate project for React-native, Redux and Firebase apps",
   "main": "App.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --maxWorkers=4"
   },
   "jest": {
     "preset": "jest-react-native",
