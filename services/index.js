@@ -5,7 +5,6 @@ import firestore from './firestore';
 import http from './http';
 import images from './images';
 import location from './location';
-import navigation from './navigation';
 import notifications from './notifications';
 import permissions from './permissions';
 import storage from './storage';
@@ -18,7 +17,6 @@ module.exports = {
   http,
   images,
   location,
-  navigation,
   notifications,
   permissions,
   storage,

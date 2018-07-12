@@ -36,8 +36,6 @@ import { resizeImage, showImagePicker } from './images';
 
 import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
 
-import { navigateTo, pop } from './navigation';
-
 import {
   createChannel,
   getToken,
@@ -90,9 +88,6 @@ export default function* sagas() {
 
     fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
     fork(takeLatest, 'getFormattedAddressFromCoords', getFormattedAddressFromCoords),
-
-    fork(takeLatest, 'navigateTo', navigateTo),
-    fork(takeLatest, 'pop', pop),
 
     fork(takeLatest, 'createChannel', createChannel),
     fork(takeLatest, 'getToken', getToken),
