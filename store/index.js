@@ -26,7 +26,7 @@ const persistConfig = {
   key: 'root',
   storage,
   stateReconciler: autoMergeLevel2,
-  blacklist: 'appState',
+  blacklist: ['appState', 'navigation'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
