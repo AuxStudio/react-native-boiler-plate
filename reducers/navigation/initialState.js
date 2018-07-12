@@ -1,3 +1,5 @@
-const initialState = {};
+const initialState = {
+  pages: [],
+};
 
 export default initialState;
