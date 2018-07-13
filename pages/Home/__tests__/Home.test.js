@@ -3,15 +3,6 @@ import renderer from 'react-test-renderer';
 
 import { Home } from '..';
 
-jest.mock('react-native-router-flux', () => {
-  return {
-    Actions: {
-      search: jest.fn(),
-      pop: jest.fn(),
-    },
-  };
-});
-
 describe('Home', () => {
   let spy;
   const dispatch = jest.fn();
