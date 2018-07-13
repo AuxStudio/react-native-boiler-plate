@@ -215,11 +215,15 @@
       "import $1 from '..';",
       "$2",
       "it('renders a $1 with all props', () => {",
-      "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
+      "const component = renderer.create(<$1 />);",
+      "$2",
+      "  expect(component).toMatchSnapshot();",
       "});",
       "$2",
       "it('renders a $1 with minimum required props', () => {",
-      "  expect(renderer.create(<$1 />)).toMatchSnapshot();",
+      "const component = renderer.create(<$1 />);",
+      "$2",
+      "  expect(component).toMatchSnapshot();",
       "});",
       "/* eslint-enable */"
     ]
