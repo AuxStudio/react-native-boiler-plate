@@ -53,9 +53,10 @@ src
 				__tests__
 					ExampleDependentComponent.test.js
 				index.js
-			index.js // container component if applicable
+			index.js
 			styles.js
 	config
+	containers
 	e2e
 		...
 		Example.spec.js
@@ -67,9 +68,6 @@ src
 	pages
 		Home
 			__tests__
-			PAGE_FEATURE/CONTAINER
-				__tests__
-				index.js
 			index.js
 	reducers
 		appData
