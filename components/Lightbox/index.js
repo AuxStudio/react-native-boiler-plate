@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
 import Animator from 'react-native-simple-animators';
+import { View } from 'react-native';
 import { Touchable } from 'react-native-simple-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -54,7 +55,7 @@ export default class Lightbox extends React.Component {
         <Touchable onPress={this.animateOut} style={styles.iconContainer}>
           <Icon name="close" style={styles.icon} />
         </Touchable>
-        {children}
+        <View style={styles.contentContainer}>{children}</View>
       </Animator>
     );
   }

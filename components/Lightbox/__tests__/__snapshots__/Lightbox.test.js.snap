@@ -64,7 +64,19 @@ exports[`Lightbox renders with all props 1`] = `
       
     </Text>
   </View>
-  <View />
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 10,
+        "paddingHorizontal": 15,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View />
+  </View>
 </Animator>
 `;
 
@@ -132,5 +144,16 @@ exports[`Lightbox renders with minimum required props 1`] = `
       
     </Text>
   </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 10,
+        "paddingHorizontal": 15,
+        "paddingVertical": 10,
+      }
+    }
+  />
 </Animator>
 `;

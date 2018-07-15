@@ -9,6 +9,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  contentContainer: {
+    alignSelf: 'center',
+    backgroundColor: styleConstants.colors.white,
+    paddingVertical: styleConstants.dimensions.spacing.vertical,
+    paddingHorizontal: styleConstants.dimensions.spacing.horizontal,
+    borderRadius: styleConstants.dimensions.borderRadius,
+  },
   iconContainer: {
     position: 'absolute',
     top: styleConstants.dimensions.spacing.vertical * 2,
