@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Error from '../../pages/Error';
+import Error from '../../scenes/pages/Error';
 
 export class ErrorHandler extends React.Component {
   constructor(props) {

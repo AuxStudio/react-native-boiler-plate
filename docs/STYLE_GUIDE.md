@@ -64,11 +64,6 @@ src
 		AuthHandler
 			__tests__
 			index.js
-	navigation
-	pages
-		Home
-			__tests__
-			index.js
 	reducers
 		appData
 			__tests__
@@ -81,6 +76,12 @@ src
 				__tests__
 				index.js
 		index.js
+	scenes
+		pages
+			Home
+				__tests__
+				index.js
+		modals
 	services
 		analytics
 			logEvent
@@ -98,6 +99,7 @@ src
 				__tests__
 				indexjs
 	App.js
+	Router.js
 ```
 
 ## Redux actions
