@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { Home } from '..';
 
 describe('Home', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
 
   it('renders with all props', () => {
@@ -15,19 +15,11 @@ describe('Home', () => {
     renderer.create(<Home />);
   });
 
-  it('should handle navigate', () => {
-    spy = jest.spyOn(Home.prototype, 'navigate');
-    const component = renderer.create(<Home dispatch={dispatch} />);
-    const instance = component.getInstance();
-
-    instance.navigate('search');
-
-    expect(spy).toHaveBeenCalledWith('search');
-  });
-
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
   });
 });

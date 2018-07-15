@@ -7,8 +7,10 @@ jest.mock('react-native-router-flux', () => {
       pop: jest.fn(),
       replace: jest.fn(),
       reset: jest.fn(),
+      refresh: jest.fn(),
 
       // Custom
+      home: jest.fn(),
       search: jest.fn(),
     },
     ActionConst: {
