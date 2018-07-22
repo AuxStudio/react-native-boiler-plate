@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import codepush from 'react-native-code-push';
 
 import { store, persistor } from './store';
-import Routes from './navigation';
+import Routes from './scenes';
 
 import ErrorHandler from './handlers/ErrorHandler';
 import NotificationsHandler from './handlers/NotificationsHandler';
