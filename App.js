@@ -1,5 +1,4 @@
 import React from 'react';
-import { Router } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import codepush from 'react-native-code-push';
