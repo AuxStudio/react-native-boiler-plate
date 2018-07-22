@@ -69,7 +69,7 @@ git push -u origin master
 Create file `./android/local.properties` with the following contents:
 
 ```
-sdk.dir=PATH_TO_SDK
+sdk.dir = PATH_TO_SDK
 ```
 
 ## 4. Update display and package name
@@ -167,23 +167,11 @@ In `./gitignore`, remove `*.keystore`.
 
 ## 7. Update android versioning
 
-1.  In `./android/app/build.gradle`, update in android:
+In `./android/build.gradle`, update in `ext` object:
 
 ```java
-compileSdkVersion 27
-buildToolsVersion "27.0.2"
-```
-
-2.  Same file as above, update in android.defaultConfig:
-
-```java
-targetSdkVersion 26
-```
-
-3.  Same file as above, update in dependencies:
-
-```java
-compile "com.android.support:appcompat-v7:25.0.0"
+buildToolsVersion = "27.0.2"
+compileSdkVersion = 27
 ```
 
 ## 8. Add Firebase apps
@@ -546,7 +534,7 @@ implementation(project(':react-native-firebase')) {
 }
 ```
 
-8.  In `./android/gradlew/wrapper/gradle-wrapper.properties`, update:
+8.  In `./android/gradle/wrapper/gradle-wrapper.properties`, update:
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
