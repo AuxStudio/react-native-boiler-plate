@@ -13,7 +13,7 @@ If you'd like to test that you are setting the project up correctly, do a build 
 3.  [Add reference to Android SDK path](#3-add-reference-to-android-sdk-path)
 4.  [Update display and package name](#4-update-display-and-package-name)
 5.  [Make Android builds smaller](#5-make-android-builds-smaller)
-6.  [Generate android app signing](#6-generate-android-app-signing)
+6.  [Generate android app signing](#6-add-android-app-signing)
 7.  [Update android versioning](#7-update-android-versioning)
 8.  [Add Firebase apps](#8-add-firebase-apps)
 9.  [Install dependencies](#9-install-dependencies)
