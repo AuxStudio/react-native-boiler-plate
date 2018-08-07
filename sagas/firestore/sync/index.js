@@ -4,7 +4,7 @@ import utils from '../../../utils';
 import createChannel from './createChannel';
 
 export default function* sync(action) {
-  const channel = yield call(createChannel, action.meta.pathParts);
+  const channel = yield call(createChannel, action.meta.pathParts, action.meta.query);
 
   try {
     while (true) {
