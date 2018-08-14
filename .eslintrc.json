@@ -38,8 +38,10 @@
     "react/jsx-one-expression-per-line": "off", // does not work well with prettier
     "react/forbid-foreign-prop-types": "off", // we will only use propTypes from React-native/Text
     "react/jsx-wrap-multilines": "off",
-    "import/named": "off", // new eslint bug
-    "implicit-arrow-linebreak": "off"
+    "import/named": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off",
+    "max-len": "off"
   },
   "plugins": ["react", "react-native", "detox"],
   "globals": {
