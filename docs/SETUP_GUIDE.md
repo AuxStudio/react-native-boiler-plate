@@ -791,7 +791,7 @@ Optional.
 
 ### Android
 
-Copy the fonts to `./android/app/src/assets/fonts`.
+Copy the fonts to `./android/app/src/main/assets/fonts`.
 
 ### iOS
 
