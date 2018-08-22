@@ -1,23 +1,37 @@
-// Takes a unix timestamp and returns a pretty date in the format: Sat, 3 Feb
-const getPrettyDate = (timestamp) => {
-  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
+/*
+  Takes a unix timestamp and returns a pretty date in the formats:
+
+  - Sat, 3 Feb (timestamp)
+  - Saturday, 3 February (timestamp, false, true)
+  - Sat, 3 Feb 2018 (timestamp, true, false)
+*/
+const getPrettyDate = (timestamp, showYear, abbreviate) => {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
+    'January',
+    'February',
+    'March',
+    'April',
     'May',
     'June',
     'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const date = new Date(timestamp);
+  let dayText = days[date.getDay()];
+  let monthText = months[date.getMonth()];
+  const yearText = showYear ? ` ${date.getFullYear()}` : '';
 
-  return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+  if (abbreviate) {
+    dayText = dayText.slice(0, 3);
+    monthText = monthText.slice(0, 3);
+  }
+
+  return `${dayText}, ${date.getDate()} ${monthText}${yearText}`;
 };
 
 export default getPrettyDate;
