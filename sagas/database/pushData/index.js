@@ -16,7 +16,7 @@ export default function* pushData(action) {
       type: 'logError',
       payload: {
         error: utils.app.createError(error),
-        date: new Date(),
+        date: Date.now(),
         action,
       },
     });

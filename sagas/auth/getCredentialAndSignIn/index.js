@@ -38,7 +38,7 @@ export default function* getCredentialAndSignIn(action) {
         type: 'logError',
         payload: {
           error: utils.app.createError(error),
-          date: new Date(),
+          date: Date.now(),
           action,
         },
       });
@@ -48,7 +48,7 @@ export default function* getCredentialAndSignIn(action) {
       type: 'logError',
       payload: {
         error: utils.app.createError(error),
-        date: new Date(),
+        date: Date.now(),
         action,
       },
     });

@@ -25,7 +25,7 @@ export default function* getCredentialFromEmail(action) {
       type: 'logError',
       payload: {
         error: utils.app.createError(error),
-        date: new Date(),
+        date: Date.now(),
         action,
       },
     });

@@ -132,7 +132,7 @@ describe('checkAndRequestPermissions saga', () => {
             error: utils.app.createError(
               `We need your permission to access your ${action.payload.permission}`,
             ),
-            date: expect.any(Date),
+            date: expect.any(Number),
             action,
           },
         }),
@@ -171,7 +171,7 @@ describe('checkAndRequestPermissions saga', () => {
             error: utils.app.createError(
               `We need your permission to access your ${action.payload.permission}`,
             ),
-            date: expect.any(Date),
+            date: expect.any(Number),
             action,
           },
         }),
@@ -201,7 +201,7 @@ describe('checkAndRequestPermissions saga', () => {
           type: 'logError',
           payload: {
             error: utils.app.createError(errorMessage),
-            date: expect.any(Date),
+            date: expect.any(Number),
             action,
           },
         }),
@@ -239,7 +239,7 @@ describe('checkAndRequestPermissions saga', () => {
           type: 'logError',
           payload: {
             error: utils.app.createError(errorMessage),
-            date: expect.any(Date),
+            date: expect.any(Number),
             action,
           },
         }),

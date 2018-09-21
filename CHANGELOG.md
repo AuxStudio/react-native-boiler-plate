@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Disabled remote debugger warnings
 - Lightbox component accepts disableClose and handleClose props
 - AppState initialState has shape where applicable (for self-documentation)
+- Replace Date strings with unix timestamps
 
 ### Added
 
