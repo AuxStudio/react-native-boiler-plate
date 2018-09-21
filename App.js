@@ -19,6 +19,9 @@ import LocationHandler from './handlers/LocationHandler';
 //   persistor.purge();
 // }
 
+// Disable remote debugger warnings
+console.ignoredYellowBox = ['Remote debugger', 'Warning: isMounted(...) is deprecated'];
+
 export function App() {
   return (
     <Provider store={store}>
