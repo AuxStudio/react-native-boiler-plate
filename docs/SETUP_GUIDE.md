@@ -744,7 +744,7 @@ git clone https://github.com/shaunsaker/react-native-boilerplate.git src
 2.  Delete and move files. FIXME: script
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./src/CODE_OF_CONDUCT.md && sudo rm ./src/CONTRIBUTING.md && sudo rm ./src/LICENCE && sudo rm ./src/PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc && mv ./src/__mocks__/ ./
+sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo rm ./src/CHANGELOG.md && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./src/CODE_OF_CONDUCT.md && sudo rm ./src/CONTRIBUTING.md && sudo rm ./src/LICENCE && sudo rm ./src/PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc && mv ./src/__mocks__/ ./
 ```
 
 3.  In `./index.js`, change:
