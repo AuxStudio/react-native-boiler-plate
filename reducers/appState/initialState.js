@@ -1,5 +1,4 @@
 const initialState = {
-  loading: true, // assume true on app open
   deviceLocation: {
     lat: null,
     lng: null,

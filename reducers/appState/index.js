@@ -5,11 +5,6 @@ export default function appStateReducer(state = initialState, action = {}) {
   let newState;
 
   switch (action.type) {
-    case 'TOGGLE_LOADING':
-      newState = utils.objects.cloneObject(state);
-      newState.loading = !newState.loading;
-      return newState;
-
     case 'SET_DEVICE_LOCATION':
       newState = utils.objects.cloneObject(state);
       newState.deviceLocation = action.payload.coords;

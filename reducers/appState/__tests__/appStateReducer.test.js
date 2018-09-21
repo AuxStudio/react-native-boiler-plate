@@ -6,14 +6,6 @@ describe('appStateReducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle TOGGLE_LOADING', () => {
-    const action = {
-      type: 'TOGGLE_LOADING',
-    };
-
-    expect(reducer(undefined, action).loading).toEqual(false); // initial is true
-  });
-
   it('should handle SET_DEVICE_LOCATION', () => {
     const payload = {
       coords: {
