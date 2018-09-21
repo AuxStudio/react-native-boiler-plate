@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - State's pendingTransactions does not reference firebase (for better backend interoperability)
 - Disabled remote debugger warnings
 - Lightbox component accepts disableClose and handleClose props
+- AppState initialState has shape where applicable (for self-documentation)
 
 ### Added
 

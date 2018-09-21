@@ -1,8 +1,14 @@
 const initialState = {
   loading: true, // assume true on app open
-  deviceLocation: null,
+  deviceLocation: {
+    lat: null,
+    lng: null,
+  },
   systemMessage: null,
-  network: null,
+  network: {
+    type: null,
+    effectiveType: null,
+  },
   pendingTransactions: [],
 };
 
