@@ -10,18 +10,20 @@ jest.mock('react-native-simple-animators', () => 'Animator');
 jest.useFakeTimers();
 
 describe('Lightbox', () => {
-  it('renders with all props', () => {
-    const component = renderer.create(
-      <Lightbox>
-        <View />
-      </Lightbox>,
-    );
+  const handleClose = jest.fn();
+
+  it('renders with minimum required props', () => {
+    const component = renderer.create(<Lightbox />);
 
     expect(component).toMatchSnapshot();
   });
 
-  it('renders with minimum required props', () => {
-    const component = renderer.create(<Lightbox />);
+  it('renders with all props', () => {
+    const component = renderer.create(
+      <Lightbox disableClose>
+        <View />
+      </Lightbox>,
+    );
 
     expect(component).toMatchSnapshot();
   });
@@ -35,10 +37,29 @@ describe('Lightbox', () => {
     expect(instance.state.shouldAnimateOut).toBe(true);
   });
 
-  it('should handle onBack', () => {
-    const component = renderer.create(<Lightbox />);
-    const instance = component.getInstance();
+  describe('should handle onBack', () => {
+    it('with handleClose', () => {
+      const component = renderer.create(<Lightbox handleClose={handleClose} />);
+      const instance = component.getInstance();
 
-    instance.onBack();
+      instance.onBack();
+
+      expect(handleClose).toHaveBeenCalled();
+    });
+
+    it('without handleClose', () => {
+      const component = renderer.create(<Lightbox />);
+      const instance = component.getInstance();
+
+      instance.onBack();
+
+      expect(handleClose).not.toHaveBeenCalled();
+    });
+
+    afterEach(() => {
+      handleClose.mockClear();
+    });
   });
+
+  // TODO: It should assign an event listener on mount
 });
