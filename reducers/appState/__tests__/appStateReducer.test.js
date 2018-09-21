@@ -6,14 +6,6 @@ describe('appStateReducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle TOGGLE_LOADING', () => {
-    const action = {
-      type: 'TOGGLE_LOADING',
-    };
-
-    expect(reducer(undefined, action).loading).toEqual(false); // initial is true
-  });
-
   it('should handle SET_DEVICE_LOCATION', () => {
     const payload = {
       coords: {
@@ -93,11 +85,11 @@ describe('appStateReducer', () => {
       payload,
     };
 
-    expect(reducer(undefined, action).firebase.pendingTransactions).toEqual([payload.event]);
+    expect(reducer(undefined, action).pendingTransactions).toEqual([payload.event]);
   });
 
   it('should handle REMOVE_PENDING_TRANSACTION', () => {
-    initialState.firebase.pendingTransactions = [
+    initialState.pendingTransactions = [
       {
         id: '1234',
         action: {
@@ -123,6 +115,6 @@ describe('appStateReducer', () => {
       payload,
     };
 
-    expect(reducer(initialState, action).firebase.pendingTransactions).toEqual([]);
+    expect(reducer(initialState, action).pendingTransactions).toEqual([]);
   });
 });

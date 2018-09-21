@@ -20,7 +20,7 @@ export default function* signOut(action) {
       type: 'logError',
       payload: {
         error: utils.app.createError(error),
-        date: new Date(),
+        date: Date.now(),
         action,
       },
     });

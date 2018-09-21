@@ -110,7 +110,7 @@ describe('getDocument saga', () => {
           type: 'logError',
           payload: {
             error: utils.app.createError(errorMessage),
-            date: expect.any(Date),
+            date: expect.any(Number),
             action,
           },
         }),

@@ -5,11 +5,6 @@ export default function appStateReducer(state = initialState, action = {}) {
   let newState;
 
   switch (action.type) {
-    case 'TOGGLE_LOADING':
-      newState = utils.objects.cloneObject(state);
-      newState.loading = !newState.loading;
-      return newState;
-
     case 'SET_DEVICE_LOCATION':
       newState = utils.objects.cloneObject(state);
       newState.deviceLocation = action.payload.coords;
@@ -32,16 +27,14 @@ export default function appStateReducer(state = initialState, action = {}) {
 
     case 'ADD_PENDING_TRANSACTION':
       newState = utils.objects.cloneObject(state);
-      newState.firebase.pendingTransactions.push(action.payload.event);
+      newState.pendingTransactions.push(action.payload.event);
       return newState;
 
     case 'REMOVE_PENDING_TRANSACTION':
       newState = utils.objects.cloneObject(state);
-      newState.firebase.pendingTransactions = newState.firebase.pendingTransactions.filter(
-        (event) => {
-          return event.id !== action.payload.id;
-        },
-      );
+      newState.pendingTransactions = newState.pendingTransactions.filter((event) => {
+        return event.id !== action.payload.id;
+      });
       return newState;
 
     default:

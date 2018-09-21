@@ -106,7 +106,7 @@ describe('When testing the saga when an error is thrown from the api', () => {
         type: 'logError',
         payload: {
           error: utils.app.createError(errorMessage),
-          date: expect.any(Date),
+          date: expect.any(Number),
         },
       }),
     );

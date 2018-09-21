@@ -1,11 +1,14 @@
 const initialState = {
-  loading: true, // assume true on app open
-  deviceLocation: null,
-  systemMessage: null,
-  network: null,
-  firebase: {
-    pendingTransactions: [],
+  deviceLocation: {
+    lat: null,
+    lng: null,
   },
+  systemMessage: null,
+  network: {
+    type: null,
+    effectiveType: null,
+  },
+  pendingTransactions: [],
 };
 
 export default initialState;
