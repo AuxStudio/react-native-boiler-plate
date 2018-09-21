@@ -32,16 +32,14 @@ export default function appStateReducer(state = initialState, action = {}) {
 
     case 'ADD_PENDING_TRANSACTION':
       newState = utils.objects.cloneObject(state);
-      newState.firebase.pendingTransactions.push(action.payload.event);
+      newState.pendingTransactions.push(action.payload.event);
       return newState;
 
     case 'REMOVE_PENDING_TRANSACTION':
       newState = utils.objects.cloneObject(state);
-      newState.firebase.pendingTransactions = newState.firebase.pendingTransactions.filter(
-        (event) => {
-          return event.id !== action.payload.id;
-        },
-      );
+      newState.pendingTransactions = newState.pendingTransactions.filter((event) => {
+        return event.id !== action.payload.id;
+      });
       return newState;
 
     default:

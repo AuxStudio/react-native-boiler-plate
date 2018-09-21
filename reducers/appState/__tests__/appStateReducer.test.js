@@ -93,11 +93,11 @@ describe('appStateReducer', () => {
       payload,
     };
 
-    expect(reducer(undefined, action).firebase.pendingTransactions).toEqual([payload.event]);
+    expect(reducer(undefined, action).pendingTransactions).toEqual([payload.event]);
   });
 
   it('should handle REMOVE_PENDING_TRANSACTION', () => {
-    initialState.firebase.pendingTransactions = [
+    initialState.pendingTransactions = [
       {
         id: '1234',
         action: {
@@ -123,6 +123,6 @@ describe('appStateReducer', () => {
       payload,
     };
 
-    expect(reducer(initialState, action).firebase.pendingTransactions).toEqual([]);
+    expect(reducer(initialState, action).pendingTransactions).toEqual([]);
   });
 });

@@ -3,9 +3,7 @@ const initialState = {
   deviceLocation: null,
   systemMessage: null,
   network: null,
-  firebase: {
-    pendingTransactions: [],
-  },
+  pendingTransactions: [],
 };
 
 export default initialState;
