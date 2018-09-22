@@ -369,7 +369,7 @@ configurations.all {
 
 2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). (ONCE-OFF).
 
-3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework `TODO: Is this necessary for login?` into Frameworks folder of the project in XCode.
+3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
 
 ### react-native-google-signin
 
@@ -487,14 +487,8 @@ react-native link react-native-firebase
 2.  In `./android/build.gradle`, add/update to buildscript.dependencies:
 
 ```java
-classpath 'com.android.tools.build:gradle:3.1.0'
+classpath 'com.android.tools.build:gradle:3.1.4'
 classpath 'com.google.gms:google-services:3.2.1'
-```
-
-3.  Same file as above, add to buildscript.repositories `AND` allprojects.repositoriess:
-
-```java
-google()
 ```
 
 4.  In `./android/app/build.gradle`, add to bottom of file:
@@ -507,7 +501,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ```java
     // Firebase dependencies
-    implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:15.0.0"
     implementation "com.google.firebase:firebase-analytics:15.0.2"
     implementation "com.google.firebase:firebase-auth:15.1.0"
@@ -532,12 +526,6 @@ multiDexEnabled true
 implementation(project(':react-native-firebase')) {
     transitive = false
 }
-```
-
-8.  In `./android/gradle/wrapper/gradle-wrapper.properties`, update:
-
-```
-distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip
 ```
 
 9.  In `./android/app/src/main/java/.../MainApplication.java`, add at top of file:
