@@ -38,7 +38,7 @@ If you'd like to test that you are setting the project up correctly, do a build 
 16. [Add Storybook](#16-add-storybook)
 17. [Fastlane integration](#17-fastlane-integration)
 18. [Setup Firebase environments](#18-setup-firebase-environments)
-19. [Setup Detox for E2E testing](#19-setup-detox-for-e2e-testing)
+19. [Setup testing](#19-setup-testing)
 20. [Add Slack config](#20-add-slack-config)
 21. [Setup Code-Push](#21-setup-code-push)
 22. [Add Push Notifications](#22-add-push-notifications)
@@ -896,7 +896,7 @@ Done! Use the scripts to develop or release the beta builds, e.g:
 yarn run ios-dev
 ```
 
-## 19. Setup detox for e2e testing
+## 19. Setup testing
 
 1.  Add dev dependency needed for saga unit tests
 
