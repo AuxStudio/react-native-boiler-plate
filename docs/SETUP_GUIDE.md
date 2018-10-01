@@ -896,7 +896,7 @@ Done! Use the scripts to develop or release the beta builds, e.g:
 yarn run ios-dev
 ```
 
-## 19. Setup testing
+## 19. Setup detox for e2e testing
 
 1.  Add dev dependency needed for saga unit tests
 
