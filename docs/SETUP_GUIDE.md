@@ -14,7 +14,7 @@ If you'd like to test that you are setting the project up correctly, do a build 
 4.  [Update display and package name](#4-update-display-and-package-name)
 5.  [Make Android builds smaller](#5-make-android-builds-smaller)
 6.  [Generate android app signing](#6-add-android-app-signing)
-7.  [Update android versioning](#7-update-android-versioning)
+7.  Placeholder
 8.  [Add Firebase apps](#8-add-firebase-apps)
 9.  [Install dependencies](#9-install-dependencies)
 10. [Link dependencies](#10-link-dependencies)
@@ -46,8 +46,10 @@ If you'd like to test that you are setting the project up correctly, do a build 
 ## 1. Initialise project
 
 ```shell
-react-native init PROJECT_NAME
+react-native init temp
 ```
+
+`NOTE: We use 'temp' as a project name here so that we can correctly rename the project in [Step 4](#4-update-display-and-package-name)`
 
 ## 2. Setup git
 
@@ -56,11 +58,11 @@ react-native init PROJECT_NAME
 2.  Initialise git in project:
 
 ```shell
-cd PROJECT_NAME
+cd temp
 git init
 git remote add origin GIT_REPO_URL
 git add .
-git commit -m "Initialise Project"
+git commit -m "Initial commit"
 git push -u origin master
 ```
 
@@ -165,15 +167,6 @@ signingConfig signingConfigs.release
 
 In `./gitignore`, remove `*.keystore`.
 
-## 7. Update android versioning
-
-In `./android/build.gradle`, update in `ext` object:
-
-```java
-buildToolsVersion = "27.0.2"
-compileSdkVersion = 27
-```
-
 ## 8. Add Firebase apps
 
 1.  Add two projects to the [Firebase console](https://console.firebase.google.com/).
@@ -192,7 +185,7 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons@4.6.0 react-native-snackbar@0.4.6 react-native-fast-image@4.0.14 react-native-firebase@4.2.0 redux@4.0.0 redux-persist@5.9.1 react-redux@5.0.7 redux-saga@0.16.0 react-native-router-flux@4.0.0-beta.28 react-native-fbsdk@0.6.3 react-native-google-signin@0.12.0 react-native-image-picker@0.26.7 react-native-image-resizer@1.0.0 react-native-permissions@1.1.1 react-native-geocoder@0.5.0 redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu react-native-material-textfield react-native-modal
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase reduxredux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-pickerreact-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
 ```
 
 ## 10. Link dependencies
