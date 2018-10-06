@@ -4,11 +4,20 @@ import { connect } from 'react-redux';
 
 import Error from '../../scenes/pages/Error';
 
+/*
+  This handler's responsibility is to:
+
+  - Catch errors in it's children
+  - If an error is caught:
+    - Render an error state
+    - Log it
+*/
 export class ErrorHandler extends React.Component {
   constructor(props) {
     super(props);
 
     this.setHasError = this.setHasError.bind(this);
+    this.logError = this.logError.bind(this);
 
     this.state = {
       hasError: null,
@@ -24,10 +33,16 @@ export class ErrorHandler extends React.Component {
   static defaultProps = {};
 
   componentDidCatch(error) {
-    const { dispatch, uid } = this.props;
+    this.setHasError(true);
+    this.logError(error);
+  }
 
-    // Catch errors in children
-    this.setHasError();
+  setHasError(hasError) {
+    this.setState({ hasError });
+  }
+
+  logError(error) {
+    const { dispatch, uid } = this.props;
 
     dispatch({
       type: 'logError',
@@ -36,10 +51,6 @@ export class ErrorHandler extends React.Component {
         uid,
       },
     });
-  }
-
-  setHasError() {
-    this.setState({ hasError: true });
   }
 
   render() {
