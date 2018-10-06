@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added getPercentage util to numbers subset
 - Added version to config
 - Added BuildStatus component
+- Added more font types to styleConstants
 
 ### Removed
 

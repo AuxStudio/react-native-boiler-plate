@@ -4,8 +4,9 @@ const fonts = {};
 
 // Font families
 fonts.families = {
-  primary: 'Arial',
-  secondary: 'Arial',
+  primary: 'System',
+  medium: 'System',
+  secondary: 'System',
 };
 
 // Font sizes
@@ -20,8 +21,28 @@ fonts.sizes = {
 // Font types
 fonts.types = {
   title: {
-    fontFamily: fonts.families.primary,
+    ...fonts.families.medium,
     fontSize: fonts.sizes.large,
+    color: colors.primaryText,
+  },
+  heading: {
+    ...fonts.families.medium,
+    fontSize: fonts.sizes.regular,
+    color: colors.primaryText,
+  },
+  paragraph: {
+    ...fonts.families.primary,
+    fontSize: fonts.sizes.regular,
+    color: colors.primaryText,
+  },
+  small: {
+    ...fonts.families.primary,
+    fontSize: fonts.sizes.small,
+    color: colors.primaryText,
+  },
+  extraSmall: {
+    ...fonts.families.medium,
+    fontSize: fonts.sizes.verySmall,
     color: colors.primaryText,
   },
 };
