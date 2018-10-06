@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated test snippet render block
 - Updated DatabaseHandler
 - Updated ErrorHandler
+- Updated NetworkHandler
 
 ## 1.1.2
 
