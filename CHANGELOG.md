@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Fixed routes import bug
+- Fixed anonymous auth SIGN_IN_USER reducer bug
 
 ### Added
 
