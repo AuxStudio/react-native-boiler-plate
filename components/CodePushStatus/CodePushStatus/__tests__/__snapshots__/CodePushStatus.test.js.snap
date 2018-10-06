@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodePushStatus renders renders 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "stretch",
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": 10,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 7.5,
+      "paddingVertical": 5,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": undefined,
+          "fontSize": 12,
+        },
+        Object {
+          "color": "#4caf50",
+          "fontSize": 20,
+          "marginRight": 7.5,
+        },
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "flex": 1,
+        "textAlign": "center",
+      }
+    }
+  >
+    Up to date
+  </Text>
+</View>
+`;
+
+exports[`CodePushStatus renders renders the loading state 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "stretch",
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": 10,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 7.5,
+      "paddingVertical": 5,
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="small"
+    style={
+      Object {
+        "marginRight": 7.5,
+      }
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "flex": 1,
+        "textAlign": "center",
+      }
+    }
+  >
+    Up to date
+  </Text>
+</View>
+`;

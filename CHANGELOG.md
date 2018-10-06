@@ -15,12 +15,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added CodePush handler
 - Added CodePushStatus component
-- Added getPercentage util
+- Added getPercentage util to numbers subset
 
 ### Removed
 
 - Removed Input component (external lib is no longer being maintained)
 - Removed Modal component (replaced by Lightbox)
+
+### Changed
+
+- Moved navigate util to navigation subset
 
 ## 1.1.2
 
