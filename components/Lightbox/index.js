@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
 import Animator from 'react-native-simple-animators';
-import { View, Text, BackHandler } from 'react-native';
+import { View, Text } from 'react-native';
 import { Touchable } from 'react-native-simple-components';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -31,13 +31,6 @@ export default class Lightbox extends React.Component {
   };
 
   static defaultProps = {};
-
-  componentDidMount() {
-    // Disable back android
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      return true;
-    });
-  }
 
   animateOut() {
     this.setState({

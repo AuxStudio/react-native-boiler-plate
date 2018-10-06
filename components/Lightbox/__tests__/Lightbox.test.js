@@ -60,6 +60,4 @@ describe('Lightbox', () => {
       handleClose.mockClear();
     });
   });
-
-  // TODO: It should assign an event listener on mount
 });
