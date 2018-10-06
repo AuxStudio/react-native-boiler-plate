@@ -6,7 +6,7 @@ export class DatabaseHandler extends React.Component {
   constructor(props) {
     super(props);
 
-    this.syncData = this.syncData.bind(this);
+    this.handleSyncData = this.handleSyncData.bind(this);
   }
 
   static get propTypes() {
@@ -20,7 +20,7 @@ export class DatabaseHandler extends React.Component {
     const { authenticated } = this.props;
 
     if (authenticated) {
-      this.syncData();
+      this.handleSyncData();
     }
   }
 
@@ -28,27 +28,12 @@ export class DatabaseHandler extends React.Component {
     const { authenticated } = this.props;
 
     if (authenticated && !prevProps.authenticated) {
-      this.syncData();
+      this.handleSyncData();
     }
   }
 
-  syncData() {
-    const { dispatch } = this.props;
-
-    // Sync data on app mount
-    dispatch({
-      type: 'TEMP',
-      // type: 'sync',
-      // meta: {
-      //   pathParts: [''],
-      //   nextAction: {
-      //     type: 'SET_APP_DATA',
-      //     payload: {
-      //       ref: 'app',
-      //     },
-      //   },
-      // },
-    });
+  handleSyncData() {
+    // NOTE: This is a placeholder for now but this should call other methods, ie. syncReviews
   }
 
   render() {

@@ -4,38 +4,45 @@ import renderer from 'react-test-renderer';
 import { DatabaseHandler } from '..';
 
 describe('DatabaseHandler', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
 
-  it('renders with all props', () => {
-    expect(
-      renderer.create(<DatabaseHandler dispatch={jest.fn()} authenticated />),
-    ).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders with minimum required props', () => {
+      const component = renderer.create(<DatabaseHandler dispatch={dispatch} />);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('renders with minimum required props', () => {
-    expect(renderer.create(<DatabaseHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  describe('methods', () => {
+    it('should handle handleSyncData', () => {});
   });
 
-  it('calls syncData on componentDidMount if authenticated prop is supplied', () => {
-    spy = jest.spyOn(DatabaseHandler.prototype, 'syncData');
+  describe('lifecycle methods', () => {
+    it('should call handleSyncData if authenticated in componentDidMount', () => {
+      spies[0] = jest.spyOn(DatabaseHandler.prototype, 'handleSyncData');
+      renderer.create(<DatabaseHandler dispatch={dispatch} authenticated />);
 
-    renderer.create(<DatabaseHandler dispatch={dispatch} authenticated />);
+      expect(spies[0]).toHaveBeenCalled();
+    });
 
-    expect(spy).toHaveBeenCalled();
-  });
+    it('should call handleSyncData on new authenticated in componentDidUpdate', () => {
+      spies[0] = jest.spyOn(DatabaseHandler.prototype, 'handleSyncData');
+      const component = renderer.create(<DatabaseHandler dispatch={dispatch} />);
 
-  it('does not call syncData on componentDidMount if authenticated prop is not supplied', () => {
-    spy = jest.spyOn(DatabaseHandler.prototype, 'syncData');
+      component.update(<DatabaseHandler dispatch={dispatch} authenticated />);
 
-    renderer.create(<DatabaseHandler dispatch={dispatch} />);
-
-    expect(spy).not.toHaveBeenCalled();
+      expect(spies[0]).toHaveBeenCalled();
+    });
   });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+    dispatch.mockClear();
   });
 });
