@@ -14,6 +14,7 @@ import DatabaseHandler from './handlers/DatabaseHandler';
 import NetworkHandler from './handlers/NetworkHandler';
 import LocationHandler from './handlers/LocationHandler';
 import CodePushHandler from './handlers/CodePushHandler';
+import AndroidBackHandler from './handlers/AndroidBackHandler';
 
 // Helper to clear local storage during development
 // if (__DEV__) {
@@ -36,6 +37,7 @@ export function App() {
             <NetworkHandler />
             <LocationHandler />
             <Routes />
+            <AndroidBackHandler />
           </SystemMessageHandler>
         </ErrorHandler>
       </PersistGate>
