@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added CodePushStatus component
 - Added getPercentage util to numbers subset
 - Added version to config
+- Added BuildStatus component
 
 ### Removed
 
