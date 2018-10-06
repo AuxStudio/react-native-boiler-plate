@@ -16,6 +16,8 @@ import LocationHandler from './handlers/LocationHandler';
 import CodePushHandler from './handlers/CodePushHandler';
 import AndroidBackHandler from './handlers/AndroidBackHandler';
 
+import PageLoader from './components/PageLoader';
+
 // Helper to clear local storage during development
 // if (__DEV__) {
 //   persistor.purge();
@@ -27,7 +29,7 @@ console.ignoredYellowBox = ['Remote debugger', 'Warning: isMounted(...) is depre
 export function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<PageLoader />} persistor={persistor}>
         <NotificationsHandler />
         <ErrorHandler>
           <SystemMessageHandler>

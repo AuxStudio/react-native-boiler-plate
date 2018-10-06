@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added Android back handler
 - Added Page component
 - Added PageLoader component
+- Added PageLoader component to PersistGate as loading state
 
 ### Removed
 
