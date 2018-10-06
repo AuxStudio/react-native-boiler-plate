@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Moved navigate util to navigation subset
 - Only log store actions if iOS
+- Changed the scripts in the SETUP_GUIDE
 
 ## 1.1.2
 
