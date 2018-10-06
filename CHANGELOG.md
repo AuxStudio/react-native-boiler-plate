@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added CodePush handler
 
+### Removed
+
+- Removed Input component (external lib is no longer being maintained)
+- Removed Modal component (replaced by Lightbox)
+
 ## 1.1.2
 
 ### Fixed
