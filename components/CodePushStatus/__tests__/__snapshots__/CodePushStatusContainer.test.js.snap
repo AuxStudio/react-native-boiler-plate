@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodePushStatusContainer renders renders the checking for updates state 1`] = `null`;
+
+exports[`CodePushStatusContainer renders renders the downloading update state 1`] = `null`;
+
+exports[`CodePushStatusContainer renders renders the up to date state 1`] = `null`;
+
+exports[`CodePushStatusContainer renders renders the update ready state 1`] = `null`;
+
+exports[`CodePushStatusContainer renders renders with minimum required props 1`] = `null`;
