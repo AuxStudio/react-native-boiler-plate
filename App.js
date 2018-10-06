@@ -13,6 +13,7 @@ import AuthHandler from './handlers/AuthHandler';
 import DatabaseHandler from './handlers/DatabaseHandler';
 import NetworkHandler from './handlers/NetworkHandler';
 import LocationHandler from './handlers/LocationHandler';
+import CodePushHandler from './handlers/CodePushHandler';
 
 // Helper to clear local storage during development
 // if (__DEV__) {
@@ -29,6 +30,7 @@ export function App() {
         <NotificationsHandler />
         <ErrorHandler>
           <SystemMessageHandler>
+            <CodePushHandler />
             <AuthHandler />
             <DatabaseHandler />
             <NetworkHandler />
