@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added BuildStatus component
 - Added more font types to styleConstants
 - Added Android back handler
+- Added Page component
 
 ### Removed
 
