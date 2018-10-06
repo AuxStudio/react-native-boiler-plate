@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Removed Input component (external lib is no longer being maintained)
 - Removed Modal component (replaced by Lightbox)
+- Removed unused log util
 
 ### Changed
 
