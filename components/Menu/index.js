@@ -12,8 +12,8 @@ export default class MenuComponent extends React.Component {
     super(props);
 
     this.setMenuRef = this.setMenuRef.bind(this);
-    this.showMenu = this.showMenu.bind(this);
-    this.selectOption = this.selectOption.bind(this);
+    this.onShowMenu = this.onShowMenu.bind(this);
+    this.onSelectOption = this.onSelectOption.bind(this);
     this.hideMenu = this.hideMenu.bind(this);
 
     this.menu = null;
@@ -28,7 +28,7 @@ export default class MenuComponent extends React.Component {
         disabled: PropTypes.bool,
       }),
     ).isRequired,
-    handlePress: PropTypes.func.isRequired,
+    handlePress: PropTypes.func,
     iconName: PropTypes.string,
     iconStyle: Text.propTypes.style,
     iconContainerStyle: ViewPropTypes.style,
@@ -45,16 +45,17 @@ export default class MenuComponent extends React.Component {
     this.menu = ref;
   }
 
-  showMenu() {
+  onShowMenu() {
     this.menu.show();
   }
 
-  selectOption(option) {
+  onSelectOption(option) {
     const { handlePress } = this.props;
 
     if (handlePress) {
       handlePress(option);
     }
+
     this.hideMenu();
   }
 
@@ -79,7 +80,7 @@ export default class MenuComponent extends React.Component {
         ref={this.setMenuRef}
         button={
           <MenuButton
-            handlePress={this.showMenu}
+            handlePress={this.onShowMenu}
             iconName={iconName}
             iconStyle={iconStyle}
             style={iconContainerStyle}
@@ -94,7 +95,7 @@ export default class MenuComponent extends React.Component {
               <MenuItem
                 testID={`menu.item.${option.text}`}
                 key={option.text}
-                onPress={() => this.selectOption(option)}
+                onPress={() => this.onSelectOption(option)}
                 disabled={option.disabled}
                 textStyle={[styles.itemText, itemTextStyle]}
                 style={[styles.itemContaier, itemContainerStyle]}
