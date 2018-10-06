@@ -13,13 +13,23 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={Object {}}
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={Object {}}
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
     >
       Version:
        
@@ -30,13 +40,23 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={Object {}}
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={Object {}}
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
     >
       Build:
        
@@ -47,13 +67,23 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={Object {}}
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-      style={Object {}}
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
     >
       Code:
        

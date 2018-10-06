@@ -46,7 +46,10 @@ exports[`CodePushStatus renders renders 1`] = `
     ellipsizeMode="tail"
     style={
       Object {
+        "color": "#212121",
         "flex": 1,
+        "fontFamily": "System",
+        "fontSize": 15,
         "textAlign": "center",
       }
     }
@@ -88,7 +91,10 @@ exports[`CodePushStatus renders renders the loading state 1`] = `
     ellipsizeMode="tail"
     style={
       Object {
+        "color": "#212121",
         "flex": 1,
+        "fontFamily": "System",
+        "fontSize": 15,
         "textAlign": "center",
       }
     }

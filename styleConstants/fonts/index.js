@@ -4,9 +4,15 @@ const fonts = {};
 
 // Font families
 fonts.families = {
-  primary: 'System',
-  medium: 'System',
-  secondary: 'System',
+  primary: {
+    fontFamily: 'System',
+  },
+  medium: {
+    fontFamily: 'System',
+  },
+  secondary: {
+    fontFamily: 'System',
+  },
 };
 
 // Font sizes

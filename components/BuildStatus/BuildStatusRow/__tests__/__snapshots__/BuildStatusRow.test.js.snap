@@ -5,13 +5,23 @@ exports[`BuildStatusRow renders renders 1`] = `
   accessible={true}
   allowFontScaling={true}
   ellipsizeMode="tail"
-  style={Object {}}
+  style={
+    Object {
+      "color": "#212121",
+      "fontFamily": "System",
+      "fontSize": 15,
+    }
+  }
 >
   <Text
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
-    style={Object {}}
+    style={
+      Object {
+        "fontFamily": "System",
+      }
+    }
   >
     Foo
      
