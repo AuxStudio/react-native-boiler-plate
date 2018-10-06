@@ -4,25 +4,46 @@ import renderer from 'react-test-renderer';
 import { LocationHandler } from '..';
 
 describe('LocationHandler', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
 
-  it('renders with all/minimum required props', () => {
-    expect(renderer.create(<LocationHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders', () => {
+      const component = renderer.create(<LocationHandler dispatch={dispatch} />);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('call getLocationPermission on componentDidMount', () => {
-    spy = jest.spyOn(LocationHandler.prototype, 'getLocationPermission');
+  describe('methods', () => {
+    it('should handle getLocationPermission', () => {
+      const component = renderer.create(<LocationHandler dispatch={dispatch} />);
+      const instance = component.getInstance();
 
-    renderer.create(<LocationHandler dispatch={dispatch} />);
+      instance.getLocationPermission();
 
-    expect(spy).toHaveBeenCalled();
-    expect(dispatch).toMatchSnapshot();
+      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toMatchSnapshot();
+    });
+  });
+
+  describe('lifecycle methods', () => {
+    it('should call getLocationPermission on componentDidMount', () => {
+      spies[0] = jest.spyOn(LocationHandler.prototype, 'getLocationPermission');
+
+      renderer.create(<LocationHandler dispatch={dispatch} />);
+
+      expect(spies[0]).toHaveBeenCalled();
+    });
   });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+
+    jest.clearAllMocks();
   });
 });

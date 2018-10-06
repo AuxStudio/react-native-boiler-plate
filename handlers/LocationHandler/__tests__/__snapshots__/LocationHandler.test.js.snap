@@ -1,8 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LocationHandler call getLocationPermission on componentDidMount 1`] = `
+exports[`LocationHandler methods should handle getLocationPermission 1`] = `
 [MockFunction] {
   "calls": Array [
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "getDeviceLocation",
+          },
+        },
+        "payload": Object {
+          "permission": "location",
+        },
+        "type": "checkAndRequestPermission",
+      },
+    ],
     Array [
       Object {
         "meta": Object {
@@ -22,8 +35,12 @@ exports[`LocationHandler call getLocationPermission on componentDidMount 1`] = `
       "isThrow": false,
       "value": undefined,
     },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
   ],
 }
 `;
 
-exports[`LocationHandler renders with all/minimum required props 1`] = `null`;
+exports[`LocationHandler renders renders 1`] = `null`;
