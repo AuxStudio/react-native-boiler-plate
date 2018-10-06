@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodePushHandler methods should handle setCodePushDownloadProgress 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "codePushDownloadProgress": Object {
+            "bytesReceived": 100,
+            "totalBytes": 500,
+          },
+        },
+        "type": "SET_CODE_PUSH_DOWNLOAD_PROGRESS",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`CodePushHandler methods should handle setCodePushStatus 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "codePushStatus": 1,
+        },
+        "type": "SET_CODE_PUSH_STATUS",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`CodePushHandler renders renders with minimum required props 1`] = `null`;

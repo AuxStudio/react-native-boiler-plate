@@ -32,5 +32,9 @@ jest.mock('react-native-code-push', () => {
       DOWNLOADING_PACKAGE: 7,
       INSTALLING_UPDATE: 8,
     },
+    InstallMode: {
+      ON_NEXT_RESUME: 'something',
+    },
+    sync: jest.fn(),
   };
 });
