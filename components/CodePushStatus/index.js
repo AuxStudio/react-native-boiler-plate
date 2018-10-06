@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import codePush from 'react-native-code-push';
 
+import utils from '../../utils';
 import CodePushStatus from './CodePushStatus';
 
 export class CodePushStatusContainer extends React.Component {
@@ -44,10 +45,10 @@ export class CodePushStatusContainer extends React.Component {
       case codePush.SyncStatus.DOWNLOADING_PACKAGE:
         statusText = `Downloading update: ${
           codePushDownloadProgress
-            ? Number(
-                (codePushDownloadProgress.receivedBytes / codePushDownloadProgress.totalBytes) *
-                  100,
-              ).toFixed(0) // FIXME: Should be a util
+            ? utils.numbers.getPercentage(
+                codePushDownloadProgress.receivedBytes,
+                codePushDownloadProgress.totalBytes,
+              )
             : 0
         }%`;
         isLoading = true;
