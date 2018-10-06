@@ -4,25 +4,44 @@ import renderer from 'react-test-renderer';
 import { AuthHandler } from '..';
 
 describe('AuthHandler', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
 
-  it('renders with all/minimum required props', () => {
-    expect(renderer.create(<AuthHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders with minimum required props', () => {
+      const component = renderer.create(<AuthHandler dispatch={dispatch} />);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('calls getAuth on componentDidMount', () => {
-    spy = jest.spyOn(AuthHandler.prototype, 'getAuth');
+  describe('methods', () => {
+    it('should handle getAuth', () => {
+      const component = renderer.create(<AuthHandler dispatch={dispatch} />);
+      const instance = component.getInstance();
 
-    renderer.create(<AuthHandler dispatch={dispatch} />);
+      instance.getAuth();
 
-    expect(spy).toHaveBeenCalled();
-    expect(dispatch).toMatchSnapshot();
+      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toMatchSnapshot();
+    });
+  });
+
+  describe('lifecycle methods', () => {
+    it('should call getAuth in componentDidMount', () => {
+      spies[0] = jest.spyOn(AuthHandler.prototype, 'getAuth');
+      renderer.create(<AuthHandler dispatch={dispatch} />);
+
+      expect(spies[0]).toHaveBeenCalled();
+    });
   });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+    dispatch.mockClear();
   });
 });

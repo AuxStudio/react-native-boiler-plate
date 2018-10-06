@@ -11,7 +11,7 @@ export class AuthHandler extends React.Component {
 
   static get propTypes() {
     return {
-      dispatch: PropTypes.func,
+      dispatch: PropTypes.func.isRequired,
     };
   }
 
