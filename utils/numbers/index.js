@@ -1,7 +1,7 @@
 import getPercentage from './getPercentage';
 
-const app = {
+const numbers = {
   getPercentage,
 };
 
-export default app;
+export default numbers;
