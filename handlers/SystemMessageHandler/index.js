@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
+import styleConstants from '../../styleConstants';
+
 export class SystemMessageHandler extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,10 @@ export class SystemMessageHandler extends React.Component {
 
     if (systemMessage && (!prevProps.systemMessage || systemMessage !== prevProps.systemMessage)) {
       this.showSnackbar();
+
+      setTimeout(() => {
+        this.resetError();
+      }, this.snackbarDuration);
     }
   }
 
@@ -35,11 +41,8 @@ export class SystemMessageHandler extends React.Component {
     Snackbar.show({
       title: systemMessage,
       duration: this.snackbarDuration,
+      backgroundColor: styleConstants.colors.orange,
     });
-
-    setTimeout(() => {
-      this.resetError();
-    }, this.snackbarDuration); // Snackbar.LENGTH_LONG does not work here so we need to manually add the duration
   }
 
   resetError() {
