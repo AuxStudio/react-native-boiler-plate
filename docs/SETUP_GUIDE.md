@@ -185,7 +185,7 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase reduxredux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-pickerreact-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-pickerreact-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
 ```
 
 ## 10. Link dependencies
