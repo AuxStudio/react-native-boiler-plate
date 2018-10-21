@@ -1,61 +1,103 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { View } from 'react-native';
 
 import Menu from '..';
 
-const OPTIONS = [
-  {
-    text: 'Test',
-  },
-  {
-    text: 'Disabled',
-    disabled: true,
-  },
-];
-
 describe('Menu', () => {
-  let spy;
+  const spies = [];
+  const handlePress = jest.fn();
+  const options = [
+    {
+      text: 'Foo',
+    },
+    {
+      text: 'Bar',
+    },
+  ];
+  const ref = 'meh';
 
-  it('renders with all props', () => {
-    expect(
-      renderer.create(
-        <Menu
-          options={OPTIONS}
-          handlePress={jest.fn()}
-          iconName="chevron-left"
-          iconStyle={{ color: 'red' }}
-          iconContainerStyle={{ backgroundColor: 'blue' }}
-          itemTextStyle={{ color: 'red' }}
-          itemContainerStyle={{ backgroundColor: 'blue' }}
-          containerStyle={{ backgroundColor: 'green' }}
-        />,
-      ),
-    ).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders with minimum required props', () => {
+      const component = renderer.create(<Menu options={options} />);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('renders a Menu with minimum required props', () => {
-    expect(renderer.create(<Menu options={OPTIONS} handlePress={jest.fn()} />)).toMatchSnapshot();
+  describe('methods', () => {
+    it('should handle setMenuRef', () => {
+      const component = renderer.create(<Menu options={options} />);
+      const instance = component.getInstance();
+
+      instance.setMenuRef(ref);
+
+      expect(instance.menu).toEqual(ref);
+    });
+
+    it('should handle onShowMenu', () => {
+      const component = renderer.create(<Menu options={options} />);
+      const instance = component.getInstance();
+
+      instance.onShowMenu();
+    });
+
+    describe('should handle onSelectOption', () => {
+      it('when handlePress is provided', () => {
+        spies[0] = jest.spyOn(Menu.prototype, 'hideMenu');
+        const component = renderer.create(<Menu options={options} handlePress={handlePress} />);
+        const instance = component.getInstance();
+        const selectedOption = options[0];
+
+        instance.onSelectOption(selectedOption);
+
+        expect(spies[0]).toHaveBeenCalled();
+        expect(handlePress).toHaveBeenCalledWith(selectedOption);
+      });
+
+      it('when handlePress is not provided', () => {
+        spies[0] = jest.spyOn(Menu.prototype, 'hideMenu');
+        const component = renderer.create(<Menu options={options} />);
+        const instance = component.getInstance();
+
+        instance.onSelectOption(options[0]);
+
+        expect(spies[0]).toHaveBeenCalled();
+      });
+    });
+
+    it('should handle hideMenu', () => {
+      const component = renderer.create(<Menu options={options} />);
+      const instance = component.getInstance();
+
+      instance.hideMenu();
+    });
   });
 
-  it('calls setMenuRef on componentDidMount', () => {
-    spy = jest.spyOn(Menu.prototype, 'setMenuRef');
+  describe('actions', () => {
+    it('should call onShowMenu on MenuButton press', () => {
+      spies[0] = jest.spyOn(Menu.prototype, 'onShowMenu');
+      const buttonTestID = 'menu.button';
+      const component = renderer.create(<Menu options={options} buttonTestID={buttonTestID} />);
+      const { root } = component;
+      const targetComponent = root.findByProps({ testID: buttonTestID });
 
-    renderer.create(
-      <Menu
-        options={OPTIONS}
-        handlePress={jest.fn()}
-        itemTextStyle={{ color: 'red' }}
-        itemContainerStyle={{ backgroundColor: 'blue' }}
-        containerStyle={{ backgroundColor: 'green' }}
-      />,
-    );
-    expect(spy).toHaveBeenCalled();
+      targetComponent.props.handlePress();
+
+      expect(spies[0]).toHaveBeenCalled();
+    });
+
+    it('should call onSelectOption on MenuItem button press', () => {
+      // NOTE: Unable to test this because of animation
+      // FIXME: Find workaround for animation
+    });
   });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+    handlePress.mockClear();
   });
 });

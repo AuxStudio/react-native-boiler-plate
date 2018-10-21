@@ -4,6 +4,7 @@
 
 1.  [Deployment](#deployment)
 2.  [Generating assets](#generating-assets)
+3.  [Database backups](#database-backups)
 
 ## Development
 
@@ -48,3 +49,42 @@ play-store-image.png
 ```
 
 Done!
+
+## Database backups
+
+We use [firestore-backup-restore]() to backup and restore the database from backups. It's super simple to use:
+
+### Setup
+
+#### Install globally:
+
+`Once-off`.
+
+```
+yarn global add firestore-backup-restore
+```
+
+#### Copy firebase project credentials to root config folder:
+
+1. Visit the Firebase Console
+2. Select your project
+3. Navigate to Project Settings
+4. Navigate to Service Accounts
+5. Click Generate New Private Key
+6. Move (and rename) that key to: `./config/firebase/ENVIRONMENT/credentials.json`
+
+### Commands
+
+Switch out `development` for `production` as needed.
+
+#### Backup
+
+```
+firestore-backup-restore --restoreAccountCredentials ./config/firebase/development/credentials.json --backupPath ./backups/development
+```
+
+#### Restore
+
+```
+firestore-backup-restore --accountCredentials ./config/firebase/development/credentials.json --backupPath ./backups/development --prettyPrint
+```

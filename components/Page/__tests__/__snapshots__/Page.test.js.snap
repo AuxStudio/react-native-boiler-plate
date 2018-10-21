@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page renders renders 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+        "paddingTop": 22,
+      },
+      undefined,
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 100,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 22,
+          },
+          Object {
+            "backgroundColor": "#3D84A8",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Page renders renders the horizontalCenter styles 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+        "paddingTop": 22,
+      },
+      undefined,
+      Object {
+        "alignItems": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 100,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 22,
+          },
+          Object {
+            "backgroundColor": "#3D84A8",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Page renders renders the verticalCenter styles 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+        "paddingTop": 22,
+      },
+      Object {
+        "justifyContent": "center",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 100,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 22,
+          },
+          Object {
+            "backgroundColor": "#3D84A8",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;

@@ -12,83 +12,70 @@ jest.mock('react-native-snackbar', () => {
 });
 
 describe('SystemMessageHandler', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
+  const children = <View />;
 
-  it('renders with all props', () => {
-    expect(
-      renderer.create(
-        <SystemMessageHandler
-          dispatch={jest.fn()}
-          systemMessage="Something went wrong"
-          uid="xxxx-xxxx-xxxx-xxxx"
-        >
-          <View />
-        </SystemMessageHandler>,
-      ),
-    ).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders', () => {
+      const component = renderer.create(<SystemMessageHandler>{children}</SystemMessageHandler>);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('renders with minimum required props', () => {
-    expect(
-      renderer.create(
-        <SystemMessageHandler dispatch={jest.fn()}>
-          <View />
-        </SystemMessageHandler>,
-      ),
-    ).toMatchSnapshot();
-  });
+  describe('methods', () => {
+    it('should handle showSnackbar', () => {
+      const component = renderer.create(<SystemMessageHandler>{children}</SystemMessageHandler>);
+      const instance = component.getInstance();
 
-  it('shows the snackbar if systemMessage changed in componentDidUpdate', () => {
-    const component = renderer.create(
-      <SystemMessageHandler dispatch={dispatch} systemMessage="Something went wrong">
-        <View />
-      </SystemMessageHandler>,
-    );
-    const instance = component.getInstance();
-    spy = jest.spyOn(instance, 'showSnackbar');
+      instance.showSnackbar();
+    });
 
-    component.update(
-      <SystemMessageHandler dispatch={dispatch} systemMessage="Same same, but different">
-        <View />
-      </SystemMessageHandler>,
-    );
+    it('should handle resetError', () => {
+      const component = renderer.create(
+        <SystemMessageHandler dispatch={dispatch}>{children}</SystemMessageHandler>,
+      );
+      const instance = component.getInstance();
 
-    expect(spy).toHaveBeenCalled();
-  });
+      instance.resetError();
 
-  it('shows the snackbar if systemMessage changed in componentDidUpdate and calls resetError after timeout', (done) => {
-    const component = renderer.create(
-      <SystemMessageHandler dispatch={dispatch}>
-        <View />
-      </SystemMessageHandler>,
-    );
-    const instance = component.getInstance();
-    spy = jest.spyOn(instance, 'showSnackbar');
-
-    component.update(
-      <SystemMessageHandler dispatch={dispatch} systemMessage="Something went wrong">
-        <View />
-      </SystemMessageHandler>,
-    );
-
-    expect(spy).toHaveBeenCalled();
-
-    spy.mockClear();
-
-    spy = jest.spyOn(instance, 'resetError');
-
-    setTimeout(() => {
-      expect(spy).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalled();
       expect(dispatch).toMatchSnapshot();
+    });
+  });
 
-      done();
-    }, instance.snackbarDuration);
+  describe('lifecycle methods', () => {
+    it('should call showSnackbar and resetError if systemMessage changed in componentDidUpdate', (done) => {
+      spies[0] = jest.spyOn(SystemMessageHandler.prototype, 'showSnackbar');
+      const component = renderer.create(
+        <SystemMessageHandler dispatch={dispatch} systemMessage="Something went wrong">
+          <View />
+        </SystemMessageHandler>,
+      );
+      const instance = component.getInstance();
+
+      component.update(
+        <SystemMessageHandler dispatch={dispatch} systemMessage="Same same, but different">
+          <View />
+        </SystemMessageHandler>,
+      );
+
+      setTimeout(() => {
+        expect(spies[0]).toHaveBeenCalled();
+        expect(dispatch).toMatchSnapshot();
+
+        done();
+      }, instance.snackbarDuration);
+    });
   });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+    dispatch.mockClear();
   });
 });

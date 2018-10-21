@@ -3,45 +3,53 @@ import renderer from 'react-test-renderer';
 
 import RemoteImage from '..';
 
-const IMAGE_SOURCE = 'https://d3iw72m71ie81c.cloudfront.net/male-47.jpg';
-
 describe('RemoteImage', () => {
-  it('renders with all props', () => {
-    expect(
-      renderer.create(
-        <RemoteImage
-          source={{ uri: IMAGE_SOURCE }}
-          borderRadius={10}
-          iconStyle={{ color: 'red' }}
-          style={{ backgroundColor: 'blue' }}
-          loaderColor="green"
-        />,
-      ),
-    ).toMatchSnapshot();
+  const spies = [];
+  const source = { uri: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png' };
+
+  describe('renders', () => {
+    it('renders with minimum required props', () => {
+      const component = renderer.create(<RemoteImage />);
+
+      expect(component).toMatchSnapshot();
+    });
+
+    it('renders the normal state', () => {
+      const component = renderer.create(<RemoteImage source={source} />);
+
+      expect(component).toMatchSnapshot();
+    });
+
+    it('renders the loading state', () => {});
+
+    it('renders the error state', () => {});
   });
 
-  it('renders with minimum required props', () => {
-    expect(renderer.create(<RemoteImage />)).toMatchSnapshot();
+  describe('methods', () => {
+    it('should handle setHasError', () => {
+      const component = renderer.create(<RemoteImage />);
+      const instance = component.getInstance();
+
+      instance.setHasError(true);
+
+      expect(instance.state.hasError).toEqual(true);
+    });
+
+    it('should handle setIsLoading', () => {
+      const component = renderer.create(<RemoteImage />);
+      const instance = component.getInstance();
+
+      instance.setIsLoading(true);
+
+      expect(instance.state.isLoading).toEqual(true);
+    });
   });
 
-  it('renders and toggles loading', () => {
-    const component = renderer.create(<RemoteImage source={{ uri: IMAGE_SOURCE }} />);
-    const instance = component.getInstance();
-
-    instance.setLoading(false);
-
-    expect(instance.state.isLoading).toBe(false);
-    expect(component).toMatchSnapshot();
-  });
-
-  it('renders with error', () => {
-    const component = renderer.create(<RemoteImage source={{ uri: IMAGE_SOURCE }} />);
-    const instance = component.getInstance();
-
-    instance.setError();
-
-    expect(instance.state.hasError).toBe(true);
-    expect(instance.state.isLoading).toBe(false);
-    expect(component).toMatchSnapshot();
+  afterEach(() => {
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
   });
 });

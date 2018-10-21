@@ -1,8 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotificationsHandler calls requestNotificationsPermission on componentDidMount 1`] = `
+exports[`NotificationsHandler methods should handle requestNotificationsPermission 1`] = `
 [MockFunction] {
   "calls": Array [
+    Array [
+      Object {
+        "meta": Object {
+          "nextAction": Object {
+            "type": "createChannel",
+          },
+        },
+        "type": "requestNotificationsPermission",
+      },
+    ],
     Array [
       Object {
         "meta": Object {
@@ -19,8 +29,12 @@ exports[`NotificationsHandler calls requestNotificationsPermission on componentD
       "isThrow": false,
       "value": undefined,
     },
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
   ],
 }
 `;
 
-exports[`NotificationsHandler renders with all/minimum required props 1`] = `null`;
+exports[`NotificationsHandler renders renders with minimum required props 1`] = `null`;

@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
 import Animator from 'react-native-simple-animators';
-import { View, Text, BackHandler } from 'react-native';
-import { Touchable } from 'react-native-simple-components';
+import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styleConstants from '../../styleConstants';
@@ -11,6 +10,7 @@ import styleConstants from '../../styleConstants';
 import styles from './styles';
 
 import InputContainer from '../InputContainer';
+import Touchable from '../Touchable';
 
 export default class Lightbox extends React.Component {
   constructor(props) {
@@ -31,13 +31,6 @@ export default class Lightbox extends React.Component {
   };
 
   static defaultProps = {};
-
-  componentDidMount() {
-    // Disable back android
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      return true;
-    });
-  }
 
   animateOut() {
     this.setState({
@@ -60,7 +53,11 @@ export default class Lightbox extends React.Component {
     const { children, disableClose } = this.props;
 
     const closeComponent = !disableClose ? (
-      <Touchable onPress={this.animateOut} style={styles.iconContainer}>
+      <Touchable
+        onPress={this.animateOut}
+        style={styles.iconContainer}
+        testID="lightbox.button.close"
+      >
         <Icon name="close" style={styles.icon} />
       </Touchable>
     ) : null;

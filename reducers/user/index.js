@@ -7,8 +7,11 @@ export default function userReducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SIGN_IN_USER':
       newState = utils.objects.cloneObject(state);
+
+      // On first app load, user is "user._user", subsequent app loads it is user.user._user"
+      const user = action.payload.user._user || action.payload.user.user._user; // eslint-disable-line
       newState = {
-        ...action.payload.user._user,
+        ...user,
       };
       newState.authenticated = true;
       return newState;

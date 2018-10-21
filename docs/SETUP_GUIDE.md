@@ -868,13 +868,18 @@ cp ./ios/PROJECT_NAME/GoogleService-Info.plist ./config/firebase/development/Goo
 4.  Add the following scripts to `./package.json`, scripts object:
 
 ```shell
-    "android-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev react-native run-android",
-    "android-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-android",
-    "ios-dev": "ENV=development ./envscript.sh && ENVFILE=.env.dev && react-native run-ios",
-    "ios-prod": "ENV=production ./envscript.sh && ENVFILE=.env.prod react-native run-ios",
-    "beta": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha && cd ../ios && fastlane beta",
-    "beta-android": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd android && fastlane alpha",
-    "beta-ios": "ENV=production ./envscript.sh && ENVFILE=.env.prod && cd ios && fastlane beta"
+    "env-development": "ENV=development ./envscript.sh",
+    "env-production": "ENV=production ./envscript.sh",
+    "ios-development": "react-native run-ios",
+    "android-development": "react-native run-android",
+    "android-staging": "react-native run-android --variant=release",
+    "android-apk:": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "android-install": "adb install ./android/app/build/outputs/apk/release/app-armeabi-v7a-release.apk",
+    "code-push-android": "code-push release-react PROJECT_NAME-android android  --deploymentName 'Production'",
+    "code-push-ios": "code-push release-react PROJECT_NAME-ios ios  --deploymentName 'Production'",
+    "code-push:": "yarn run code-push-android && yarn run code-push-ios",
+    "beta-android": "yarn run env-production && cd android && fastlane alpha",
+    "beta-ios": "yarn run env-production && cd ios && fastlane beta"
 ```
 
 5.  Set permissions on env script:

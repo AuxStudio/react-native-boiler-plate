@@ -28,9 +28,27 @@ describe('getCollection saga', () => {
   describe('When testing the saga without a nextAction and without a response from the api', () => {
     const it = sagaHelper(getCollection(action));
 
-    it('should have called the mocked API first', (result) => {
+    it('should have added the transaction first', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'ADD_PENDING_TRANSACTION',
+          payload: { event: { id: expect.any(String), action } },
+        }),
+      );
+    });
+
+    it('should have called the mocked API', (result) => {
       expect(JSON.stringify(result)).toEqual(
         JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
+      );
+    });
+
+    it('and then remove the transaction', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'REMOVE_PENDING_TRANSACTION',
+          payload: { id: expect.any(String) },
+        }),
       );
     });
 
@@ -42,12 +60,30 @@ describe('getCollection saga', () => {
   describe('When testing the saga without a nextAction and with a response from the api', () => {
     const it = sagaHelper(getCollection(action));
 
-    it('should have called the mocked API first', (result) => {
+    it('should have added the transaction first', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'ADD_PENDING_TRANSACTION',
+          payload: { event: { id: expect.any(String), action } },
+        }),
+      );
+    });
+
+    it('should have called the mocked API', (result) => {
       expect(JSON.stringify(result)).toEqual(
         JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
 
       return response;
+    });
+
+    it('and then remove the transaction', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'REMOVE_PENDING_TRANSACTION',
+          payload: { id: expect.any(String) },
+        }),
+      );
     });
 
     it('and then nothing', (result) => {
@@ -58,9 +94,27 @@ describe('getCollection saga', () => {
   describe('When testing the saga with a nextAction and without a response from the api', () => {
     const it = sagaHelper(getCollection(actionWithNextAction));
 
-    it('should have called the mocked API first', (result) => {
+    it('should have added the transaction first', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'ADD_PENDING_TRANSACTION',
+          payload: { event: { id: expect.any(String), action: actionWithNextAction } },
+        }),
+      );
+    });
+
+    it('should have called the mocked API', (result) => {
       expect(JSON.stringify(result)).toEqual(
         JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
+      );
+    });
+
+    it('and then remove the transaction', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'REMOVE_PENDING_TRANSACTION',
+          payload: { id: expect.any(String) },
+        }),
       );
     });
 
@@ -76,12 +130,30 @@ describe('getCollection saga', () => {
   describe('When testing the saga with a nextAction and with a response from the api', () => {
     const it = sagaHelper(getCollection(actionWithNextAction));
 
-    it('should have called the mocked API first', (result) => {
+    it('should have added the transaction first', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'ADD_PENDING_TRANSACTION',
+          payload: { event: { id: expect.any(String), action: actionWithNextAction } },
+        }),
+      );
+    });
+
+    it('should have called the mocked API', (result) => {
       expect(JSON.stringify(result)).toEqual(
         JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );
 
       return response;
+    });
+
+    it('and then remove the transaction', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'REMOVE_PENDING_TRANSACTION',
+          payload: { id: expect.any(String) },
+        }),
+      );
     });
 
     it('and then trigger an action', (result) => {
@@ -97,7 +169,16 @@ describe('getCollection saga', () => {
     const it = sagaHelper(getCollection(action));
     const errorMessage = 'Something went wrong';
 
-    it('should have called the mocked API first', (result) => {
+    it('should have added the transaction first', (result) => {
+      expect(result).toEqual(
+        put({
+          type: 'ADD_PENDING_TRANSACTION',
+          payload: { event: { id: expect.any(String), action } },
+        }),
+      );
+    });
+
+    it('should have called the mocked API', (result) => {
       expect(JSON.stringify(result)).toEqual(
         JSON.stringify(call(firestore.getCollection, action.meta.pathParts, action.meta.query)),
       );

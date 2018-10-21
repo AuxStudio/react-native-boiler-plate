@@ -1,14 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ErrorHandler catches errors in componentDidCatch 1`] = `null`;
-
-exports[`ErrorHandler catches errors in componentDidCatch 2`] = `
+exports[`ErrorHandler methods should handle logError 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
       Object {
         "payload": Object {
-          "error": [Error: Error thrown from problem child],
+          "error": [Error: foo],
           "uid": undefined,
         },
         "type": "logError",
@@ -24,6 +22,6 @@ exports[`ErrorHandler catches errors in componentDidCatch 2`] = `
 }
 `;
 
-exports[`ErrorHandler renders with all props 1`] = `<View />`;
+exports[`ErrorHandler renders renders the error state 1`] = `null`;
 
-exports[`ErrorHandler renders with minimum required props 1`] = `<View />`;
+exports[`ErrorHandler renders renders with minimum required props 1`] = `<View />`;

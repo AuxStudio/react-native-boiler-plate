@@ -33,10 +33,12 @@ export default function* logError(action) {
     ];
 
     const databaseAction = put({
-      type: 'pushData',
+      type: 'addDocument',
+      meta: {
+        pathParts: 'errors',
+      },
       payload: {
-        data,
-        ref: 'errors',
+        document: data,
       },
     });
 

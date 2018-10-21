@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
+import { Platform } from 'react-native';
 
 import reducers from '../reducers';
 import sagas from '../sagas';
@@ -15,7 +16,8 @@ const middlewares = [];
 const sagaMiddleware = createSagaMiddleware();
 middlewares.push(sagaMiddleware);
 
-if (__DEV__) {
+// Only log store actions if dev and iOS
+if (__DEV__ && Platform.OS === 'ios') {
   middlewares.push(logger);
 }
 
