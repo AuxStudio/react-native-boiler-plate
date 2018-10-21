@@ -3,9 +3,13 @@ import renderer from 'react-test-renderer';
 import { View } from 'react-native';
 
 import { ErrorHandler } from '..';
-import ProblemChild from './ProblemChild';
 
 jest.mock('../../../scenes/pages/Error'); // Error scene that is displayed on error
+
+const ProblemChild = () => {
+  throw new Error('Error thrown from problem child');
+  return <div>Error</div>; // eslint-disable-line
+};
 
 describe('ErrorHandler', () => {
   const spies = [];
