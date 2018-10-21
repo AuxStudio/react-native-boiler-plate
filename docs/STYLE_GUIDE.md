@@ -130,6 +130,29 @@ this.props.dispatch({
 })
 ```
 
+## Importing
+
+We follow the following order wrt importing modules:
+
+1. External files
+2. Global files
+3. Local files
+4. Components
+
+```js
+import { View } from 'react-native';
+...
+
+import utils from '../../utils';
+...
+
+import styles from './styles';
+...
+
+import CodePushStatus from '../../components/CodePushStatus';
+...
+```
+
 ## Typical class structure
 
 We follow the typical order set out in eslint react/sort-comp except that the constructor should be placed at the top of the class. This serves as self-documentation.
