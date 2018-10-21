@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Fixed grammar error in setup guide
+- Fixed grammar errors in setup guide
+
+### Removed
+
+- Removed temporary android release build fix from setup guide
 
 ## 1.2.0
 

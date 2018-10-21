@@ -185,7 +185,7 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-pickerreact-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
 ```
 
 ## 10. Link dependencies
@@ -570,17 +570,19 @@ pod init
 
 4.  In `./ios/PodFile` delete duplicate PROJECT_NAME-tvOSTests within main project target.
 
+5.  Update pods:
+
 ```shell
 pod update
 ```
 
-5.  Same file as above, uncomment:
+6.  Same file as above, uncomment:
 
 ```
 platform :ios, '9.0'
 ```
 
-6.  Same file as above, add these pods:
+7.  Same file as above, add these pods:
 
 ```
 pod 'Firebase/Core'
@@ -592,7 +594,7 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Firestore'
 ```
 
-7.  Install the pods:
+8.  Install the pods:
 
 ```shell
 pod install
@@ -1014,8 +1016,6 @@ code-push release-react PROJECT_NAME-android android --deploymentName "Productio
 code-push release-react PROJECT_NAME-ios ios --deploymentName "Production"
 ```
 
-`TODO: add this to scripts in package.json once we've worked out a good flow between fastlane, firebase environments and this.`
-
 ## 22. Add Push Notifications
 
 Optional.
@@ -1070,13 +1070,3 @@ In XCode, enable the following capabilities:
 - Background modes => Remote notifications
 
 3.  Upload APNs Authentication Key to Firebase console (Project Settings => Cloud Messaging)
-
-## 23. Fix android release build
-
-This is a temporary fix that will allow android release builds to build. Read more [here](https://github.com/facebook/react-native/issues/16906).
-
-In `./android/gradle.properties`, add:
-
-```
-android.enableAapt2=false
-```
