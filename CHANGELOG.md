@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated NetworkHandler
 - logError saga calls addDocument instead of pushData
 - Updated SystemMessageHandler method calls
+- getCollection and getDocument sagas dispatch transaction actions
 
 ## 1.1.2
 
