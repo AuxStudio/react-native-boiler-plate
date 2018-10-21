@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added PageLoader component
 - Added PageLoader component to PersistGate as loading state
 - Added Touchable component
+- Added forceCodePushUpdate field to version config
 
 ### Removed
 
