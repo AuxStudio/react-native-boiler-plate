@@ -95,4 +95,12 @@ export default class RNFirebase {
   static analytics() {}
 
   static app() {}
+
+  static notifications() {
+    return {
+      onNotificationDisplayed: jest.fn(),
+      onNotification: jest.fn(),
+      onNotificationOpened: jest.fn(),
+    };
+  }
 }

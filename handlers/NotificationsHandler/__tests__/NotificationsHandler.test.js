@@ -3,92 +3,47 @@ import renderer from 'react-test-renderer';
 
 import { NotificationsHandler } from '..';
 
-// NOTE: I have not written tests for the events listeners - struggled with this one
-jest.mock('react-native-firebase', () => {
-  return {
-    notifications: () => {
-      return {
-        onNotificationDisplayed: jest.fn(),
-        onNotification: jest.fn(),
-        onNotificationOpened: jest.fn(),
-      };
-    },
-  };
-});
-
 describe('NotificationsHandler', () => {
-  let spy;
+  const spies = [];
   const dispatch = jest.fn();
 
-  it('renders with all/minimum required props', () => {
-    expect(renderer.create(<NotificationsHandler dispatch={jest.fn()} />)).toMatchSnapshot();
+  describe('renders', () => {
+    it('renders with minimum required props', () => {
+      const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
-  it('calls requestNotificationsPermission on componentDidMount', () => {
-    spy = jest.spyOn(NotificationsHandler.prototype, 'requestNotificationsPermission');
+  describe('methods', () => {
+    it('should handle requestNotificationsPermission', () => {
+      const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
+      const instance = component.getInstance();
 
-    renderer.create(<NotificationsHandler dispatch={dispatch} />);
+      instance.requestNotificationsPermission();
 
-    expect(spy).toHaveBeenCalled();
-    expect(dispatch).toMatchSnapshot();
+      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toMatchSnapshot();
+    });
   });
 
-  // it('updates the store with connection info when WIFI connection', () => {
-  //   const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
-  //   const instance = component.getInstance();
-  //   const connectionInfo = {
-  //     type: 'wifi',
-  //     effectiveType: '4g',
-  //   };
+  describe('lifecycle methods', () => {
+    it('should handle call requestNotificationsPermission in componentDidMount', () => {
+      spies[0] = jest.spyOn(NotificationsHandler.prototype, 'requestNotificationsPermission');
+      renderer.create(<NotificationsHandler dispatch={dispatch} />);
 
-  //   instance.handleConnectionChange(connectionInfo);
-  //   expect(dispatch).toMatchSnapshot();
-  // });
+      expect(spies[0]).toHaveBeenCalled();
+    });
 
-  // it('updates the store with connection info and goes online when WIFI connection', () => {
-  //   spy = jest.spyOn(NotificationsHandler.prototype, 'enableNetwork');
-  //   const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
-  //   const instance = component.getInstance();
-  //   const connectionInfo = {
-  //     type: 'wifi',
-  //     effectiveType: '4g',
-  //   };
-
-  //   instance.handleConnectionChange(connectionInfo);
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(dispatch).toMatchSnapshot();
-  // });
-
-  // it('updates the store with connection info and goes offline when no connection', () => {
-  //   spy = jest.spyOn(NotificationsHandler.prototype, 'disableNetwork');
-  //   const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
-  //   const instance = component.getInstance();
-  //   const connectionInfo = {
-  //     type: 'none',
-  //   };
-
-  //   instance.handleConnectionChange(connectionInfo);
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(dispatch).toMatchSnapshot();
-  // });
-
-  // it('updates the store with connection info and goes offline when 2g connection', () => {
-  //   spy = jest.spyOn(NotificationsHandler.prototype, 'disableNetwork');
-  //   const component = renderer.create(<NotificationsHandler dispatch={dispatch} />);
-  //   const instance = component.getInstance();
-  //   const connectionInfo = {
-  //     type: 'cellular',
-  //     effectiveType: '2g',
-  //   };
-
-  //   instance.handleConnectionChange(connectionInfo);
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(dispatch).toMatchSnapshot();
-  // });
+    // NOTE: I am not testing the event listener calls here
+  });
 
   afterEach(() => {
-    if (spy) {
-      spy.mockClear();
-    }
+    spies.forEach((spy) => {
+      if (spy) {
+        spy.mockClear();
+      }
+    });
+    dispatch.mockClear();
   });
 });
