@@ -33,6 +33,7 @@ yarn run beta
 
 ```shell
 npm install -g generator-rn-toolbox
+brew install imagemagick
 yo rn-toolbox:assets --icon ./design/icon.png --splash ./design/splash.png --store
 yo rn-toolbox:assets --android-notification-icon ./design/icon.png
 ```
