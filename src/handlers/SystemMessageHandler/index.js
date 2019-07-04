@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
-import styleConstants from '../../styleConstants';
+import styleConstants from '../../static/styleConstants';
 
 export class SystemMessageHandler extends React.Component {
   constructor(props) {

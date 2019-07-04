@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import styleConstants from '../../../styleConstants';
+import styleConstants from '../../../static/styleConstants';
 
 const ICON_SIZE = 20;
 

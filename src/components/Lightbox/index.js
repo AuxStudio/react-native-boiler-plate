@@ -5,7 +5,7 @@ import Animator from 'react-native-simple-animators';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import styleConstants from '../../styleConstants';
+import styleConstants from '../../static/styleConstants';
 
 import styles from './styles';
 

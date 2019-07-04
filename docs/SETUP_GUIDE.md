@@ -757,7 +757,7 @@ yarn add --dev eslint babel-eslint eslint-config-airbnb eslint-plugin-import esl
 
 ## 13. Setup extra app icons
 
-1.  Copy `./src/assets/fonts/AppIcons.ttf` to
+1.  Copy `./src/static/fonts/AppIcons.ttf` to
 
 - `./android/app/src/assets/fonts` (you'll need to create the assets/fonts/ directory)
 - `./ios/PROJECT_NAME/`

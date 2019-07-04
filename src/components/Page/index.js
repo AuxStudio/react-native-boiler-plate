@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
 import { StatusBar } from 'react-native-simple-components';
 
-import styleConstants from '../../styleConstants';
+import styleConstants from '../../static/styleConstants';
 
 import styles from './styles';
 

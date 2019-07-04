@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import styleConstants from '../../styleConstants';
+import styleConstants from '../../static/styleConstants';
 import styles from './styles';
 
 import Page from '../Page';

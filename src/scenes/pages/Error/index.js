@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Page, InfoBlock } from 'react-native-simple-components';
 
-import styleConstants from '../../../styleConstants';
+import styleConstants from '../../../static/styleConstants';
 
 export class Error extends React.Component {
   constructor(props) {

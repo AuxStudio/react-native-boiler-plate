@@ -5,7 +5,7 @@ import FastImage from 'react-native-fast-image';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
-import styleConstants from '../../styleConstants';
+import styleConstants from '../../static/styleConstants';
 
 export default class RemoteImage extends React.Component {
   constructor(props) {

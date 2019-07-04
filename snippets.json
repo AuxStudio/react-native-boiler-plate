@@ -194,7 +194,7 @@
     "body": [
       "import { StyleSheet } from 'react-native';",
       "$1",
-      "import styleConstants from '../../styleConstants';",
+      "import styleConstants from '../../static/styleConstants';",
       "$1",
       "const styles = StyleSheet.create({});",
       "$1",

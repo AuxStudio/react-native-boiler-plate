@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import styleConstants from '../../../styleConstants';
+import styleConstants from '../../../static/styleConstants';
 import styles from './styles';
 
 const propTypes = {
