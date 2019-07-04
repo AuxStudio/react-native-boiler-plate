@@ -721,13 +721,16 @@ react-native link react-native-image-resizer
 1.  Clone the source files:
 
 ```shell
-git clone https://github.com/shaunsaker/react-native-boilerplate.git src
+git clone https://github.com/shaunsaker/react-native-boilerplate.git temp
 ```
 
-2.  Delete and move files. FIXME: script
+2.  Move the source files.
+
+This way we only copy the src files and not this repo's files.
 
 ```shell
-sudo rm ./App.js && sudo rm ./src/.gitignore && sudo rm ./src/package.json && sudo rm ./src/README.md && sudo rm ./src/snippets.json && sudo rm -R ./src/.git && sudo rm ./src/CHANGELOG.md && sudo mv ./src/docs/CHANGELOG.md ./CHANGELOG.md && sudo rm -r ./src/docs && sudo rm ./src/CODE_OF_CONDUCT.md && sudo rm ./src/CONTRIBUTING.md && sudo rm ./src/LICENCE && sudo rm ./src/PULL_REQUEST_TEMPLATE.md && sudo mv ./src/envscript.sh ./envscript.sh && sudo rm ./src/.babelrc && sudo rm ./src/.travis.yml && sudo rm ./src/yarn.lock && sudo mv ./src/.eslintrc.json ./.eslintrc.json && sudo mv ./src/.prettierrc ./.prettierrc && mv ./src/__mocks__/ ./
+mv temp/src src
+sudo rm -r temp
 ```
 
 3.  In `./index.js`, change:
