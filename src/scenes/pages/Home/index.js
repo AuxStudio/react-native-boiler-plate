@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Page } from 'react-native-simple-components';
-import { Text } from 'react-native';
 
-export class Home extends React.Component {
+import Home from './Home';
+
+export class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,11 +16,7 @@ export class Home extends React.Component {
   static defaultProps = {};
 
   render() {
-    return (
-      <Page verticalCenter horizontalCenter>
-        <Text>Hello World!</Text>
-      </Page>
-    );
+    return <Home />;
   }
 }
 
@@ -28,4 +24,4 @@ function mapStateToProps() {
   return {};
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(HomeContainer);
