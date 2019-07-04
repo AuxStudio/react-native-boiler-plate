@@ -1,5 +1,7 @@
 import logEvent from './logEvent';
 
-module.exports = {
+export { logEvent };
+
+export default {
   logEvent,
 };

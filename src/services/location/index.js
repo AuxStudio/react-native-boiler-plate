@@ -1,7 +1,9 @@
 import getDeviceLocation from './getDeviceLocation';
 import getFormattedAddressFromCoords from './getFormattedAddressFromCoords';
 
-module.exports = {
+export { getDeviceLocation, getFormattedAddressFromCoords };
+
+export default {
   getDeviceLocation,
   getFormattedAddressFromCoords,
 };

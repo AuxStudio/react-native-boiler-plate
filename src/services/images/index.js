@@ -1,7 +1,9 @@
 import showImagePicker from './showImagePicker';
 import resizeImage from './resizeImage';
 
-module.exports = {
+export { showImagePicker, resizeImage };
+
+export default {
   showImagePicker,
   resizeImage,
 };

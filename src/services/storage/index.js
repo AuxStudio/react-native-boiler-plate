@@ -1,5 +1,7 @@
 import uploadFile from './uploadFile';
 
-module.exports = {
+export { uploadFile };
+
+export default {
   uploadFile,
 };

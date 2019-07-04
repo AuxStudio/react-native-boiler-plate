@@ -3,7 +3,9 @@ import getToken from './getToken';
 import hasPermission from './hasPermission';
 import requestPermission from './requestPermission';
 
-module.exports = {
+export { createChannel, getToken, hasPermission, requestPermission };
+
+export default {
   createChannel,
   getToken,
   hasPermission,

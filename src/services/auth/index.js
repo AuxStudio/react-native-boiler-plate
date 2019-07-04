@@ -7,7 +7,18 @@ import signInWithCredential from './signInWithCredential';
 import sendPasswordResetEmail from './sendPasswordResetEmail';
 import signOut from './signOut';
 
-module.exports = {
+export {
+  getAuth,
+  signInAnonymously,
+  getCredentialFromEmail,
+  getCredentialFromFacebook,
+  getCredentialFromGoogle,
+  signInWithCredential,
+  sendPasswordResetEmail,
+  signOut,
+};
+
+export default {
   getAuth,
   signInAnonymously,
   getCredentialFromEmail,

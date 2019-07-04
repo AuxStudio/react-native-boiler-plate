@@ -9,7 +9,20 @@ import setDocument from './setDocument';
 import sync from './sync';
 import updateDocument from './updateDocument';
 
-module.exports = {
+export {
+  addDocument,
+  deleteDocument,
+  disableNetwork,
+  enableNetwork,
+  getCollection,
+  getDocument,
+  getRef,
+  setDocument,
+  sync,
+  updateDocument,
+};
+
+export default {
   addDocument,
   deleteDocument,
   disableNetwork,

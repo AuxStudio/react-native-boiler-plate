@@ -9,7 +9,20 @@ import notifications from './notifications';
 import permissions from './permissions';
 import storage from './storage';
 
-module.exports = {
+export {
+  analytics,
+  auth,
+  database,
+  firestore,
+  http,
+  images,
+  location,
+  notifications,
+  permissions,
+  storage,
+};
+
+export default {
   analytics,
   auth,
   database,

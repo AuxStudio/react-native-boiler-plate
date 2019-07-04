@@ -1,7 +1,9 @@
 import checkPermission from './checkPermission';
 import requestPermission from './requestPermission';
 
-module.exports = {
+export { checkPermission, requestPermission };
+
+export default {
   checkPermission,
   requestPermission,
 };

@@ -6,7 +6,9 @@ import pushData from './pushData';
 import goOffline from './goOffline';
 import goOnline from './goOnline';
 
-module.exports = {
+export { listenForData, getData, updateData, setData, pushData, goOffline, goOnline };
+
+export default {
   listenForData,
   getData,
   updateData,
