@@ -3,11 +3,11 @@ import googleSignIn from './googleSignIn';
 import slack from './slack';
 import version from './version';
 
-const config = {
+export { images, googleSignIn, slack, version };
+
+export default {
   images,
   googleSignIn,
   slack,
   version,
 };
-
-export default config;

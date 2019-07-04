@@ -1,13 +1,13 @@
 import ImageResizer from 'react-native-image-resizer';
 
-import config from '../../../config';
+import { images } from '../../../config';
 import utils from '../../../utils';
 
 export default function resizeImage(imageURI) {
   return new Promise((resolve, reject) => {
     const imageResizerOptions = [
       imageURI, // uri to image
-      ...config.images.imageResizerOptions, // maxWidth, maxHeight, format, quality, rotation
+      ...images.imageResizerOptions, // maxWidth, maxHeight, format, quality, rotation
     ];
 
     ImageResizer.createResizedImage(...imageResizerOptions)

@@ -1,10 +1,10 @@
 import { GoogleSignIn } from 'react-native-google-signin';
 
-import config from '../../../../config';
+import { googleSignIn } from '../../../../config';
 
 export default function configureGoogleSignIn() {
   return new Promise((resolve, reject) => {
-    GoogleSignIn.configure({ ...config.googleSignIn })
+    GoogleSignIn.configure({ ...googleSignIn })
       .then(() => {
         resolve();
       })

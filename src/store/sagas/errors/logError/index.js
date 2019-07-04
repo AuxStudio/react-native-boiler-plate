@@ -1,7 +1,7 @@
 import { all, put } from 'redux-saga/effects';
 
 import utils from '../../../utils';
-import config from '../../../config';
+import { slack } from '../../../config';
 
 export default function* logError(action) {
   /*
@@ -45,12 +45,12 @@ export default function* logError(action) {
     const slackAction = put({
       type: 'post',
       payload: {
-        url: config.slack.webhook,
+        url: slack.webhook,
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         parameters: {
-          channel: config.slack.channel,
-          username: config.slack.username,
-          icon_emoji: config.slack.icon_emoji,
+          channel: slack.channel,
+          username: slack.username,
+          icon_emoji: slack.icon_emoji,
           text: JSON.stringify(data),
         },
       },
@@ -59,7 +59,7 @@ export default function* logError(action) {
     if (!__DEV__) {
       actions.push(databaseAction);
 
-      if (config.slack.webhook) {
+      if (slack.webhook) {
         actions.push(slackAction);
       }
     }
