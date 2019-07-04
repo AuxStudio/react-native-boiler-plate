@@ -6,7 +6,9 @@ import objects from './objects';
 import strings from './strings';
 import time from './time';
 
-const utils = {
+export { app, arrays, navigation, numbers, objects, strings, time };
+
+export default {
   app,
   arrays,
   navigation,
@@ -15,5 +17,3 @@ const utils = {
   strings,
   time,
 };
-
-export default utils;

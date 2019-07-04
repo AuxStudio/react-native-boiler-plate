@@ -1,7 +1,7 @@
 import navigate from './navigate';
 
-const navigation = {
+export { navigate };
+
+export default {
   navigate,
 };
-
-export default navigation;

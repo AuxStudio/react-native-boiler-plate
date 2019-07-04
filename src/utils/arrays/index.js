@@ -1,7 +1,7 @@
 import sortArrayOfObjectsByKey from './sortArrayOfObjectsByKey';
 
-const app = {
+export { sortArrayOfObjectsByKey };
+
+export default {
   sortArrayOfObjectsByKey,
 };
-
-export default app;

@@ -2,9 +2,9 @@ import createError from './createError';
 import prepareNextAction from './prepareNextAction';
 
 // All app-specific utils go here
-const app = {
+export { createError, prepareNextAction };
+
+export default {
   createError,
   prepareNextAction,
 };
-
-export default app;
