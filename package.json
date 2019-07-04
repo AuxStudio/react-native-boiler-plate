@@ -5,7 +5,10 @@
   "main": "App.js",
   "scripts": {
     "test": "jest --maxWorkers=4",
-    "upgrade-deps": "ncu -u && yarn"
+    "upgrade-deps": "ncu -u && yarn",
+    "update-changelog": "yarn run auto-changelog && git add . && git commit -m 'Update Changelog' && git push",
+    "update-tags": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
+    "publish": "yarn run update-changelog && yarn run update-tags"
   },
   "jest": {
     "preset": "jest-react-native",
@@ -34,6 +37,7 @@
   },
   "homepage": "https://github.com/AuxStudio/react-native-boiler-plate/README.md",
   "devDependencies": {
+    "auto-changelog": "^1.13.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "enzyme": "^3.10.0",
@@ -78,5 +82,11 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.5"
+  },
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false
   }
 }
