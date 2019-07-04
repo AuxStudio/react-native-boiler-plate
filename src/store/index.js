@@ -6,8 +6,8 @@ import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
 import { Platform } from 'react-native';
 
-import reducers from '../reducers';
-import sagas from '../sagas';
+import reducers from './reducers';
+import sagas from './sagas';
 
 // add the middlewares
 const middlewares = [];
