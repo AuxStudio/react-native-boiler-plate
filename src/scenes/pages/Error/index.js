@@ -1,41 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Page, InfoBlock } from 'react-native-simple-components';
 
 import styleConstants from '../../../static/styleConstants';
+import styles from './styles';
 
-export class Error extends React.Component {
-  constructor(props) {
-    super(props);
+const propTypes = {
+  message: PropTypes.string,
+};
 
-    this.state = {};
-  }
+const defaultProps = {
+  message: 'Something went wrong.',
+};
 
-  static propTypes = {
-    message: PropTypes.string,
-  };
+const Error = ({ message }) => {
+  return (
+    <Page style={styles.container}>
+      <InfoBlock title="Error" description={message} />
+    </Page>
+  );
+};
 
-  static defaultProps = {
-    message: 'Something went wrong.',
-  };
+Error.propTypes = propTypes;
+Error.defaultProps = defaultProps;
 
-  render() {
-    const { message } = this.props;
-
-    return (
-      <Page
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: styleConstants.dimensions.spacing.vertical,
-          paddingHorizontal: styleConstants.dimensions.spacing.horizontal,
-        }}
-      >
-        <InfoBlock title="Error" description={message} />
-      </Page>
-    );
-  }
-}
-
-export default connect()(Error);
+export default Error;
