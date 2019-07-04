@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function uploadFile(ref, uri) {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ export default function uploadFile(ref, uri) {
           // Ignore for now (need redux-saga's eventChannel)
         },
         (error) => {
-          reject(utils.app.createError(error));
+          reject(app.createError(error));
         },
         (uploadedFile) => {
           const response = uploadedFile && { uploadedFile };

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
-import utils from '../../../../utils';
+import { app } from '../../../../../utils';
 import checkPermission from '..';
 
 const permissions = {
@@ -109,7 +109,7 @@ describe('checkPermission saga', () => {
         put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(errorMessage),
+            error: app.createError(errorMessage),
             date: expect.any(Number),
             action,
           },

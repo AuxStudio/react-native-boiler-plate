@@ -1,11 +1,11 @@
 import { call, put } from 'redux-saga/effects';
 
-import { firestore } from '../../../services';
-import utils from '../../../utils';
+import { firestore } from '../../../../services';
+import { app, strings } from '../../../../utils';
 
 export default function* addDocument(action) {
   try {
-    const writeEventID = utils.strings.createUID();
+    const writeEventID = strings.createUID();
 
     yield put({
       type: 'ADD_PENDING_TRANSACTION',
@@ -30,7 +30,7 @@ export default function* addDocument(action) {
       },
     });
 
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -39,7 +39,7 @@ export default function* addDocument(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

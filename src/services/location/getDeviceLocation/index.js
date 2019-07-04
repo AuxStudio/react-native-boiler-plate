@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function getDeviceLocation() {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,7 @@ export default function getDeviceLocation() {
         resolve(response);
       },
       (error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       },
     );
   });

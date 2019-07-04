@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function post(url, headers, parameters) {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export default function post(url, headers, parameters) {
           resolve(response);
         })
         .catch((error) => {
-          reject(utils.app.createError(error));
+          reject(app.createError(error));
         });
     } else {
       reject(new Error('URL is required'));

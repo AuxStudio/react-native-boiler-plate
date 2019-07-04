@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
-import { auth } from '../../../services';
-import utils from '../../../utils';
+import { auth } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* getCredentialAndSignIn(action) {
   try {
@@ -23,7 +23,7 @@ export default function* getCredentialAndSignIn(action) {
         auth.signInWithCredential,
         getCredentialResponse.credential,
       );
-      const nextAction = utils.app.prepareNextAction(action, signInWithCredentialResponse);
+      const nextAction = app.prepareNextAction(action, signInWithCredentialResponse);
 
       if (nextAction) {
         yield put(nextAction);
@@ -37,7 +37,7 @@ export default function* getCredentialAndSignIn(action) {
       yield put({
         type: 'logError',
         payload: {
-          error: utils.app.createError(error),
+          error: app.createError(error),
           date: Date.now(),
           action,
         },
@@ -47,7 +47,7 @@ export default function* getCredentialAndSignIn(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

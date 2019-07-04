@@ -1,6 +1,4 @@
-import firebase from 'react-native-firebase';
-
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 import checkAndResolvePlayServices from './checkAndResolvePlayServices';
 import configureGoogleSign from './configureGoogleSignIn';
@@ -21,19 +19,19 @@ export default function getCredentialFromGoogle() {
                     resolve(response);
                   })
                   .catch((error) => {
-                    reject(utils.app.createError(error));
+                    reject(app.createError(error));
                   });
               })
               .catch((error) => {
-                reject(utils.app.createError(error));
+                reject(app.createError(error));
               });
           })
           .catch((error) => {
-            reject(utils.app.createError(error));
+            reject(app.createError(error));
           });
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

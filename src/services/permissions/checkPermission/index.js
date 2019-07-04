@@ -1,6 +1,6 @@
 import Permissions from 'react-native-permissions';
 
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function checkPermission(permission) {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ export default function checkPermission(permission) {
           resolve(response);
         })
         .catch((error) => {
-          reject(utils.app.createError(error));
+          reject(app.createError(error));
         });
     } else {
       reject(new Error('Permission type is required'));

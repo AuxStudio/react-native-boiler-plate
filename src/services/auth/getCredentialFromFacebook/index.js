@@ -1,6 +1,4 @@
-import firebase from 'react-native-firebase';
-
-import utils from '../../../utils';
+import { app } from '../../../utils';
 import logOutFromFacebook from './logOutFromFacebook';
 import logInToFacebook from './logInToFacebook';
 import getCurrentAccessTokenFromFacebook from './getCurrentAccessTokenFromFacebook';
@@ -13,7 +11,7 @@ export default function getCredentialFromFacebook() {
         logInToFacebook()
           .then((result) => {
             if (result.isCancelled) {
-              reject(utils.app.createError('User cancelled login'));
+              reject(app.createError('User cancelled login'));
             } else {
               getCurrentAccessTokenFromFacebook()
                 .then((user) => {
@@ -23,20 +21,20 @@ export default function getCredentialFromFacebook() {
                       resolve(response);
                     })
                     .catch((error) => {
-                      reject(utils.app.createError(error));
+                      reject(app.createError(error));
                     });
                 })
                 .catch((error) => {
-                  reject(utils.app.createError(error));
+                  reject(app.createError(error));
                 });
             }
           })
           .catch((error) => {
-            reject(utils.app.createError(error));
+            reject(app.createError(error));
           }),
       )
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

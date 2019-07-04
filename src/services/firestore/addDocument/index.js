@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 import getRef from '../getRef';
 
 export default function addDocument(pathParts, document) {
@@ -11,11 +11,11 @@ export default function addDocument(pathParts, document) {
             resolve({ id: response.id });
           })
           .catch((error) => {
-            reject(utils.app.createError(error));
+            reject(app.createError(error));
           });
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

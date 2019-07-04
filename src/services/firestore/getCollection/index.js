@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 import getRef from '../getRef';
 
 // Gets a collection from firestore, queries it (if query (array) provided) and
@@ -30,21 +30,19 @@ export default function getCollection(pathParts, query) {
             } catch (error) {
               if (collection.docs && true) {
                 reject(
-                  utils.app.createError(
-                    `${pathParts.join('/')} references a document, not a collection`,
-                  ),
+                  app.createError(`${pathParts.join('/')} references a document, not a collection`),
                 );
               } else {
-                reject(utils.app.createError(error));
+                reject(app.createError(error));
               }
             }
           })
           .catch((error) => {
-            reject(utils.app.createError(error));
+            reject(app.createError(error));
           });
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

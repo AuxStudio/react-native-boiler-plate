@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 
-import { firestore } from '../../../services';
-import utils from '../../../utils';
+import { firestore } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* enableNetwork(action) {
   try {
     const response = yield call(firestore.enableNetwork);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -15,7 +15,7 @@ export default function* enableNetwork(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

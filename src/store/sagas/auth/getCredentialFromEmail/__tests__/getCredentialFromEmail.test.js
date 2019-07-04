@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
-import utils from '../../../../utils';
+import { app } from '../../../../../utils';
 import getCredentialFromEmail from '..';
 
 const auth = {
@@ -124,7 +124,7 @@ describe('getCredentialFromEmail saga', () => {
         put({
           type: 'logError',
           payload: expect.objectContaining({
-            error: utils.app.createError(errorMessage),
+            error: app.createError(errorMessage),
             action,
           }),
         }),

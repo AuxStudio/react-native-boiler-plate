@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 import getRef from '../getRef';
 
 export default function getDocument(pathParts) {
@@ -13,21 +13,19 @@ export default function getDocument(pathParts) {
             } catch (error) {
               if (document.docs && true) {
                 reject(
-                  utils.app.createError(
-                    `${pathParts.join('/')} references a collection, not a document`,
-                  ),
+                  app.createError(`${pathParts.join('/')} references a collection, not a document`),
                 );
               } else {
-                reject(utils.app.createError(error));
+                reject(app.createError(error));
               }
             }
           })
           .catch((error) => {
-            reject(utils.app.createError(error));
+            reject(app.createError(error));
           });
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
-import { location } from '../../../services';
-import utils from '../../../utils';
+import { location } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* getFormattedAddressFromCoords(action) {
   try {
@@ -10,7 +10,7 @@ export default function* getFormattedAddressFromCoords(action) {
       action.payload.latitude,
       action.payload.longitude,
     );
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -19,7 +19,7 @@ export default function* getFormattedAddressFromCoords(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

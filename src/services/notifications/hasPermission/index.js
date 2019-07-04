@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function hasPermission() {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ export default function hasPermission() {
         resolve({ enabled });
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 
-import { permissions } from '../../../services';
-import utils from '../../../utils';
+import { permissions } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* requestPermission(action) {
   try {
     const response = yield call(permissions.requestPermission, action.payload.permission);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -15,7 +15,7 @@ export default function* requestPermission(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

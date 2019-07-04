@@ -1,7 +1,7 @@
 import { put, all } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
-import utils from '../../../../utils';
+import { app } from '../../../../../utils';
 import logError from '..';
 
 const action = {
@@ -59,7 +59,7 @@ describe('logError saga', () => {
       expect(result).toEqual(
         put({
           type: 'SET_SYSTEM_MESSAGE',
-          payload: utils.app.createError(new Error(errorMessage)),
+          payload: app.createError(new Error(errorMessage)),
           error: true,
         }),
       );

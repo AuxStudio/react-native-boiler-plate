@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 
-import { http } from '../../../services';
-import utils from '../../../utils';
+import { http } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* post(action) {
   try {
@@ -11,7 +11,7 @@ export default function* post(action) {
       action.payload.headers,
       action.payload.parameters,
     );
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -20,7 +20,7 @@ export default function* post(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

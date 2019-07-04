@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BackHandler } from 'react-native';
 
-import utils from '../../utils';
+import { navigation } from '../../utils';
 
 // NOTE: It is important that this component renders after our scenes
 export class AndroidBackHandler extends React.Component {
@@ -49,7 +49,7 @@ export class AndroidBackHandler extends React.Component {
   }
 
   navigate(page, props) {
-    utils.navigation.navigate(page, props);
+    navigation.navigate(page, props);
   }
 
   render() {

@@ -1,6 +1,6 @@
 import { call, take, put } from 'redux-saga/effects';
 
-import utils from '../../../utils';
+import { app } from '../../../../utils';
 import createChannel from './createChannel';
 
 export default function* sync(action) {
@@ -26,7 +26,7 @@ export default function* sync(action) {
         });
       }
 
-      const nextAction = utils.app.prepareNextAction(action, { data });
+      const nextAction = app.prepareNextAction(action, { data });
 
       if (nextAction) {
         yield put(nextAction);
@@ -36,7 +36,7 @@ export default function* sync(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
       },
     });

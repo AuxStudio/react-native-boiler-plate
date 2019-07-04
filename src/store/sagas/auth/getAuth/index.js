@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 
-import { auth } from '../../../services';
-import utils from '../../../utils';
+import { auth } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* getAuth(action) {
   try {
     const response = yield call(auth.getAuth);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -24,7 +24,7 @@ export default function* getAuth(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

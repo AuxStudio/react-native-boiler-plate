@@ -1,4 +1,4 @@
-import utils from '../../../utils';
+import { app } from '../../../utils';
 import getRef from '../getRef';
 
 export default function sync(pathParts, query, callback) {
@@ -18,7 +18,7 @@ export default function sync(pathParts, query, callback) {
         resolve(unsubscribe);
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

@@ -1,8 +1,8 @@
 import { call, put } from 'redux-saga/effects';
 import { Platform } from 'react-native';
 
-import { permissions } from '../../../services';
-import utils from '../../../utils';
+import { permissions } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* checkAndRequestPermission(action) {
   try {
@@ -10,7 +10,7 @@ export default function* checkAndRequestPermission(action) {
       permissions.checkPermission,
       action.payload.permission,
     );
-    const nextActionOne = utils.app.prepareNextAction(action, checkPermissionResponse);
+    const nextActionOne = app.prepareNextAction(action, checkPermissionResponse);
 
     if (checkPermissionResponse.message === 'authorized' && nextActionOne) {
       yield put(nextActionOne);
@@ -23,7 +23,7 @@ export default function* checkAndRequestPermission(action) {
           permissions.requestPermission,
           action.payload.permission,
         );
-        const nextActionTwo = utils.app.prepareNextAction(action);
+        const nextActionTwo = app.prepareNextAction(action);
 
         if (requestPermissionResponse.message === 'authorized' && nextActionTwo) {
           yield put(nextActionTwo);
@@ -31,7 +31,7 @@ export default function* checkAndRequestPermission(action) {
           yield put({
             type: 'logError',
             payload: {
-              error: utils.app.createError(
+              error: app.createError(
                 `We need your permission to access your ${action.payload.permission}`,
               ),
               date: Date.now(),
@@ -43,7 +43,7 @@ export default function* checkAndRequestPermission(action) {
         yield put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(error),
+            error: app.createError(error),
             date: Date.now(),
             action,
           },
@@ -56,7 +56,7 @@ export default function* checkAndRequestPermission(action) {
       yield put({
         type: 'logError',
         payload: {
-          error: utils.app.createError(
+          error: app.createError(
             `We need your permission to access your ${action.payload.permission}`,
           ),
           date: Date.now(),
@@ -68,7 +68,7 @@ export default function* checkAndRequestPermission(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

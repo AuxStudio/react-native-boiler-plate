@@ -1,7 +1,7 @@
 import ImageResizer from 'react-native-image-resizer';
 
 import { images } from '../../../config';
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function resizeImage(imageURI) {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ export default function resizeImage(imageURI) {
         resolve(response);
       })
       .catch((error) => {
-        reject(utils.app.createError(error));
+        reject(app.createError(error));
       });
   });
 }

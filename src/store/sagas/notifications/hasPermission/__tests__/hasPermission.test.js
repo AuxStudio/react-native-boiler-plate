@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
-import utils from '../../../../utils';
+import { app } from '../../../../../utils';
 import hasPermission from '..';
 
 const notifications = {
@@ -95,7 +95,7 @@ describe('When testing the saga when an error is thrown from the api', () => {
       put({
         type: 'logError',
         payload: {
-          error: utils.app.createError(errorMessage),
+          error: app.createError(errorMessage),
           date: expect.any(Number),
         },
       }),

@@ -1,6 +1,6 @@
 import Geocoder from 'react-native-geocoder';
 
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function getFormattedAddressFromCoords(lat, lng) {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export default function getFormattedAddressFromCoords(lat, lng) {
           resolve(response);
         })
         .catch((error) => {
-          reject(utils.app.createError(error));
+          reject(app.createError(error));
         });
     } else if (!lat) {
       reject(new Error('Latitude is required'));

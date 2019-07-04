@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import sagaHelper from 'redux-saga-testing';
 
-import utils from '../../../../utils';
+import { app } from '../../../../../utils';
 import checkAndRequestPermission from '..';
 
 // This saga uses the Platform module so let's mock it to test our conditions
@@ -129,7 +129,7 @@ describe('checkAndRequestPermissions saga', () => {
         put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(
+            error: app.createError(
               `We need your permission to access your ${action.payload.permission}`,
             ),
             date: expect.any(Number),
@@ -168,7 +168,7 @@ describe('checkAndRequestPermissions saga', () => {
         put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(
+            error: app.createError(
               `We need your permission to access your ${action.payload.permission}`,
             ),
             date: expect.any(Number),
@@ -200,7 +200,7 @@ describe('checkAndRequestPermissions saga', () => {
         put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(errorMessage),
+            error: app.createError(errorMessage),
             date: expect.any(Number),
             action,
           },
@@ -238,7 +238,7 @@ describe('checkAndRequestPermissions saga', () => {
         put({
           type: 'logError',
           payload: {
-            error: utils.app.createError(errorMessage),
+            error: app.createError(errorMessage),
             date: expect.any(Number),
             action,
           },

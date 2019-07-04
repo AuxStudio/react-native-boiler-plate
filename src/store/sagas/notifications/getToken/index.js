@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 
-import { notifications } from '../../../services';
-import utils from '../../../utils';
+import { notifications } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* getToken(action) {
   try {
     const response = yield call(notifications.getToken);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -15,7 +15,7 @@ export default function* getToken(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
       },
     });

@@ -1,7 +1,7 @@
 import { all, put } from 'redux-saga/effects';
 
-import utils from '../../../utils';
-import { slack } from '../../../config';
+import { app } from '../../../../utils';
+import { slack } from '../../../../config';
 
 export default function* logError(action) {
   /*
@@ -68,7 +68,7 @@ export default function* logError(action) {
   } catch (error) {
     yield put({
       type: 'SET_SYSTEM_MESSAGE',
-      payload: utils.app.createError(error),
+      payload: app.createError(error),
       error: true,
     });
   }

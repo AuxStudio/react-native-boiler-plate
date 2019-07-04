@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 
-import utils from '../../../utils';
+import { app } from '../../../utils';
 
 export default function signInWithCredential(credential) {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export default function signInWithCredential(credential) {
           resolve(response);
         })
         .catch((error) => {
-          reject(utils.app.createError(error));
+          reject(app.createError(error));
         });
     } else {
       reject(new Error('Credential is required'));

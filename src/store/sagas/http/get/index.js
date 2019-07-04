@@ -1,11 +1,12 @@
 import { call, put } from 'redux-saga/effects';
-import { http } from '../../../services';
-import utils from '../../../utils';
+
+import { http } from '../../../../services';
+import { app } from '../../../../utils';
 
 export default function* get(action) {
   try {
     const response = yield call(http.get, action.payload.url);
-    const nextAction = utils.app.prepareNextAction(action, response);
+    const nextAction = app.prepareNextAction(action, response);
 
     if (nextAction) {
       yield put(nextAction);
@@ -14,7 +15,7 @@ export default function* get(action) {
     yield put({
       type: 'logError',
       payload: {
-        error: utils.app.createError(error),
+        error: app.createError(error),
         date: Date.now(),
         action,
       },

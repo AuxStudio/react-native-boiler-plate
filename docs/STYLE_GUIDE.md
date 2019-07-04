@@ -77,7 +77,7 @@ We follow the following order wrt importing modules:
 import { View } from 'react-native';
 ...
 
-import utils from '../../utils';
+import {app} from '../../utils';
 ...
 
 import styles from './styles';
