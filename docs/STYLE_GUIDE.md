@@ -151,7 +151,7 @@ Some common terminology that we use.
 ### Services and sagas
 
 - Every service should have a saga.
-- If you're going to couple sagas (see ./sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
+- If you're going to couple sagas (see ./store/sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
 - Sagas should not implicitly yield (put) an action. Use the nextAction convention (see all sagas). This allows for much better customisablility when calling sagas.
 
 ### Firebase
