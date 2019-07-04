@@ -1,6 +1,6 @@
 {
   "name": "react-native-boiler-plate",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "A boiler-plate project for React-native, Redux and Firebase apps",
   "main": "App.js",
   "scripts": {
