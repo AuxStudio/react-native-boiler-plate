@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import styleConstants from '../../static/styleConstants';
+import { colors, dimensions, fonts } from '../../static/styleConstants';
 
 const styles = StyleSheet.create({
   wrapper: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: styleConstants.colors.transBlack,
+    backgroundColor: colors.transBlack,
   },
   container: {
     flex: 1,
@@ -14,19 +14,19 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignSelf: 'center',
-    backgroundColor: styleConstants.colors.white,
-    paddingVertical: styleConstants.dimensions.spacing.vertical,
-    paddingHorizontal: styleConstants.dimensions.spacing.horizontal,
-    borderRadius: styleConstants.dimensions.borderRadius,
+    backgroundColor: colors.white,
+    paddingVertical: dimensions.spacing.vertical,
+    paddingHorizontal: dimensions.spacing.horizontal,
+    borderRadius: dimensions.borderRadius,
   },
   iconContainer: {
     position: 'absolute',
-    top: styleConstants.dimensions.spacing.vertical * 2,
-    right: styleConstants.dimensions.spacing.horizontal,
+    top: dimensions.spacing.vertical * 2,
+    right: dimensions.spacing.horizontal,
   },
   icon: {
-    fontSize: styleConstants.fonts.sizes.icon,
-    color: styleConstants.colors.white,
+    fontSize: fonts.sizes.icon,
+    color: colors.white,
   },
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import styleConstants from '../../static/styleConstants';
+import { colors } from '../../static/styleConstants';
 import styles from './styles';
 
 import Page from '../Page';
@@ -13,7 +13,7 @@ const defaultProps = {};
 const PageLoader = () => {
   return (
     <Page verticalCenter horizontalCenter style={styles.container}>
-      <ActivityIndicator size="large" color={styleConstants.colors.white} />
+      <ActivityIndicator size="large" color={colors.white} />
     </Page>
   );
 };

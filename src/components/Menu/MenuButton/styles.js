@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-import styleConstants from '../../../static/styleConstants';
+import { colors, fonts } from '../../../static/styleConstants';
 
 const styles = StyleSheet.create({
   menuButton: {},
   menuButtonIcon: {
-    fontSize: styleConstants.fonts.sizes.icon,
-    color: styleConstants.primaryTextColor,
+    fontSize: fonts.sizes.icon,
+    color: colors.primaryTextColor,
   },
 });
 

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import styleConstants from '../../static/styleConstants';
+import { colors, fonts } from '../../static/styleConstants';
 
 const styles = StyleSheet.create({
   container: {},
@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: styleConstants.colors.dividerColor,
+    backgroundColor: colors.dividerColor,
   },
   icon: {
-    fontSize: styleConstants.fonts.sizes.icon,
-    color: styleConstants.colors.primaryText,
+    fontSize: fonts.sizes.icon,
+    color: colors.primaryText,
   },
 });
 

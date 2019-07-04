@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
 import { StatusBar } from 'react-native-simple-components';
 
-import styleConstants from '../../static/styleConstants';
+import { colors } from '../../static/styleConstants';
 
 import styles from './styles';
 
@@ -30,7 +30,7 @@ const Page = ({ verticalCenter, horizontalCenter, children, style, testID }) => 
       style={[styles.container, verticalCenterStyles, horizontalCenterStyles, style]}
       testID={testID}
     >
-      <StatusBar backgroundColor={styleConstants.colors.primary} barStyle="light-content" />
+      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
 
       {children}
     </View>

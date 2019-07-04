@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-import styleConstants from '../../static/styleConstants';
+import { dimensions } from '../../../static/styleConstants';
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: styleConstants.dimensions.spacing.vertical,
-    paddingHorizontal: styleConstants.dimensions.spacing.horizontal,
+    paddingVertical: dimensions.spacing.vertical,
+    paddingHorizontal: dimensions.spacing.horizontal,
   },
 });
 

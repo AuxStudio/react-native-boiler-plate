@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
 import Animator from 'react-native-simple-animators';
-import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import styleConstants from '../../static/styleConstants';
+import { dimensions } from '../../static/styleConstants';
 
 import styles from './styles';
 
@@ -65,7 +64,7 @@ export default class Lightbox extends React.Component {
     return (
       <Animator
         type="translateY"
-        initialValue={styleConstants.dimensions.window.height}
+        initialValue={dimensions.window.height}
         finalValue={0}
         shouldAnimateIn
         shouldAnimateOut={shouldAnimateOut}

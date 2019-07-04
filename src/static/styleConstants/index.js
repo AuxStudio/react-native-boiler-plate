@@ -4,12 +4,12 @@ import fonts from './fonts';
 import shadows from './shadows';
 import helpers from './helpers';
 
-const styleConstants = {
+export { colors, dimensions, fonts, shadows, helpers };
+
+export default {
   colors,
   dimensions,
   fonts,
   shadows,
   helpers,
 };
-
-export default styleConstants;

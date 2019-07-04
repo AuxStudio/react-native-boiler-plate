@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Page, InfoBlock } from 'react-native-simple-components';
 
-import styleConstants from '../../../static/styleConstants';
 import styles from './styles';
 
 const propTypes = {

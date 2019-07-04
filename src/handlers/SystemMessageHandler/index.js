@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 
-import styleConstants from '../../static/styleConstants';
+import { colors } from '../../static/styleConstants';
 
 export class SystemMessageHandler extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export class SystemMessageHandler extends React.Component {
     Snackbar.show({
       title: systemMessage,
       duration: this.snackbarDuration,
-      backgroundColor: styleConstants.colors.orange,
+      backgroundColor: colors.orange,
     });
   }
 
