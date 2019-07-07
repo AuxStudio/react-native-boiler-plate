@@ -29,6 +29,7 @@ If you'd like to test that you are setting the project up correctly, do a build 
     8.  [react-native-geocoder](#react-native-geocoder)
     9.  [react-native-image-picker](#react-native-image-picker)
     10. [react-native-image-resizer](#react-native-image-resizer)
+    11. [react-native-netinfo](#react-native-netinfo)
 
 11. [Copy the source files](#11-copy-the-source-files)
 12. [Setup ESLint and Prettier](#12-setup-eslint-and-prettier)
@@ -185,7 +186,7 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu @react-native-community/netinfo
 ```
 
 ## 10. Link dependencies
@@ -715,6 +716,12 @@ react-native link react-native-image-resizer
 2.  Go to `node_modules` => `react-native-image-resizer` => `ios` => select `RNImageResizer.xcodeproj`
 
 3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
+
+### react-native-netinfo
+
+```shell
+react-native link @react-native-community/netinfo
+```
 
 ## 11. Copy the source files
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { NetInfo } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import NetInfo from '@react-native-community/netinfo';
 
 export class NetworkHandler extends React.Component {
   constructor(props) {

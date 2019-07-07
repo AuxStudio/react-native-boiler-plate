@@ -13,7 +13,7 @@ exports[`NetworkHandler methods should handle disableNetwork 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -31,7 +31,7 @@ exports[`NetworkHandler methods should handle enableNetwork 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -54,7 +54,7 @@ exports[`NetworkHandler methods should handle setNetworkConnectionInfo 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],

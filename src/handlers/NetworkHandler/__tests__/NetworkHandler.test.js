@@ -3,6 +3,16 @@ import renderer from 'react-test-renderer';
 
 import { NetworkHandler } from '..';
 
+/*
+ * Mock the NetInfo module
+ */
+jest.mock('@react-native-community/netinfo', () => {
+  return {
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+  };
+});
+
 const NETWORK = {
   online: {
     type: 'wifi',
