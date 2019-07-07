@@ -20,11 +20,41 @@ yarn run android-dev
 
 ## Deployment
 
+1. Update the version:
+
+1.1. [ANDROID] In `./android/app/build.gradle`:
+
+```gradle
+android {
+    ...
+    defaultConfig {
+        ...
+        versionCode 22 // Increment this
+        versionName "1.2.0" // Update this
+```
+
+1.2. [iOS] In `./ios/PROJECT_NAME/Info.plist`:
+
+```plist
+<dict>
+  ...
+	<key>CFBundleShortVersionString</key>
+	<string>1.2.0</string> // Update this
+  ...
+	<key>CFBundleVersion</key>
+	<string>22</string> // Increment this
+</dict>
+```
+
+2. Deploy:
+
 To deploy to the stores, use:
 
 ```shell
 yarn run beta
 ```
+
+This command will build and deploy on both iOS and android via fastlane.
 
 ## Generating assets
 
