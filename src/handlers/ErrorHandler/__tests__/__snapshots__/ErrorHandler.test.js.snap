@@ -22,6 +22,4 @@ exports[`ErrorHandler methods should handle logError 1`] = `
 }
 `;
 
-exports[`ErrorHandler renders renders the error state 1`] = `null`;
-
 exports[`ErrorHandler renders renders with minimum required props 1`] = `<View />`;
