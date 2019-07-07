@@ -1,7 +1,6 @@
-import { takeLatest, takeEvery, fork, all } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 
-import { logEvent } from './analytics';
-
+import { logEvent } from '../../services/analytics';
 import {
   getAuth,
   signInAnonymously,
@@ -12,12 +11,15 @@ import {
   sendPasswordResetEmail,
   signInWithCredential,
   signOut,
-} from './auth';
-
-import { getData, updateData, setData, pushData, goOffline, goOnline } from './database';
-
-import { logError } from './errors';
-
+} from '../../services/auth';
+import {
+  getData,
+  updateData,
+  setData,
+  pushData,
+  goOffline,
+  goOnline,
+} from '../../services/database';
 import {
   addDocument,
   deleteDocument,
@@ -28,76 +30,108 @@ import {
   setDocument,
   sync,
   updateDocument,
-} from './firestore';
-
-import { get, post } from './http';
-
-import { resizeImage, showImagePicker } from './images';
-
-import { getDeviceLocation, getFormattedAddressFromCoords } from './location';
-
+} from '../../services/firestore';
+import { get, post } from '../../services/http';
+import { resizeImage, showImagePicker } from '../../services/images';
+import { getDeviceLocation, getFormattedAddressFromCoords } from '../../services/location';
 import {
   createChannel,
   getToken,
   hasPermission,
   requestNotificationsPermission,
-} from './notifications';
+} from '../../services/notifications';
+import {
+  checkPermission,
+  requestPermission,
+  checkAndRequestPermission,
+} from '../../services/permissions';
+import { uploadFile } from '../../services/storage';
 
-import { checkPermission, requestPermission, checkAndRequestPermission } from './permissions';
-
-import { uploadFile } from './storage';
+import eventChannelSaga from './eventChannelSaga';
+import genericSaga from './genericSaga';
 
 export default function* sagas() {
-  yield all([
-    fork(takeLatest, 'logEvent', logEvent),
+  // Analytics
+  yield takeEvery('logEvent', genericSaga, { service: logEvent });
 
-    fork(takeLatest, 'getAuth', getAuth),
-    fork(takeLatest, 'signInAnonymously', signInAnonymously),
-    fork(takeLatest, 'getCredentialFromEmail', getCredentialFromEmail),
-    fork(takeLatest, 'getCredentialFromFacebook', getCredentialFromFacebook),
-    fork(takeLatest, 'getCredentialFromGoogle', getCredentialFromGoogle),
-    fork(takeLatest, 'getCredentialAndSignIn', getCredentialAndSignIn),
-    fork(takeLatest, 'sendPasswordResetEmail', sendPasswordResetEmail),
-    fork(takeLatest, 'signInWithCredential', signInWithCredential),
-    fork(takeLatest, 'signOut', signOut),
+  // Auth
+  yield takeEvery('getAuth', eventChannelSaga, { service: getAuth });
+  yield takeEvery('getCredentialFromEmail', genericSaga, {
+    service: getCredentialFromEmail,
+  });
+  yield takeEvery('getCredentialFromFacebook', genericSaga, {
+    service: getCredentialFromFacebook,
+  });
+  yield takeEvery('getCredentialFromGoogle', genericSaga, {
+    service: getCredentialFromGoogle,
+  });
+  yield takeEvery('getCredentialAndSignIn', genericSaga, {
+    service: getCredentialAndSignIn,
+  });
+  yield takeEvery('sendPasswordResetEmail', genericSaga, {
+    service: sendPasswordResetEmail,
+  });
+  yield takeEvery('signInAnonymously', genericSaga, {
+    service: signInAnonymously,
+  });
+  yield takeEvery('signInWithCredential', genericSaga, { service: signInWithCredential });
+  yield takeEvery('signOut', genericSaga, { service: signOut });
 
-    fork(takeEvery, 'getData', getData),
-    fork(takeEvery, 'updateData', updateData),
-    fork(takeEvery, 'setData', setData),
-    fork(takeEvery, 'pushData', pushData),
-    fork(takeEvery, 'goOffline', goOffline),
-    fork(takeEvery, 'goOnline', goOnline),
+  // Database
+  yield takeEvery('getData', genericSaga, { service: getData, shouldTrackEvent: true });
+  yield takeEvery('updateData', genericSaga, { service: updateData, shouldTrackEvent: true });
+  yield takeEvery('setData', genericSaga, { service: setData, shouldTrackEvent: true });
+  yield takeEvery('pushData', genericSaga, { service: pushData, shouldTrackEvent: true });
+  yield takeEvery('goOffline', genericSaga, { service: goOffline, shouldTrackEvent: true });
+  yield takeEvery('goOnline', genericSaga, { service: goOnline, shouldTrackEvent: true });
 
-    fork(takeEvery, 'addDocument', addDocument),
-    fork(takeEvery, 'deleteDocument', deleteDocument),
-    fork(takeEvery, 'disableNetwork', disableNetwork),
-    fork(takeEvery, 'enableNetwork', enableNetwork),
-    fork(takeEvery, 'getCollection', getCollection),
-    fork(takeEvery, 'getDocument', getDocument),
-    fork(takeEvery, 'setDocument', setDocument),
-    fork(takeEvery, 'sync', sync),
-    fork(takeEvery, 'updateDocument', updateDocument),
+  // Firestore
+  yield takeEvery('addDocument', genericSaga, { service: addDocument, shouldTrackEvent: true });
+  yield takeEvery('deleteDocument', genericSaga, {
+    service: deleteDocument,
+    shouldTrackEvent: true,
+  });
+  yield takeEvery('disableNetwork', genericSaga, { service: disableNetwork });
+  yield takeEvery('enableNetwork', genericSaga, { service: enableNetwork });
+  yield takeEvery('getCollection', genericSaga, { service: getCollection, shouldTrackEvent: true });
+  yield takeEvery('getDocument', genericSaga, { service: getDocument, shouldTrackEvent: true });
+  yield takeEvery('setDocument', genericSaga, { service: setDocument, shouldTrackEvent: true });
+  yield takeEvery('sync', eventChannelSaga, {
+    service: sync,
+    shouldTrackEvent: true,
+  });
+  yield takeEvery('updateDocument', genericSaga, {
+    service: updateDocument,
+    shouldTrackEvent: true,
+  });
 
-    fork(takeLatest, 'logError', logError),
+  // HTTP
+  yield takeEvery('get', genericSaga, { service: get, shouldTrackEvent: true });
+  yield takeEvery('post', genericSaga, { service: post, shouldTrackEvent: true });
 
-    fork(takeLatest, 'get', get),
-    fork(takeLatest, 'post', post),
+  // Images
+  yield takeEvery('resizeImage', genericSaga, { service: resizeImage });
+  yield takeEvery('showImagePicker', genericSaga, { service: showImagePicker });
 
-    fork(takeLatest, 'resizeImage', resizeImage),
-    fork(takeLatest, 'showImagePicker', showImagePicker),
+  // Location
+  yield takeEvery('getDeviceLocation', genericSaga, { service: getDeviceLocation });
+  yield takeEvery('getFormattedAddressFromCoords', genericSaga, {
+    service: getFormattedAddressFromCoords,
+  });
 
-    fork(takeLatest, 'getDeviceLocation', getDeviceLocation),
-    fork(takeLatest, 'getFormattedAddressFromCoords', getFormattedAddressFromCoords),
+  // Notifications
+  yield takeEvery('createChannel', genericSaga, { service: createChannel });
+  yield takeEvery('getToken', genericSaga, { service: getToken });
+  yield takeEvery('hasPermission', genericSaga, { service: hasPermission });
+  yield takeEvery('requestNotificationsPermission', genericSaga, {
+    service: requestNotificationsPermission,
+  });
 
-    fork(takeLatest, 'createChannel', createChannel),
-    fork(takeLatest, 'getToken', getToken),
-    fork(takeLatest, 'hasPermission', hasPermission),
-    fork(takeLatest, 'requestNotificationsPermission', requestNotificationsPermission),
+  // Permisions
+  yield takeEvery('checkPermission', genericSaga, { service: checkPermission });
+  yield takeEvery('requestPermission', genericSaga, { service: requestPermission });
+  yield takeEvery('checkAndRequestPermission', genericSaga, { service: checkAndRequestPermission });
 
-    fork(takeLatest, 'checkPermission', checkPermission),
-    fork(takeLatest, 'requestPermission', requestPermission),
-    fork(takeLatest, 'checkAndRequestPermission', checkAndRequestPermission),
-
-    fork(takeLatest, 'uploadFile', uploadFile),
-  ]);
+  // Storage
+  yield takeEvery('uploadFile', genericSaga, { service: uploadFile, shouldTrackEvent: true });
 }
