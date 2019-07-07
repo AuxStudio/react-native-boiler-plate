@@ -11,7 +11,7 @@ exports[`SystemMessageHandler lifecycle methods should call showSnackbar and res
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -29,7 +29,7 @@ exports[`SystemMessageHandler methods should handle resetError 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],

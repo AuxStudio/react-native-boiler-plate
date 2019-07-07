@@ -16,9 +16,7 @@ exports[`CodePushStatus renders renders 1`] = `
   }
 >
   <Text
-    accessible={true}
     allowFontScaling={false}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {
@@ -35,15 +33,13 @@ exports[`CodePushStatus renders renders 1`] = `
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
+        Object {},
       ]
     }
   >
     
   </Text>
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#212121",
@@ -86,9 +82,6 @@ exports[`CodePushStatus renders renders the loading state 1`] = `
     }
   />
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#212121",

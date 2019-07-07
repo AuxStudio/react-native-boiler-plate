@@ -32,11 +32,11 @@ exports[`LocationHandler methods should handle getLocationPermission 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],

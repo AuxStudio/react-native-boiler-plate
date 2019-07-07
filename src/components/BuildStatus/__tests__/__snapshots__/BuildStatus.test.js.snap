@@ -10,9 +10,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
   }
 >
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#212121",
@@ -22,9 +19,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "fontFamily": "System",
@@ -37,9 +31,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     0.0.1 | 
   </Text>
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#212121",
@@ -49,9 +40,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "fontFamily": "System",
@@ -64,9 +52,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     1 | 
   </Text>
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "color": "#212121",
@@ -76,9 +61,6 @@ exports[`BuildStatus renders renders with minimum required props 1`] = `
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "fontFamily": "System",

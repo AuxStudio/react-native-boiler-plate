@@ -17,7 +17,7 @@ exports[`CodePushHandler methods should handle setCodePushDownloadProgress 1`] =
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -38,7 +38,7 @@ exports[`CodePushHandler methods should handle setCodePushStatus 1`] = `
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],

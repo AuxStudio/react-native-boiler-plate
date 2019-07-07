@@ -51,6 +51,7 @@ exports[`Lightbox renders renders with minimum required props 1`] = `
         }
       }
       enableAutomaticScroll={true}
+      enableOnAndroid={false}
       enableResetScrollToCoords={true}
       extraHeight={75}
       extraScrollHeight={0}
@@ -75,7 +76,9 @@ exports[`Lightbox renders renders with minimum required props 1`] = `
       <View>
         <View
           accessible={true}
+          clickable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -93,9 +96,7 @@ exports[`Lightbox renders renders with minimum required props 1`] = `
           testID="lightbox.button.close"
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -111,6 +112,7 @@ exports[`Lightbox renders renders with minimum required props 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >

@@ -3,7 +3,9 @@
 exports[`MenuButton renders with all props 1`] = `
 <View
   accessible={true}
+  clickable={true}
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -17,9 +19,7 @@ exports[`MenuButton renders with all props 1`] = `
   }
 >
   <Text
-    accessible={true}
     allowFontScaling={false}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {
@@ -40,6 +40,7 @@ exports[`MenuButton renders with all props 1`] = `
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
+        Object {},
       ]
     }
   >
@@ -51,7 +52,9 @@ exports[`MenuButton renders with all props 1`] = `
 exports[`MenuButton renders with minimum required props 1`] = `
 <View
   accessible={true}
+  clickable={false}
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -65,9 +68,7 @@ exports[`MenuButton renders with minimum required props 1`] = `
   }
 >
   <Text
-    accessible={true}
     allowFontScaling={false}
-    ellipsizeMode="tail"
     style={
       Array [
         Object {
@@ -86,6 +87,7 @@ exports[`MenuButton renders with minimum required props 1`] = `
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
+        Object {},
       ]
     }
   >

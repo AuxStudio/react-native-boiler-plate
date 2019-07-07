@@ -4,12 +4,12 @@ exports[`Menu renders renders with minimum required props 1`] = `
 <View
   collapsable={false}
 >
-  <View
-    onLayout={[Function]}
-  >
+  <View>
     <View
       accessible={true}
+      clickable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -23,9 +23,7 @@ exports[`Menu renders renders with minimum required props 1`] = `
       }
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -44,6 +42,7 @@ exports[`Menu renders renders with minimum required props 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -53,12 +52,24 @@ exports[`Menu renders renders with minimum required props 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
+    onDismiss={[Function]}
     onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
     transparent={true}
     visible={false}
   >
     <View
-      accessible={true}
+      accessible={false}
+      clickable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -80,10 +91,9 @@ exports[`Menu renders renders with minimum required props 1`] = `
         style={
           Object {
             "backgroundColor": "white",
-            "borderRadius": 2,
-            "left": 0,
+            "borderRadius": 4,
+            "left": 8,
             "opacity": 0,
-            "paddingVertical": 8,
             "position": "absolute",
             "shadowColor": "black",
             "shadowOffset": Object {
@@ -92,7 +102,7 @@ exports[`Menu renders renders with minimum required props 1`] = `
             },
             "shadowOpacity": 0.14,
             "shadowRadius": 2,
-            "top": 0,
+            "top": 8,
             "transform": Array [],
           }
         }
@@ -106,103 +116,107 @@ exports[`Menu renders renders with minimum required props 1`] = `
         >
           <View
             accessible={true}
+            clickable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
-                },
-                Array [
-                  undefined,
-                  undefined,
-                ],
-                Object {
-                  "width": 0,
-                },
-              ]
-            }
+            style={null}
+            testID="menu.item.Foo"
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
+            <View
               style={
                 Array [
                   Object {
-                    "fontSize": 14,
-                    "fontWeight": "400",
-                    "paddingHorizontal": 16,
+                    "height": 48,
+                    "justifyContent": "center",
+                    "maxWidth": 248,
+                    "minWidth": 124,
                   },
-                  false,
                   Array [
-                    Object {},
+                    undefined,
                     undefined,
                   ],
                 ]
               }
             >
-              Foo
-            </Text>
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "paddingHorizontal": 16,
+                    },
+                    false,
+                    Array [
+                      Object {},
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Foo
+              </Text>
+            </View>
           </View>
           <View
             accessible={true}
+            clickable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
-                },
-                Array [
-                  undefined,
-                  undefined,
-                ],
-                Object {
-                  "width": 0,
-                },
-              ]
-            }
+            style={null}
+            testID="menu.item.Bar"
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
+            <View
               style={
                 Array [
                   Object {
-                    "fontSize": 14,
-                    "fontWeight": "400",
-                    "paddingHorizontal": 16,
+                    "height": 48,
+                    "justifyContent": "center",
+                    "maxWidth": 248,
+                    "minWidth": 124,
                   },
-                  false,
                   Array [
-                    Object {},
+                    undefined,
                     undefined,
                   ],
                 ]
               }
             >
-              Bar
-            </Text>
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "paddingHorizontal": 16,
+                    },
+                    false,
+                    Array [
+                      Object {},
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Bar
+              </Text>
+            </View>
           </View>
         </View>
       </View>

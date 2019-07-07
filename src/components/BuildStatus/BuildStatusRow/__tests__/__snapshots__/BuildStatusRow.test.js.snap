@@ -2,9 +2,6 @@
 
 exports[`BuildStatusRow renders renders 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Object {
       "color": "#212121",
@@ -14,9 +11,6 @@ exports[`BuildStatusRow renders renders 1`] = `
   }
 >
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     style={
       Object {
         "fontFamily": "System",

@@ -7,14 +7,14 @@ exports[`RemoteImage renders renders the normal state 1`] = `
   <View
     style={
       Array [
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {},
           undefined,
           undefined,
         ],
-        Object {
-          "overflow": "hidden",
-        },
       ]
     }
   >
@@ -69,18 +69,36 @@ exports[`RemoteImage renders renders with minimum required props 1`] = `
 <View
   style={Object {}}
 >
-  <Image
-    onError={[Function]}
-    onLoadEnd={[Function]}
-    resizeMode="cover"
+  <View
     style={
       Array [
-        Object {},
-        undefined,
-        undefined,
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {},
+          undefined,
+          undefined,
+        ],
       ]
     }
-  />
+  >
+    <FastImageView
+      onFastImageError={[Function]}
+      onFastImageLoadEnd={[Function]}
+      resizeMode="cover"
+      source={null}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
   <View
     style={
       Array [
