@@ -4,7 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import codepush from 'react-native-code-push';
 
 import { store, persistor } from './store';
-import Routes from './Routes';
+import Scenes from './scenes';
 
 import ErrorHandler from './handlers/ErrorHandler';
 import NotificationsHandler from './handlers/NotificationsHandler';
@@ -38,7 +38,7 @@ export function App() {
             <DatabaseHandler />
             <NetworkHandler />
             <LocationHandler />
-            <Routes />
+            <Scenes />
             <AndroidBackHandler />
           </SystemMessageHandler>
         </ErrorHandler>
