@@ -3,9 +3,7 @@
 exports[`Touchable renders renders with the minimum required props 1`] = `
 <View
   accessible={true}
-  clickable={false}
   isTVSelectable={true}
-  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
