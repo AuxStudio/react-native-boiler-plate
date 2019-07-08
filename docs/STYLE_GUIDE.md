@@ -36,72 +36,6 @@ To set these tools up with VSCode:
 - Prettier (easy, install the VSCode extension and enable formatOnSave in userSettings)
 - [ESLint](https://github.com/airbnb/javascript/issues/1589#issuecomment-344097023)
 
-## Directory structure:
-
-```
-src
-	assets
-	fonts
-	images
-	icons
-		index.js
-	components
-		Example
-			__tests__
-				Example.test.js
-			ExampleDependentComponent
-				__tests__
-					ExampleDependentComponent.test.js
-				index.js
-			index.js
-			styles.js
-	config
-	containers
-	e2e
-		...
-		Example.spec.js
-	handlers
-		AuthHandler
-			__tests__
-			index.js
-	reducers
-		appData
-			__tests__
-			index.js
-			initialState.js
-		index.js
-	sagas
-		analytics
-			logEvent
-				__tests__
-				index.js
-		index.js
-	scenes
-		pages
-			Home
-				__tests__
-				index.js
-		modals
-	services
-		analytics
-			logEvent
-				__tests__
-				index.js
-		index.js
-	store
-	styleConstants
-		index.js
-		dimensions
-			index.js
-	utils
-		app
-			createError
-				__tests__
-				indexjs
-	App.js
-	Router.js
-```
-
 ## Redux actions
 
 We use the [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) as a standard for our redux actions.
@@ -143,7 +77,7 @@ We follow the following order wrt importing modules:
 import { View } from 'react-native';
 ...
 
-import utils from '../../utils';
+import {app} from '../../utils';
 ...
 
 import styles from './styles';
@@ -217,7 +151,7 @@ Some common terminology that we use.
 ### Services and sagas
 
 - Every service should have a saga.
-- If you're going to couple sagas (see ./sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
+- If you're going to couple sagas (see ./store/sagas/auth/linkUserWithCredential), that's okay, but make sure the individual sagas are available individually (ie. linkUserWithCredential and signInAnonymously are in separate files).
 - Sagas should not implicitly yield (put) an action. Use the nextAction convention (see all sagas). This allows for much better customisablility when calling sagas.
 
 ### Firebase

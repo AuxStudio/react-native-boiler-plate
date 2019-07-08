@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BuildStatusRow renders renders 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#212121",
+      "fontFamily": "System",
+      "fontSize": 15,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontFamily": "System",
+      }
+    }
+  >
+    Foo
+     
+  </Text>
+  Bar
+</Text>
+`;

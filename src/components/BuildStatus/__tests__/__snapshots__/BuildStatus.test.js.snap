@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BuildStatus renders renders with minimum required props 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
+    >
+      Version:
+       
+    </Text>
+    0.0.1 | 
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
+    >
+      Build:
+       
+    </Text>
+    1 | 
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#212121",
+        "fontFamily": "System",
+        "fontSize": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontFamily": "System",
+        }
+      }
+    >
+      Code:
+       
+    </Text>
+    1
+  </Text>
+</View>
+`;

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthHandler methods should handle getAuth 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "type": "getAuth",
+      },
+    ],
+    Array [
+      Object {
+        "type": "getAuth",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`AuthHandler renders renders with minimum required props 1`] = `null`;
