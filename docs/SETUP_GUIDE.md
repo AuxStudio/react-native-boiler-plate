@@ -47,10 +47,10 @@ If you'd like to test that you are setting the project up correctly, do a build 
 ## 1. Initialise project
 
 ```shell
-react-native init temp
+react-native init --version 0.59.9 temp
 ```
 
-`NOTE: We use 'temp' as a project name here so that we can correctly rename the project in [Step 4](#4-update-display-and-package-name)`
+`NOTE: We're locking RN to version 0.59.9 here. This will prevent bugs in this setup guide. We will continue to upgrade RN with each new release. Also: we use 'temp' as a project name here so that we can correctly rename the project in [Step 4](#4-update-display-and-package-name)`
 
 ## 2. Setup git
 
@@ -88,19 +88,26 @@ yarn global add react-native-rename
 
 1.  Update the display and package name (android only):
 
-NOTE: The display name will need to be different to the name you initialised the project with.
+`NOTE: The display name will need to be different to the name you initialised the project with. Also. The react-native-rename package breaks the iOS build. We'll use react-native eject to handle renaming on iOS.`
 
 ```shell
 react-native-rename "NEW DISPLAY NAME" -b NEW_PACKAGE_NAME
 ```
 
-2.  Update the package name in XCode (iOS only):
+2. Rebuild the iOS folder:
+
+```shell
+sudo rm -R ./ios
+react-native eject
+```
+
+3.  Update the package name in XCode (iOS only):
 
 NOTE: Follow this step to a tee, don't modify Info.plist's bundle identifier, you will run into build issues.
 
 In Xcode, `Project` => `General` => `Identity` => `Bundle Identifier` => `NEW_PACKAGE_NAME`.
 
-3.  Setup iOS app signing (since you have XCode open):
+4.  Setup iOS app signing (since you have XCode open):
 
 In Xcode, `Project` => `General` => `Signing` => Select team.
 
@@ -108,18 +115,10 @@ In Xcode, `Project` => `General` => `Signing` => Select team.
 
 Approximately 33% smaller.
 
-1.  In `./android/app/build.gradle`, replace as necessary:
+In `./android/app/build.gradle`, replace as necessary:
 
 ```java
 def enableSeparateBuildPerCPUArchitecture = true
-```
-
-2.  Same file as above, remove (from android.defaultConfig):
-
-```java
-ndk {
-    abiFilters "armeabi-v7a", "x86"
-}
 ```
 
 ## 6. Add android app signing
@@ -128,6 +127,7 @@ ndk {
 
 ```shell
 keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+mv ./my-release-key.keystore ./android/app/my-release-key.keystore
 ```
 
 2.  Enter a password and your details.
@@ -186,36 +186,15 @@ The projects should be called PROJECT_NAME-development and PROJECT_NAME-producti
 Remove what you don't need.
 
 ```shell
-yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu @react-native-community/netinfo
+yarn add prop-types react-native-simple-components react-native-simple-animators react-native-vector-icons react-native-snackbar react-native-fast-image@6 react-native-firebase redux redux-persist react-redux redux-saga react-native-router-flux react-native-fbsdk@0.8 react-native-google-signin react-native-image-picker react-native-image-resizer react-native-permissions react-native-geocoder redux-logger react-native-keyboard-aware-scroll-view react-native-material-menu @react-native-community/netinfo
 ```
 
 ## 10. Link dependencies
 
 ### react-native-vector-icons
 
-#### Android
-
-In `./android/app/build.gradle` (at bottom of file add):
-
-```gradle
-// react-native-vector-icons
-project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf' ] // add whatever other icons you want
-]
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 ```
-
-#### iOS
-
-1.  In Xcode, drag fonts to project (eg. MaterialIcons.ttf and any other custom fonts you want).
-
-2.  In `./ios/PROJECT_NAME/info.plist` add to the outermost dict:
-
-```
-<key>UIAppFonts</key>
-<array>
-    <string>MaterialIcons.ttf</string>
-</array>
+react-native link react-native-vector-icons
 ```
 
 ### react-native-snackbar
@@ -325,7 +304,7 @@ implementation 'com.facebook.android:facebook-login:[4,5)'
 <string name="fb_login_protocol_scheme">FACEBOOK_LOGIN_SCHEME</string>
 ```
 
-12. In `./android/app/src/main/AndroidManifest.xml` add (within <application> tags):
+12. In `./android/app/src/main/AndroidManifest.xml` add (within `application` tags):
 
 ```xml
 <meta-data android:name="com.facebook.sdk.ApplicationId"
@@ -363,7 +342,7 @@ configurations.all {
 
 2.  Download the [FacebookSDK](https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip). (ONCE-OFF).
 
-3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode.
+3.  Drag the downloaded Bolts.framework, FBSDKCoreKit.framework, FBSDKLoginKit.framework and FBSDKShareKit.framework into Frameworks folder of the project in XCode. Make sure to select `Copy items if needed`.
 
 ### react-native-google-signin
 
@@ -449,13 +428,13 @@ Add permissions to `./android/app/src/main/AndroidManifest.xml` (remove what you
 
 #### iOS
 
-1.  In the XCode's "Project navigator", right click on Libraries folder under your project => `Add Files to <...>`
+1.  Link:
 
-2.  Go to `node_modules` => `react-native-permissions` => `ios` => select `ReactNativePermissions.xcodeproj`
+```
+react-native link react-native-permissions
+```
 
-3.  Add `libReactNativePermissions.a` to `Build Phases -> Link Binary With Libraries`
-
-4.  Add necessary permissions to `./ios/PROJECT_NAME/Info.plist` (remove what you don't need):
+2.  Add necessary permissions to `./ios/PROJECT_NAME/Info.plist` (remove what you don't need):
 
 ```
 <key>NSLocationWhenInUseUsageDescription</key>
@@ -603,119 +582,21 @@ pod install
 
 ### react-native-geocoder
 
-#### Android
-
-1.  In `android/settings.gradle`
-
-```gradle
-...
-include ':react-native-geocoder', ':app'
-project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
 ```
-
-3.  In `android/app/build.gradle`
-
-```gradle
-...
-dependencies {
-    ...
-    implementation project(':react-native-geocoder')
-}
+react-native link react-native-geocoder
 ```
-
-4.  Register module (in MainApplication.java)
-
-```java
-import com.devfd.RNGeocoder.RNGeocoderPackage;
-
-public class MainActivity extends ReactActivity {
-  ......
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new RNGeocoderPackage()) // <------ add this
-  }
-
-  ......
-
-}
-```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on Libraries folder under your project => `Add Files to <...>`
-
-2.  Go to `node_modules` => `react-native-geocoder` => `ios` => select `RNGeocoder.xcodeproj`
-
-3.  Add `libRNGeocoder.a` to `Build Phases -> Link Binary With Libraries`
 
 ### react-native-image-picker
 
-#### Android
-
-1.  Add the following lines to `android/settings.gradle`:
-
-    ```gradle
-    include ':react-native-image-picker'
-    project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
-    ```
-
-2.  Add the implementation line to the dependencies in `android/app/build.gradle`:
-
-    ```gradle
-    dependencies {
-        implementation project(':react-native-image-picker')
-    }
-    ```
-
-3.  Add the required permissions in `AndroidManifest.xml` (this was done when linking react-native-permissions):
-
-    ```xml
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    ```
-
-4.  Add the import and link the package in `MainApplication.java`:
-
-    ```java
-    import com.imagepicker.ImagePickerPackage; // <-- add this import
-
-    public class MainApplication extends Application implements ReactApplication {
-        @Override
-        protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new ImagePickerPackage() // <-- add this
-            );
-        }
-    }
-    ```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on your project's Libraries folder => `Add Files to <...>`
-
-2.  Go to `node_modules` => `react-native-image-picker` => `ios` => select `RNImagePicker.xcodeproj`
-
-3.  Add `RNImagePicker.a` to `Build Phases -> Link Binary With Libraries`
+```
+react-native link react-native-image-picker
+```
 
 ### react-native-image-resizer
 
-#### Android
-
-```shell
+```
 react-native link react-native-image-resizer
 ```
-
-#### iOS
-
-1.  In the XCode's "Project navigator", right click on your project's Libraries folder => `Add Files to <...>`
-
-2.  Go to `node_modules` => `react-native-image-resizer` => `ios` => select `RNImageResizer.xcodeproj`
-
-3.  Add `RNImageResizer.a` to `Build Phases -> Link Binary With Libraries`
 
 ### react-native-netinfo
 
@@ -736,8 +617,7 @@ git clone https://github.com/shaunsaker/react-native-boilerplate.git temp
 This way we only copy the src files and not this repo's files.
 
 ```shell
-mv temp/src src
-sudo rm -r temp
+mv temp src
 ```
 
 3.  In `./index.js`, change:
